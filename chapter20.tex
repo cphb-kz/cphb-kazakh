@@ -1,25 +1,26 @@
-\chapter{Flows and cuts}
+\chapter{Ағындар мен қималар}
 
-In this chapter, we focus on the following
-two problems:
+Бұл тарауда төмендегі екі есепті 
+қарастыратын боламыз:
 
 \begin{itemize}
-\item \key{Finding a maximum flow}:
-What is the maximum amount of flow we can
-send from a node to another node?
-\item \key{Finding a minimum cut}:
-What is a minimum-weight set of edges
-that separates two nodes of the graph?
+\item \key{Максималды ағынды табу}, яғни 
+бір төбеден екінші төбеге максималды қанша 
+ағын жібере алатынымызды анықтау.
+\item \key{Минималды қиманы табу}, яғни
+графта салмағы минималды болатын
+қай қырлар жиындысы 
+екі төбенің арасын ажырататынын анықтау.
 \end{itemize}
 
-The input for both these problems is a directed,
-weighted graph that contains two special nodes:
-the \emph{source} is a node with no incoming edges,
-and the \emph{sink} is a node with no outgoing edges.
+Аталған екі есепте де бағытталған,
+салмақталған граф пен
+екі арнаулы төбе берілген. Мұндағы
+\emph{бастау} -- кіріс қырлары жоқ төбе,
+\emph{саға} –– шығыс қырлары жоқ төбе.
 
-As an example, we will use the following graph
-where node 1 is the source and node 6
-is the sink:
+Өрнек ретінде бастауы 1-төбе,
+ал сағасы 6-төбе болатын төмендегі графты қолданамыз:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -40,25 +41,21 @@ is the sink:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Maximum flow}
+\subsubsection{Максималды ағын}
 
-\index{flow}
-\index{maximum flow}
+\index{ағын}
+\index{Максималды ағын}
 
-In the \key{maximum flow} problem,
-our task is to send as much flow as possible
-from the source to the sink.
-The weight of each edge is a capacity that
-restricts the flow
-that can go through the edge.
-In each intermediate node,
-the incoming and outgoing
-flow has to be equal.
+Ең \key{максималды ағын} есебіндегі
+бізге берілетін тапсырама -- бастаудан сағаға
+ең максималды ағынды жіберу. Әр қырдағы салмақ --
+сол қыр арқылы қанша ағын өте алатынын шектеуші
+сыйымдылық. Әр аралық төбенің кіріс және шығыс
+ағындары бірдей болуы қажет. 
 
-For example, the maximum size of a flow
-in the example graph is 7.
-The following picture shows how we can
-route the flow:
+Өрнектегі графтың максималды ағыны -- 7.
+Ал төмендегі сурет ағынды қалай бағыттау
+керектігін көрсетеді:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -79,32 +76,28 @@ route the flow:
 \end{tikzpicture}
 \end{center}
 
-The notation $v/k$ means
-that a flow of $v$ units is routed through
-an edge whose capacity is $k$ units.
-The size of the flow is $7$,
-because the source sends $3+4$ units of flow
-and the sink receives $5+2$ units of flow.
-It is easy see that this flow is maximum,
-because the total capacity of the edges
-leading to the sink is $7$.
+$v/k$ нотациясы -- $k$ бірлік сыйымдылығы бар
+қырдан $v$ бірлік ағын бағытталғанын көрсетеді.  
+Ағынның өлшемі -- $7$, себебі бастау $3+4$ бірлік 
+ағын жіберіп, саға $5+2$ ағынды қабылдайды. 
+Бұл жағдайда ағын максималды екенін түсіну 
+оңай, өйткені сағаға жетелейтін барлық 
+қырлардың сыйымдылығы -- 7.
 
-\subsubsection{Minimum cut}
+\subsubsection{Минималды қима}
 
-\index{cut}
-\index{minimum cut}
+\index{қима}
+\index{минималды қима}
 
-In the \key{minimum cut} problem,
-our task is to remove a set
-of edges from the graph
-such that there will be no path from the source
-to the sink after the removal
-and the total weight of the removed edges
-is minimum.
+\key{Минималды қима} есебіндегі
+бізге берілетін тапсырма графта 
+бастаудан сағаға жол болмайтындай етіп
+қырлар жиындысын өшіруге және өшірілген 
+қырлардың салмағы минималды болуына арналады. 
 
-The minimum size of a cut in the example graph is 7.
-It suffices to remove the edges $2 \rightarrow 3$
-and $4 \rightarrow 5$:
+Өрнек графындағы қиманың минималды өлшемі -- 7.
+$2 \rightarrow 3$ пен $4 \rightarrow 5$ қырларын
+өшіру жеткілікті:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -130,53 +123,45 @@ and $4 \rightarrow 5$:
 \end{tikzpicture}
 \end{center}
 
-After removing the edges,
-there will be no path from the source to the sink.
-The size of the cut is $7$,
-because the weights of the removed edges
-are $6$ and $1$.
-The cut is minimum, because there is no valid
-way to remove edges from the graph such that
-their total weight would be less than $7$.
+Қырларды өшіргеннен кейін бастаудан сағаға дейін
+ешқандай жол болмайды. Қиманың өлшемі -- 7, ал өшірілген
+қырлардың салмақтары -- $6$ мен $1$. Жалпы салмағы $7$-ден кем болатын өшіруге келетін қырлар жиындысы
+графта болмағандықтан қима минималды деп саналады.
 \\\\
-It is not a coincidence that
-the maximum size of a flow
-and the minimum size of a cut
-are the same in the above example.
-It turns out that a maximum flow
-and a minimum cut are
-\emph{always} equally large,
-so the concepts are two sides of the same coin.
+Жоғарыдағы өрнекте максималды ағын 
+мен минималды қиманың 
+бірдей болуы жай сәйкестік емес. 
+Шын мәнінде олар \emph{әрқашан} тең болады. 
+Сондықтан бұл ұғымдар 
+әртүрлі болып көрінгенімен, өте тығыз байланысты.
 
-Next we will discuss the Ford–Fulkerson
-algorithm that can be used to find
-the maximum flow and minimum cut of a graph.
-The algorithm also helps us to understand
-\emph{why} they are equally large.
+Алдағы уақытта біз максималды ағын мен
+минималды қиманы табатын Форд-Фалкерсон 
+алгоритмін талқылайтын боламыз. Алгоритм
+олардың \emph{не} себепті тең екенін түсінуімізге 
+көмектеседі. 
 
-\section{Ford–Fulkerson algorithm}
+\section{Форд–Фалкерсон алгоритмі}
 
-\index{Ford–Fulkerson algorithm}
+\index{Форд–Фалкерсон алгоритмі}
 
-The \key{Ford–Fulkerson algorithm} \cite{for56} finds
-the maximum flow in a graph.
-The algorithm begins with an empty flow,
-and at each step finds a path from the source
-to the sink that generates more flow.
-Finally, when the algorithm cannot increase the flow
-anymore, the maximum flow has been found.
+\key{Форд–Фалкерсон алгоритмі} \cite{for56} 
+графтағы максималды ағынды табады. Алгоритм
+бос ағыннан басталады, әр қадамда бастаудан 
+сағаға дейін көбірек ағын өндіретін жолды іздейді.
+Ақырында алгоритм ағынды үлкейте алмаса, 
+максималды ағын табылады. 
 
-The algorithm uses a special representation
-of the graph where each original edge has a reverse
-edge in another direction.
-The weight of each edge indicates how much more flow
-we could route through it.
-At the beginning of the algorithm, the weight of each original edge
-equals the capacity of the edge
-and the weight of each reverse edge is zero.
+Алгоритм әр негізгі қырға 
+оған кері бағытта қыр болатын графтың арнайы көрінісін қолданады.
+Әр қырдың салмағы тағы қанша ағынның өте алатынын 
+бейнелейді. Алгоритмнің басында негізгі қырлардың
+салмақтары сол қырлардың сыйымдылықтарына тең болса,
+кері қырлардың салмақтары нөлге тең болады.
+
 
 \begin{samepage}
-The new representation for the example graph is as follows:
+Өрнек графының жаңа көрінісі төмендегідей болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -207,17 +192,15 @@ The new representation for the example graph is as follows:
 \end{center}
 \end{samepage}
 
-\subsubsection{Algorithm description}
+\subsubsection{Алгоритм сипаттамасы}
 
-The Ford–Fulkerson algorithm consists of several
-rounds.
-On each round, the algorithm finds
-a path from the source to the sink
-such that each edge on the path has a positive weight.
-If there is more than one possible path available,
-we can choose any of them.
+Форд-Фалкерсон алгоритмі бірнеше кезеңдерден
+тұрады. Әр кезеңде алгоритм барлық қырлардың салмақтары
+оң болатын бастаудан сағаға жол іздейді.
+Егер мұндай бірнеше жол болса, кез келгенін 
+таңдай аламыз. 
 
-For example, suppose we choose the following path:
+Мысалы, төмендегідей жолды таңдайық:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -252,17 +235,14 @@ For example, suppose we choose the following path:
 \end{tikzpicture}
 \end{center}
 
-After choosing the path, the flow increases by $x$ units,
-where $x$ is the smallest edge weight on the path.
-In addition, the weight of each edge on the path
-decreases by $x$ and the weight of each reverse edge
-increases by $x$.
+Жолды таңдағаннан кейін ағын $x$ бірлікке артады,
+мұнда $x$ -- жолдағы ең кіші салмақ. Оған қоса
+жолдағы қырлардың салмақтарын $x$-ке азайтамыз және
+кері қырлардың салмақтарын $x$-ке арттырамыз.  
 
-In the above path, the weights of the
-edges are 5, 6, 8 and 2.
-The smallest weight is 2,
-so the flow increases by 2
-and the new graph is as follows:
+Жоғарыдағы жолда қырлардың салмақтары
+-- 5, 6, 8 және 2. Ең кіші салмақ -- 2, 
+жаңа граф төмендегідей:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -292,17 +272,15 @@ and the new graph is as follows:
 \end{tikzpicture}
 \end{center}
 
-The idea is that increasing the flow decreases the amount of
-flow that can go through the edges in the future.
-On the other hand, it is possible to cancel
-flow later using the reverse edges of the graph
-if it turns out that
-it would be beneficial to route the flow in another way.
+Идеясы ағынды арттыру арқылы болашақта қырлардан
+өте алатын ағынды азайтуға бағытталады. Екінші жағынан
+егер ағынды басқа жолмен өткізген оңтайлырақ болса,
+өткізген ағынды графтағы кері қырлар арқылы болдырмауға болады.
 
-The algorithm increases the flow as long as
-there is a path from the source
-to the sink through positive-weight edges.
-In the present example, our next path can be as follows:
+Алгоритм бастаудан сағаға қырлардың
+салмақтары оң болатын 
+жол болғанша ағынды арттырады. Мысалдағы
+келесі жолымыз төмендегідей болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -337,12 +315,12 @@ In the present example, our next path can be as follows:
 \end{tikzpicture}
 \end{center}
 
-The minimum edge weight on this path is 3,
-so the path increases the flow by 3,
-and the total flow after processing the path is 5.
+Осы жолдағы ең кіші қырдың салмағы -- 3,
+демек жол ағынды 3-ке арттырады және осы жолды
+өңдегеннен кейін қорытынды ағын 5 болады. 
 
 \begin{samepage}
-The new graph will be as follows:
+Жаңа граф төмендегідей:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -373,12 +351,14 @@ The new graph will be as follows:
 \end{center}
 \end{samepage}
 
-We still need two more rounds before reaching the maximum flow.
-For example, we can choose the paths
-$1 \rightarrow 2 \rightarrow 3 \rightarrow 6$ and
-$1 \rightarrow 4 \rightarrow 5 \rightarrow 3 \rightarrow 6$.
-Both paths increase the flow by 1,
-and the final graph is as follows:
+Максималды ағынға жетуіміз үшін 
+әлі де 2 кезең өтуіміз қажет. 
+Мысалы, біз $1 \rightarrow 2 \rightarrow 3 \rightarrow 6$
+және 
+$1 \rightarrow 4 \rightarrow 5 \rightarrow 3 \rightarrow 6$ жолдарын
+таңдай аламыз. 
+Екеуі де ағынды 1-ге арттырады және 
+қорытынды граф төмендегідей болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -408,67 +388,64 @@ and the final graph is as follows:
 \end{tikzpicture}
 \end{center}
 
-It is not possible to increase the flow anymore,
-because there is no path from the source
-to the sink with positive edge weights.
-Hence, the algorithm terminates and the maximum flow is 7.
+Бұдан кейін ағынды арттыру мүмкін емес, өйткені
+бастаудан сағаға дейінгі қырлардың салмағы оң
+болатын жол жоқ. 
+Демек алгоритм тоқтайды және максималды ағын 7-ге тең болады.
 
-\subsubsection{Finding paths}
+\subsubsection{Жолдар іздеу}
 
-The Ford–Fulkerson algorithm does not specify
-how we should choose the paths that increase the flow.
-In any case, the algorithm will terminate sooner or later
-and correctly find the maximum flow.
-However, the efficiency of the algorithm depends on
-the way the paths are chosen.
+Форд-Фалкерсон алгоритмі ағынды арттыратын қандай
+жолдарды алу керектігін атап өтпейді. Кез келген
+жағдайда алгоритм ерте ме, кеш пе, бір тоқтайды және 
+максималды ағынды дұрыс табады. Бірақ алгоритмнің
+тиімділігі жолдардың қалай таңдалғанына тәуелді болады.
 
-A simple way to find paths is to use depth-first search.
-Usually, this works well, but in the worst case,
-each path only increases the flow by 1
-and the algorithm is slow.
-Fortunately, we can avoid this situation
-by using one of the following techniques:
+Жолдарды табудың қарапайым тәсілі -- 
+тереңдігі бойынша ізденісті (DFS) қолдану.
+Әдетте бұл жақсы жұмыс істейді, бірақ ең нашар жағдайда
+әр жол ағынды 1-ге арттыратындықтан, мұндай алгоритм
+баяу өтеді. Бақытымызға орай, төмендегі әдістердің 
+бірін қолдану арқылы бұл жағдайдан құтыла аламыз:
 
-\index{Edmonds–Karp algorithm}
+\index{Эдмондс-Карп алгоритмі}
 
-The \key{Edmonds–Karp algorithm} \cite{edm72}
-chooses each path so that the number of edges
-on the path is as small as possible.
-This can be done by using breadth-first search
-instead of depth-first search for finding paths.
-It can be proven that this guarantees that
-the flow increases quickly, and the time complexity
-of the algorithm is $O(m^2 n)$.
+\key{Эдмондс–Карп алгоритмі} \cite{edm72}
+жолдағы қырлардың саны ең аз болатын
+жолды таңдап отырады. Мұны тереңдігі бойынша ізденістің
+(DFS) орнына ені бойынша ізденіс (BFS) жасау арқылы орындауымызға
+болады. Сол арқылы ағынның жылдам өсу кепілдігін 
+дәлелдей аламыз және алгоритмнің уақытша күрделілігі 
+$O(m^2 n)$ болмақ.
 
-\index{scaling algorithm}
+\index{ағынды масштабтау алгоритмі}
 
-The \key{scaling algorithm} \cite{ahu91} uses depth-first
-search to find paths where each edge weight is
-at least a threshold value.
-Initially, the threshold value is
-some large number, for example the sum of all
-edge weights of the graph.
-Always when a path cannot be found,
-the threshold value is divided by 2.
-The time complexity of the algorithm is $O(m^2 \log c)$,
-where $c$ is the initial threshold value.
+\key{Ағынды масштабтау алгоритмі} \cite{ahu91} 
+тереңдігі бойынша ізденіс (DFS) арқылы
+жолдағы қырлардың салмағы кем дегенде шекті 
+мән болатын жолдарды іздейді. Бастапқыда
+шекті мән үлкен сан, мысалы
+барлық қырлардың салмақтар қосындысы болуы мүмкін.
+Жол табылмаған жағдайда шекті мәнді әрдайым
+2-ге бөлеміз. Алгоритмнің уақытша күрделілігі ––
+$O(m^2 \log c)$, мұндағы $c$ -- бастапқы шекті мән. 
 
-In practice, the scaling algorithm is easier to implement,
-because depth-first search can be used for finding paths.
-Both algorithms are efficient enough for problems
-that typically appear in programming contests.
+Тәжірибеде ағынды масштабтау алгоритмін жазу жеңілірек, яғни 
+жолдарды табу үшін тереңдігі бойынша ізденісті (DFS) қолдансақ жеткілікті.
+Екі алгоритм де әдетте 
+бағдарламалау контесттерінде
+кездесетін есептер үшін 
+жеткілікті деңгейде тиімді болады.
 
-\subsubsection{Minimum cuts}
+\subsubsection{Минималды қима}
 
-\index{minimum cut}
+\index{минималды қима}
 
-It turns out that once the Ford–Fulkerson algorithm
-has found a maximum flow,
-it has also determined a minimum cut.
-Let $A$ be the set of nodes
-that can be reached from the source
-using positive-weight edges.
-In the example graph, $A$ contains nodes 1, 2 and 4:
+Форд–Фалкерсон алгоритмі максималды ағынды тапқаннан кейін, 
+минималды қиманы да анықтайды. 
+$A$ деп бастаудан салмақтары оң қырлар арқылы
+жетуге болатын төбелер жиындысын белгілейік. 
+Өрнектегі графта $A$ 1, 2, және 4 төбелерінен тұрады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9,label distance=-2mm]
@@ -498,26 +475,25 @@ In the example graph, $A$ contains nodes 1, 2 and 4:
 \end{tikzpicture}
 \end{center}
 
-Now the minimum cut consists of the edges of the original graph
-that start at some node in $A$, end at some node outside $A$,
-and whose capacity is fully
-used in the maximum flow.
-In the above graph, such edges are
-$2 \rightarrow 3$ and $4 \rightarrow 5$,
-that correspond to the minimum cut $6+1=7$.
+Енді минималды қима $A$-дағы төбеден басталып, $A$-ның сыртындағы төбеде
+аяқталатын және максималды ағында сыйымдылығы толық қолданылған қырлардан 
+тұрады. Жоғарыдағы графта сондай қырлар -- $2 \rightarrow 3$ 
+және $4 \rightarrow 5$, олар $6+1=7$ минималды қимасын береді. 
 
-Why is the flow produced by the algorithm maximum
-and why is the cut minimum?
-The reason is that a graph cannot
-contain a flow whose size is larger
-than the weight of any cut of the graph.
-Hence, always when a flow and a cut are equally large,
-they are a maximum flow and a minimum cut.
+''Неге алгоритмнен құрылған ағын максималды және
+қима минималды болады?'' - деген сұрақ туындауы мүмкін. Оған мынадай түсіндірме береміз: графта
+кез келген қиманың салмағынан үлкен
+ағын болуы мүмкін емес. Демек ағын мен қиманың мәндері 
+тең болса, онда ағын максималды, ал қима минималды болмақ.
 
-Let us consider any cut of the graph
-such that the source belongs to $A$,
-the sink belongs to $B$
-and there are some edges between the sets:
+Бастау $A$-да, саға $B$-да болатын
+және екі жиынның араларында қырлары 
+бар қималарды қарастырайық:
+
+% Let us consider any cut of the graph
+% such that the source belongs to $A$,
+% the sink belongs to $B$
+% and there are some edges between the sets:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -541,39 +517,48 @@ and there are some edges between the sets:
 \end{tikzpicture}
 \end{center}
 
-The size of the cut is the sum of the edges
-that go from $A$ to $B$.
-This is an upper bound for the flow
-in the graph, because the flow has to proceed
-from $A$ to $B$.
-Thus, the size of a maximum flow is smaller than or equal to
-the size of any cut in the graph.
+Қиманың өлшемі -- $A$ мен $B$ араларынан өтетін
+қырлардың қосындысы. Бұл графтағы ағынның жоғарғы шекті 
+мәні, себебі ағын $A$ мен $B$ арасынан өтуі қажет. 
+Осылайша максималды ағынның өлшемі 
+кез келген қиманың өлшемінен
+кіші немесе тең болады.
 
-On the other hand, the Ford–Fulkerson algorithm
-produces a flow whose size is \emph{exactly} as large
-as the size of a cut in the graph.
-Thus, the flow has to be a maximum flow
-and the cut has to be a minimum cut.
+Басқа жағынан қарасақ, Форд-Фалкерсон алгоритмі 
+бір қиманың өлшеміне \emph{тең} ағынды табады. 
+Осылайша ағын максималды және
+қима минималды болуы керек. 
 
-\section{Disjoint paths}
+% On the other hand, the Ford–Fulkerson algorithm
+% produces a flow whose size is \emph{exactly} as large
+% as the size of a cut in the graph.
+% Thus, the flow has to be a maximum flow
+% and the cut has to be a minimum cut.
 
-Many graph problems can be solved by reducing
-them to the maximum flow problem.
-Our first example of such a problem is
-as follows: we are given a directed graph
-with a source and a sink,
-and our task is to find the maximum number
-of disjoint paths from the source to the sink.
+\section{Қиылыспайтын жолдар}
 
-\subsubsection{Edge-disjoint paths}
+Граф есептерінің көбісін максималды ағын есебіне
+келтіріп шығаруымызға болады. Сондай есептердің 
+біріне мысал келтірейік. Бізге бастау мен сағасы бар 
+бағытталған граф берілген. Тапсырма бойынша бастаудан сағаға апаратын
+қиылыспайтын жолдардың максималды санын 
+есептеуіміз керек. 
 
-We will first focus on the problem of
-finding the maximum number of
-\key{edge-disjoint paths} from the source to the sink.
-This means that we should construct a set of paths
-such that each edge appears in at most one path.
+% Many graph problems can be solved by reducing
+% them to the maximum flow problem.
+% Our first example of such a problem is
+% as follows: we are given a directed graph
+% with a source and a sink,
+% and our task is to find the maximum number
+% of disjoint paths from the source to the sink.
 
-For example, consider the following graph:
+\subsubsection{Қырлары қиылыспайтын жолдар}
+
+Алдымен бастаудан сағаға дейінгі \key{қырлары қиылыспайтын
+жолдар}дың максималды санын есептейтін боламыз, яғни әр қыр ең көбі бір жолда ғана
+кездесетін жолдар жиынын құрастыруымыз керек.
+
+Мысалға төмендегі графты қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,2) {$1$};
@@ -594,11 +579,10 @@ For example, consider the following graph:
 \end{tikzpicture}
 \end{center}
 
-In this graph, the maximum number of edge-disjoint
-paths is 2.
-We can choose the paths
-$1 \rightarrow 2 \rightarrow 4 \rightarrow 3 \rightarrow 6$
-and $1 \rightarrow 4 \rightarrow 5 \rightarrow 6$ as follows:
+Графтағы қырлары қиылыспайтын жолдардың максималды саны
+2-ге тең. Біз $1 \rightarrow 2 \rightarrow 4 \rightarrow 3 \rightarrow 6$
+және $1 \rightarrow 4 \rightarrow 5 \rightarrow 6$ жолдарын
+таңдай аламыз:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -629,29 +613,26 @@ and $1 \rightarrow 4 \rightarrow 5 \rightarrow 6$ as follows:
 \end{tikzpicture}
 \end{center}
 
-It turns out that the maximum number of
-edge-disjoint paths
-equals the maximum flow of the graph,
-assuming that the capacity of each edge is one.
-After the maximum flow has been constructed,
-the edge-disjoint paths can be found greedily
-by following paths from the source to the sink.
+Егер граф қырларының сыйымдылығын бір деп алсақ,
+қырлары қиылыспайтын жолдардың максималды саны
+максималды ағынға тең болады. Максималды ағын құрастырылғаннан кейін
+бастаудан сағаға апаратын 
+жолдарды ашкөз алгоритм арқылы қарастырып,
+қырлары қиылыспайтын жолдарды таба аламыз.
 
-\subsubsection{Node-disjoint paths}
+\subsubsection{Төбелері қиылыспайтын жолдар}
 
-Let us now consider another problem:
-finding the maximum number of
-\key{node-disjoint paths} from the source
-to the sink.
-In this problem, every node,
-except for the source and sink,
-may appear in at most one path.
-The number of node-disjoint paths
-may be smaller than the number of
-edge-disjoint paths.
+Келесі есепте
+бастаудан сағаға дейін \key{төбелері қиылыспайтын
+жолдар}дың максималды санын есептеп көрейік. 
+Есепте әр төбе бастау мен сағадан басқа 
+жолда ең көбі бір рет кездеседі. 
+Төбелері қиылыспайтын жолдардың саны
+қырлары қиылыспайтын жолдар санынан 
+аз болуы мүмкін. 
 
-For example, in the previous graph,
-the maximum number of node-disjoint paths is 1:
+Мысалы, төмендегі графта төбелері қиылыспайтын 
+жолдардың максималды саны -- 1:
 
 \begin{center}
 \begin{tikzpicture}
@@ -678,17 +659,24 @@ the maximum number of node-disjoint paths is 1:
 \end{tikzpicture}
 \end{center}
 
-We can reduce also this problem to the maximum flow problem.
-Since each node can appear in at most one path,
-we have to limit the flow that goes through the nodes.
-A standard method for this is to divide each node into
-two nodes such that the first node has the incoming edges
-of the original node, the second node has the outgoing
-edges of the original node, and
-there is a new edge from the first node
-to the second node.
+Бұл есепті де максималды ағын есебіне келтірсек болады. 
+Әр төбе жолда ең көбі бір рет бола алғандықтан
+төбеден өтетін ағынды шектеуіміз қажет. Бұл үшін стандартты әдісті қолданып,
+әр төбені екі төбеге бөлеміз. Бірінші төбе бастапқы төбеден кіріс қырларды қамтыса,
+екінші төбе бастапқы төбеден шығыс қырларды қамтиды және бірінші төбеден
+екінші төбеге жаңа қыр түседі. 
 
-In our example, the graph becomes as follows:
+% We can reduce also this problem to the maximum flow problem.
+% Since each node can appear in at most one path,
+% we have to limit the flow that goes through the nodes.
+% A standard method for this is to divide each node into
+% two nodes such that the first node has the incoming edges
+% of the original node, the second node has the outgoing
+% edges of the original node, and
+% there is a new edge from the first node
+% to the second node.
+
+Графымыз төмендегідей ретпен өзгереді:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle] (1) at (1,2) {$1$};
@@ -722,7 +710,7 @@ In our example, the graph becomes as follows:
 \end{tikzpicture}
 \end{center}
 
-The maximum flow for the graph is as follows:
+Графтағы максималды ағын:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle] (1) at (1,2) {$1$};
@@ -764,35 +752,37 @@ The maximum flow for the graph is as follows:
 \end{tikzpicture}
 \end{center}
 
-Thus, the maximum number of node-disjoint paths
-from the source to the sink is 1.
+Осылайша бастаудан сағаға дейінгі
+төбелері қиылыспайтын жолдардың
+максималды саны 1 болады.
 
-\section{Maximum matchings}
+\section{Максималды жұптасу}
 
-\index{matching}
-\index{maximum matching}
+\index{жұптасу}
+\index{максималды жұптасу}
 
-The \key{maximum matching} problem asks to find
-a maximum-size set of node pairs in an undirected graph
-such that each pair is connected with an edge and
-each node belongs to at most one pair.
+Максималды жұптасу есебінде тапсырма ретінде бағытталмаған графта
+қырлар арқылы қосылып, әр төбе ең көбі бір жұпта болатын 
+максималды төбелер жұптарының санын табу беріледі.
 
-There are polynomial algorithms for finding
-maximum matchings in general graphs \cite{edm65},
-but such algorithms are complex and
-rarely seen in programming contests.
-However, in bipartite graphs,
-the maximum matching problem is much easier
-to solve, because we can reduce it to the
-maximum flow problem.
+% The \key{maximum matching} problem asks to find
+% a maximum-size set of node pairs in an undirected graph
+% such that each pair is connected with an edge and
+% each node belongs to at most one pair.
 
-\subsubsection{Finding maximum matchings}
+Жалпы графтарда максималды жұптасуды іздейтін 
+полиномдық алгоритмдер бар\cite{edm65}, бірақ
+ондай алгоритмдер күрделі және 
+бағдарламау контесттерінде сирек кездеседі. 
+Дегенмен екі ұялы графта максималды жұптасуды 
+табу оңайырақ, өйткені біз оны максималды 
+ағын есебіне келтіре аламыз. 
 
-The nodes of a bipartite graph can be always
-divided into two groups such that all edges
-of the graph go from the left group to the right group.
-For example, in the following bipartite graph,
-the groups are $\{1,2,3,4\}$ and $\{5,6,7,8\}$.
+\subsubsection{Максималды жұптасуды іздеу}
+
+Екі ұялы графтағы төбелерді қырлары сол топтан оң топқа бағытталатындай етіп,
+әрдайым екі топқа бөле аламыз. Мысалы, төмендегі графтағы екі топ --  
+$\{1,2,3,4\}$ және $\{5,6,7,8\}$.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
@@ -813,7 +803,7 @@ the groups are $\{1,2,3,4\}$ and $\{5,6,7,8\}$.
 \path[draw,thick,-] (4) -- (7);
 \end{tikzpicture}
 \end{center}
-The size of a maximum matching of this graph is 3:
+Графтың максималды жұптасуының өлшемі -- 3:
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
 \node[draw, circle] (1) at (2,4.5) {1};
@@ -838,16 +828,15 @@ The size of a maximum matching of this graph is 3:
 \end{tikzpicture}
 \end{center}
 
-We can reduce the bipartite maximum matching problem
-to the maximum flow problem by adding two new nodes
-to the graph: a source and a sink.
-We also add edges from the source
-to each left node and from each right node to the sink.
-After this, the size of a maximum flow in the graph
-equals the size of a maximum matching in the original graph.
+Максималды жұптасу есебін
+бастау мен саға төбелерін қосу арқылы
+максималды ағын есебіне келтіре аламыз.
+Оған қоса, бастаудан сол жақ топтағы барлық төбелерге қырлар қосып,
+сағаға оң жақ топтағы барлық төбелерден қырлар қосамыз.
+Кейін осы графтағы максималды ағынның өлшемі берілген графтағы
+максималды жұптасу өлшеміне тең болады. 
 
-For example, the reduction for the above
-graph is as follows:
+Мысалы, жаңа өзгерген графымыз төмендегідей болады:
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
 \node[draw, circle] (1) at (2,4.5) {1};
@@ -880,7 +869,7 @@ graph is as follows:
 \end{tikzpicture}
 \end{center}
 
-The maximum flow of this graph is as follows:
+Графтың максималды ағыны келесідей болмақ:
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
 \node[draw, circle] (1) at (2,4.5) {1};
@@ -923,29 +912,30 @@ The maximum flow of this graph is as follows:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Hall's theorem}
+\subsubsection{Хол теоремасы}
 
-\index{Hall's theorem}
-\index{perfect matching}
+\index{Хол теоремасы}
+\index{мінсіз жұптасу}
 
-\key{Hall's theorem} can be used to find out
-whether a bipartite graph has a matching
-that contains all left or right nodes.
-If the number of left and right nodes is the same,
-Hall's theorem tells us if it is possible to
-construct a \key{perfect matching} that
-contains all nodes of the graph.
+\key{Хол теоремасы} арқылы екі ұялы графта
+барлық сол немесе оң жақ топтағы төбелерді қамтитын
+жұптасудың бар-жоғын тексеруге болады. Егер 
+сол мен оң жақ топтағы төбелердің сандары бірдей болса,
+Хол теоремасы графтағы барлық төбелерді қамтитын
+\key{мінсіз жұптасу} құрылысының 
+мүмкін екендігін хабарлайды.
 
-Assume that we want to find a matching
-that contains all left nodes.
-Let $X$ be any set of left nodes
-and let $f(X)$ be the set of their neighbors.
-According to Hall's theorem, a matching
-that contains all left nodes exists
-exactly when for each $X$, the condition $|X| \le |f(X)|$ holds.
+Мысалы, барлық сол жақ топтағы төбелерді қамтитын
+жұптасуды тапқымыз келеді делік. 
+$X$ деп кез келген сол жақ топтағы төбелер жиындысы 
+және $f(X)$ деп олардың көршілерін белгілейік. 
+Хол теоремасы бойынша әр $X$-ке $|X| \le |f(X)|$ шарты орындалған жағдайда ғана барлық сол жақ топтағы төбелерді
+қамтитын жұптасу жүзеге асады. 
+% eger tek eger degen qazaqwa iff degen fraza
 
-Let us study Hall's theorem in the example graph.
-First, let $X=\{1,3\}$ which yields $f(X)=\{5,6,8\}$:
+Хол теоремасын граф мысалында қарайық.
+Басында $X=\{1,3\}$ деп алсақ және
+сәйкесінше $f(X)=\{5,6,8\}$ болса:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
@@ -967,9 +957,10 @@ First, let $X=\{1,3\}$ which yields $f(X)=\{5,6,8\}$:
 \end{tikzpicture}
 \end{center}
 
-The condition of Hall's theorem holds, because
-$|X|=2$ and $|f(X)|=3$.
-Next, let $X=\{2,4\}$ which yields $f(X)=\{7\}$:
+Хол теоремасының шарты сақталды. Себебі 
+$|X|=2$ және $|f(X)|=3$. Келесі 
+$X=\{2,4\}$ деп алайық және 
+сәйкесінше $f(X)=\{7\}$ болсын:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
@@ -991,41 +982,43 @@ Next, let $X=\{2,4\}$ which yields $f(X)=\{7\}$:
 \end{tikzpicture}
 \end{center}
 
-In this case, $|X|=2$ and $|f(X)|=1$,
-so the condition of Hall's theorem does not hold.
-This means that it is not possible to form
-a perfect matching for the graph.
-This result is not surprising, because we already
-know that the maximum matching of the graph is 3 and not 4.
+Осы жағдайда $|X|=2$ және $|f(X)|=1$,
+яғни Хол теоремасының шарты орындалмады.
+Бұл граф үшін мінсіз жұптасуды құру мүмкін 
+емес дегенді білдіреді. Тұжырым таңқаларлық емес, өйткені
+осыған дейін де осы графтың максималды 
+ағыны 4 емес, 3 екенін білген болатынбыз. 
 
-If the condition of Hall's theorem does not hold,
-the set $X$ provides an explanation \emph{why}
-we cannot form such a matching.
-Since $X$ contains more nodes than $f(X)$,
-there are no pairs for all nodes in $X$.
-For example, in the above graph, both nodes 2 and 4
-should be connected with node 7 which is not possible.
+Егер Хол теоремасының шарты орындалмаса,
+$X$ жиыны ондай жұптасу \emph{неге} бола алмайтынына
+түсіндірме береді. $X$-те $f(X)$-тен төбелер 
+көп болғандықтан, $X$-тің барлық төбелеріне жұп 
+табылмайды. Мысалы, жоғарыдағы графта 2-төбе мен 4-төбе
+екеуі де 7-төбемен байланысуы керек, бірақ ол мүмкін емес. 
 
-\subsubsection{Kőnig's theorem}
+\subsubsection{Кёниг теоремасы}
 
-\index{Kőnig's theorem}
-\index{node cover}
-\index{minimum node cover}
+\index{Кёниг теоремасы}
+\index{төбелер бүркемесі}
+\index{минималды төбелер бүркемесі}
 
-A \key{minimum node cover} of a graph
-is a minimum set of nodes such that each edge of the graph
-has at least one endpoint in the set.
-In a general graph, finding a minimum node cover
-is a NP-hard problem.
-However, if the graph is bipartite,
-\key{Kőnig's theorem} tells us that
-the size of a minimum node cover
-and the size of a maximum matching are always equal.
-Thus, we can calculate the size of a minimum node cover
-using a maximum flow algorithm.
+Графтың \key{минималды төбелер бүркемесі} -- графтағы
+қырлардың әр шетінің кем дегенде біреуі
+жиында болатын
+минималды төбелер жиыны.
+Жалпы графтың минималды төбелер бүркемесін 
+табу NP-қиын есептер қатарынан саналады. Бірақ егер граф екі ұялы болса,
+\key{Кёниг теоремасы} минималды төбелер бүркемесінің өлшемі
+максималды жұптасу өлшемімен тең деп тұжырымдайды.
+Осылайша біз минималды төбелер бүркемесін максималды ағын
+алгоритмі арқылы таба аламыз. 
 
-Let us consider the following graph
-with a maximum matching of size 3:
+% A \key{minimum node cover} of a graph
+% is a minimum set of nodes such that each edge of the graph
+% has at least one endpoint in the set.
+
+Төмендегі максималды жұптасу өлшемі 3-ке тең
+графты қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
 \node[draw, circle] (1) at (2,4.5) {1};
@@ -1049,9 +1042,9 @@ with a maximum matching of size 3:
 \path[draw=red,thick,-,line width=2pt] (3) -- (6);
 \end{tikzpicture}
 \end{center}
-Now Kőnig's theorem tells us that the size
-of a minimum node cover is also 3.
-Such a cover can be constructed as follows:
+Кёниг теоремасы минималды төбелер бүркемесінің
+өлшемі де 3 екенін айтады. 
+Сондай бүркеме төмендегідей ретпен құрыстырылады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
@@ -1073,21 +1066,18 @@ Such a cover can be constructed as follows:
 \end{tikzpicture}
 \end{center}
 
-\index{independent set}
-\index{maximum independent set}
+\index{тәуелсіз жиын}
+\index{максималды тәуелсіз жиын}
 
-The nodes that do \emph{not}
-belong to a minimum node cover
-form a \key{maximum independent set}.
-This is the largest possible set of nodes
-such that no two nodes in the set
-are connected with an edge.
-Once again, finding a maximum independent
-set in a general graph is a NP-hard problem,
-but in a bipartite graph we can use
-Kőnig's theorem to solve the problem efficiently.
-In the example graph, the maximum independent
-set is as follows:
+Минималды төбелер бүркемесіне \emph{кірмейтін}
+төбелер \key{максималды тәуелсіз жиын}ды құрайды.
+Бұл -- оған тиесілі екі төбенің ешқайсысы қырлармен байланыспайтын, төбелердің мүмкін болатын максималды жиыны. 
+Қайталап өтейік, жалпы графтарда 
+максималды тәуелсіз жиынды табу NP-қиын есеп саналады,
+бірақ екі ұялы графтарда есепті Кёниг теоремасы
+арқылы тиімдірек шешуге болады.
+Мысалдағы графта максималды тәуелсіз жиын төмендегідей 
+болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.60]
@@ -1109,22 +1099,21 @@ set is as follows:
 \end{tikzpicture}
 \end{center}
 
-\section{Path covers}
+\section{Жол бүркемелері}
 
-\index{path cover}
+\index{Жол бүркемесі}
 
-A \key{path cover} is a set of paths in a graph
-such that each node of the graph belongs to at least one path.
-It turns out that in directed, acyclic graphs,
-we can reduce the problem of finding a minimum
-path cover to the problem of finding a maximum
-flow in another graph.
+\key{Жол бүркемесі} -- графтың әрбір төбесі кем дегенде 
+бір жолға жататын жолдар жиынтығы. Бағытталған,
+циклсіз графта минималды жол бүркеме есебін 
+басқа графтағы максималды ағын табу есебіне келтіре 
+аламыз.
 
-\subsubsection{Node-disjoint path cover}
+\subsubsection{Төбелері қиылыспайтын жол бүркемесі}
 
-In a \key{node-disjoint path cover},
-each node belongs to exactly one path.
-As an example, consider the following graph:
+\key{Төбелері қиылыспайтын жол бүркемесі}нде 
+әр төбе тек бір жолға жатады.
+Үлгі ретінде төмендегі графты қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (0,0) {1};
@@ -1144,10 +1133,9 @@ As an example, consider the following graph:
 \end{tikzpicture}
 \end{center}
 
-A minimum node-disjoint path cover
-of this graph
-consists of three paths.
-For example, we can choose the following paths:
+Графтағы минималды төбелері қиылыспайтын 
+жол бүркемесі 3 жолдан тұрады.
+Мысалы, төмендегі үш жолды таңдасақ болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -1166,25 +1154,28 @@ For example, we can choose the following paths:
 \end{tikzpicture}
 \end{center}
 
-Note that one of the paths only contains node 2,
-so it is possible that a path does not contain any edges.
+Жолдардың біреуі тек 2-төбеден тұратынына назар
+аударыңыз, яғни жолда ешқандай қыр болмауы мүмкін.  
 
-We can find a minimum node-disjoint path cover
-by constructing a \emph{matching graph} where each node
-of the original graph is represented by
-two nodes: a left node and a right node.
-There is an edge from a left node to a right node
-if there is such an edge in the original graph.
-In addition, the matching graph contains a source and a sink,
-and there are edges from the source to all
-left nodes and from all right nodes to the sink.
+Минималды төбелері қиылыспайтын 
+жол бүркемесін
+берілген графтың әр төбесін оң және сол 
+төбелермен бейнелейтін
+\emph{жұптасу графын} құрастырып 
+табуға болады. Егер бастапқы графта сол жақ төбеден оң жақ төбеге қарай қыр болса, жұптасу графында қыр сол жақ және оң жақ төбелердің арасынан өтеді. Оған қоса жұптасу графы бастау мен сағаны қамтиды.
+Бастаудан барлық сол жақ төбелерге қырлар өтеді
+және сағаға барлық оң жақ төбелерден қырлар өтеді. 
 
-A maximum matching in the resulting graph corresponds
-to a minimum node-disjoint path cover in
-the original graph.
-For example, the following matching graph
-for the above graph contains
-a maximum matching of size 4:
+
+% We can find a minimum node-disjoint path cover
+% by constructing a \emph{matching graph} where each node
+% of the original graph is represented by
+% two nodes: a left node and a right node.
+
+Жаңа графтағы максималды жұптасу
+берілген графтағы минималды төбелері қиылыспайтын 
+жол бүркемесіне сәйкес болмақ. Мысалы, жоғарыдағы графтың жұптасу
+графының максималды жұптасуының өлшемі 4-ке тең:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -1238,21 +1229,23 @@ a maximum matching of size 4:
 \end{tikzpicture}
 \end{center}
 
-Each edge in the maximum matching of the matching graph corresponds
-to an edge in the minimum node-disjoint path cover
-of the original graph.
-Thus, the size of the minimum node-disjoint path cover is $n-c$,
-where $n$ is the number of nodes in the original graph
-and $c$ is the size of the maximum matching.
+Жұптасу графындағы максималды жұптасудың әр қыры
+берілген графтағы төбелері қиылыспайтын 
+жол бүркемесінің қырларына сәйкес келеді.
+Демек минималды төбелері қиылыспайтын 
+жол бүркемесінің өлшемі $n-c$ болады,
+мұндағы $n$ берілген графтағы төбелер саны болса,
+$c$ максималды жұптасудың өлшемі болмақ.
+\subsubsection{Жалпы жол бүркемесі}
 
-\subsubsection{General path cover}
+\key{Жалпы жол бүркемесі} -- төбелер бірден көп
+жолдарда жата алатын жол бүркемесі.
+Минималды жалпы жол бүркемесі минималды
+төбелері қиылыспайтын жол бүркемесінен 
+кіші болуы мүмкін, өйткені төбе жолдарда бірнеше мәрте
+қолданылуы мүмкін.  
 
-A \key{general path cover} is a path cover
-where a node can belong to more than one path.
-A minimum general path cover may be smaller
-than a minimum node-disjoint path cover,
-because a node can be used multiple times in paths.
-Consider again the following graph:
+Келесі графты қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (0,0) {1};
@@ -1272,9 +1265,9 @@ Consider again the following graph:
 \end{tikzpicture}
 \end{center}
 
-The minimum general path cover of this graph
-consists of two paths.
-For example, the first path may be as follows:
+Графтың минималды жалпы жол бүркемесі екі 
+жолдан тұрады. 
+Мысалы, бірінші жол төмендегідей болуы мүмкін:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (0,0) {1};
@@ -1291,7 +1284,7 @@ For example, the first path may be as follows:
 \path[draw=red,thick,->,line width=2pt] (3) -- (4);
 \end{tikzpicture}
 \end{center}
-And the second path may be as follows:
+Ал екінші жол осындай болуы мүмкін:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (0,0) {1};
@@ -1307,14 +1300,12 @@ And the second path may be as follows:
 \end{tikzpicture}
 \end{center}
 
-A minimum general path cover can be found
-almost like a minimum node-disjoint path cover.
-It suffices to add some new edges to the matching graph
-so that there is an edge $a \rightarrow b$
-always when there is a path from $a$ to $b$
-in the original graph (possibly through several edges).
+Минималды жалпы жол бүркемесін
+төбелері қиылыспайтын минималды жол бүркемесі
+сияқты табуға болады. Ол үшін
+бастапқы графта $a$-дан $b$-ға (бәлкім бірнеше төбелер арқылы өтетін) жол болған жағдайда $a \rightarrow b$ қыры болатындай етіп, жұптасқан графқа тағы бірнеше қырлар қоссақ жеткілікі.
 
-The matching graph for the above graph is as follows:
+Жоғарыдағы графтың жұптасу графы төмендегідей болады:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1a) at (0,6) {1};
@@ -1399,22 +1390,24 @@ The matching graph for the above graph is as follows:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Dilworth's theorem}
+\subsubsection{Дилуорс теоремасы}
 
-\index{Dilworth's theorem}
-\index{antichain}
+\index{Дилуорс теоремасы}
+\index{антитізбек}
 
-An \key{antichain} is a set of nodes of a graph
-such that there is no path
-from any node to another node
-using the edges of the graph.
-\key{Dilworth's theorem} states that
-in a directed acyclic graph, the size of
-a minimum general path cover
-equals the size of a maximum antichain.
+\key{Антитізбек} -- бір төбеден екінші төбеге 
+қырлар арқылы жол болмайтын төбелер жиындысы.
+\key{Дилуорс теоремасы} бағытталған циклсіз графтың
+минималды жалпы жол бүркемесінің өлшемі
+максималды антитізбектің өлшеміне сәйкес деп мәлімдейді.
 
-For example, nodes 3 and 7 form an antichain
-in the following graph:
+% An \key{antichain} is a set of nodes of a graph
+% such that there is no path
+% from any node to another node
+% using the edges of the graph.
+
+Мысалы төмендегі графта 3-төбе мен 7-төбе 
+антитізбекті құрайды:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -1435,7 +1428,7 @@ in the following graph:
 \end{tikzpicture}
 \end{center}
 
-This is a maximum antichain, because it is not possible
-to construct any antichain that would contain three nodes.
-We have seen before that the size of a minimum
-general path cover of this graph consists of two paths.
+3 төбеден тұратын антитізбек
+мүлдем құрастырылмайтын болғандықтан, мысалдығы тізбек максималды антитізбекке жатады. Осы графтың 
+минималды жалпы жол бүркемесінің өлшемі 2 жолдан тұратынын осыған 
+білген едік.

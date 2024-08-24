@@ -1,42 +1,31 @@
-\chapter{Sorting}
+\chapter{Сұрыптау}
 
-\index{sorting}
+\index{сұрыптау}
 
-\key{Sorting}
-is a fundamental algorithm design problem.
-Many efficient algorithms
-use sorting as a subroutine,
-because it is often easier to process
-data if the elements are in a sorted order.
+\key{Сұрыптау} --
+алгоритмдерді жобалаудағы іргелі әдіс-тәсілдердің бірі.
+Ол көптеген тиімді алгоритмдерде ішбағдарлама ретінде қолданылады. Өйткені сұрыпталған енгізулермен есеп оңай шығарылады.
 
-For example, the problem ''does an array contain
-two equal elements?'' is easy to solve using sorting.
-If the array contains two equal elements,
-they will be next to each other after sorting,
-so it is easy to find them.
-Also, the problem ''what is the most frequent element
-in an array?'' can be solved similarly.
+Мысалы, ''жиымда екі бірдей элемент бар ма?'' деген сұраққа
+сұрыптау арқылы жауап берген ыңғайлы. Жиымда екі бірдей элемент болса, сұрыптаудан кейін олар бір-бірінің жанына орналасады.
+Осылайша олар оңай анықталады.
+Сонымен қатар ''ең жиі кездесетін элементті табу'' есебін де ұқсас жолмен шеше аламыз.
 
-There are many algorithms for sorting, and they are
-also good examples of how to apply
-different algorithm design techniques.
-The efficient general sorting algorithms
-work in $O(n \log n)$ time,
-and many algorithms that use sorting
-as a subroutine also
-have this time complexity.
+Сұрыптау алгоритмдері өте көп, және оларды өзге алгоритмдерді құруда үлгі ретінде алуға болады.
+Тиімді жалпы сұрыптау алгоритмдері
+$O(n \log n)$ уақытта жұмыс жасайды.
+Сұрыптауды ішбағдарлама ретінде қолданатын алгоритмдердің уақытша күрделілігі де көбіне соған тең болып келеді.
 
-\section{Sorting theory}
+\section{Сұрыптау теориясы}
 
-The basic problem in sorting is as follows:
+Сұрыптаудағы негізгі есептердің бірі :
 \begin{framed}
 \noindent
-Given an array that contains $n$ elements,
-your task is to sort the elements
-in increasing order.
+$n$ элементтен тұратын жиым берілген,
+оны өсу реті бойынша жүйеге келтіруіміз қажет.
 \end{framed}
 \noindent
-For example, the array
+Мысалы, мына жиым
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -50,7 +39,7 @@ For example, the array
 \node at (7.5,0.5) {$6$};
 \end{tikzpicture}
 \end{center}
-will be as follows after sorting:
+сұрыптаудан кейін төмендегідей болып өзгереді:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -65,25 +54,20 @@ will be as follows after sorting:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{$O(n^2)$ algorithms}
+\subsubsection{$O(n^2)$ алгоритмдері}
 
-\index{bubble sort}
+\index{көпіршікті сұрыптау}
 
-Simple algorithms for sorting an array
-work in $O(n^2)$ time.
-Such algorithms are short and usually
-consist of two nested loops.
-A famous $O(n^2)$ time sorting algorithm
-is \key{bubble sort} where the elements
-''bubble'' in the array according to their values.
+Қарапайым сұрыптау алгоритмдері $O(n^2)$ 
+уақытта жұмыс жасайды.
+Олар ықшам болады және әдетте екі циклден тұрады.
+$O(n^2)$ уақытта жұмыс істейтін сұрыптау алгоритмдерінің ішіндегі ең танымалы -- \key{көпіршікті сұрыптау}.
+Ол $n$ кезеңнен тұрады.
+Әр кезеңде алгоритм жиым ішімен өтіп шығады.
+Екі қатар келетін элемент бұрыс тұрса,
+оларды алмастырады.
 
-Bubble sort consists of $n$ rounds.
-On each round, the algorithm iterates through
-the elements of the array.
-Whenever two consecutive elements are found
-that are not in correct order,
-the algorithm swaps them.
-The algorithm can be implemented as follows:
+Алгоритм төменде көрсетілген жолмен орындалады:
 \begin{lstlisting}
 for (int i = 0; i < n; i++) {
     for (int j = 0; j < n-1; j++) {
@@ -94,14 +78,13 @@ for (int i = 0; i < n; i++) {
 }
 \end{lstlisting}
 
-After the first round of the algorithm,
-the largest element will be in the correct position,
-and in general, after $k$ rounds, the $k$ largest
-elements will be in the correct positions.
-Thus, after $n$ rounds, the whole array
-will be sorted.
+1-кезеңнен кейін
+ең үлкен элемент өз орнына келеді,
+сәйкесінше $k$ кезеңнен соң $k$ үлкен сан 
+нақты өз орнында болады.
+Осылайша, $n$ кезеңде барлық жиымды сұрыптай аламыз.
 
-For example, in the array
+Мысалы, жиымда
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -119,8 +102,7 @@ For example, in the array
 \end{center}
 
 \noindent
-the first round of bubble sort swaps elements
-as follows:
+1-кезеңдегі алмасулар:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -186,25 +168,22 @@ as follows:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Inversions}
+\subsubsection{Инверсиялар}
 
-\index{inversion}
+\index{инверсиялар}
 
-Bubble sort is an example of a sorting
-algorithm that always swaps \emph{consecutive}
-elements in the array.
-It turns out that the time complexity
-of such an algorithm is \emph{always}
-at least $O(n^2)$, because in the worst case,
-$O(n^2)$ swaps are required for sorting the array.
+Көпіршікті сұрыптау \emph{қатар тұрған}
+элементтерді алмастыру арқылы жүзеге асады.
+Осылайша ол \emph{үнемі}
+кем дегенде $O(n^2)$ уақытта жұмыс істейді.
+Өйткені нашар жағдайда бізге
+$O(n^2)$ алмастырулар жасауға тура келер еді.
 
-A useful concept when analyzing sorting
-algorithms is an \key{inversion}:
-a pair of array elements
-$(\texttt{array}[a],\texttt{array}[b])$ such that
-$a<b$ and $\texttt{array}[a]>\texttt{array}[b]$,
-i.e., the elements are in the wrong order.
-For example, the array
+Сұрыптау алгоритмдерін талдауда \key{инверсия}, яғни
+элементтер жиымының 
+$(\texttt{array}[a],\texttt{array}[b])$ жұбы үшін
+$a<b$ және $\texttt{array}[a]>\texttt{array}[b]$ орындалып, элементтердің бұрыс ретпен орналасуы пайдалы болмақ.
+Мысалы, келесі жиымда
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -218,55 +197,51 @@ For example, the array
 \node at (7.5,0.5) {$8$};
 \end{tikzpicture}
 \end{center}
-has three inversions: $(6,3)$, $(6,5)$ and $(9,8)$.
-The number of inversions indicates
-how much work is needed to sort the array.
-An array is completely sorted when
-there are no inversions.
-On the other hand, if the array elements
-are in the reverse order,
-the number of inversions is the largest possible:
+үш инверсия бар: $(6,3)$, $(6,5)$ және $(9,8)$.
+Инверсиялар саны
+сұрыптау үшін қаншалықты жұмыс істеу қажеттілігін анықтайды.
+Инверсияның болмауы жиымның сұрыпталғаны жайлы хабар береді.
+Ал егер, жиым кері реттілікте болса,
+инверсиялар санының болжамды ең үлкен мәні төмендегідей болмақ:
 \[1+2+\cdots+(n-1)=\frac{n(n-1)}{2} = O(n^2)\]
 
-Swapping a pair of consecutive elements that are
-in the wrong order removes exactly one inversion
-from the array.
-Hence, if a sorting algorithm can only
-swap consecutive elements, each swap removes
-at most one inversion, and the time complexity
-of the algorithm is at least $O(n^2)$.
+Қате ретте орналасқан көршілес элементтер жұптарының алмасуы 
+инверсиялар санын бірге азайтып отырады.
+Осылайша, алгоритм жоғарыда келтірілген әрекет арқылы жүзеге асса, 
+әр алмасу көп дегенде 1 инверсияны жойып отырады, 
+сол себепті алгоритмнің уақытша күрделілігі қалай болғанда да $O(n^2)$.
 
-\subsubsection{$O(n \log n)$ algorithms}
+\subsubsection{$O(n \log n)$ алгоритмдер}
 
-\index{merge sort}
+\index{біріктіру бойынша сұрыптау}
 
-It is possible to sort an array efficiently
-in $O(n \log n)$ time using algorithms
-that are not limited to swapping consecutive elements.
-One such algorithm is \key{merge sort}\footnote{According to \cite{knu983},
-merge sort was invented by J. von Neumann in 1945.},
-which is based on recursion.
+Жиымды $O(n \log n)$ уақыт ішінде тезірек сұрыптауды
+көршілес орналасқан элементтерді алмастырумен шектелмейтін
+алгоритм арқылы да жүзеге асыру мүмкіндігі бар.
+Осындай алгоритмдердің бірі рекурсияға негізделген 
+\key{біріктіру бойынша сұрыптау деп аталады}\footnote{\cite{knu983}
+мұндай сұрыптауды Дж. фон Нейман 1945 жылы ойлап тапты.}.
 
-Merge sort sorts a subarray \texttt{array}$[a \ldots b]$ as follows:
+Ол \texttt{array}$[a \ldots b]$ ішжиымын төмендегідей сұрыптайды:
 
 \begin{enumerate}
-\item If $a=b$, do not do anything, because the subarray is already sorted.
-\item Calculate the position of the middle element: $k=\lfloor (a+b)/2 \rfloor$.
-\item Recursively sort the subarray \texttt{array}$[a \ldots k]$.
-\item Recursively sort the subarray \texttt{array}$[k+1 \ldots b]$.
-\item \emph{Merge} the sorted subarrays \texttt{array}$[a \ldots k]$ and
-\texttt{array}$[k+1 \ldots b]$
-into a sorted subarray \texttt{array}$[a \ldots b]$.
+\item $a=b$ болған жағдайда, еш әрекет жасамаймыз, себебі ішжиым әлдеқашан сұрыпталған.
+\item Центрде орналасқан элементтің позициясын анықтаймыз : $k=\lfloor (a+b)/2 \rfloor$.
+\item Рекурсивті \texttt{array}$[a \ldots k]$ ішжиымын сұрыптаймыз.
+\item \texttt{array}$[k+1 \ldots b]$ ішжиымын да дәл осылай сұрыптаймыз.
+\item Сұрыпталған \texttt{array}$[a \ldots k]$ және
+\texttt{array}$[k+1 \ldots b]$ ішжиымдарын \texttt{array}$[a \ldots b]$
+\emph{біріктіреміз}.
 \end{enumerate}
 
-Merge sort is an efficient algorithm, because it
-halves the size of the subarray at each step.
-The recursion consists of $O(\log n)$ levels,
-and processing each level takes $O(n)$ time.
-Merging the subarrays \texttt{array}$[a \ldots k]$ and \texttt{array}$[k+1 \ldots b]$
-is possible in linear time, because they are already sorted.
+Бағдарламалауда бұл алгоритм тиімді саналады. Себебі 
+ол әр қадам сайын ішжиым өлшемін екі есеге азайтып отырады.
+Рекурсия $O(\log n)$ деңгейден тұрады
+және әр деңгейді өңдеуге $O(n)$ уақыт кетеді.
+Ал \texttt{array}$[a \ldots k]$ мен \texttt{array}$[k+1 \ldots b]$
+ішжиымдарын біріктіру олар әлдеқашан сұрыпталғандықтан сызықты уақытты алады.
 
-For example, consider sorting the following array:
+Мысалы, келесі жиымды сұрыптау жолын қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -281,8 +256,7 @@ For example, consider sorting the following array:
 \end{tikzpicture}
 \end{center}
 
-The array will be divided into two subarrays
-as follows:
+Жиымды екіге бөлейік:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (4,1);
@@ -300,8 +274,7 @@ as follows:
 \end{tikzpicture}
 \end{center}
 
-Then, the subarrays will be sorted recursively
-as follows:
+Кейін ішжиымдар рекурсивті түрде сұрыпталады:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (4,1);
@@ -319,8 +292,8 @@ as follows:
 \end{tikzpicture}
 \end{center}
 
-Finally, the algorithm merges the sorted
-subarrays and creates the final sorted array:
+Соңында алгоритм барлық ішжиымдардан 
+сұрыпталған жиым құрайды:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -335,19 +308,15 @@ subarrays and creates the final sorted array:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Sorting lower bound}
+\subsubsection{Сұрыптаудың төменгі шегі}
 
-Is it possible to sort an array faster
-than in $O(n \log n)$ time?
-It turns out that this is \emph{not} possible
-when we restrict ourselves to sorting algorithms
-that are based on comparing array elements.
+''$O(n \log n)$ уақытынан жылдамырақ сұрыптау мүмкін бе?'' -- деген заңды сұрақ туындайды. 
+Бұл сұраққа: ''Егер алмастыру алгоритмдерімен шектелсек, мүмкін \emph{емес}'' -- деп жауап беруге болады. 
 
-The lower bound for the time complexity
-can be proved by considering sorting
-as a process where each comparison of two elements
-gives more information about the contents of the array.
-The process creates the following tree:
+Уақытша күрделілігінің төменгі шегін дәлелдеу үшін
+сұрыптауды әр салыстыру сайын жиым туралы молырақ
+ақпарат беретін үдеріс деп қарастырайық.
+Бұл үдерістен төмендегідей дарақ шығады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -387,45 +356,34 @@ The process creates the following tree:
 \end{tikzpicture}
 \end{center}
 
-Here ''$x<y?$'' means that some elements
-$x$ and $y$ are compared.
-If $x<y$, the process continues to the left,
-and otherwise to the right.
-The results of the process are the possible
-ways to sort the array, a total of $n!$ ways.
-For this reason, the height of the tree
-must be at least
+Бұл жердегі ''$x<y?$'' қандай да бір
+$x$ пен $y$ элементтерінің салыстырылуын білдіреді.
+Егер $x<y$ болса, үдеріс солға жалғасады.
+Ал кері жағдайда оңға қарай ауысады.
+Нәтижелер -- жиымды сұрыптаудың $n!$ болжамды жолдары.
+Сол себепті, дарақтың биіктігі кем дегенде
 \[ \log_2(n!) = \log_2(1)+\log_2(2)+\cdots+\log_2(n).\]
-We get a lower bound for this sum
-by choosing the last $n/2$ elements and
-changing the value of each element to $\log_2(n/2)$.
-This yields an estimate
+Қосындының төменгі шегін соңғы $n/2$ элементті таңдап,
+әрқайсының мәнін $\log_2(n/2)$-ге өзгерту арқылы анықтай аламыз.
+Беретін бағасы
 \[ \log_2(n!) \ge (n/2) \cdot \log_2(n/2),\]
-so the height of the tree and the minimum
-possible number of steps in a sorting
-algorithm in the worst case
-is at least $n \log n$.
+сондықтан дарақтың биіктігі мен сұрыптау
+алгоритмі ең нашар жағдайда жасайтын 
+минималды жүріс саны $n \log n$ - ге тең.
 
-\subsubsection{Counting sort}
+\subsubsection{Санамалы сұрыптау}
 
-\index{counting sort}
+\index{санамалы сұрыптау}
+$n \log n$ элементтерді салыстырмай,
+өзге ақпараттарды қолдана отырып сұрыптайтын алгоритмдер
+үшін төменгі шек бола алмайды.
+Осындай алгоритмдердің бірі -- $O(n)$ уақытта жұмыс жасайтын
+санамалы сұрыптау, ол жиымдағы элементтер $0 \ldots c$ 
+аралығанда деген болжамға негізделген және $c=O(n)$.
 
-The lower bound $n \log n$ does not apply to
-algorithms that do not compare array elements
-but use some other information.
-An example of such an algorithm is
-\key{counting sort} that sorts an array in
-$O(n)$ time assuming that every element in the array
-is an integer between $0 \ldots c$ and $c=O(n)$.
+Біз индекстері бастапқы жиымның элементтерімен сәйкес келетін көмекші жиымды қолданатын боламыз. Алгоритм бастапқы  жиымды айналып шығып, онда әр элементтің қанша рет кездесетінін есептейді.
 
-The algorithm creates a \emph{bookkeeping} array,
-whose indices are elements of the original array.
-The algorithm iterates through the original array
-and calculates how many times each element
-appears in the array.
-\newpage
-
-For example, the array
+Мысалы, мына жиымнан
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -439,7 +397,7 @@ For example, the array
 \node at (7.5,0.5) {$9$};
 \end{tikzpicture}
 \end{center}
-corresponds to the following bookkeeping array:
+келесі есептік жиым туындайды:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (9,1);
@@ -467,96 +425,84 @@ corresponds to the following bookkeeping array:
 \end{tikzpicture}
 \end{center}
 
-For example, the value at position 3
-in the bookkeeping array is 2,
-because the element 3 appears 2 times
-in the original array.
+Есептік жиымның 3-индексінде
+2 саны сақталған, себебі
+3 элементі негізгі жиымда 2 рет кездеседі.
 
-Construction of the bookkeeping array
-takes $O(n)$ time. After this, the sorted array
-can be created in $O(n)$ time because
-the number of occurrences of each element can be retrieved
-from the bookkeeping array.
-Thus, the total time complexity of counting
-sort is $O(n)$.
+Аталған жиым $O(n)$ уақытта құрылады. Ал сұрыпталған
+жиым құрау $O(n)$ уақыт алады. Себебі әр элементтің 
+қанша рет кездескенін есептік жиымнан біле аламыз.
+Сондықтан санамалы сұрыптаудың уақытша күрделілігі $O(n)$-ге тең.
 
-Counting sort is a very efficient algorithm
-but it can only be used when the constant $c$
-is small enough, so that the array elements can
-be used as indices in the bookkeeping array.
+Тұрақты $c$ жеткілікті деңгейде кіші болған
+жағдайда есептік жиым құру мүмкіндігі артады.
+Сондықтан санамалы сұрыптау өте тиімді алгоритм болмақ.
 
-\section{Sorting in C++}
+\section{C++ -тегі сұрыптау}
 
 \index{sort@\texttt{sort}}
 
-It is almost never a good idea to use
-a home-made sorting algorithm
-in a contest, because there are good
-implementations available in programming languages.
-For example, the C++ standard library contains
-the function \texttt{sort} that can be easily used for
-sorting arrays and other data structures.
+Контестте қолдан құрастырылған сұрыптау алгоритмін пайдалану сирек жағдайларда ғана жақсы идея деп саналады. Өйткені бағдарламалау тілдерінде
+кірістірілген жақсы тәсілдер баршылық.
+Мысалы, C++ стандартты дерекханасында \texttt{sort}
+функциясы бар, оның көмегімен жиымдар және басқа да деректер
+құрылымдарын оңай сұрыптай аламыз.
 
-There are many benefits in using a library function.
-First, it saves time because there is no need to
-implement the function.
-Second, the library implementation is
-certainly correct and efficient: it is not probable
-that a home-made sorting function would be better.
+Дерекхананың сұрыптау функциясын пайдаланудың
+көптеген артықшылықтары бар.
+Біріншіден, ол уақытты үнемдейді. Себебі функция кодын жазуға уақыт кетпейді.
+Екіншіден, оның жүзеге асыру тәсілі тиімді әрі дұрыс. Өйткені қолдан құрастырылған алгоритмнің жақсырақ болуы екіталай.
 
-In this section we will see how to use the
-C++ \texttt{sort} function.
-The following code sorts
-a vector in increasing order:
+Бұл бөлікте C++ \texttt{sort} функциясын 
+қолдану барысын қарастырамыз.
+Келесі код векторды өсу ретімен сұрыптайды:
 \begin{lstlisting}
 vector<int> v = {4,2,5,3,5,8,3};
 sort(v.begin(),v.end());
 \end{lstlisting}
-After the sorting, the contents of the
-vector will be
+Сұрыптаудан кейінгі вектор
 $[2,3,3,4,5,5,8]$.
-The default sorting order is increasing,
-but a reverse order is possible as follows:
+Әдепкі қалпы бойынша жұмыс істесе, өсу реті бойынша жүзеге асады,
+бірақ кері ретпен сұрыптауды төмендегіше орындай аламыз:
 \begin{lstlisting}
 sort(v.rbegin(),v.rend());
 \end{lstlisting}
-An ordinary array can be sorted as follows:
+Кәдімгі жиым осылай реттеледі:
 \begin{lstlisting}
 int n = 7; // array size
 int a[] = {4,2,5,3,5,8,3};
 sort(a,a+n);
 \end{lstlisting}
-\newpage
-The following code sorts the string \texttt{s}:
+
+Ал \texttt{s} жолын сұрыптау төмендегідей орындалады:
 \begin{lstlisting}
 string s = "monkey";
 sort(s.begin(), s.end());
 \end{lstlisting}
-Sorting a string means that the characters
-of the string are sorted.
-For example, the string ''monkey'' becomes ''ekmnoy''.
+Жолды сұрыптау дегеніміз оның құрамындағы 
+элементтердің реттелуін білдіреді.
+Мысалы, ''monkey'' жолы ''ekmnoy'' болып өзгереді.
 
-\subsubsection{Comparison operators}
+\subsubsection{Салыстыру операторлары}
 
-\index{comparison operator}
+\index{салыстыру операторлары}
 
-The function \texttt{sort} requires that
-a \key{comparison operator} is defined for the data type
-of the elements to be sorted.
-When sorting, this operator will be used
-whenever it is necessary to find out the order of two elements.
+\texttt{sort} функциясы элементтерді сұрыптау кезінде
+дерек типіне байланысты салыстыру  операторын талап етеді.
+Оператор екі элементтің орындарын анықтауда қажет.
 
-Most C++ data types have a built-in comparison operator,
-and elements of those types can be sorted automatically.
-For example, numbers are sorted according to their values
-and strings are sorted in alphabetical order.
+Көптеген C++ дерек типтерінің кірістірілген
+салыстыру операторлары болады, сондықтан элементтер 
+автоматты түрде сұрыптала алады.
+Мысалы, сандар мәндеріне байланысты, ал жолдар әліпбидегі
+реттілігіне байланысты сұрыпталады.
 
-\index{pair@\texttt{pair}}
+\index{жұп@\texttt{жұп}}
 
-Pairs (\texttt{pair}) are sorted primarily according to their
-first elements (\texttt{first}).
-However, if the first elements of two pairs are equal,
-they are sorted according to their second elements (\texttt{second}):
+(\texttt{pair}) жұптары бірінші элементтері 
+(\texttt{first}) бойынша сұрыпталады.
+Екі жұптың бірінші элементтері бірдей болса, екінші элементтері 
+(\texttt{second}) бойынша реттеледі:
 \begin{lstlisting}
 vector<pair<int,int>> v;
 v.push_back({1,5});
@@ -564,16 +510,19 @@ v.push_back({2,3});
 v.push_back({1,2});
 sort(v.begin(), v.end());
 \end{lstlisting}
-After this, the order of the pairs is
-$(1,2)$, $(1,5)$ and $(2,3)$.
+Осыдан кейінгі жұптардың реттілігі:
+$(1,2)$, $(1,5)$ және $(2,3)$.
 
-\index{tuple@\texttt{tuple}}
+\index{кортеж@\texttt{кортеж}}
 
-In a similar way, tuples (\texttt{tuple})
-are sorted primarily by the first element,
-secondarily by the second element, etc.\footnote{Note that in some older compilers,
-the function \texttt{make\_tuple} has to be used to create a tuple instead of
-braces (for example, \texttt{make\_tuple(2,1,4)} instead of \texttt{\{2,1,4\}}).}:
+(\texttt{tuple}) кортеждері ұқсас жолмен 
+алғашқы ретте бірінші элемент бойынша, кейін
+екінші элемент бойынша, т.с.с. сұрыпталады 
+\footnote{Кей ескі компиляторларда кортеж  
+құрау үшін өрнек жақшалар орнына \texttt{make\_tuple}
+функциясы қолданылуы қажет екенін ескерген жөн
+(мысалы, \texttt{\{2,1,4\}} орнына 
+\texttt{make\_tuple(2,1,4)}).}:
 \begin{lstlisting}
 vector<tuple<int,int,int>> v;
 v.push_back({2,1,4});
@@ -581,26 +530,24 @@ v.push_back({1,5,3});
 v.push_back({2,1,3});
 sort(v.begin(), v.end());
 \end{lstlisting}
-After this, the order of the tuples is
-$(1,5,3)$, $(2,1,3)$ and $(2,1,4)$.
+Кейін кортеждер реттілігі осылай өзгереді:
+$(1,5,3)$, $(2,1,3)$ және $(2,1,4)$.
 
-\subsubsection{User-defined structs}
 
-User-defined structs do not have a comparison
-operator automatically.
-The operator should be defined inside
-the struct as a function
-\texttt{operator<},
-whose parameter is another element of the same type.
-The operator should return \texttt{true}
-if the element is smaller than the parameter,
-and \texttt{false} otherwise.
+\subsubsection{Пайдаланушы құрылымдары (struct)}
 
-For example, the following struct \texttt{P}
-contains the x and y coordinates of a point.
-The comparison operator is defined so that
-the points are sorted primarily by the x coordinate
-and secondarily by the y coordinate.
+Пайдаланушы құрылымдарында (struct) автоматты түрдегі 
+салыстыру операторлары болмайды.
+Оператор құрылым (struct) ішінде параметрі сол типтегі 
+элемент болатын \texttt{operator<} 
+функциясы ретінде анықталуы қажет.
+Ол элемент параметрден кішірек болса, \texttt{true} арқылы, 
+кері жағдайда \texttt{false} арқылы қайтару керек.
+
+Мысалы, кезекті struct \texttt{P}
+x және y координатты нүктелерін қамтиды.
+Салыстыру операторы бірінші x координаты,
+ал кейін y координаты бойынша сұрыптайды.
 
 \begin{lstlisting}
 struct P {
@@ -612,16 +559,16 @@ struct P {
 };
 \end{lstlisting}
 
-\subsubsection{Comparison functions}
+\subsubsection{Салыстыру функциялары}
 
-\index{comparison function}
+\index{салыстыру функциясы}
 
-It is also possible to give an external
-\key{comparison function} to the \texttt{sort} function
-as a callback function.
-For example, the following comparison function \texttt{comp}
-sorts strings primarily by length and secondarily
-by alphabetical order:
+\key{Салыстырудың сыртқы функциясын} да солай анықтап, 
+оның \texttt{sort} функциясын кері шақыру функциясы ретінде беруге болады.
+Мысалы, келесі \texttt{comp} салыстыру функциясы 
+жолды бірінші кезекте ұзындығы бойынша, ал егер екі
+бірдей ұзындықтағы жол кездессе, әліпбидегі реттіліктері
+бойынша сұрыптайды:
 
 \begin{lstlisting}
 bool comp(string a, string b) {
@@ -629,20 +576,19 @@ bool comp(string a, string b) {
     return a < b;
 }
 \end{lstlisting}
-Now a vector of strings can be sorted as follows:
+Жолдардан тұратын вектор осылай сұрыпталады:
 \begin{lstlisting}
 sort(v.begin(), v.end(), comp);
 \end{lstlisting}
 
-\section{Binary search}
+\section{Бинарлық ізденіс}
 
-\index{binary search}
+\index{бинарлық ізденіс}
 
-A general method for searching for an element
-in an array is to use a \texttt{for} loop
-that iterates through the elements of the array.
-For example, the following code searches for
-an element $x$ in an array:
+Жиымдағы элементті іздеудің негізгі жолы -- \texttt{for} 
+қайталымы арқылы жиыммен өтіп шығу.
+Мысалы, келесі код жиымнан
+$x$ элементін іздейді:
 
 \begin{lstlisting}
 for (int i = 0; i < n; i++) {
@@ -652,41 +598,33 @@ for (int i = 0; i < n; i++) {
 }
 \end{lstlisting}
 
-The time complexity of this approach is $O(n)$,
-because in the worst case, it is necessary to check
-all elements of the array.
-If the order of the elements is arbitrary,
-this is also the best possible approach, because
-there is no additional information available where
-in the array we should search for the element $x$.
+Тәсілдің уақытша күрделілігі $O(n)$, себебі ең нашар жағдайда
+жиымның барлық элементін қарап шығуға мәжбүрміз.
+Элементтер кез келген ретте орналасса, тәсіл біз үшін тиімді саналады.
+Себебі $x$-ті қайдан іздестіру керектігі туралы қосымша ақпарат ала алмаймыз.
 
-However, if the array is \emph{sorted},
-the situation is different.
-In this case it is possible to perform the
-search much faster, because the order of the
-elements in the array guides the search.
-The following \key{binary search} algorithm
-efficiently searches for an element in a sorted array
-in $O(\log n)$ time.
+Егер жиым \emph{сұрыпталған} болса, жағдай басқаша қабылданады.
+Бұл жағдайда іздестіруді реттілік көмегімен 
+тез жүзеге асыра аламыз.
+\key{Бинарлық ізденіс} алгоритмі сұрыпталған жиымнан
+элементті $O(\log n)$ уақытта тиімді таба алады.
 
-\subsubsection{Method 1}
+\subsubsection{Бірінші тәсіл}
 
-The usual way to implement binary search
-resembles looking for a word in a dictionary.
-The search maintains an active region in the array,
-which initially contains all array elements.
-Then, a number of steps is performed,
-each of which halves the size of the region.
+Алгоритмді жүзеге асырудың қарапайым жолы -- сөздіктен 
+сөз іздеуге ұқсас. Ізденісті алдымен жиымның барлық 
+элементтерін қамтитын аралықтан бастаймыз.
+Кейін бірнеше қадам ішінде аралықтың өлшемін 
+екі есеге азайтып отырамыз.
 
-At each step, the search checks the middle element
-of the active region.
-If the middle element is the target element,
-the search terminates.
-Otherwise, the search recursively continues
-to the left or right half of the region,
-depending on the value of the middle element.
+Әр қадам сайын ізденіс қарастырылып жатқан
+аралықтың орталық элементін тексереді.
+Егер орталық элемент іздестірілген элемент болса,
+ізденісті тоқтатамыз.
+Басқа жағдайда, ізденіс орталық элементтің мәніне байланысты
+оң жаққа немесе сол жаққа жалғасады.
 
-The above idea can be implemented as follows:
+Идеяның орындалу жолы:
 \begin{lstlisting}
 int a = 0, b = n-1;
 while (a <= b) {
@@ -699,28 +637,24 @@ while (a <= b) {
 }
 \end{lstlisting}
 
-In this implementation, the active region is $a \ldots b$,
-and initially the region is $0 \ldots n-1$.
-The algorithm halves the size of the region at each step,
-so the time complexity is $O(\log n)$.
+Бұл жердегі қарастырылып жатқан аралық -- $a \ldots b$,
+бастапқы қалпы -- $0 \ldots n-1$ аралығы.
+Алгоритм әр қадамда ізденіс аралығын екі есеге кішірейтеді. Демек оның уақытша күрделілігі $O(\log n)$ болады. 
 
-\subsubsection{Method 2}
+\subsubsection{Екінші тәсіл}
 
-An alternative method to implement binary search
-is based on an efficient way to iterate through
-the elements of the array.
-The idea is to make jumps and slow the speed
-when we get closer to the target element.
+Біз бинарлық ізденісті басқа тәсілмен де жүзеге асыра аламыз. Ол үшін жиым элементтерінен тиімді өтіп шығу керек. Мұндағы идея секіруге және нысанға
+жақындаған сайын жылдамдықты азайтуға негізделеді.
 
-The search goes through the array from left to
-right, and the initial jump length is $n/2$.
-At each step, the jump length will be halved:
-first $n/4$, then $n/8$, $n/16$, etc., until
-finally the length is 1.
-After the jumps, either the target element has
-been found or we know that it does not appear in the array.
+Ізденіс солдан оңға қарай жүреді, бастапқы секіріс --
+$n/2$. Әр қадамда секіру ұзындығы екі есеге қысқарады:
+алғашында $n/4$, кейін $n/8$, $n/16$, т.с.с., ақырғы 
+ұзындық бір болғанға дейін жалғасады.
+Секірістердің соңында біз нысандағы элементті табамыз
+немесе оның жиымда жоқ екеніне көз жеткіземіз.
+\newpage
 
-The following code implements the above idea:
+Төменде осы идея бойынша жазылған код берілген:
 \begin{lstlisting}
 int k = 0;
 for (int b = n/2; b >= 1; b /= 2) {
@@ -731,30 +665,31 @@ if (array[k] == x) {
 }
 \end{lstlisting}
 
-During the search, the variable $b$
-contains the current jump length.
-The time complexity of the algorithm is $O(\log n)$,
-because the code in the \texttt{while} loop
-is performed at most twice for each jump length.
+Ізденіс барысында $b$ айнымалысы
+секіріс ұзындығына жауап береді.
+алгоритмнің уақытша күрделілігі -- $O(\log n)$.
+Себебі кодтағы \texttt{while} айнымалысы
+әр секіру ұзындығы үшін ең көп дегенде екі
+рет қолданылады.
 
-\subsubsection{C++ functions}
+\subsubsection{C++ функциялары}
 
-The C++ standard library contains the following functions
-that are based on binary search and work in logarithmic time:
+С++ стандартты дерекханасы бинарлық ізденіске 
+негізделген және логарифмдік уақытта жұмыс істейтін
+келесі функцияларды қамтиды:
 
 \begin{itemize}
-\item \texttt{lower\_bound} returns a pointer to the
-first array element whose value is at least $x$.
-\item \texttt{upper\_bound} returns a pointer to the
-first array element whose value is larger than $x$.
-\item \texttt{equal\_range} returns both above pointers.
+\item \texttt{lower\_bound} жиымдағы мәні кемінде $x$ болатын
+бірінші элементке нұсқайды.
+\item \texttt{upper\_bound} жиымдағы мәні $x$-тен үлкен ең
+бірінші элементке нұсқайды.
+\item \texttt{equal\_range} жоғарыдағы екеуін де қайтарады.
 \end{itemize}
 
-The functions assume that the array is sorted.
-If there is no such element, the pointer points to
-the element after the last array element.
-For example, the following code finds out whether
-an array contains an element with value $x$:
+Функция жиым сұрыпталған деп қабылдайды.
+Егер қажет элемент табылмаса, нұсқағыш жиымның соңғы
+элементінен кейінгі элементке нұсқайды. 
+Мысалы, төмендегі код жиымда $x$ элементі бар-жоғын анықтайды:
 
 \begin{lstlisting}
 auto k = lower_bound(array,array+n,x)-array;
@@ -763,8 +698,7 @@ if (k < n && array[k] == x) {
 }
 \end{lstlisting}
 
-Then, the following code counts the number of elements
-whose value is $x$:
+Ал келесі код $x$ жиымда қанша рет кездесетінін есептейді:
 
 \begin{lstlisting}
 auto a = lower_bound(array, array+n, x);
@@ -772,25 +706,24 @@ auto b = upper_bound(array, array+n, x);
 cout << b-a << "\n";
 \end{lstlisting}
 
-Using \texttt{equal\_range}, the code becomes shorter:
+\texttt{equal\_range} көмегімен кодты ықшамдай аламыз:
 
 \begin{lstlisting}
 auto r = equal_range(array, array+n, x);
 cout << r.second-r.first << "\n";
 \end{lstlisting}
 
-\subsubsection{Finding the smallest solution}
+\subsubsection{Ең кіші шешімді табу}
 
-An important use for binary search is
-to find the position where the value of a \emph{function} changes.
-Suppose that we wish to find the smallest value $k$
-that is a valid solution for a problem.
-We are given a function $\texttt{ok}(x)$
-that returns \texttt{true} if $x$ is a valid solution
-and \texttt{false} otherwise.
-In addition, we know that $\texttt{ok}(x)$ is \texttt{false}
-when $x<k$ and \texttt{true} when $x \ge k$.
-The situation looks as follows:
+Бинарлық ізденістің маңызды қолданыс аясы --
+функцияның мәні өзгеретін позицияны анықтау.
+Есепке шешім бола алатын ең төмен $k$ мәнін
+тапқымыз келеді делік.
+Бізде $x$ жауап бола алса, \texttt{true}, басқа жағдайда
+\texttt{false} қайтаратын $\texttt{ok}(x)$ функциясы бар.
+Оған қоса, $\texttt{ok}(x)$ $x<k$ болғанда, \texttt{false}
+және $x \ge k$ болғанда, \texttt{true} қайтаратынын білеміз.
+Жағдаят көрінісі:
 
 \begin{center}
 \begin{tabular}{r|rrrrrrrr}
@@ -802,7 +735,7 @@ $\texttt{ok}(x)$ & \texttt{false} & \texttt{false}
 \end{center}
 
 \noindent
-Now, the value of $k$ can be found using binary search:
+$k$ мәнін бинарлық ізденіс арқылы анықтай аламыз:
 
 \begin{lstlisting}
 int x = -1;
@@ -812,41 +745,40 @@ for (int b = z; b >= 1; b /= 2) {
 int k = x+1;
 \end{lstlisting}
 
-The search finds the largest value of $x$ for which
-$\texttt{ok}(x)$ is \texttt{false}.
-Thus, the next value $k=x+1$
-is the smallest possible value for which
-$\texttt{ok}(k)$ is \texttt{true}.
-The initial jump length $z$ has to be
-large enough, for example some value
-for which we know beforehand that $\texttt{ok}(z)$ is \texttt{true}.
+$\texttt{ok}(x)$ \texttt{false} болатындай 
+$x$-тің ең үлкен мәнін іздейміз. Осылайша, $k=x+1$
+$\texttt{ok}(k)$ \texttt{true} болатындай
+ең кіші мәнге тең.
+Бастапқы секіріс ұзындығы $z$ жеткілікті
+деңгейде үлкен болуы қажет,
+мысалы біз алдын ала білетін қандай да бір
+$\texttt{ok}(z)$ \texttt{true} болатын мән.
 
-The algorithm calls the function \texttt{ok}
-$O(\log z)$ times, so the total time complexity
-depends on the function \texttt{ok}.
-For example, if the function works in $O(n)$ time,
-the total time complexity is $O(n \log z)$.
+Алгоритм \texttt{ok} функциясын 
+$O(\log z)$ рет шақырады, сол себепті
+уақытша күрделілігі \texttt{ok} функциясына тәуелді.
+Мысалы, функция $O(n)$ уақытта жұмыс жасаса,
+жалпы уақытша күрделілігі -- $O(n \log z)$.
 
-\subsubsection{Finding the maximum value}
+\subsubsection{Ең үлкен мәнді табу}
 
-Binary search can also be used to find
-the maximum value for a function that is
-first increasing and then decreasing.
-Our task is to find a position $k$ such that
+Сонымен қатар бинарлық ізденіс
+мәні алдымен өсіп, кейін белгілі бір сәтте
+күрт азаятын функция үшін де пайдаланылады.
+Біздің тапсырмамыз төмендегідей $k$ мәнін табу
 
 \begin{itemize}
 \item
-$f(x)<f(x+1)$ when $x<k$, and
+ $x<k$ үшін $f(x)<f(x+1)$, ал
 \item
-$f(x)>f(x+1)$ when $x \ge k$.
+$x \ge k$ үшін $f(x)>f(x+1)$.
 \end{itemize}
 
-The idea is to use binary search
-for finding the largest value of $x$
-for which $f(x)<f(x+1)$.
-This implies that $k=x+1$
-because $f(x+1)>f(x+2)$.
-The following code implements the search: 
+Идеясы -- $f(x)<f(x+1)$ болатын ең үлкен
+$x$-ті бинарлық ізденіс арқылы табу. 
+Бұл $k=x+1$ екенін білдіреді. Себебі
+$f(x+1)>f(x+2)$. Төмендегі код 
+ізденісті жүзеге асырады:
 
 \begin{lstlisting}
 int x = -1;
@@ -856,8 +788,7 @@ for (int b = z; b >= 1; b /= 2) {
 int k = x+1;
 \end{lstlisting}
 
-Note that unlike in the ordinary binary search,
-here it is not allowed that consecutive values
-of the function are equal.
-In this case it would not be possible to know
-how to continue the search.
+Қарапайым бинарлық ізденістен айырмашылығы --
+функцияның қатар келетін мәндері бірдей 
+болуына рұқсат етілмейді. Бұл жағдайда ізденісті қалай
+жалғастыру керектігін білу мүмкін емес. 

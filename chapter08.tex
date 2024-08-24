@@ -1,46 +1,35 @@
-\chapter{Amortized analysis}
+\chapter{Амортизацияланған талдау}
 
-\index{amortized analysis}
+\index{амортизацияланған талдау}
 
-The time complexity of an algorithm
-is often easy to analyze
-just by examining the structure
-of the algorithm:
-what loops does the algorithm contain
-and how many times the loops are performed.
-However, sometimes a straightforward analysis
-does not give a true picture of the efficiency of the algorithm.
+Алгоритмнің уақытша күрделілігі жай ғана
+алгоритм құрылымын зерттеу, алгоритмнің қандай циклдерді
+қамтитынын және олардың қанша мәрте орындалатынын анықтау арқылы оңай 
+талдана алады.
+Дегенмен кейде мұндай қарапайым талдау алгоритмнің
+шын мәнінде қаншалықты тиімді жұмыс жасайтындығы
+туралы толық ақпарат бермейді.
 
-\key{Amortized analysis} can be used to analyze
-algorithms that contain operations whose
-time complexity varies.
-The idea is to estimate the total time used to
-all such operations during the
-execution of the algorithm, instead of focusing
-on individual operations.
+\key{Амортизацияланған талдауды} уақыт күрделілігі түрленіп отыратын опрецияларды қамтитын алгоритмдерді талдау үшін қолдануға болады. Талдаудың бұл түрінің негізгі идеясы алгоритмдегі операциялардың 
+жұмыс жасау уақытын өз алдына бөлек бағалаудың орнына
+бірге бағалауға негізделген болатын.
 
-\section{Two pointers method}
+\section{Екі нұсқағыш әдісі}
 
-\index{two pointers method}
+\index{Екі нұсқағыш әдісі}
 
-In the \key{two pointers method},
-two pointers are used to
-iterate through the array values.
-Both pointers can move to one direction only,
-which ensures that the algorithm works efficiently.
-Next we discuss two problems that can be solved
-using the two pointers method.
+\key{Екі нұсқағыш әдісінде} жиым мәндерімен өтіп шығу үшін
+екі нұсқағыш пайдаланылады. Екі нұсқағыш та алгоритм тиімді болатындай
+тек бір бағытта қозғалады. Енді екі нұсқағыш әдісімен шығаруға болатын есептерді қарастырайық.
 
-\subsubsection{Subarray sum}
+\subsubsection{Ішжиым қосындысы}
 
-As the first example,
-consider a problem where we are
-given an array of $n$ positive integers
-and a target sum $x$,
-and we want to find a subarray whose sum is $x$
-or report that there is no such subarray.
+Бірінші мысал ретінде $n$ оң бүтін саннан тұратын
+жиым мен $x$ мақсатты сома берілген есепті қарастырайық. %мақсатты қосынды - target sum, егер жарамаса дұрысырақ нұсқаларын айтсаңыз
+Біз қосындысы $x$ болатын ішжиымды анықтағымыз келеді, болмаған жағдайда
+жоқ екені туралы хабарлаймыз.
 
-For example, the array
+Мысалы, төмендегі жиым
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -55,7 +44,7 @@ For example, the array
 \node at (7.5,0.5) {$3$};
 \end{tikzpicture}
 \end{center}
-contains a subarray whose sum is 8:
+қосындысы 8 болатын ішжиымды қатиды:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (2,0) rectangle (5,1);
@@ -72,18 +61,17 @@ contains a subarray whose sum is 8:
 \end{tikzpicture}
 \end{center}
 
-This problem can be solved in
-$O(n)$ time by using the two pointers method.
-The idea is to maintain pointers that point to the
-first and last value of a subarray.
-On each turn, the left pointer moves one step
-to the right, and the right pointer moves to the right
-as long as the resulting subarray sum is at most $x$.
-If the sum becomes exactly $x$,
-a solution has been found.
+Есеп шешімін екі нұсқағыш әдісімен $O(n)$ уақытта таба аламыз.
+Идеясы -- нұсқағыштарды ішжиымның алғашқы және соңғы мәндеріне сілтеу.
+Әр жүрісте сол жақ нұсқағыш бір қадам оңға, ал оң жақ нұсқағыш нәтижесінде
+пайда болған ішжиым қосындысы $x$-тен аспайтындай позицияға дейін оңға жылжиды.
 
-As an example, consider the following array
-and a target sum $x=8$:
+% On each turn, the left pointer moves one step
+% to the right, and the right pointer moves to the right
+% as long as the resulting subarray sum is at most $x$.
+Егер қосынды $x$-ке тең болса, шешім табылды.
+
+Үлгі ретінде төмендегі жиым мен мақсатты қосынды $x=8$ болған жағдайды қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -99,8 +87,8 @@ and a target sum $x=8$:
 \end{tikzpicture}
 \end{center}
 
-The initial subarray contains the values
-1, 3 and 2 whose sum is 6:
+Бастапқы ішжиым қосындысы 6 болатын 1, 3 және 2 
+мәндерін қамтиды:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -121,9 +109,9 @@ The initial subarray contains the values
 \end{tikzpicture}
 \end{center}
 
-Then, the left pointer moves one step to the right.
-The right pointer does not move, because otherwise
-the subarray sum would exceed $x$.
+Кейін сол жақ нұсқағыш бір қадам оңға жылжиды. Оң жақ нұсқағыш
+орнынан қозғалмайды, себебі қозғалған жағдайда ішжиым қосындысы 
+$x$-тен асып кетер еді.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -144,11 +132,9 @@ the subarray sum would exceed $x$.
 \end{tikzpicture}
 \end{center}
 
-Again, the left pointer moves one step to the right,
-and this time the right pointer moves three
-steps to the right.
-The subarray sum is $2+5+1=8$, so a subarray
-whose sum is $x$ has been found.
+Қайтадан сол жақ нұсқағыш бір қадам оңға жылжиды. Осы кезде
+оң жақтағы нұсқағыш оңға қарай 3 қадам жасайды. Ішжиым қосындысы -- $2+5+1=8$,
+қосындысы $x$ болатын ішжиым табылды.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -169,44 +155,39 @@ whose sum is $x$ has been found.
 \end{tikzpicture}
 \end{center}
 
-The running time of the algorithm depends on
-the number of steps the right pointer moves.
-While there is no useful upper bound on how many steps the
-pointer can move on a \emph{single} turn.
-we know that the pointer moves \emph{a total of}
-$O(n)$ steps during the algorithm,
-because it only moves to the right.
+Алгоритмнің өңдеу уақыты оң жақ нұсқағыштың жасайтын қадам санына байланысты болады.
+Бір итерацияда жасалатын қадамның жоғарғы шегін білмейміз. 
+Біз алгоритм барысында нұсқағыштың \emph{жалпылама} $O(n)$ қадам жасайтындағын білеміз,
+себебі ол оңға ғана қозғалады.
+% we know that the pointer moves \emph{a total of}
+% $O(n)$ steps during the algorithm,
+% because it only moves to the right.
 
-Since both the left and right pointer
-move $O(n)$ steps during the algorithm,
-the algorithm works in $O(n)$ time.
+Алгоритмдегі сол және оң нұсқағыштардың $O(n)$
+қадам жасайтындығына байланысты алгоритм $O(n)$ уақытта жұмыс істейді.
+% Since both the left and right pointer
+% move $O(n)$ steps during the algorithm,
+% the algorithm works in $O(n)$ time.
 
-\subsubsection{2SUM problem}
+\subsubsection{2SUM есебі}
 
-\index{2SUM problem}
+\index{2SUM есебі}
 
-Another problem that can be solved using
-the two pointers method is the following problem,
-also known as the \key{2SUM problem}:
-given an array of $n$ numbers and
-a target sum $x$, find
-two array values such that their sum is $x$,
-or report that no such values exist.
+Екі нұсқағыш тәсілімен шығарылатын тағы бір есептің, яғни 2SUM есебінің шығарылу барысына тоқталайық.  
+$n$ саннан тұратын жиым мен $x$ мақсатты сомасы берілген,
+қосындылары $x$-ке тең екі жиым мәндерін анықтау немесе мүмкін еместігін хабарлау.
 
-To solve the problem, we first
-sort the array values in increasing order.
-After that, we iterate through the array using
-two pointers.
-The left pointer starts at the first value
-and moves one step to the right on each turn.
-The right pointer begins at the last value
-and always moves to the left until the sum of the
-left and right value is at most $x$.
-If the sum is exactly $x$,
-a solution has been found.
+Есепті шығару үшін бірінші жиымды өсу реті бойынша сұрыптаймыз.
+Кейін екі нұсқағышты пайдаланып жиымды өтіп шығамыз.
+Сол жақ нұсқағыш бірінші мәннен бастап әр жүрісте бір қадам оңға жылжиды.
+Оң жақ нұсқағыш соңғы мәннен басталып сол және оң мәндердің қосындысы ең көп дегенде $x$ болғанша
+солға жылжиды.
+% The right pointer begins at the last value
+% and always moves to the left until the sum of the
+% left and right value is at most $x$.
+Қосынды мәнінің $x$ болуы шешімнің табылғанын білдіреді.
 
-For example, consider the following array
-and a target sum $x=12$:
+Мысалы, келесі жиым мен мақсатты сома $x=12$ түрінде қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -222,10 +203,8 @@ and a target sum $x=12$:
 \end{tikzpicture}
 \end{center}
 
-The initial positions of the pointers
-are as follows.
-The sum of the values is $1+10=11$
-that is smaller than $x$.
+Нұсқағыштардың бастапқы позициялары көрсетілгендей.
+Мәндер қосындысы -- $1+10=11$, бұл $x$-тен кіші.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -247,9 +226,9 @@ that is smaller than $x$.
 \end{tikzpicture}
 \end{center}
 
-Then the left pointer moves one step to the right.
-The right pointer moves three steps to the left,
-and the sum becomes $4+7=11$.
+Кейін сол жақ нұсқағыш бір қадам оңға жылжиды.
+Оң жақ нұсқағыш үш қадам солға жылжиды, осылайша 
+пайда болған қосынды -- $4+7=11$.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -271,9 +250,8 @@ and the sum becomes $4+7=11$.
 \end{tikzpicture}
 \end{center}
 
-After this, the left pointer moves one step to the right again.
-The right pointer does not move, and a solution
-$5+7=12$ has been found.
+Бұдан соң сол жақ нұсқағыш қайтадан оңға бір қадам жасайды.
+Оң жақ нұсқағыш қозғалмайды, солайша $5+7=12$ шешімі табылды.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -295,66 +273,52 @@ $5+7=12$ has been found.
 \end{tikzpicture}
 \end{center}
 
-The running time of the algorithm is
-$O(n \log n)$, because it first sorts
-the array in $O(n \log n)$ time,
-and then both pointers move $O(n)$ steps.
+Алгоритмнің өңдеу уақыты -- $O(n \log n)$, себебі бірінші
+жиым $O(n \log n)$ уақыт ішінде сұрыпталып, кейін екі нұсқағыш та 
+$O(n)$ қадам жасайды.
 
-Note that it is possible to solve the problem
-in another way in $O(n \log n)$ time using binary search.
-In such a solution, we iterate through the array
-and for each array value, we try to find another
-value that yields the sum $x$.
-This can be done by performing $n$ binary searches,
-each of which takes $O(\log n)$ time.
+Есепті $O(n \log n)$ ішінде бинарлы ізденіс арқылы да шығаруға болатындығын ескеріңіз.
+Бұл жағдайда біз жиымды өтіп шығып, әр мән үшін қосынды $x$-ке тең болатындай басқа мән іздейміз.
+Ол әрқайсысы $O(\log n)$ уақыт алатын $n$ бинарлы ізденіс арқылы орындала алады.
 
-\index{3SUM problem}
-A more difficult problem is 
-the \key{3SUM problem} that asks to
-find \emph{three} array values
-whose sum is $x$.
-Using the idea of the above algorithm,
-this problem can be solved in $O(n^2)$ time\footnote{For a long time,
-it was thought that solving
-the 3SUM problem more efficiently than in $O(n^2)$ time
-would not be possible.
-However, in 2014, it turned out \cite{gro14}
-that this is not the case.}.
-Can you see how?
+\index{3SUM есебі}
+Қосындысы $x$-ке тең болатын \emph{үш} жиым мәндерін анықтауды 
+көздейтін \key{3SUM есебі} алдыңғы қарастырған есепке қарағанда қиынырақ.
+Жоғарыда қарастырылған алгоритмді қолдана отырып бұл есепті
+$O(n^2)$ уақытта шығара аламыз\footnote{Ұзақ уақыт бойы
+3SUM есебін $O(n^2)$ уақытынан тез шешу мүмкін емес деп ойладық.
+Бірақ 2014 жылы бұлай еместігі\cite{gro14} анықталды.}.
+Қалай шығарылатынын байқадыңыз ба?
 
-\section{Nearest smaller elements}
+\section{Ең жақын кішірек элементтер} %nearest smaller elements
 
-\index{nearest smaller elements}
+\index{ең жақын кішірек элементтер}
 
-Amortized analysis is often used to
-estimate the number of operations
-performed on a data structure.
-The operations may be distributed unevenly so
-that most operations occur during a
-certain phase of the algorithm, but the total
-number of the operations is limited.
+Амортиазцияланған талдау деректер құрылымындағы
+операциялар санына баға беру үшін жиі қолданылады.
+Операциялар бірқалыпсыз, алгоритмнің белгілі бір бөлігінде
+жиірек орындалатындай болып таратылуы мүмкін.
+Дегенмен операциялар саны шектеулі болмақ.
+% The operations may be distributed unevenly so
+% that most operations occur during a
+% certain phase of the algorithm, but the total
+% number of the operations is limited.
 
-As an example, consider the problem
-of finding for each array element
-the \key{nearest smaller element}, i.e.,
-the first smaller element that precedes the element
-in the array.
-It is possible that no such element exists,
-in which case the algorithm should report this.
-Next we will see how the problem can be
-efficiently solved using a stack structure.
+Үлгі ретінде жиымдағы әр элемент үшін \key{ең жақын кішірек элементті},
+яки ең бірінші болып сол элементке дейін кездесетін кішірек элементті анықтайтын
+есепті қарастырайық.
+Ондай элемент болмаған жағдайда алгоритм
+жоқ екенін хабарлауы қажет. 
+Енді есепті стэк құрылымын пайдалану арқылы қалай тиімді шешуге болатынын көреміз.
 
-We go through the array from left to right
-and maintain a stack of array elements.
-At each array position, we remove elements from the stack
-until the top element is smaller than the
-current element, or the stack is empty.
-Then, we report that the top element is
-the nearest smaller element of the current element,
-or if the stack is empty, there is no such element.
-Finally, we add the current element to the stack.
+Біз жиым элементтерінің стегін сақтай отырып, жиымды солдан оңға қарай аралаймыз.
+%We go through the array from left to right
+%and maintain a stack of array elements.
+Әр қадам сайын біз төбедегі элемент ағымдағы элементтен кіші болып шыққанға дейін немесе стек босап қалғанға дейін стэктен элементтерді өшіріп отырамыз. Осыдан кейін біз стэктің төбесіндегі элемент - ағымдағы ең жақын кіші элемент екенін немесе стэк бос 
+болған жағдайда, ондай элементтің жоқтығын хабарлаймыз.
+Соңында ағымдағы элементті стэкке қосамыз.
 
-As an example, consider the following array:
+Мысал ретінде келесі жиымды қарастырайық: 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -370,10 +334,8 @@ As an example, consider the following array:
 \end{tikzpicture}
 \end{center}
 
-First, the elements 1, 3 and 4 are added to the stack,
-because each element is larger than the previous element.
-Thus, the nearest smaller element of 4 is 3,
-and the nearest smaller element of 3 is 1.
+Бірінші 1, 3 және 4 сандары стэкке қосылады, себебі әр элемент алдыңғысынан үлкенірек.
+Сол себепті 4 үшін ең жақын кішірек элемент -- 3, ал 3 үшін ең жақын кішірек элемент 2 болмақ.
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (2,0) rectangle (3,1);
@@ -401,11 +363,9 @@ and the nearest smaller element of 3 is 1.
 \end{tikzpicture}
 \end{center}
 
-The next element 2 is smaller than the two top
-elements in the stack.
-Thus, the elements 3 and 4 are removed from the stack,
-and then the element 2 is added to the stack.
-Its nearest smaller element is 1:
+Келесі элемент -- 2. Ол стэктің жоғарысындағы екі элементтен кіші.
+Сол себепті 3 пен 4 элементтері стэктен өшіріліп, 2 стэкке қосылады.
+Оның ең жақын кішірек элементі -- 1:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (3,0) rectangle (4,1);
@@ -430,9 +390,8 @@ Its nearest smaller element is 1:
 \end{tikzpicture}
 \end{center}
 
-Then, the element 5 is larger than the element 2,
-so it will be added to the stack, and
-its nearest smaller element is 2:
+Кейін 5 элементі 2-ден үлкенірек болғандықтан
+осы стэкке қосылып, оның ең жақын кішірек элементі 2 болады:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (4,0) rectangle (5,1);
@@ -460,8 +419,7 @@ its nearest smaller element is 2:
 \end{tikzpicture}
 \end{center}
 
-After this, the element 5 is removed from the stack
-and the elements 3 and 4 are added to the stack:
+Бұдан соң 5 элементі стэктен өшіріліп, стэкке 3 пен 4 элементтері қосылады:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (6,0) rectangle (7,1);
@@ -492,9 +450,7 @@ and the elements 3 and 4 are added to the stack:
 \end{tikzpicture}
 \end{center}
 
-Finally, all elements except 1 are removed
-from the stack and the last element 2
-is added to the stack:
+Ақырында 1-ден өзге барлық элементтер өшіріліп, соңғы 2 элементі стэкке қосылады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -520,52 +476,35 @@ is added to the stack:
 \end{tikzpicture}
 \end{center}
 
-The efficiency of the algorithm depends on
-the total number of stack operations.
-If the current element is larger than
-the top element in the stack, it is directly
-added to the stack, which is efficient.
-However, sometimes the stack can contain several
-larger elements and it takes time to remove them.
-Still, each element is added \emph{exactly once} to the stack
-and removed \emph{at most once} from the stack.
-Thus, each element causes $O(1)$ stack operations,
-and the algorithm works in $O(n)$ time.
+Алгоритмнің тиімділігі стэк операцияларының жалпы санына тәуелді.
+Егер алынған элемент стэктің жоғарғы элементінен үлкен болса,
+ол стэкке бірден тиімді қосылады.
+Бірақ кейде стэк бірнеше үлкенірек элементтерді қамтуы мүмкін
+және оларды өшіру уақытты алады. Дегенмен әр элемент стэкке \emph{бір рет қана қосылады}
+және өшірілуі \emph{көп дегенде бір рет} орын алады.
+Сондықтан әр элемент $O(1)$ стэк операцияларын тудырып, алгоритм $O(n)$ уақытында орындалады.
 
-\section{Sliding window minimum}
+\section{Жылжымалы терезе минимумы}
 
-\index{sliding window}
-\index{sliding window minimum}
+\index{жылжымалы терезе}
+\index{жылжымалы терезе минимумы}
 
-A \key{sliding window} is a constant-size subarray
-that moves from left to right through the array.
-At each window position,
-we want to calculate some information
-about the elements inside the window.
-In this section, we focus on the problem
-of maintaining the \key{sliding window minimum},
-which means that
-we should report the smallest value inside each window.
+\key{Жылжымалы терезе} -- константалы-өлшемді ішжиым,
+ол жиым бойымен солдан оңға қарай жылжиды.
+Әр терезе позициясында терезе ішіндегі элементтер туралы
+қандай да бір ақпаратты анықтағымыз келеді. Бұл бөлікте 
+\key{жылжымалы терезе минимумы} есебіне назар аударамыз.
+Мұнда әр терезе ішіндегі ең кіші мәнді хабарлауымыз қажет.
 
-The sliding window minimum can be calculated
-using a similar idea that we used to calculate
-the nearest smaller elements.
-We maintain a queue
-where each element is larger than
-the previous element,
-and the first element
-always corresponds to the minimum element inside the window.
-After each window move,
-we remove elements from the end of the queue
-until the last queue element
-is smaller than the new window element,
-or the queue becomes empty.
-We also remove the first queue element
-if it is not inside the window anymore.
-Finally, we add the new window element
-to the end of the queue.
+Жылжымалы терезелердегі минимумдарды есептеу үшін ең жақын кішірек элементтерді табу барысындағы идеяны қолдануға болады.  
+Бірақ бұл жолы бізге әр элементі алдыңғысынан 
+үлкенірек, ал бірінші элементі әрдайым терезенің ішіндегі ең аз элементке сәйкес келетін кезек қажет болады. 
+Әр терезе қозғалысы сайын кезек соңынан 
+элементтерді алып отырамыз, бұл кезектің соңғы саны терезенің жаңа элементінен кіші 
+болғанша немесе кезек босағанша жалғасады. Сонымен қатар егер кезектің алғашқы элементі терезеде болмаса,
+оны өшіреміз. Соңында терезенің жаңа элементін кезек соңына қосамыз.
 
-As an example, consider the following array:
+Мысал ретінде келесі жиымды қарастырайық:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -582,11 +521,12 @@ As an example, consider the following array:
 \end{tikzpicture}
 \end{center}
 
-Suppose that the size of the sliding window is 4.
-At the first window position, the smallest value is 1:
+Жылжымалы терезе өлшемін 4 деп алайық. Терезенің бірінші позициясында
+ең кіші мән -- 1:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
-\fill[color=lightgray] (0,0) rectangle (4,1);
+\fill[color=lightgray]
+(0,0) rectangle (4,1);
 \draw (0,0) grid (8,1);
 
 \node at (0.5,0.5) {$2$};
@@ -611,12 +551,10 @@ At the first window position, the smallest value is 1:
 \end{tikzpicture}
 \end{center}
 
-Then the window moves one step right.
-The new element 3 is smaller than the elements
-4 and 5 in the queue, so the elements 4 and 5
-are removed from the queue
-and the element 3 is added to the queue.
-The smallest value is still 1.
+Кейін терезе бір қадам оңға жылжиды.
+Жаңа элемент 3 кезектегі 4 пен 5 элементтерінен кішірек,
+сондықтан 4 пен 5 элементтері кезектен өшіріліп,
+3 қосылды. Ең кіші элемент әлі де 1 бола береді.
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (1,0) rectangle (5,1);
@@ -641,12 +579,10 @@ The smallest value is still 1.
 \end{tikzpicture}
 \end{center}
 
-After this, the window moves again,
-and the smallest element 1
-does not belong to the window anymore.
-Thus, it is removed from the queue and the smallest
-value is now 3. Also the new element 4
-is added to the queue.
+Бұдан соң терезе тағы жылжиды,
+енді ең кіші элемент 1 терзеге кірмейді.
+Сондықтан ол кезектен өшіріліп, ең кіші мән 3-ке теңеседі.
+Сонымен қатар жаңа элемент 4 кезекке қосылады.
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (2,0) rectangle (6,1);
@@ -671,10 +607,8 @@ is added to the queue.
 \end{tikzpicture}
 \end{center}
 
-The next new element 1 is smaller than all elements
-in the queue.
-Thus, all elements are removed from the queue
-and it will only contain the element 1:
+Келесі жаңа элемент 1 кезектегі барлық элементтерден кіші.
+Сол себепті барлық элементтер өшіріліп, кезек енді тек 1 элементін қамтиды:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (3,0) rectangle (7,1);
@@ -695,10 +629,8 @@ and it will only contain the element 1:
 \end{tikzpicture}
 \end{center}
 
-Finally the window reaches its last position.
-The element 2 is added to the queue,
-but the smallest value inside the window
-is still 1.
+Ақырында терезе өзінің соңғы позициясына жетеді.
+2 элементі кезекке қосылады, бірақ терезедегі ең кіші элемент 1 болып қала береді.
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (4,0) rectangle (8,1);
@@ -723,10 +655,6 @@ is still 1.
 \end{tikzpicture}
 \end{center}
 
-Since each array element
-is added to the queue exactly once and
-removed from the queue at most once,
-the algorithm works in $O(n)$ time.
-
-
-
+Жиымның әр элементі кезекке тек бір рет қосылғандықтан 
+және кезектен көп дегенде бір-ақ рет өшірілгендіктен,
+алгоритм $O(n)$ уақытта жұмыс жасайды.

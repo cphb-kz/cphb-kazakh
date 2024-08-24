@@ -1,9 +1,28 @@
-\documentclass[twoside,12pt,a4paper,english]{book}
+\documentclass[oneside,12pt,a4paper,kazakh]{book}
 
 %\includeonly{chapter04,list}
 
-\usepackage[english]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}			% закомментил т.к. не работает \uppercase для toc.
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage[intlimits]{amsmath}
+\usepackage{amssymb}
+
+\usepackage{caption}
+
+\addto\captionsrussian{%
+  \renewcommand{\bibname}{Әдебиеттер}
+  \renewcommand{\indexname}{Пәндік сілтеме}
+  \renewcommand{\chaptername}{тарау}
+  \renewcommand{\partname}{БӨЛІМ}
+  \renewcommand{\contentsname}{Мазмұны}
+}
+
+
+
+
+\usepackage[T2A]{fontenc}
+
 \usepackage{listings}
 \usepackage[table]{xcolor}
 \usepackage{tikz}
@@ -25,7 +44,24 @@
 \usepackage{makeidx}
 \usepackage{enumitem}
 
+
 \usepackage{titlesec}
+
+
+
+
+% \titleformat{\part}[display]{\Huge\bfseries}{}{10pt}{\Huge\bfseries}
+
+\titleformat{\part}
+  [display] % shape
+  {\Huge\bfseries} % format
+  {\thepart{ } \partname. } % label
+  {0pt} % sep
+  {\Huge\bfseries} % before code
+
+
+\usepackage[perpage]{footmisc}
+
 
 \usepackage{skak}
 \usepackage[scaled=0.95]{inconsolata}
@@ -39,11 +75,7 @@
 \definecolor{comments}{HTML}{990000}
 
 \lstset{language=C++,frame=single,basicstyle=\ttfamily \small,showstringspaces=false,columns=flexible}
-\lstset{
-  literate={ö}{{\"o}}1
-           {ä}{{\"a}}1
-           {ü}{{\"u}}1
-}
+
 \lstset{xleftmargin=20pt,xrightmargin=5pt}
 \lstset{aboveskip=12pt,belowskip=8pt}
 
@@ -53,12 +85,17 @@
     stringstyle=\color{strings}
 }
 
-\date{Draft \today}
+\date{12 тамыз 2024 ж.}
 
 \usepackage[a4paper,vmargin=30mm,hmargin=33mm,footskip=15mm]{geometry}
 
-\title{\Huge Competitive Programmer's Handbook}
-\author{\Large Antti Laaksonen}
+\title{\Huge Спорттық бағдарламалау нұсқаулығы}
+\author{\Large Автор: Лааксонен Антти \\
+Редактор: Итеғұлова Сая Ағанасқызы
+\\
+Аудармашы: Талгаткызы Нурхаят
+}
+
 
 \makeindex
 \usepackage[totoc]{idxlayout}
@@ -78,7 +115,12 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter{-}\chaptertitlename.}{10pt}{\Huge\bfseries}
+
 \include{preface}
+\include{translator-preface}
+\include{kazakh-translation-author-comment}
+\include{about-editor}
 
 \mainmatter
 \pagenumbering{arabic}
@@ -86,7 +128,7 @@
 
 \newcommand{\key}[1] {\textbf{#1}}
 
-\part{Basic techniques}
+\part{Негізгі әдіс-тәсілдер}
 \include{chapter01}
 \include{chapter02}
 \include{chapter03}
@@ -97,7 +139,7 @@
 \include{chapter08}
 \include{chapter09}
 \include{chapter10}
-\part{Graph algorithms}
+\part{Графтағы алгоритмдер}
 \include{chapter11}
 \include{chapter12}
 \include{chapter13}
@@ -108,7 +150,7 @@
 \include{chapter18}
 \include{chapter19}
 \include{chapter20}
-\part{Advanced topics}
+\part{Күрделі тақырыптар}
 \include{chapter21}
 \include{chapter22}
 \include{chapter23}
@@ -122,10 +164,12 @@
 
 \cleardoublepage
 \phantomsection
-\addcontentsline{toc}{chapter}{Bibliography}
+\addcontentsline{toc}{chapter}{Әдебиеттер}
 \include{list}
 
 \cleardoublepage
 \printindex
+
+
 
 \end{document}

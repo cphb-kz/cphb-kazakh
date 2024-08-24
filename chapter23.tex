@@ -1,10 +1,13 @@
-\chapter{Matrices}
+\chapter{Матрицалар}
 
-\index{matrix}
+\index{матрица}
 
-A \key{matrix} is a mathematical concept
-that corresponds to a two-dimensional array
-in programming. For example,
+\key{Матрица} бағдарламалаудағы екі өлшемді жиымға сәйкес
+математикалық тұжырымдама. Мысалы:
+
+% A \key{matrix} is a mathematical concept
+% that corresponds to a two-dimensional array
+% in programming. For example,
 \[
 A = 
  \begin{bmatrix}
@@ -13,19 +16,20 @@ A =
   9 & 5 & 4 & 18 \\
  \end{bmatrix}
 \]
-is a matrix of size $3 \times 4$, i.e.,
-it has 3 rows and 4 columns.
-The notation $[i,j]$ refers to
-the element in row $i$ and column $j$
-in a matrix.
-For example, in the above matrix,
-$A[2,3]=8$ and $A[3,1]=9$.
+-- $3 \times 4$ өлшемді матрица, яғни 
+3 жолы және 4 бағанасы бар.
+$[i,j]$ нотациясы $i$-жолда және
+$j$-бағанда тұрған элементке сілтейді.
+Мысалы жоғарыдағы матрицада $A[2,3]=8$
+және $A[3,1]=9$.
 
-\index{vector}
+\index{вектор}
 
-A special case of a matrix is a \key{vector}
-that is a one-dimensional matrix of size $n \times 1$.
-For example,
+Матрицаның ерекше жағдайы -- \key{вектор}. Ол --
+өлшемі $n \times 1$ болатын матрица. 
+Мысалы: 
+% A special case of a matrix is a \key{vector}
+% that is a one-dimensional matrix of size $n \times 1$.
 \[
 V =
 \begin{bmatrix}
@@ -34,13 +38,17 @@ V =
 5 \\
 \end{bmatrix}
 \]
-is a vector that contains three elements.
+-- үш элементті қамтитын вектор. 
 
-\index{transpose}
+\index{аудару}
 
-The \key{transpose} $A^T$ of a matrix $A$
-is obtained when the rows and columns of $A$
-are swapped, i.e., $A^T[i,j]=A[j,i]$:
+$A$ матрицаның \key{аударуы} $A^T$–ны
+$A$ матрицасының 
+жолдарымен бағаналарын ауыстыру арқылы алынады,
+яғни $A^T[i,j]=A[j,i]$:
+% The \key{transpose} $A^T$ of a matrix $A$
+% is obtained when the rows and columns of $A$
+% are swapped, i.e., $A^T[i,j]=A[j,i]$:
 \[
 A^T = 
  \begin{bmatrix}
@@ -51,13 +59,11 @@ A^T =
  \end{bmatrix}
 \]
 
-\index{square matrix}
+\index{шаршы матрица}
 
-A matrix is a \key{square matrix} if it
-has the same number of rows and columns.
-For example, the following matrix is a
-square matrix:
-
+Егер
+жолдар саны мен бағана саны бірдей болса, ондай матрица \key{шаршы матрица} деп аталады. 
+Мысалы төменде шаршы матрица берілген:
 \[
 S = 
  \begin{bmatrix}
@@ -67,15 +73,18 @@ S =
  \end{bmatrix}
 \]
 
-\section{Operations}
+\section{Операциялар}
 
-The sum $A+B$ of matrices $A$ and $B$
-is defined if the matrices are of the same size.
-The result is a matrix where each element
-is the sum of the corresponding elements
-in $A$ and $B$.
+$A$ мен $B$ матрицаларының қосындысы 
+$A+B$ анықталған. Егер матрицалардың 
+өлшемдері бірдей болса, нәтижесінде әр элементі сәйкес $A$ және $B$ элементтерінің қосындысын беретін матрица пайда болады.
 
-For example,
+% TODO
+% The result is a matrix where each element
+% is the sum of the corresponding elements
+% in $A$ and $B$.
+
+Мысалы
 \[
  \begin{bmatrix}
   6 & 1 & 4 \\
@@ -98,9 +107,11 @@ For example,
  \end{bmatrix}.
 \]
 
-Multiplying a matrix $A$ by a value $x$ means
-that each element of $A$ is multiplied by $x$.
-For example,
+$A$ матрицасын $x$ мәніне көбейту деген сөз
+$A$ әр элементінің $x$-ке көбейтілетінін 
+білдіреді.
+
+Мысалы
 \[
  2 \cdot \begin{bmatrix}
   6 & 1 & 4 \\
@@ -118,23 +129,23 @@ For example,
  \end{bmatrix}.
 \]
 
-\subsubsection{Matrix multiplication}
+\subsubsection{Матрицаларды көбейту}
 
-\index{matrix multiplication}
+\index{матрицаларды көбейту}
 
-The product $AB$ of matrices $A$ and $B$
-is defined if $A$ is of size $a \times n$
-and $B$ is of size $n \times b$, i.e.,
-the width of $A$ equals the height of $B$.
-The result is a matrix of size $a \times b$
-whose elements are calculated using the formula
+Егер $A$-ның өлшемі 
+$a \times n$ және $B$-ның өлшемі 
+$n \times b$ (яғни $A$-ның ені $B$-ның
+биіктігіне тең) болса, $A$ мен $B$ матрицаларының көбейтіндісі 
+$AB$ анықталған болады. Төменде көбейтіндісі 
 \[
 AB[i,j] = \sum_{k=1}^n A[i,k] \cdot B[k,j].
 \]
+формуласы арқылы есептелген $a \times b$ өлшемді
+матрица беріледі. 
 
-The idea is that each element of $AB$
-is a sum of products of elements of $A$ and $B$
-according to the following picture:
+Яғни $AB$-ның әр элементі төмендегі суреттегідей
+$A$ мен $B$ элементтері көбейтінділерінің қосындысына тең болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.5]
@@ -152,7 +163,7 @@ according to the following picture:
 \end{tikzpicture}
 \end{center}
 
-For example,
+Мысалы:
 
 \[
  \begin{bmatrix}
@@ -179,18 +190,15 @@ For example,
  \end{bmatrix}.
 \]
 
-Matrix multiplication is associative,
-so $A(BC)=(AB)C$ holds,
-but it is not commutative,
-so $AB = BA$ does not usually hold.
+Матрицадағы көбейту –– ассоциативті,
+яғни $A(BC)=(AB)C$, бірақ коммутативті 
+емес, яғни әдетте $AB = BA$ болмайды.
 
-\index{identity matrix}
+\index{бірлік матрица}
 
-An \key{identity matrix} is a square matrix
-where each element on the diagonal is 1
-and all other elements are 0.
-For example, the following matrix
-is the $3 \times 3$ identity matrix:
+\key{Бірлік матрица} –– диагоналдағы элементтері бірге 
+тең және қалған элементтері нөлге тең шаршы матрица.
+Мысалы, төменде $3 \times 3$ өлшемді бірлік матрица келтірілген:
 \[
  I = \begin{bmatrix}
   1 & 0 & 0 \\
@@ -200,8 +208,8 @@ is the $3 \times 3$ identity matrix:
 \]
 
 \begin{samepage}
-Multiplying a matrix by an identity matrix
-does not change it. For example,
+Бірлік матрицаға көбейтілген матрица өзгермейді.
+Мысалы:
 \[
  \begin{bmatrix}
   1 & 0 & 0 \\
@@ -219,7 +227,7 @@ does not change it. For example,
   1 & 4 \\
   3 & 9 \\
   8 & 6 \\
- \end{bmatrix} \hspace{10px} \textrm{and} \hspace{10px}
+ \end{bmatrix} \hspace{10px} \textrm{және} \hspace{10px}
  \begin{bmatrix}
   1 & 4 \\
   3 & 9 \\
@@ -239,31 +247,27 @@ does not change it. For example,
 \]
 \end{samepage}
 
-Using a straightforward algorithm,
-we can calculate the product of
-two $n \times n$ matrices
-in $O(n^3)$ time.
-There are also more efficient algorithms
-for matrix multiplication\footnote{The first such
-algorithm was Strassen's algorithm,
-published in 1969 \cite{str69},
-whose time complexity is $O(n^{2.80735})$;
-the best current algorithm \cite{gal14}
-works in $O(n^{2.37286})$ time.},
-but they are mostly of theoretical interest
-and such algorithms are not necessary
-in competitive programming.
+Қарапайым алгоритм арқылы екі $n \times n$
+матрицаларының көбейтіндісін $O(n^3)$
+уақытта есептеуге болады. Матрицалардың
+көбейтіндісін есептейтін одан да
+тиімді алгоритмдер бар\footnote{Сондай алгоритмдердің
+алғашқысын 1969 жылы Штрассен ойлап тапты \cite{str69}.
+Қазір алгоритм оның атымен аталады.
+Оның уақытша күрделілігі -- $O(n^{2.80735})$;
+бүгінге дейін ең тиімді алгоритм
+$O(n^{2.37286})$ уақытта жұмыс істейді \cite{gal14}.},
+бірақ оларға теориялық тұрғыдан қызығушылық танытқанымызбен, жарыстарда қолдана бермейміз. 
 
+\subsubsection{Матрица дәрежесі}
 
-\subsubsection{Matrix power}
+\index{матрица дәрежесі}
 
-\index{matrix power}
-
-The power $A^k$ of a matrix $A$ is defined
-if $A$ is a square matrix.
-The definition is based on matrix multiplication:
-\[ A^k = \underbrace{A \cdot A \cdot A \cdots A}_{\textrm{$k$ times}} \]
-For example,
+Егер $A$ матрицасы шаршы матрица болса, онда $A$ матрицасының дәрежесі $A^k$ анықталған болады.
+ 
+Оның анықтамасы матрицаларды көбейтуге негізделеді:
+\[ A^k = \underbrace{A \cdot A \cdot A \cdots A}_{\textrm{$k$ рет}} \]
+Мысалы
 
 \[
  \begin{bmatrix}
@@ -287,7 +291,7 @@ For example,
   33 & 114 \\
  \end{bmatrix}.
 \]
-In addition, $A^0$ is an identity matrix. For example,
+Оған қоса, $A^0$ бірлік матрицаға тең болады. Мысалы
 \[
  \begin{bmatrix}
   2 & 5 \\
@@ -299,9 +303,9 @@ In addition, $A^0$ is an identity matrix. For example,
  \end{bmatrix}.
 \]
 
-The matrix $A^k$ can be efficiently calculated
-in $O(n^3 \log k)$ time using the
-algorithm in Chapter 21.2. For example,
+$A^k$ матрицасын 21.2-тарауда айтылған алгоритм арқылы
+$O(n^3 \log k)$ уақыт ішінде
+тиімді есептеуімізге болады. Мысалы:
 \[
  \begin{bmatrix}
   2 & 5 \\
@@ -317,27 +321,25 @@ algorithm in Chapter 21.2. For example,
  \end{bmatrix}^4.
 \]
 
-\subsubsection{Determinant}
+\subsubsection{Анықтауыш}
 
-\index{determinant}
+\index{анықтауыш}
 
-The \key{determinant} $\det(A)$ of a matrix $A$
-is defined if $A$ is a square matrix.
-If $A$ is of size $1 \times 1$,
-then $\det(A)=A[1,1]$.
-The determinant of a larger matrix is
-calculated recursively using the formula \index{cofactor}
+Егер $A$ шаршы матрица болса, $A$ матрицасының \key{анықтауышы} $\det(A)$
+анықталған болады. 
+$A$-ның өлшемі $1 \times 1$ болса,
+онда $\det(A)=A[1,1]$. Одан үлкен матрицаның
+анықтауышы рекурсивті формула 
+арқылы есептелінеді. \index{алгебралық толықтауыш}
 \[\det(A)=\sum_{j=1}^n A[1,j] C[1,j],\]
-where $C[i,j]$ is the \key{cofactor} of $A$
-at $[i,j]$.
-The cofactor is calculated using the formula
+мұндағы $C[i,j]$ -- $[i,j]$ позициясының \key{алгебралық толықтауышы}.
+Алгебралық толықтауыш төмендегі формула арқылы есептелінеді:
 \[C[i,j] = (-1)^{i+j} \det(M[i,j]),\]
-where $M[i,j]$ is obtained by removing
-row $i$ and column $j$ from $A$.
-Due to the coefficient $(-1)^{i+j}$ in the cofactor,
-every other determinant is positive
-and negative.
-For example,
+мұндағы $M[i,j]$ ––
+$i$-жолы мен $j$-бағанасы өшірілген $A$ матрицасы.
+Алгебралық толықтауыштың $(-1)^{i+j}$ коэффициентіне байланысты
+анықтауыштар аралата келе, оң және теріс болып бөлінеді. 
+Мысалы
 \[
 \det(
  \begin{bmatrix}
@@ -346,7 +348,7 @@ For example,
  \end{bmatrix}
 ) = 3 \cdot 6 - 4 \cdot 1 = 14 
 \]
-and
+және
 \[
 \det(
  \begin{bmatrix}
@@ -378,19 +380,19 @@ and
 ) = 81.
 \]
 
-\index{inverse matrix}
+\index{кері матрица}
 
-The determinant of $A$ tells us
-whether there is an \key{inverse matrix}
-$A^{-1}$ such that $A \cdot A^{-1} = I$,
-where $I$ is an identity matrix.
-It turns out that $A^{-1}$ exists
-exactly when $\det(A) \neq 0$,
-and it can be calculated using the formula
+$A$–ның анықтауышы матрицаның \key{кері 
+матрицасы} $A^{-1}$ бар-жоғын айтады.
+Кері матрица дегеніміз $A \cdot A^{-1} = I$
+орындалатын $A^{-1}$ матрицасы, мұндағы 
+$I$ бірлік матрицасы. Егер
+$\det(A) \neq 0$ болса ғана, $A^{-1}$ кері матрицасы бар болады және оны төмендегі формула
+бойынша есептей аламыз:
 
 \[A^{-1}[i,j] = \frac{C[j,i]}{det(A)}.\]
 
-For example,
+Мысалы:
 
 \[
 \underbrace{
@@ -419,32 +421,42 @@ For example,
 }_{I}.
 \]
 
-\section{Linear recurrences}
+\section{Сызықтық рекуренттілік}
 
-\index{linear recurrence}
+\index{сызықтық рекуренттілік}
 
-A \key{linear recurrence}
-is a function $f(n)$
-whose initial values are
-$f(0),f(1),\ldots,f(k-1)$
-and larger values
-are calculated recursively using the formula
+\key{Сызықтық рекуренттілік} -- 
+бастапқы мәндері 
+$f(0),f(1),\ldots,f(k-1)$ болатын
+және одан үлкен мәндері 
 \[f(n) = c_1 f(n-1) + c_2 f(n-2) + \ldots + c_k f (n-k),\]
-where $c_1,c_2,\ldots,c_k$ are constant coefficients.
+рекурсивті формула 
+арқылы есептелетін функция, мұндағы $c_1,c_2,\ldots,c_k$ тұрақты
+коэффициенттер.
 
-Dynamic programming can be used to calculate
-any value of $f(n)$ in $O(kn)$ time by calculating
-all values of $f(0),f(1),\ldots,f(n)$ one after another.
-However, if $k$ is small, it is possible to calculate
-$f(n)$ much more efficiently in $O(k^3 \log n)$
-time using matrix operations.
+% A \key{linear recurrence}
+% is a function $f(n)$
+% whose initial values are
+% $f(0),f(1),\ldots,f(k-1)$
+% and larger values
+% are calculated recursively using the formula
+% \[f(n) = c_1 f(n-1) + c_2 f(n-2) + \ldots + c_k f (n-k),\]
+% where $c_1,c_2,\ldots,c_k$ are constant coefficients.
+% TODO CHECK IT THROUGHLY
 
-\subsubsection{Fibonacci numbers}
+Динамикалық бағдарламалау арқылы $f(n)$-нің кез келген 
+мәнін $O(kn)$ уақытта 
+$f(0),f(1),\ldots,f(n)$ мәндерін біртіндеп есептеу арқылы
+табуға болады. Бірақ $k$ кішкентай болса, $f(n)$-ді
+матрица операциялары арқылы $O(k^3 \log n)$ 
+уақытта әлдеқайда тиімдірек есептей аламыз. 
 
-\index{Fibonacci number}
+\subsubsection{Фибоначчи сандары}
 
-A simple example of a linear recurrence is the
-following function that defines the Fibonacci numbers:
+\index{Фибоначчи сандары}
+
+Сызықтық рекуренттілікке ең қарапайым үлгі 
+Фибоначчи сандарын анықтайтын функция болмақ:
 \[
 \begin{array}{lcl}
 f(0) & = & 0 \\
@@ -452,14 +464,19 @@ f(1) & = & 1 \\
 f(n) & = & f(n-1)+f(n-2) \\
 \end{array}
 \]
-In this case, $k=2$ and $c_1=c_2=1$.
+Бұл жағдайда $k=2$ және $c_1=c_2=1$.
 
 \begin{samepage}
-To efficiently calculate Fibonacci numbers,
-we represent the
-Fibonacci formula as a
-square matrix $X$ of size $2 \times 2$,
-for which the following holds:
+Фибоначчи сандарын тиімді есептеу үшін
+Фибоначчи формуласын өлшемі $2 \times 2$ 
+болатын 
+және келесі ара қатынас орындалатын
+шаршы матрица $X$ арқылы көрсетейік:
+% To efficiently calculate Fibonacci numbers,
+% we represent the
+% Fibonacci formula as a
+% square matrix $X$ of size $2 \times 2$,
+% for which the following holds:
 \[ X \cdot
  \begin{bmatrix}
   f(i) \\
@@ -471,11 +488,10 @@ for which the following holds:
   f(i+2) \\
  \end{bmatrix}
  \]
-Thus, values $f(i)$ and $f(i+1)$ are given as
-''input'' for $X$,
-and $X$ calculates values $f(i+1)$ and $f(i+2)$
-from them.
-It turns out that such a matrix is
+Осылайша $f(i)$ және $f(i+1)$ мәндері 
+$X$-ке ''енгізу'' ретінде берілген және
+$X$ солар арқылы $f(i+1)$ және $f(i+2)$ мәндерін
+есептеп береді. $X$ матрицасының мәні төмендегідей болады:
 
 \[ X = 
  \begin{bmatrix}
@@ -485,7 +501,7 @@ It turns out that such a matrix is
 \]
 \end{samepage}
 \noindent
-For example,
+Мысалы:
 \[
  \begin{bmatrix}
   0 & 1 \\
@@ -517,7 +533,7 @@ For example,
   f(7) \\
  \end{bmatrix}.
 \]
-Thus, we can calculate $f(n)$ using the formula
+Осылайша $f(n)$-ді келесі формула арқылы есептеуімізге болады:
 \[
  \begin{bmatrix}
   f(n) \\
@@ -540,17 +556,15 @@ X^n \cdot
   1 \\
  \end{bmatrix}.
 \]
-The value of $X^n$ can be calculated in
-$O(\log n)$ time,
-so the value of $f(n)$ can also be calculated
-in $O(\log n)$ time.
+$X^n$ мәні $O(\log n)$ уақытта есептелінеді,
+демек $f(n)$-нің мәні де $O(\log n)$ уақытта 
+есептелінеді. 
 
-\subsubsection{General case}
+\subsubsection{Жалпы жағдай}
 
-Let us now consider the general case where
-$f(n)$ is any linear recurrence.
-Again, our goal is to construct a matrix $X$
-for which
+Жалпы сызықтық рекуренттілік $f(n)$ функциясын
+қарастырайық. Біздің мақсатымыз қайтадан төмендегі орындалатын
+$X$ матрицасын құру
 
 \[ X \cdot
  \begin{bmatrix}
@@ -567,7 +581,7 @@ for which
   f(i+k) \\
  \end{bmatrix}.
 \]
-Such a matrix is
+Ондай матрицаның түрі осындай болады
 \[
 X =
  \begin{bmatrix}
@@ -579,16 +593,15 @@ X =
   c_k & c_{k-1} & c_{k-2} & c_{k-3} & \cdots & c_1 \\
  \end{bmatrix}.
 \]
-In the first $k-1$ rows, each element is 0
-except that one element is 1.
-These rows replace $f(i)$ with $f(i+1)$,
-$f(i+1)$ with $f(i+2)$, and so on.
-The last row contains the coefficients of the recurrence
-to calculate the new value $f(i+k)$.
+Бастапқы $k-1$ жолда бір элемент бірге тең және қалған 
+элементтер нөлге тең болады. Бұл жолдар 
+$f(i)$-ді $f(i+1)$-мен, $f(i+1)$-ді $f(i+2)$-мен,
+т.с.с. ауыстырады. Соңғы жол болса, жаңа $f(i+k)$ мәнін 
+есептеу үшін рекуренттіліктің коэффициенттерін қамтиды.
 
 \begin{samepage}
-Now, $f(n)$ can be calculated in
-$O(k^3 \log n)$ time using the formula
+Енді $f(n)$ мәнін $O(k^3 \log n)$ уақытта 
+төмендегі формула арқылы есептеуімізге болады:
 \[
  \begin{bmatrix}
   f(n) \\
@@ -607,17 +620,17 @@ X^n \cdot
 \]
 \end{samepage}
 
-\section{Graphs and matrices}
+\section{Графтар мен матрицалар}
 
-\subsubsection{Counting paths}
+\subsubsection{Жолдар санау}
 
-The powers of an adjacency matrix of a graph
-have an interesting property.
-When $V$ is an adjacency matrix of an unweighted graph,
-the matrix $V^n$ contains the numbers of paths of
-$n$ edges between the nodes in the graph.
+Графтың cыбайластық матрицасының дәрежесі
+қызық қасиетке ие болады. Егер $V$ 
+салмақталмаған графтың cыбайластық матрицасы болса,
+$V^n$ матрицасы $n$ қыр арқылы өтетін төбелер арасындағы
+жолдар санын қамтиды. 
 
-For example, for the graph
+Келесідегі графқа
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -637,7 +650,7 @@ For example, for the graph
 \path[draw,thick,->,>=latex] (6) -- (5);
 \end{tikzpicture}
 \end{center}
-the adjacency matrix is
+cыбайластық матрица 
 \[
 V= \begin{bmatrix}
   0 & 0 & 0 & 1 & 0 & 0 \\
@@ -648,7 +661,7 @@ V= \begin{bmatrix}
   0 & 0 & 1 & 0 & 1 & 0 \\
  \end{bmatrix}.
 \]
-Now, for example, the matrix
+болады. Төмендегі матрица
 \[
 V^4= \begin{bmatrix}
   0 & 0 & 1 & 1 & 1 & 0 \\
@@ -659,27 +672,26 @@ V^4= \begin{bmatrix}
   0 & 0 & 1 & 1 & 1 & 0 \\
  \end{bmatrix}
 \]
-contains the numbers of paths of 4 edges
-between the nodes.
-For example, $V^4[2,5]=2$,
-because there are two paths of 4 edges
-from node 2 to node 5:
+4 төбе арқылы өтетін төбелер арасындағы
+жолдар санын қамтиды.
+Мысалы, $V^4[2,5]=2$,
+себебі 2-төбе мен 5-төбе арасында 
+4 қырдан өтетін 2 жол бар:
 $2 \rightarrow 1 \rightarrow 4 \rightarrow 2 \rightarrow 5$
-and 
+және 
 $2 \rightarrow 6 \rightarrow 3 \rightarrow 2 \rightarrow 5$.
 
-\subsubsection{Shortest paths}
+\subsubsection{Ең қысқа жол}
 
-Using a similar idea in a weighted graph,
-we can calculate for each pair of nodes the minimum
-length of a path
-between them that contains exactly $n$ edges.
-To calculate this, we have to define matrix multiplication
-in a new way, so that we do not calculate the numbers
-of paths but minimize the lengths of paths.
+Дәл жаңағы идеяны салмақталған графта қолдансақ,
+$n$ қыр арқылы өтетін төбелер арасындағы минималды жолдың ұзындығын 
+есептей аламыз.
+Оны есептеу үшін матрицалардың көбейтуін  жолдардың санын санамайтын, бірақ 
+жолдардың ұзындығын минималдайтындай жаңа түрде 
+анықтауымыз қажет.
 
 \begin{samepage}
-As an example, consider the following graph:
+Өрнек ретінде төмендегі графты қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -701,10 +713,10 @@ As an example, consider the following graph:
 \end{center}
 \end{samepage}
 
-Let us construct an adjacency matrix where
-$\infty$ means that an edge does not exist,
-and other values correspond to edge weights.
-The matrix is
+Сыбайластық матрицасын құрастырайық. Егер 
+қыр болмаса, $\infty$ деп анықтайық, әйтпесе
+соған сәйкес мәнімен анықтайық.
+Матрица --
 \[
 V= \begin{bmatrix}
   \infty & \infty & \infty & 4 & \infty & \infty \\
@@ -716,22 +728,22 @@ V= \begin{bmatrix}
  \end{bmatrix}.
 \]
 
-Instead of the formula
+Матрицаларды көбейту үшін 
+төмендегі формуланың орнына
 \[
 AB[i,j] = \sum_{k=1}^n A[i,k] \cdot B[k,j]
 \]
-we now use the formula
+осы формуланы қолданамыз:
 \[
-AB[i,j] = \min_{k=1}^n A[i,k] + B[k,j]
+AB[i,j] = \min_{k=1}^n A[i,k] + B[k,j],
 \]
-for matrix multiplication, so we calculate
-a minimum instead of a sum,
-and a sum of elements instead of a product.
-After this modification,
-matrix powers correspond to
-shortest paths in the graph.
+демек біз қосындының орнына минимумды және
+элементтердің көбейтіндісінің орнына қосындысын
+есептейміз.
+Осы өзгерістен кейін матрицаның дәрежесі 
+графтың ең қысқа жолдарына сәйкес келеді.
 
-For example, as
+Мысалы:
 \[
 V^4= \begin{bmatrix}
   \infty & \infty & 10 & 11 & 9 & \infty \\
@@ -742,23 +754,22 @@ V^4= \begin{bmatrix}
   \infty & \infty & 12 & 13 & 11 & \infty \\
  \end{bmatrix},
 \]
-we can conclude that the minimum length of a path
-of 4 edges
-from node 2 to node 5 is 8.
-Such a path is
+болғандықтан, 2-төбеден 5-төбеге дейін 4 қыр арқылы 
+өтетін жолдың ең қысқа ұзындығы 8 болатынын қорытындылай аламыз.
+Ол жол --
 $2 \rightarrow 1 \rightarrow 4 \rightarrow 2 \rightarrow 5$.
 
-\subsubsection{Kirchhoff's theorem}
+\subsubsection{Кирхгоф теоремасы}
 
-\index{Kirchhoff's theorem}
-\index{spanning tree}
+\index{Кирхгоф теоремасы}
+\index{қаңқалы дарақ}
 
-\key{Kirchhoff's theorem}
+\key{Кирхгоф теоремасы}
 %\footnote{G. R. Kirchhoff (1824--1887) was a German physicist.}
-provides a way
-to calculate the number of spanning trees
-of a graph as a determinant of a special matrix.
-For example, the graph
+арнайы матрицаның анықтауышы арқылы
+графтың қаңқалы дарақтарының санын табуға
+мүмкіндік береді.
+Мысалы, төмендегі графта
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -772,7 +783,7 @@ For example, the graph
 \path[draw,thick,-] (1) -- (4);
 \end{tikzpicture}
 \end{center}
-has three spanning trees:
+үш қаңқалы дарақ бар:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1a) at (1,3) {$1$};
@@ -806,13 +817,14 @@ has three spanning trees:
 %\path[draw,thick,-] (1c) -- (4c);
 \end{tikzpicture}
 \end{center}
-\index{Laplacean matrix}
-To calculate the number of spanning trees,
-we construct a \key{Laplacean matrix} $L$,
-where $L[i,i]$ is the degree of node $i$
-and $L[i,j]=-1$ if there is an edge between
-nodes $i$ and $j$, and otherwise $L[i,j]=0$.
-The Laplacean matrix for the above graph is as follows:
+\index{Лаплас матрицасы}
+Қаңқалы дарақтардың санын санау үшін 
+\key{Лаплас матрицасын} $L$ құрайық. 
+Матрицада $L[i,i]$ $i$-төбенің дәрежесіне тең
+және егер $i$ мен $j$ арасында қыр болса,
+$L[i,j]=-1$, әйтпесе $L[i,j]=0$ тең.
+Жоғарыдағы графқа сәйкес Лаплас матрицасы 
+төмендегідей болады
 \[
 L= \begin{bmatrix}
   3 & -1 & -1 & -1 \\
@@ -822,12 +834,13 @@ L= \begin{bmatrix}
  \end{bmatrix}
 \]
 
-It can be shown that
-the number of spanning trees equals
-the determinant of a matrix that is obtained
-when we remove any row and any column from $L$.
-For example, if we remove the first row
-and column, the result is
+Егер $L$ матрицасының кез келген жолы мен
+бағанасын өшіріп, оның анықтауышын қарасақ,
+ол қаңқалы дарақтардың санына тең екенін
+көреміз. 
+
+Мысалы егер бірінші жол мен біріші бағананы 
+өшірсек, нәтижесінде
 
 \[ \det(
 \begin{bmatrix}
@@ -836,12 +849,14 @@ and column, the result is
   0 & -1 & 2 \\
  \end{bmatrix}
 ) =3.\]
-The determinant is always the same,
-regardless of which row and column we remove from $L$.
+$L$ матрицасының қандай да болсын жолы мен 
+бағанасын өшірсек, анықтауышы әрдайым бірдей 
+болады.
 
-Note that Cayley's formula in Chapter 22.5 is
-a special case of Kirchhoff's theorem,
-because in a complete graph of $n$ nodes
+22.5-тарауындағы Кэли формуласы 
+Кирхгоф теоремасының дербес жағдайы
+екенін көруімізге болады,
+себебі $n$ төбелі толық граф төмендегідей болмақ: 
 
 \[ \det(
 \begin{bmatrix}

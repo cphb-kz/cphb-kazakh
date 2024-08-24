@@ -1,38 +1,26 @@
-\chapter{Graph traversal}
+\chapter{Графты аралау}
 
-This chapter discusses two fundamental
-graph algorithms:
-depth-first search and breadth-first search.
-Both algorithms are given a starting
-node in the graph,
-and they visit all nodes that can be reached
-from the starting node.
-The difference in the algorithms is the order
-in which they visit the nodes.
+Бұл тарау екі негізгі граф алгоритмдері туралы болмақ.
+Біріншісі -- тереңдігі бойынша іздеу, екіншісі -- ені бойынша іздеу. 
+Екі алгоритмде де алғашында графтағы бастапқы төбе беріледі және олар бастапқы төбеден жете алатын барлық төбелерге барып шығады.
+Алгоритмдердің айырмашылығы төбелерге келу реттілігіне байланысты туындайды.
+% The difference in the algorithms is the % order
+% in which they visit the nodes.
 
-\section{Depth-first search}
+\section{Тереңдігі бойынша іздеу}
 
-\index{depth-first search}
+\index{тереңдігі бойынша іздеу}
 
-\key{Depth-first search} (DFS)
-is a straightforward graph traversal technique.
-The algorithm begins at a starting node,
-and proceeds to all other nodes that are
-reachable from the starting node using
-the edges of the graph.
+\key{Тереңдігі бойынша іздеу} (DFS) --
+қарапайым графты өтіп шығу әдісі.
+Алгоритм алғашқы төбеден бастап, графтағы қырларды қолдана отырып, басқа төбелерге жетеді.
 
-Depth-first search always follows a single
-path in the graph as long as it finds
-new nodes.
-After this, it returns to previous
-nodes and begins to explore other parts of the graph.
-The algorithm keeps track of visited nodes,
-so that it processes each node only once.
+Тереңдігі бойынша іздеу әрқашан бастапқы төбеден басталады және басқа бармаған төбелерге апаратын қыр болса, сол төбелерге тікелей жалғасады. Ал егер бармаған басқа төбеге апаратын жол болмаса, кейін қайтып, артынша бармаған басқа төбелерге қарай өтеді.
+Алгоритм әрбір төбеге тек бір рет қана бару үшін жеткен төбелерін сақтап отырады.
 
-\subsubsection*{Example}
+\subsubsection*{Мысал}
 
-Let us consider how depth-first search processes
-the following graph:
+Төменде берілген графты тереңдігі бойынша өтіп көрейік:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -48,10 +36,9 @@ the following graph:
 \path[draw,thick,-] (2) -- (5);
 \end{tikzpicture}
 \end{center}
-We may begin the search at any node of the graph;
-now we will begin the search at node 1.
+Біз ізденісті кез келген төбеден бастай аламыз. Келтіріліп отырған мысалда біз $1$-төбеден бастаймыз.
 
-The search first proceeds to node 2:
+Бірінші, ізденіс $1$-төбеден $2$-төбеге жетеді:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=lightgray] (1) at (1,5) {$1$};
@@ -69,7 +56,7 @@ The search first proceeds to node 2:
 \path[draw=red,thick,->,line width=2pt] (1) -- (2);
 \end{tikzpicture}
 \end{center}
-After this, nodes 3 and 5 will be visited:
+Содан кейін $3$ және $5$-төбелерге барады:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=lightgray] (1) at (1,5) {$1$};
@@ -89,12 +76,8 @@ After this, nodes 3 and 5 will be visited:
 \path[draw=red,thick,->,line width=2pt] (3) -- (5);
 \end{tikzpicture}
 \end{center}
-The neighbors of node 5 are 2 and 3,
-but the search has already visited both of them,
-so it is time to return to the previous nodes.
-Also the neighbors of nodes 3 and 2
-have been visited, so we next move
-from node 1 to node 4:
+$5$-төбенің көршілері -- $2$ және $3$-төбелер. Бірақ біз бұл төбелерде әлдеқшан болғандықтан оларға бара алмай, артқы төбеге қайтамыз.
+Сондай-ақ $3$, $2$-төбелердің көршілеріне де бұған дейін барып қойғандықтан, біз $1$-төбеге қайтамыз. Осылайша $4$-төбеге де жетеміз:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=lightgray] (1) at (1,5) {$1$};
@@ -112,34 +95,22 @@ from node 1 to node 4:
 \path[draw=red,thick,->,line width=2pt] (1) -- (4);
 \end{tikzpicture}
 \end{center}
-After this, the search terminates because it has visited
-all nodes.
+Бұдан кейін ізденіс бітеді. Себебі біз барлық төбелерде болдық.
 
-The time complexity of depth-first search is $O(n+m)$
-where $n$ is the number of nodes and $m$ is the
-number of edges,
-because the algorithm processes each node and edge once.
+Төбелердің санын $n$, ал қырлардың санын $m$ деп белгілесек, бұл алгоритмнің уақытша күрделілігі $O(n+m)$-ге тең болады. Себебі алгоритм әр төбені және әр қырды бір рет өтіп шығады.
 
-\subsubsection*{Implementation}
+\subsubsection*{Кодтың жазылуы}
 
-Depth-first search can be conveniently
-implemented using recursion.
-The following function \texttt{dfs} begins
-a depth-first search at a given node.
-The function assumes that the graph is
-stored as adjacency lists in an array
+Тереңдiгi бойынша iздеу алгоритмін рекурсия арқылы жазу ең оңай әдіске жатады. Төмендегі \texttt{dfs} функциясында бастапқы төбені қабылдаймыз. Сол төбеден ізденісті бастаймыз. Бұл ізденіс функциясында біз cыбайластық тізімімен жұмыс жасаймыз:
 \begin{lstlisting}
 vector<int> adj[N];
 \end{lstlisting}
-and also maintains an array
+Сондай-ақ барған төбелерді жиымда сақтаймыз:
 \begin{lstlisting}
 bool visited[N];
 \end{lstlisting}
-that keeps track of the visited nodes.
-Initially, each array value is \texttt{false},
-and when the search arrives at node $s$,
-the value of \texttt{visited}[$s$] becomes \texttt{true}.
-The function can be implemented as follows:
+Алғашында жиымдағы әр элемент \texttt{false} болады. Ал $s$ төбесіне келгенде \texttt{visited}[$s$] элементі \texttt{true} болып өзгереді.
+Бұл функцияны төмендегідей етіп жазуға болады:
 \begin{lstlisting}
 void dfs(int s) {
     if (visited[s]) return;
@@ -151,31 +122,19 @@ void dfs(int s) {
 }
 \end{lstlisting}
 
-\section{Breadth-first search}
+\section{Ені бойынша іздеу}
 
-\index{breadth-first search}
+\index{ені бойынша іздеу}
 
-\key{Breadth-first search} (BFS) visits the nodes
-in increasing order of their distance
-from the starting node.
-Thus, we can calculate the distance
-from the starting node to all other
-nodes using breadth-first search.
-However, breadth-first search is more difficult
-to implement than depth-first search.
+\key{Ені бойынша іздеуде} (BFS) графтың төбелеріне бастапқы төбеден арақашықтың өсу ретіне қарай барылады. Алгоритм арқылы бастапқы төбе мен графтағы кез келген төбе арасындағы арақашықтықты есептеу оңайға соғады. Бірақ кодтың жазылуы тереңдігі бойынша ізденістен қиынырақ болады.
 
-Breadth-first search goes through the nodes
-one level after another.
-First the search explores the nodes whose
-distance from the starting node is 1,
-then the nodes whose distance is 2, and so on.
-This process continues until all nodes
-have been visited.
+Ізденіс барысында төбелерді кезең-кезеңімен өтіп шығамыз.
+Алдымен бастапқы орнымыздан 1 қыр арақашықтығындағы барлық төбелерден өтеміз,
+кейін арақашықтығы 2 болатын төбелерге барамыз. Бұл үдеріс барлық төбелерді өтіп шыққанға дейін жалғаса береді.
 
-\subsubsection*{Example}
+\subsubsection*{Мысал}
 
-Let us consider how breadth-first search processes
-the following graph:
+Мысалға төмендегі графты қарастырайық:
 
 \begin{center}
 \begin{tikzpicture}
@@ -194,9 +153,8 @@ the following graph:
 \path[draw,thick,-] (5) -- (6);
 \end{tikzpicture}
 \end{center}
-Suppose that the search begins at node 1.
-First, we process all nodes that can be reached
-from node 1 using a single edge:
+Ені бойынша ізденісті $1$-төбеден бастаймыз.
+Алдымен біз $1$-төбемен бір қыр арқылы жалғасып тұрған төбелерге барамыз:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=lightgray] (1) at (1,5) {$1$};
@@ -222,7 +180,7 @@ from node 1 using a single edge:
 \path[draw=red,thick,->,line width=2pt] (1) -- (4);
 \end{tikzpicture}
 \end{center}
-After this, we proceed to nodes 3 and 5:
+Кейін $3$ және $5$-төбелерге жетеміз:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=lightgray] (1) at (1,5) {$1$};
@@ -248,7 +206,7 @@ After this, we proceed to nodes 3 and 5:
 \path[draw=red,thick,->,line width=2pt] (2) -- (5);
 \end{tikzpicture}
 \end{center}
-Finally, we visit node 6:
+Ал ең соңында біз $6$-төбеге жетеміз:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=lightgray] (1) at (1,5) {$1$};
@@ -274,13 +232,11 @@ Finally, we visit node 6:
 \path[draw=red,thick,->,line width=2pt] (5) -- (6);
 \end{tikzpicture}
 \end{center}
-Now we have calculated the distances
-from the starting node to all nodes of the graph.
-The distances are as follows:
+Енді біз бастапқы төбеден графтағы барлық төбелерге дейінгі арақашықтықты есептеп шығамыз. Арақашықтықтар төмендегі кестеде көрсетіледі:
 
 \begin{tabular}{ll}
 \\
-node & distance \\
+төбе & арақашықтық \\
 \hline
 1 & 0 \\
 2 & 1 \\
@@ -291,44 +247,33 @@ node & distance \\
 \\
 \end{tabular}
 
-Like in depth-first search,
-the time complexity of breadth-first search
-is $O(n+m)$, where $n$ is the number of nodes
-and $m$ is the number of edges.
+Тереңдігі бойынша ізденістегідей ені бойынша ізденістің 
+уақытша күрделілігі $O(n+m)$. Мұндағы $n$ деп төбелердің санын,
+ал $m$ деп қырлардың санын белгілейміз.
 
-\subsubsection*{Implementation}
+\subsubsection*{Кодтың жазылуы}
 
-Breadth-first search is more difficult
-to implement than depth-first search,
-because the algorithm visits nodes
-in different parts of the graph.
-A typical implementation is based on
-a queue that contains nodes.
-At each step, the next node in the queue
-will be processed.
+Ені бойынша ізденіс алгоритмін жазу тереңдік бойынша ізденіс
+алгоритмін жазудан қиынырақ. Себебі алгоритм графтың әр жеріндегі төбелер арқылы ретсіз жүреді.
+Көбіне бұл алгоритмді төбелердің тізімін сақтайтын кезек деректер құрылымы арқылы жазады.
+Әр қадам сайын кезектегі бірінші төбеге барамыз.
 
-The following code assumes that the graph is stored
-as adjacency lists and maintains the following
-data structures:
+Осы ізденіс функциясында cыбайластық тізімін пайдаланамыз, сонымен қатар келесі деректер құрылымдарымен жұмыс жасаймыз:
 \begin{lstlisting}
 queue<int> q;
 bool visited[N];
 int distance[N];
 \end{lstlisting}
 
-The queue \texttt{q}
-contains nodes to be processed
-in increasing order of their distance.
-New nodes are always added to the end
-of the queue, and the node at the beginning
-of the queue is the next node to be processed.
-The array \texttt{visited} indicates
-which nodes the search has already visited,
-and the array \texttt{distance} will contain the
-distances from the starting node to all nodes of the graph.
+Кодтағы \texttt{q} -- кезек деректер құрылымы, ол төбелердің тізімін
+сақтайды. 
+\texttt{q} кезегі қашықтықтың өсу ретімен өңделетін төбелерді қамтиды.
+Кезектің басында алғашқы төбеге ең жақын,
+ал соңына қарай ең алыс төбелер орналасқан. Жаңа бір төбені тізімге қосақан сәтте әрқашан
+кезектің соңынан қосамыз, ал келесі баратын төбені тізімнің басынан аламыз. \texttt{visited} жиымы төбеде бұрын болғанымызды немесе болмағанымызды білдіреді. Ал \texttt{distance} жиымы бастапқы төбеден басқа
+төбелерге дейінгі арақашықтықты есептейді.
 
-The search can be implemented as follows,
-starting at node $x$:
+Кодты үлгідегідей етіп жазуға болады ($x$ бастапқы төбе деп алсақ):
 \begin{lstlisting}
 visited[x] = true;
 distance[x] = 0;
@@ -345,29 +290,26 @@ while (!q.empty()) {
 }
 \end{lstlisting}
 
-\section{Applications}
+\section{Қолданыс аясы}
 
-Using the graph traversal algorithms,
-we can check many properties of graphs.
-Usually, both depth-first search and
-breadth-first search may be used,
-but in practice, depth-first search
-is a better choice, because it is
-easier to implement.
-In the following applications we will
-assume that the graph is undirected.
+Атап өтілген алгоритмдер арқылы графтың көптеген
+қасиеттері туралы ақпарат алуға болады.
+Көп жағдайда екі ізденісті де пайдалана аламыз.
+Бірақ жазылу жолы оңайырақ болғандықтан, тереңдігі бойынша
+ізденіс жиі жасалады. 
+Төмендегі қолданыстарда бағытталмаған граф келтірілген деп болжанады.
 
-\subsubsection{Connectivity check}
+\subsubsection{Графтың байланыстылығын тексеру}
 
-\index{connected graph}
+\index{Байланысты граф}
 
-A graph is connected if there is a path
-between any two nodes of the graph.
-Thus, we can check if a graph is connected
-by starting at an arbitrary node and
-finding out if we can reach all other nodes.
+Егер кез келген екі төбе арасында
+жол болса, ол графтың байланыстылығын білдіреді. Демек
+біз графтың байланыстылығын кез келген бір
+төбені таңдап, одан басқа төбелерге
+жете алатындығымызды тексеру арқылы біле аламыз.
 
-For example, in the graph
+Мысалы, төмендегі графта
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle] (2) at (7,5) {$2$};
@@ -382,8 +324,8 @@ For example, in the graph
 \path[draw,thick,-] (2) -- (5);
 \end{tikzpicture}
 \end{center}
-a depth-first search from node $1$ visits
-the following nodes:
+тереңдігі бойынша ізденісті $1$-төбеден бастасақ,
+келесі төбелерге бара аламыз:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle] (2) at (7,5) {$2$};
@@ -403,22 +345,16 @@ the following nodes:
 \end{tikzpicture}
 \end{center}
 
-Since the search did not visit all the nodes,
-we can conclude that the graph is not connected.
-In a similar way, we can also find all connected components
-of a graph by iterating through the nodes and always
-starting a new depth-first search if the current node
-does not belong to any component yet.
+Жоғарыдағы мысалдан 1-ші төбеден басталған тереңдігі бойынша іздеу барлық төбелерге бара алмайтынын көреміз. Сондықтан графты өзара
+байланыссыз деп қорытынды жасауға болады. Дәл осылай графтың  барлық компоненттерін таба аламыз. Ол үшін барлық төбелерді өтіп шығып, егер ағымдағы төбе бұған дейін табылған байланыстылық компонентінің бір де біреуіне жатпаса, тереңдігі бойынша жаңа іздеуді бастаймыз.  
 
-\subsubsection{Finding cycles}
+\subsubsection{Циклдарды табу}
 
-\index{cycle}
+\index{цикл}
 
-A graph contains a cycle if during a graph traversal,
-we find a node whose neighbor (other than the
-previous node in the current path) has already been
-visited.
-For example, the graph
+Егер біз графтың тереңдігі бойынша ізденіс жасап келе жатып, сол сәтте тұрақтаған
+ағымдағы төбенің көршісі осыған дейін өтілгенін байқасақ, граф циклды қамтыды деп санаймыз.
+Мысалға, келесі граф екі циклды қамтиды:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle] (2) at (7,5) {$2$};
@@ -435,8 +371,7 @@ For example, the graph
 \path[draw,thick,-] (3) -- (5);
 \end{tikzpicture}
 \end{center}
-contains two cycles and we can find one
-of them as follows:
+Төменде циклдардың біреуінің табу жолы көрсетілген:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=lightgray] (2) at (7,5) {$2$};
@@ -458,39 +393,29 @@ of them as follows:
 
 \end{tikzpicture}
 \end{center}
-After moving from node 2 to node 5 we notice that
-the neighbor 3 of node 5 has already been visited.
-Thus, the graph contains a cycle that goes through node 3,
-for example, $3 \rightarrow 2 \rightarrow 5 \rightarrow 3$.
+Мұндағы $2$-төбеден $5$-төбеге жеткен кезде $3$-төбеге әлдеқашан барылғанын
+байқаймыз. Сондықтан бұл граф $3$-төбеден өтетін циклды қамтиды.
+Мысалға, $3 \rightarrow 2 \rightarrow 5 \rightarrow 3$.
 
-Another way to find out whether a graph contains a cycle
-is to simply calculate the number of nodes and edges
-in every component.
-If a component contains $c$ nodes and no cycle,
-it must contain exactly $c-1$ edges
-(so it has to be a tree).
-If there are $c$ or more edges, the component
-surely contains a cycle.
+Графта цикл бар екенін басқа жолмен де тексеруге болады. Ол үшін біз
+жай ғана әр компоненттегі төбелер мен қырлардың санын есептейміз.
+Егер компонентте $c$ төбе болса, әрі цикл болмаса,
+бұл компонентте (граф дарақ болуы үшін) дәл $c-1$ қыр болуы керек.
+Егер де, $c$ немесе одан да көп қыр болса, компонентте 
+цикл бар екені сөзсіз анық.
 
-\subsubsection{Bipartiteness check}
+\subsubsection{Екі ұялыққа тексеріс}
 
-\index{bipartite graph}
+\index{екі ұялы граф}
 
-A graph is bipartite if its nodes can be colored
-using two colors so that there are no adjacent
-nodes with the same color.
-It is surprisingly easy to check if a graph
-is bipartite using graph traversal algorithms.
+Егер графтағы төбелер екі көршісінің түстері бірдей болмайтындай етіп, екі түспен боялатын болса, граф екі ұялы болады. Графты айтылған алгоритмдер 
+арқылы екі ұялылыққа оңай тексере аламыз.
 
-The idea is to color the starting node blue,
-all its neighbors red, all their neighbors blue, and so on.
-If at some point of the search we notice that
-two adjacent nodes have the same color,
-this means that the graph is not bipartite.
-Otherwise the graph is bipartite and one coloring
-has been found.
+Тексеру үшін бастапқы төбені көкке бояйық. Кейін оның
+көршілерін қызылға, ал қызылға боялған төбелердің көршілерін көкке, т.с.с. жалғастыра отырып бояймыз.
+Бояу барысында екі көршілес төбеде бірдей түс болса, граф екі ұялы бола алмайды. Ал графты толықтай бояу мүмкін болса, граф екі ұялы саналады.
 
-For example, the graph
+Мысалға, төмендегі граф екі ұялы бола алмайды:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle] (2) at (5,5) {$2$};
@@ -507,8 +432,8 @@ For example, the graph
 \path[draw,thick,-] (5) -- (3);
 \end{tikzpicture}
 \end{center}
-is not bipartite, because a search from node 1
-proceeds as follows:
+Себебі, $1$-төбеден басталған тереңдігі бойынша ізденіс
+былай жұмыс жасайды:
 \begin{center}
 \begin{tikzpicture}
 \node[draw, circle,fill=red!40] (2) at (5,5) {$2$};
@@ -530,20 +455,14 @@ proceeds as follows:
 \path[draw=red,thick,->,line width=2pt] (5) -- (2);
 \end{tikzpicture}
 \end{center}
-We notice that the color of both nodes 2 and 5
-is red, while they are adjacent nodes in the graph.
-Thus, the graph is not bipartite.
+Көріп отырғанымыздай үлгідегі граф екі ұялы емес. Себебі $2$ және $5$-төбелер
+бірдей қызыл түске боялған, оған қоса көршілес келген.
 
-This algorithm always works, because when there
-are only two colors available,
-the color of the starting node in a component
-determines the colors of all other nodes in the component.
-It does not make any difference whether the
-starting node is red or blue.
+Аталған алгоритм әрқашан да дұрыс жұмыс жасайды. Себебі графты екі түске бояған
+кезде бастапқы төбе компоненттегі барлық басқа төбелердің
+түстерін анықтайды.
+Алғашқы төбенің қай түске, яғни қызылға немесе көкке боялғаны маңызды емес.
 
-Note that in the general case,
-it is difficult to find out if the nodes
-in a graph can be colored using $k$ colors
-so that no adjacent nodes have the same color.
-Even when $k=3$, no efficient algorithm is known
-but the problem is NP-hard.
+Басқа жағдайларда графты $k$ түске бояу мүмкіндігін тексеру
+қиынға соғатынын ескергеніміз жөн. Тіпті $k=3$ деп алсақ та, әзірге тиімді алгоритм жоқ екенін айта кеткіміз келеді. 
+Аталған есеп NP-қиын есептердің қатарына жатады.

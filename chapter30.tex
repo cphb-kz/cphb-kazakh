@@ -1,39 +1,60 @@
-\chapter{Sweep line algorithms}
+\chapter{Сыпырма түзуге негізделген алгоритмдер}
 
-\index{sweep line}
+\index{сыпырма түзу}
 
-Many geometric problems can be solved using
-\key{sweep line} algorithms.
-The idea in such algorithms is to represent
-an instance of the problem as a set of events that correspond
-to points in the plane.
-The events are processed in increasing order
-according to their x or y coordinates.
+Көптеген геометриялық есептерді 
+\key{сыпырма түзуге} негізделген алгоритмдер 
+арқылы шығаруға болады. Ондай алгоритмдердің идеясы --
+есепті жазықтықтағы нүктелерге сәйкес оқиғалар жиынтығы ретінде
+көрсету. Кейін оқиғалар сәйкес x немесе y координаталары бойынша 
+өсу ретімен өңделеді. 
 
-As an example, consider the following problem:
-There is a company that has $n$ employees,
-and we know for each employee their arrival and
-leaving times on a certain day.
-Our task is to calculate the maximum number of
-employees that were in the office at the same time.
+% Many geometric problems can be solved using
+% \key{sweep line} algorithms.
+% The idea in such algorithms is to represent
+% an instance of the problem as a set of events that correspond
+% to points in the plane.
+% The events are processed in increasing order
+% according to their x or y coordinates.
 
-The problem can be solved by modeling the situation
-so that each employee is assigned two events that
-correspond to their arrival and leaving times.
-After sorting the events, we go through them
-and keep track of the number of people in the office.
-For example, the table
+Үлгі ретінде келесі есепті қарастырайық:
+Бір мекемеде $n$ жұмысшы еңбек етеді. Біз 
+әр жұмысшының белгілі бір күндегі келу және кету 
+уақыттарын білеміз. Біздің тапсырмамыз -- 
+нақтылы бір уақытта кеңсе ішінде болатын жұмысшылардың максималды 
+санын табу.  
+
+% As an example, consider the following problem:
+% There is a company that has $n$ employees,
+% and we know for each employee their arrival and
+% leaving times on a certain day.
+% Our task is to calculate the maximum number of
+% employees that were in the office at the same time.
+
+Есепті әрбір қызметкерге олардың келу және кету уақытына сәйкес екі оқиға 
+белгілеу арқылы шығаруға болады.
+Оқиғаларды сұрыптағаннан кейін, оларды рет бойынша өтіп,
+кеңседегі адам санын қадағалаймыз.
+Мысалы, төмендегі кесте
+
+% The problem can be solved by modeling the situation
+% so that each employee is assigned two events that
+% correspond to their arrival and leaving times.
+% After sorting the events, we go through them
+% and keep track of the number of people in the office.
+% For example, the table
 \begin{center}
 \begin{tabular}{ccc}
-person & arrival time & leaving time \\
+қызметкер & келу уақыты & кету уақыты \\
 \hline
-John & 10 & 15 \\
-Maria & 6 & 12 \\
-Peter & 14 & 16 \\
-Lisa & 5 & 13 \\
+Нұрғиса & 10 & 15 \\
+Сәндібек & 6 & 12 \\
+Дәулет & 14 & 16 \\
+Бекзат & 5 & 13 \\
 \end{tabular}
 \end{center}
-corresponds to the following events:
+келесі оқиғаларға сәйкес келеді:
+% corresponds to the following events:
 \begin{center}
 \begin{tikzpicture}[scale=0.6]
 \draw (0,0) rectangle (17,-6.5);
@@ -51,22 +72,28 @@ corresponds to the following events:
 \draw[fill] (5,-5.5) circle [radius=0.05];
 \draw[fill] (13,-5.5) circle [radius=0.05];
 
-\node at (2,-1) {John};
-\node at (2,-2.5) {Maria};
-\node at (2,-4) {Peter};
-\node at (2,-5.5) {Lisa};
+\node at (2,-1) {Нұрғиса};
+\node at (2,-2.5) {Сәндібек};
+\node at (2,-4) {Дәулет};
+\node at (2,-5.5) {Бекзат};
 \end{tikzpicture}
 \end{center}
-We go through the events from left to right
-and maintain a counter.
-Always when a person arrives, we increase
-the value of the counter by one,
-and when a person leaves,
-we decrease the value of the counter by one.
-The answer to the problem is the maximum
-value of the counter during the algorithm.
+Біз оқиғалар бойынша солдан оңға қарай өтіп,
+есептегіш айныламыны қолданамыз. 
+Жаңа жұмысшы келгенде, есептегіш айнымалыны әрдайым
+бірге арттырамыз. Ал жұмысшы кеткенде, есептегіш
+айнымалыны бірге азайтамыз. Алгоритм барысындағы есептегіш айнымалының максималды мәні есептің жауабы болады.
+% We go through the events from left to right
+% and maintain a counter.
+% Always when a person arrives, we increase
+% the value of the counter by one,
+% and when a person leaves,
+% we decrease the value of the counter by one.
+% The answer to the problem is the maximum
+% value of the counter during the algorithm.
 
-In the example, the events are processed as follows:
+% In the example, the events are processed as follows:
+Мысалдағы оқиғалар келесі ретпен өңделеді:
 \begin{center}
 \begin{tikzpicture}[scale=0.6]
 \path[draw,thick,->] (0.5,0.5) -- (16.5,0.5);
@@ -85,10 +112,10 @@ In the example, the events are processed as follows:
 \draw[fill] (5,-5.5) circle [radius=0.05];
 \draw[fill] (13,-5.5) circle [radius=0.05];
 
-\node at (2,-1) {John};
-\node at (2,-2.5) {Maria};
-\node at (2,-4) {Peter};
-\node at (2,-5.5) {Lisa};
+\node at (2,-1) {Нұрғиса};
+\node at (2,-2.5) {Сәндібек};
+\node at (2,-4) {Дәулет};
+\node at (2,-5.5) {Бекзат};
 
 \path[draw,dashed] (10,0)--(10,-6.5);
 \path[draw,dashed] (15,0)--(15,-6.5);
@@ -118,24 +145,35 @@ In the example, the events are processed as follows:
 \node at (13,-8) {$1$};
 \end{tikzpicture}
 \end{center}
-The symbols $+$ and $-$ indicate whether the
-value of the counter increases or decreases,
-and the value of the counter is shown below.
-The maximum value of the counter is 3
-between John's arrival and Maria's leaving.
+$+$ пен $-$ таңбалары есептегіш айнымалының не
+артқанын, не кемігенін көрсетеді, ал
+есептегіш айнымалының мәні астында жазылған. 
+Нұрғисаның келуі мен Сәндібектің кетуі арасындағы есептегіш айнымалының максималды мәні 3-ке тең. 
 
-The running time of the algorithm is $O(n \log n)$,
-because sorting the events takes $O(n \log n)$ time
-and the rest of the algorithm takes $O(n)$ time.
+% The symbols $+$ and $-$ indicate whether the
+% value of the counter increases or decreases,
+% and the value of the counter is shown below.
+% The maximum value of the counter is 3
+% between John's arrival and Maria's leaving.
 
-\section{Intersection points}
+Алгоримтнің уақытша күрделілігі -- $O(n \log n)$,
+себебі оқиғаларды сұрыптау $O(n \log n)$ уақыт алады, ал алгоритмнің қалған бөлігі $O(n)$ уақыт алады. 
 
-\index{intersection point}
+% The running time of the algorithm is $O(n \log n)$,
+% because sorting the events takes $O(n \log n)$ time
+% and the rest of the algorithm takes $O(n)$ time.
 
-Given a set of $n$ line segments, each of them being either
-horizontal or vertical, consider the problem of
-counting the total number of intersection points.
-For example, when the line segments are
+\section{Қиылысу нүктелері}
+
+\index{қиылысу нүктесі}
+
+$n$ горизонталды немесе вертикалды кесінділер жинағы берілген. 
+Қиылысу нүктелерінің жалпы санын табатын есепті қарастырайық. 
+Мысалы, кесінділер төмендегідей орналасқан кезде
+% Given a set of $n$ line segments, each of them being either
+% horizontal or vertical, consider the problem of
+% counting the total number of intersection points.
+% For example, when the line segments are
 \begin{center}
 \begin{tikzpicture}[scale=0.5]
 \path[draw,thick,-] (0,2) -- (5,2);
@@ -145,7 +183,8 @@ For example, when the line segments are
 \path[draw,thick,-] (8,2) -- (8,5);
 \end{tikzpicture}
 \end{center}
-there are three intersection points:
+3 қиылысу нүктелері пайда болады:
+% there are three intersection points:
 \begin{center}
 \begin{tikzpicture}[scale=0.5]
 \path[draw,thick,-] (0,2) -- (5,2);
@@ -161,23 +200,34 @@ there are three intersection points:
 \end{tikzpicture}
 \end{center}
 
-It is easy to solve the problem in $O(n^2)$ time,
-because we can go through all possible pairs of line segments
-and check if they intersect.
-However, we can solve the problem more efficiently
-in $O(n \log n)$ time using a sweep line algorithm
-and a range query data structure.
+Бұл есепті $O(n^2)$ уақытта шығарған жеңіл, өйткені
+біз барлық кесінділердің жұптары бойынша өтіп, олардың қиылысуын
+тексере аламыз. Дегенмен бұл есепті 
+сыпырма түзуіне негізделген алгоритм мен аралық сұратым жасайтын
+деректер құрылымы арқылы 
+$O(n \log n)$ уақытта 
+тиімдірек шығара аламыз.
 
-The idea is to process the endpoints of the line
-segments from left to right and 
-focus on three types of events:
+% It is easy to solve the problem in $O(n^2)$ time,
+% because we can go through all possible pairs of line segments
+% and check if they intersect.
+% However, we can solve the problem more efficiently
+% in $O(n \log n)$ time using a sweep line algorithm
+% and a range query data structure.
+
+Мұндағы идея кесінділердің шеткі нүктелерін солдан оңға 
+қарай өңдеуге және 3 түрлі оқиғаларға назар аударуға негізделеді. Олар:
+% The idea is to process the endpoints of the line
+% segments from left to right and 
+% focus on three types of events:
 \begin{enumerate}[noitemsep]
-\item[(1)] horizontal segment begins
-\item[(2)] horizontal segment ends
-\item[(3)] vertical segment
+\item[(1)] көлденең кесінді басталады %horizontal segment begins
+\item[(2)] көлденең кесінді аяқталады %horizontal segment ends
+\item[(3)] тік кесінді %vertical segment
 \end{enumerate}
 
-The following events correspond to the example:
+Келесі оқиғалар жоғарыдағы мысалға сәйкес келеді:
+% The following events correspond to the example:
 \begin{center}
 \begin{tikzpicture}[scale=0.6]
 \path[draw,dashed] (0,2) -- (5,2);
@@ -198,34 +248,57 @@ The following events correspond to the example:
 \end{tikzpicture}
 \end{center}
 
-We go through the events from left to right
-and use a data structure that maintains a set of
-y coordinates where there is an active horizontal segment.
-At event 1, we add the y coordinate of the segment
-to the set, and at event 2, we remove the
-y coordinate from the set.
+Оқиғалар бойынша солдан оңға қарай өтеміз
+және белсенді көлденең кесіндісі бар 
+y координаталардың жинағын сақтайтын
+деректер құрылымын қолданамыз. 1-оқиғада
+біз y координатасын жиымға қосамыз, ал 2-оқиғада
+y координатасын жиымнан өшіреміз. 
 
-Intersection points are calculated at event 3.
-When there is a vertical segment between points
-$y_1$ and $y_2$, we count the number of active
-horizontal segments whose y coordinate is between
-$y_1$ and $y_2$, and add this number to the total
-number of intersection points.
+% We go through the events from left to right
+% and use a data structure that maintains a set of
+% y coordinates where there is an active horizontal segment.
+% At event 1, we add the y coordinate of the segment
+% to the set, and at event 2, we remove the
+% y coordinate from the set.
 
-To store y coordinates of horizontal segments,
-we can use a binary indexed or segment tree,
-possibly with index compression.
-When such structures are used, processing each event
-takes $O(\log n)$ time, so the total running
-time of the algorithm is $O(n \log n)$.
+Қиылысу нүктелері 3-оқиғада анықталады. 
+$y_1$ мен $y_2$ нүктелері арасында тік кесінді 
+келген кезде, y координатасы $y_1$ мен $y_2$ арасындағы
+белсенді көлденең кесінділердің санын есептейміз және
+оны жалпы қиылысу нүктелерінің санына қосамыз. 
 
-\section{Closest pair problem}
+% Intersection points are calculated at event 3.
+% When there is a vertical segment between points
+% $y_1$ and $y_2$, we count the number of active
+% horizontal segments whose y coordinate is between
+% $y_1$ and $y_2$, and add this number to the total
+% number of intersection points.
 
-\index{closest pair}
+Көлденең кесінділердің y координаталарын
+сақтау үшін бинарлы индекстелген дарақ немесе кесінділер
+дарағын (бәлкім индекстерді сығымдау арқылы) пайдалануға болады. 
+Сондай деректер құрылымы қолданылған кезде, әр оқиғаны 
+өңдеу $O(\log n)$ уақыт алады, демек алгоритмнің
+қорытынды уақытша күрделілігі -- $O(n \log n)$.
 
-Given a set of $n$ points, our next problem is
-to find two points whose Euclidean distance is minimum.
-For example, if the points are
+% To store y coordinates of horizontal segments,
+% we can use a binary indexed or segment tree,
+% possibly with index compression.
+% When such structures are used, processing each event
+% takes $O(\log n)$ time, so the total running
+% time of the algorithm is $O(n \log n)$.
+
+\section{Ең жақын жұп есебі}
+
+\index{ең жақын жұп}
+
+$n$ нүктелер жиынтығы берілген. Біздің келесі тапсырмамыз
+-- Евклидтік арақашықтығы ең аз болатын екі нүктені табу.
+Мысалы, егер нүктелер төмендегідей орналасса,
+% Given a set of $n$ points, our next problem is
+% to find two points whose Euclidean distance is minimum.
+% For example, if the points are
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0)--(12,0)--(12,4)--(0,4)--(0,0);
@@ -247,7 +320,8 @@ For example, if the points are
 \end{tikzpicture}
 \end{center}
 \begin{samepage}
-we should find the following points:
+келесі нүктелерді табуымыз қажет:
+% we should find the following points:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0)--(12,0)--(12,4)--(0,4)--(0,0);
@@ -270,35 +344,60 @@ we should find the following points:
 \end{center}
 \end{samepage}
 
-This is another example of a problem
-that can be solved in $O(n \log n)$ time
-using a sweep line algorithm\footnote{Besides this approach,
-there is also an
-$O(n \log n)$ time divide-and-conquer algorithm \cite{sha75}
-that divides the points into two sets and recursively
-solves the problem for both sets.}.
-We go through the points from left to right
-and maintain a value $d$: the minimum distance
-between two points seen so far.
-At each point, we find the nearest point to the left.
-If the distance is less than $d$, it is the
-new minimum distance and we update
-the value of $d$.
+Бұл –– сыпырма түзуіне негізделген алгоритм\footnote{Сонымен қатар 
+нүктелерді екі жиынға бөліп, екі жиында есепті рекурсивті түрде шығаратын
+''бөліп ал да билей бер'' алгоритмі \cite{sha75} арқылы 
+$O(n \log n)$ уақытта шығаруға болатын
+есептердің тағы бір мысалын келтірейік. Нүктелер бойынша 
+солдан оңға қарай өтіп, осы уақытқа дейін 
+өткен екі нүкте арасындағы ең аз 
+арақашықтықты, яғни $d$ мәнін сақтаймыз. 
+Әр нүктеге сол жақтан ең жақын нүктені табамыз. 
+Егер арақашықтық $d$-дан кем болса, ол жаңа 
+минималды арақашықтық болады және $d$ мәні
+жаңартылады. 
 
-If the current point is $(x,y)$
-and there is a point to the left
-within a distance of less than $d$,
-the x coordinate of such a point must
-be between $[x-d,x]$ and the y coordinate
-must be between $[y-d,y+d]$.
-Thus, it suffices to only consider points
-that are located in those ranges,
-which makes the algorithm efficient.
+% This is another example of a problem
+% that can be solved in $O(n \log n)$ time
+% using a sweep line algorithm\footnote{Besides this approach,
+% there is also an
+% $O(n \log n)$ time divide-and-conquer algorithm \cite{sha75}
+% that divides the points into two sets and recursively
+% solves the problem for both sets.}.
+% We go through the points from left to right
+% and maintain a value $d$: the minimum distance
+% between two points seen so far.
+% At each point, we find the nearest point to the left.
+% If the distance is less than $d$, it is the
+% new minimum distance and we update
+% the value of $d$.
 
-For example, in the following picture, the
-region marked with dashed lines contains
-the points that can be within a distance of $d$
-from the active point:
+Егер қазіргі нүкте $(x,y)$ болса
+және оның сол жағындағы $d$ арақашықтықтың
+ішінде нүкте бар болса, оның x координатасы
+$[x-d,x]$ аралығында, ал y координатасы
+$[y-d,y+d]$ аралығында болуы керек. Демек бізге 
+сол аралықтағы нүктелерді қарастырсақ та жеткілікті.  
+Бұл -- алгоритмді тиімді қылады. 
+
+% If the current point is $(x,y)$
+% and there is a point to the left
+% within a distance of less than $d$,
+% the x coordinate of such a point must
+% be between $[x-d,x]$ and the y coordinate
+% must be between $[y-d,y+d]$.
+% Thus, it suffices to only consider points
+% that are located in those ranges,
+% which makes the algorithm efficient.
+
+Мысалы, келесі суреттегі 
+үзік сызықтармен белгіленген аймақ 
+қазіргі нүктеден $d$ арақашықтықта болуы мүмкін нүктелерді қамтиды:
+
+% For example, in the following picture, the
+% region marked with dashed lines contains
+% the points that can be within a distance of $d$
+% from the active point:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -331,29 +430,44 @@ from the active point:
 \end{tikzpicture}
 \end{center}
 
-The efficiency of the algorithm is based on the fact
-that the region always contains
-only $O(1)$ points.
-We can go through those points in $O(\log n)$ time
-by maintaining a set of points whose x coordinate
-is between $[x-d,x]$, in increasing order according
-to their y coordinates.
+Алгоритмнің тиімділігі -- аймақтың әрдайым
+тек $O(1)$ нүктелерден тұратын
+фактіге негізделуінде. Біз бұл нүктелерден $[x-d,x]$ аралығындағы x координатасы нүктелерінің жиынын олардың y координатасындағы өсу ретіне сәйкес сақтау арқылы $O(\log n)$ уақытта өте аламыз.
+ 
+% The efficiency of the algorithm is based on the fact
+% that the region always contains
+% only $O(1)$ points.
+% We can go through those points in $O(\log n)$ time
+% by maintaining a set of points whose x coordinate
+% is between $[x-d,x]$, in increasing order according
+% to their y coordinates.
 
-The time complexity of the algorithm is $O(n \log n)$,
-because we go through $n$ points and
-find for each point the nearest point to the left
-in $O(\log n)$ time.
+Алгоритмнің уақытша күрделілігі -- $O(n \log n)$, яғни
+біз $n$ нүктелерді өтеміз және 
+әр нүктеге сол жағынан ең жақын нүктені $O(\log n)$ уақытта
+табамыз. 
 
-\section{Convex hull problem}
+% The time complexity of the algorithm is $O(n \log n)$,
+% because we go through $n$ points and
+% find for each point the nearest point to the left
+% in $O(\log n)$ time.
 
-A \key{convex hull} is the smallest convex polygon
-that contains all points of a given set.
-Convexity means that a line segment between
-any two vertices of the polygon is completely
-inside the polygon.
+\section{Дөңес қабықша есебі}
+
+\key{Дөңес қабықша} –– берілген жиынның барлық нүктелерін 
+қамтитын ең кішкентай дөңес көпбұрыш. Дөңестік 
+көпбұрыштың кез келген екі нүктесінің арасындағы 
+түзу кесіндісі толығымен көпбұрыштың ішінде болуын білдіреді.
+
+% A \key{convex hull} is the smallest convex polygon
+% that contains all points of a given set.
+% Convexity means that a line segment between
+% any two vertices of the polygon is completely
+% inside the polygon.
 
 \begin{samepage}
-For example, for the points
+Мысалы төмендегі нүктелердің
+% For example, for the points
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) circle [radius=0.1];
@@ -373,7 +487,8 @@ For example, for the points
 \end{tikzpicture}
 \end{center}
 \end{samepage}
-the convex hull is as follows:
+дөңес қабықшасы келесідей болады:
+% the convex hull is as follows:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0)--(4,-1)--(7,1)--(6,3)--(2,4)--(0,2)--(0,0);
@@ -395,31 +510,47 @@ the convex hull is as follows:
 \end{tikzpicture}
 \end{center}
 
-\index{Andrew's algorithm}
+\index{Эндрю алгоритмі}
 
-\key{Andrew's algorithm} \cite{and79} provides
-an easy way to
-construct the convex hull for a set of points
-in $O(n \log n)$ time.
-The algorithm first locates the leftmost
-and rightmost points, and then
-constructs the convex hull in two parts:
-first the upper hull and then the lower hull.
-Both parts are similar, so we can focus on
-constructing the upper hull.
+\key{Эндрю алгоритмі} \cite{and79} берілген нүктелер
+жиыны үшін $O(n \log n)$ уақытта дөңес 
+қабықша құрастырудың оңай жолын береді. 
+Алгоритм басында ең сол және ең оң жақта 
+тұрған нүктелерді табады, кейін дөңес қабықшасының
+үстіңгі және астыңғы бөлігін құрастырады. Екі бөлік ұқсас болғандықтан, біз үстіңгі бөліктің құрылу барысына аударайық.
 
-First, we sort the points primarily according to
-x coordinates and secondarily according to y coordinates.
-After this, we go through the points and
-add each point to the hull.
-Always after adding a point to the hull,
-we make sure that the last line segment
-in the hull does not turn left.
-As long as it turns left, we repeatedly remove the
-second last point from the hull.
+% \key{Andrew's algorithm} \cite{and79} provides
+% an easy way to
+% construct the convex hull for a set of points
+% in $O(n \log n)$ time.
+% The algorithm first locates the leftmost
+% and rightmost points, and then
+% constructs the convex hull in two parts:
+% first the upper hull and then the lower hull.
+% Both parts are similar, so we can focus on
+% constructing the upper hull.
 
-The following pictures show how
-Andrew's algorithm works:
+Нүктелерді алдымен x координаталары, содан соң
+y координаталары бойынша сұрыптайық. 
+Кейін нүктелерден өтіп шығып, бір-бірден қабықшаға қосамыз.
+Нүктені қабықшаға қосқан кезде қабықшаның соңғы кесіндісі 
+солға бұрылып кетпеуін әрдайым  қадағап отырамыз. Егер солға бұрылып кетсе, 
+қабықтың соңғыдан бұрынғы нүктесін өшіріп, қайта тексереміз.
+
+% First, we sort the points primarily according to
+% x coordinates and secondarily according to y coordinates.
+% After this, we go through the points and
+% add each point to the hull.
+% Always after adding a point to the hull,
+% we make sure that the last line segment
+% in the hull does not turn left.
+% As long as it turns left, we repeatedly remove the
+% second last point from the hull.
+
+Келесі суреттер Эндрю алгоритмінің 
+қалай жұмыс істейтінін көрсетеді:
+% The following pictures show how
+% Andrew's algorithm works:
 \\
 \begin{tabular}{ccccccc}
 \\

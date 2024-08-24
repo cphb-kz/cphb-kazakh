@@ -1,33 +1,50 @@
-\chapter{Paths and circuits}
+\chapter{Жолдар және шынжырлар}
 
-This chapter focuses on two types of paths in graphs:
+Бұл тарауда графтардағы жолдардың екі түріне назар аударылады:
 \begin{itemize}
-\item An \key{Eulerian path} is a path that
-goes through each edge exactly once.
-\item A \key{Hamiltonian path} is a path
-that visits each node exactly once.
+\item \key{Эйлер жолы} -- әр қырдан дәл бір рет өтетін
+жол.
+\item \key{Гамильтон жолы} -- әр төбеден
+дәл бір рет өтетін жол.
 \end{itemize}
+% \begin{itemize}
+% \item An \key{Eulerian path} is a path that
+% goes through each edge exactly once.
+% \item A \key{Hamiltonian path} is a path
+% that visits each node exactly once.
+% \end{itemize}
 
-While Eulerian and Hamiltonian paths look like
-similar concepts at first glance,
-the computational problems related to them
-are very different.
-It turns out that there is a simple rule that
-determines whether a graph contains an Eulerian path,
-and there is also an efficient algorithm to
-find such a path if it exists.
-On the contrary, checking the existence of a Hamiltonian path is a NP-hard
-problem, and no efficient algorithm is known for solving the problem.
+Эйлер және Гамильтон жолдары бір қарағанда 
+ұқсас ұғымдар сияқты көрінгенімен, оларға
+байланысты есептер әртүрлі болып келеді.
+Графта Эйлер жолының бар-жоғын анықтайтын
+қарапайым ереже, сондай-ақ егер мұндай жол болған 
+жағдайда, оны табудың тиімді алгоритмі бар.
+Ал Гамильтон жолының бар-жоғын тексеру NP-қиын
+есеп болып табылады және есепті шешу үшін қолданылатын тиімді 
+алгоритм де әзірше белгісіз.
+% While Eulerian and Hamiltonian paths look like
+% similar concepts at first glance,
+% the computational problems related to them
+% are very different.
+% It turns out that there is a simple rule that
+% determines whether a graph contains an Eulerian path,
+% and there is also an efficient algorithm to
+% find such a path if it exists.
+% On the contrary, checking the existence of a Hamiltonian path is a NP-hard
+% problem, and no efficient algorithm is known for solving the problem.
 
-\section{Eulerian paths}
+\section{Эйлер жолы}
 
-\index{Eulerian path}
+\index{Эйлер жолы}
 
-An \key{Eulerian path}\footnote{L. Euler studied such paths in 1736
-when he solved the famous Königsberg bridge problem.
-This was the birth of graph theory.} is a path
-that goes exactly once through each edge of the graph.
-For example, the graph
+\key{Эйлер жолы}\footnote{Мұндай жолдарды Л. Эйлер 1736 жылы Кёнигсберг көпірі туралы танымал есебін шығару барысында зерттеген болатын. Осылайша граф теориясы пайда болған еді.} -- графтағы әр қырдан дәл бір рет қана өтіп шығатын жол.
+Мысалы, төмендегі графта
+% \key{Эйлер жолы}\footnote{L. Euler studied such paths in 1736
+% when he solved the famous Königsberg bridge problem.
+% This was the birth of graph theory.} is a path
+% that goes exactly once through each edge of the graph.
+% For example, the graph
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -44,7 +61,8 @@ For example, the graph
 \path[draw,thick,-] (4) -- (5);
 \end{tikzpicture}
 \end{center}
-has an Eulerian path from node 2 to node 5:
+$2$-төбеден $5$-төбеге баратын Эйлер жолы қамтылған:
+% has an Eulerian path from node 2 to node 5:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -68,11 +86,13 @@ has an Eulerian path from node 2 to node 5:
 \path[draw=red,thick,->,line width=2pt] (3) -- node[font=\small,label={[red]south:6.}] {} (5);
 \end{tikzpicture}
 \end{center}
-\index{Eulerian circuit}
-An \key{Eulerian circuit}
-is an Eulerian path that starts and ends
-at the same node.
-For example, the graph
+\index{Эйлер шынжыры}
+\key{Эйлер шынжыры}
+-- бір төбеден басталатын және аяқталатын Эйлер жолы.
+Мысалы, төмендегі граф
+% is an Eulerian path that starts and ends
+% at the same node.
+% For example, the graph
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -89,7 +109,8 @@ For example, the graph
 \path[draw,thick,-] (2) -- (4);
 \end{tikzpicture}
 \end{center}
-has an Eulerian circuit that starts and ends at node 1:
+$1$-төбеден басталып, сол төбеде аяқталатын Эйлер шынжырын қамтиды:
+% has an Eulerian circuit that starts and ends at node 1:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -114,25 +135,39 @@ has an Eulerian circuit that starts and ends at node 1:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Existence}
+\subsubsection{Графта бар болуына тексеріс}
 
-The existence of Eulerian paths and circuits
-depends on the degrees of the nodes.
-First, an undirected graph has an Eulerian path 
-exactly when all the edges
-belong to the same connected component and
+Графта Эйлер жолы мен шынжырының бар болуы 
+төбелердің дәрежесіне тәуелді болып келеді.
+Эйлер жолы түзілу үшін келесі шарттылықтар сақталуы керек: 
 \begin{itemize}
-\item the degree of each node is even \emph{or}
-\item the degree of exactly two nodes is odd,
-and the degree of all other nodes is even.
+\item Біріншіден, бағытталмаған графтағы барлық
+қырлар бір байланысқан компонентте жатуы керек; 
+\item Екіншіден, әр төбенің дәрежесі жұп сан болуы \emph{немесе}
+екі төбенің дәрежесі тақ сан, ал қалғандарының
+дәрежелері жұп сан болуы тиіс.
 \end{itemize}
+% The existence of Eulerian paths and circuits
+% depends on the degrees of the nodes.
+% First, an undirected graph has an Eulerian path 
+% exactly when all the edges
+% belong to the same connected component and
 
-In the first case, each Eulerian path is also an Eulerian circuit.
-In the second case, the odd-degree nodes are the starting
-and ending nodes of an Eulerian path which is not an Eulerian circuit.
+% \begin{itemize}
+% \item the degree of each node is even \emph{or}
+% \item the degree of exactly two nodes is odd,
+% and the degree of all other nodes is even.
+% \end{itemize}
+
+Бірінші жағдайда Эйлер жолы да,  Эйлер шынжыры да бар деп саналады.
+Екінші жағдайда тақ дәрежелі төбелер Эйлер жолының басы немесе 
+аяғы болады. Бұл жерде Эйлер жолы бар, бірақ ол Эйлер шынжыры бола алмайды.
+% In the first case, each Eulerian path is also an Eulerian circuit.
+% In the second case, the odd-degree nodes are the starting
+% and ending nodes of an Eulerian path which is not an Eulerian circuit.
 
 \begin{samepage}
-For example, in the graph
+Мысалы, төмендегі графта
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -150,32 +185,54 @@ For example, in the graph
 \end{tikzpicture}
 \end{center}
 \end{samepage}
-nodes 1, 3 and 4 have a degree of 2,
-and nodes 2 and 5 have a degree of 3.
-Exactly two nodes have an odd degree,
-so there is an Eulerian path between nodes 2 and 5,
-but the graph does not contain an Eulerian circuit.
+1, 3 және 4 төбелерінің дәреже мәндері 2, ал 
+2 және 5 төбелерінің дәреже мәндері 3.
+Дәл екі төбенің дәрежелері тақ.
+Сондықтан 2 мен 5 төбелерінің арасында Эйлер жолы бар. 
+Бірақ граф Эйлер шынжырын қамтымайды.
+% nodes 1, 3 and 4 have a degree of 2,
+% and nodes 2 and 5 have a degree of 3.
+% Exactly two nodes have an odd degree,
+% so there is an Eulerian path between nodes 2 and 5,
+% but the graph does not contain an Eulerian circuit.
 
-In a directed graph,
-we focus on indegrees and outdegrees
-of the nodes.
-A directed graph contains an Eulerian path
-exactly when all the edges belong to the same
-connected component and
+%check
+Бағытталған графта біз төбелердегі кірістің және
+шығыстың жарты дәрежелеріне мән береміз.
+Егер графтағы барлық қырлар
+бір байланысқан компонентте жатса және
 \begin{itemize}
-\item in each node, the indegree equals the outdegree, \emph{or}
-\item in one node, the indegree is one larger than the outdegree,
-in another node, the outdegree is one larger than the indegree,
-and in all other nodes, the indegree equals the outdegree.
+\item әр төбенің кірісінің жарты дәрежесі шығысының жарты дәрежесіне тең болса,
+\emph{немесе}
+\item бір төбенің кірісінің жарты дәрежесі шығысының жарты дәрежесінен 
+1-ге артық болса және басқа төбенің шығысының жарты дәрежесі 
+кірісінің жарты дәрежесінен 1-ге
+артық болып, ал қалған төбелердің кірісінің және шығысының жарты
+дәрежелері тең болса, онда бағытталған графта Эйлер жолы бар деп есептейміз. 
+%till there
 \end{itemize}
+% In a directed graph,
+% we focus on indegrees and outdegrees
+% of the nodes.
+% A directed graph contains an Eulerian path
+% exactly when all the edges belong to the same
+% connected component and
+% \begin{itemize}
+% \item in each node, the indegree equals the outdegree, \emph{or}
+% \item in one node, the indegree is one larger than the outdegree,
+% in another node, the outdegree is one larger than the indegree,
+% and in all other nodes, the indegree equals the outdegree.
+% \end{itemize}
 
-In the first case, each Eulerian path
-is also an Eulerian circuit,
-and in the second case, the graph contains an Eulerian path
-that begins at the node whose outdegree is larger
-and ends at the node whose indegree is larger.
+Бірінші жағдайда графта Эйлер жолы да, Эйлер шынжыры да бар.
+Екінші жағдайда графта шығысының жарты дәрежесі үлкенірек төбеден басталып, кірісінің жарты дәрежесі үлкенірек төбеде аяқталатын Эйлер жолы бар.
+% In the first case, each Eulerian path
+% is also an Eulerian circuit,
+% and in the second case, the graph contains an Eulerian path
+% that begins at the node whose outdegree is larger
+% and ends at the node whose indegree is larger.
 
-For example, in the graph
+Мысалы, төмендегі графта
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -192,11 +249,15 @@ For example, in the graph
 \path[draw,thick,->,>=latex] (5) -- (4);
 \end{tikzpicture}
 \end{center}
-nodes 1, 3 and 4 have both indegree 1 and outdegree 1,
-node 2 has indegree 1 and outdegree 2,
-and node 5 has indegree 2 and outdegree 1.
-Hence, the graph contains an Eulerian path
-from node 2 to node 5:
+1, 3, және 4-төбелердің кірістерінің және шығыстарының жарты дәрежелері 1-ге тең, 
+$2$-төбенің кірісінің жарты дәрежесі -- 1, ал шығысының жарты дәрежесі -- 2, 
+$5$-төбенің кірісінің жарты дәрежесі -- 2, ал шығысының жарты дәрежесі -- 1.
+Демек, графта 2-төбеден 5-төбеге дейін Эйлер жолы бар:
+% nodes 1, 3 and 4 have both indegree 1 and outdegree 1, 
+% node 2 has indegree 1
+% and outdegree 2, and node 5 has indegree 2 and outdegree 1.
+% Hence, the graph contains an Eulerian path
+% from node 2 to node 5:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -221,52 +282,71 @@ from node 2 to node 5:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Hierholzer's algorithm}
+\subsubsection{Хирхольцер алгоритмі}
 
-\index{Hierholzer's algorithm}
+\index{Хирхольцер алгоритмі}
 
-\key{Hierholzer's algorithm}\footnote{The algorithm was published
-in 1873 after Hierholzer's death \cite{hie73}.} is an efficient
-method for constructing
-an Eulerian circuit.
-The algorithm consists of several rounds,
-each of which adds new edges to the circuit.
-Of course, we assume that the graph contains
-an Eulerian circuit; otherwise Hierholzer's
-algorithm cannot find it.
+\key{Хирхольцер алгоритмі}\footnote{Алгоритм 1873 жылы Хирхольцер қайтыс болғаннан кейін жарияланды \cite{hie73}.} -- Эйлер шынжырын құрайтын тиімді әдіс.
+Алгоритм бірнеше бөлімнен тұрады, олардың әрқайсысы
+шынжырға жаңа қырларды қосады.
+Біз графта Эйлер жынжыры бар деп қарастырамыз,
+басқаша жағдайда Хирхольцер алгоритмі оны таба алмайды.
+% is an efficient
+% method for constructing
+% an Eulerian circuit.
+% The algorithm consists of several rounds,
+% each of which adds new edges to the circuit.
+% Of course, we assume that the graph contains
+% an Eulerian circuit; otherwise Hierholzer's
+% algorithm cannot find it.
 
-First, the algorithm constructs a circuit that contains
-some (not necessarily all) of the edges of the graph.
-After this, the algorithm extends the circuit
-step by step by adding subcircuits to it.
-The process continues until all edges have been added
-to the circuit.
+Алдымен алгоритм графтың кейбір қырларын (барлығын қамту 
+міндетті емес) қамтитын шынжырды құрастырады.
+Ішшынжырларды біртіндеп қосу арқылы алгоритм шынжырды ұлғайта береді.
+Осы процесс барлық қырларды қосқанға дейін жалғасады. 
+% First, the algorithm constructs a circuit that contains
+% some (not necessarily all) of the edges of the graph.
+% After this, the algorithm extends the circuit
+% step by step by adding subcircuits to it.
+% The process continues until all edges have been added
+% to the circuit.
 
-The algorithm extends the circuit by always finding
-a node $x$ that belongs to the circuit but has
-an outgoing edge that is not included in the circuit.
-The algorithm constructs a new path from node $x$
-that only contains edges that are not yet in the circuit.
-Sooner or later,
-the path will return to node $x$,
-which creates a subcircuit.
+Шынжырды кеңейту үшін біз шынжырдың ішінен шынжырға кірмеген шығыс қыры бар $x$ төбесін табамыз. Содан соң тек қана әлі шынжырға кірмеген қырдан тұратын $x$ төбесінен жаңа жол басталады. Ерте ме, кеш пе, бұл жол ішшынжыр басталған $x$ төбесіне қайта оралады.     
 
-If the graph only contains an Eulerian path,
-we can still use Hierholzer's algorithm
-to find it by adding an extra edge to the graph
-and removing the edge after the circuit
-has been constructed.
-For example, in an undirected graph,
-we add the extra edge between the two
-odd-degree nodes.
+% The algorithm extends the circuit by always finding
+% a node $x$ that belongs to the circuit but has
+% an outgoing edge that is not included in the circuit.
+% The algorithm constructs a new path from node $x$
+% that only contains edges that are not yet in the circuit.
+% Sooner or later,
+% the path will return to node $x$,
+% which creates a subcircuit.
 
-Next we will see how Hierholzer's algorithm
-constructs an Eulerian circuit for an undirected graph.
+%check
+Егер граф тек Эйлер жолын қамтыса, біз осы
+графта Хирхольцер алгоритмін қолдана аламыз.
+Ол үшін біз графқа уақытша қосымша қыр қосып, 
+Хирхольцер алгоритмін жүргіземіз, ал шынжырды құрастырып
+болғаннан кейін сол қырды алып тастаймыз.
+Мысалы бағытталмаған графта біз екі тақ дәрежелі
+төбелердің арасына қосымша қыр қосамыз.
+% If the graph only contains an Eulerian path,
+% we can still use Hierholzer's algorithm
+% to find it by adding an extra edge to the graph
+% and removing the edge after the circuit
+% has been constructed.
+% For example, in an undirected graph,
+% we add the extra edge between the two
+% odd-degree nodes.
 
-\subsubsection{Example}
+Әрі қарай Хирхольцер алгоритмі бағытталмаған граф үшін Эйлер шынжырын қалай құрастыратынын көреміз.
+% Next we will see how Hierholzer's algorithm
+% constructs an Eulerian circuit for an undirected graph.
+
+\subsubsection{Мысал}
 
 \begin{samepage}
-Let us consider the following graph:
+Келесі жолды қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (3,5) {$1$};
@@ -292,10 +372,12 @@ Let us consider the following graph:
 \end{samepage}
 
 \begin{samepage}
-Suppose that the algorithm first creates a circuit
-that begins at node 1.
-A possible circuit is
-$1 \rightarrow 2 \rightarrow 3 \rightarrow 1$:
+Алгоритм алдымен 1-төбеден басталатын шынжырды 
+құрады делік. Шынжыр осындай болуы мүмкін: $1 \rightarrow 2 \rightarrow 3 \rightarrow 1$
+% Suppose that the algorithm first creates a circuit
+% that begins at node 1.
+% A possible circuit is
+% $1 \rightarrow 2 \rightarrow 3 \rightarrow 1$:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (3,5) {$1$};
@@ -323,10 +405,13 @@ $1 \rightarrow 2 \rightarrow 3 \rightarrow 1$:
 \end{tikzpicture}
 \end{center}
 \end{samepage}
-After this, the algorithm adds
-the subcircuit
+Содан кейін алгоритм 
 $2 \rightarrow 5 \rightarrow 6 \rightarrow 2$
-to the circuit:
+ішшынжырды бас шынжырға қосады:
+% After this, the algorithm adds
+% the subcircuit
+% $2 \rightarrow 5 \rightarrow 6 \rightarrow 2$
+% to the circuit:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (3,5) {$1$};
@@ -356,9 +441,12 @@ to the circuit:
 \path[draw=red,thick,->,line width=2pt] (3) -- node[font=\small,label={[red]east:6.}] {} (1);
 \end{tikzpicture}
 \end{center}
-Finally, the algorithm adds the subcircuit
+Ең соңында алгоритм 
 $6 \rightarrow 3 \rightarrow 4 \rightarrow 7 \rightarrow 6$
-to the circuit:
+ішшынжырды бас шынжырға қосады:
+% Finally, the algorithm adds the subcircuit
+% $6 \rightarrow 3 \rightarrow 4 \rightarrow 7 \rightarrow 6$
+% to the circuit:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (3,5) {$1$};
@@ -392,18 +480,24 @@ to the circuit:
 \path[draw=red,thick,->,line width=2pt] (3) -- node[font=\small,label={[red]east:10.}] {} (1);
 \end{tikzpicture}
 \end{center}
-Now all edges are included in the circuit,
-so we have successfully constructed an Eulerian circuit.
+Көріп тұрғанымыздай, барлық қырларды шынжырға қосып шықтық. Осылайша Эйлер 
+шынжырын құрастырдық.
+% Now all edges are included in the circuit,
+% so we have successfully constructed an Eulerian circuit.
 
-\section{Hamiltonian paths}
+\section{Гамильтон жолдары}
 
-\index{Hamiltonian path}
+\index{Гамильтон жолы}
 
-A \key{Hamiltonian path}
-%\footnote{W. R. Hamilton (1805--1865) was an Irish mathematician.}
-is a path
-that visits each node of the graph exactly once.
-For example, the graph
+\key{Гамильтон жолы}
+% \footnote{Ирландия математигі У.Р. Гамильтонның (1805--1865) құрметіне қойылған.}
+-- графтағы әр төбеге дәл бір рет баратын жол.
+Мысалы, осы граф
+% A \key{Hamiltonian path}
+% %\footnote{W. R. Hamilton (1805--1865) was an Irish mathematician.}
+% is a path
+% that visits each node of the graph exactly once.
+% For example, the graph
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -420,7 +514,8 @@ For example, the graph
 \path[draw,thick,-] (4) -- (5);
 \end{tikzpicture}
 \end{center}
-contains a Hamiltonian path from node 1 to node 3:
+$1$-төбеден басталып $3$-төбеде аяқталатын Гамильтон жолын қамтиды:
+% contains a Hamiltonian path from node 1 to node 3:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -443,12 +538,15 @@ contains a Hamiltonian path from node 1 to node 3:
 \end{tikzpicture}
 \end{center}
 
-\index{Hamiltonian circuit}
+\index{Гамильтон шынжыры}
 
-If a Hamiltonian path begins and ends at the same node,
-it is called a \key{Hamiltonian circuit}.
-The graph above also has an Hamiltonian circuit
-that begins and ends at node 1:
+Егер Гамильтон жолы бір төбеден басталып, сол төбеден аяқталса, мұны
+Гамильтон шынжыры деп атаймыз. Жоғарыдағы граф $1$-төбеден 
+басталып, сол төбеде аяқталатын Гамильтон шынжырын қамтиды.
+% If a Hamiltonian path begins and ends at the same node,
+% it is called a \key{Hamiltonian circuit}.
+% The graph above also has an Hamiltonian circuit
+% that begins and ends at node 1:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,5) {$1$};
@@ -472,86 +570,132 @@ that begins and ends at node 1:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Existence}
+\subsubsection{Графта бар болуына тексеріс}
 
-No efficient method is known for testing if a graph
-contains a Hamiltonian path, and the problem is NP-hard.
-Still, in some special cases, we can be certain
-that a graph contains a Hamiltonian path.
+Графта Гамильтон жолы бар-жоғын тексеретін 
+тиімді алгоритм жоқ және тапсырма NP-қиын есеп саналады.
+Дегенмен кейбір ерекше жағдайларда графта Гамильтон жолы
+бар екеніне сенімді бола аламыз.
+% No efficient method is known for testing if a graph
+% contains a Hamiltonian path, and the problem is NP-hard.
+% Still, in some special cases, we can be certain
+% that a graph contains a Hamiltonian path.
 
-A simple observation is that if the graph is complete,
-i.e., there is an edge between all pairs of nodes,
-it also contains a Hamiltonian path.
-Also stronger results have been achieved:
+Оны байқаудың қарапайым жолы манау: егер граф толық болса, яғни барлық төбелердің арасында қыр болса, онда Гамильтон жолы бар. Одан басқа төмендегі тәсілдерді де қолдануға болады:
+% A simple observation is that if the graph is complete,
+% i.e., there is an edge between all pairs of nodes,
+% it also contains a Hamiltonian path.
+% Also stronger results have been achieved:
 
 \begin{itemize}
 \item
-\index{Dirac's theorem}
-\key{Dirac's theorem}: %\cite{dir52}
-If the degree of each node is at least $n/2$,
-the graph contains a Hamiltonian path.
+\index{Дирак теоремасы}
+\key{Дирак теоремасы} бойынша, %\cite{dir52}
+егер әр төбенің дәрежесі кем дегенде $n/2$ болса,
+графта Гамильтон жолы бар деп саналады.
 \item
-\index{Ore's theorem}
-\key{Ore's theorem}: %\cite{ore60}
-If the sum of degrees of each non-adjacent pair of nodes
-is at least $n$,
-the graph contains a Hamiltonian path.
+\index{Оре теоремасы}
+\key{Оре теоремасы} бойынша, %\cite{ore60}
+егер әр көрші емес жұп дәрежелерінің
+қосындысы кем дегенде $n$ болса,
+графта Гамильтон жолы бар деп саналады.
 \end{itemize}
+% \begin{itemize}
+% \item
+% \index{Dirac's theorem}
+% \key{Dirac's theorem}: %\cite{dir52}
+% If the degree of each node is at least $n/2$,
+% the graph contains a Hamiltonian path.
+% \item
+% \index{Ore's theorem}
+% \key{Ore's theorem}: %\cite{ore60}
+% If the sum of degrees of each non-adjacent pair of nodes
+% is at least $n$,
+% the graph contains a Hamiltonian path.
+% \end{itemize}
 
-A common property in these theorems and other results is
-that they guarantee the existence of a Hamiltonian path
-if the graph has \emph{a large number} of edges.
-This makes sense, because the more edges the graph contains,
-the more possibilities there is to construct a Hamiltonian path.
+Егер графта \emph{көп} қыр болса,
+олардың Гамильтон жолының бар екендігіне кепілдік беруі теоремалардың ортақ қасиетіне жатады.
+Бұл -- ақылға қонымды жайт, өйткені графтың қырлары неғұрлым көп болса, Гамильтон жолын салу мүмкіндігі де соғұрлым көбейе түседі.
+% A common property in these theorems and other results is
+% that they guarantee the existence of a Hamiltonian path
+% if the graph has \emph{a large number} of edges.
+% This makes sense, because the more edges the graph contains,
+% the more possibilities there is to construct a Hamiltonian path.
 
-\subsubsection{Construction}
+\subsubsection{Құрылысы}
 
-Since there is no efficient way to check if a Hamiltonian
-path exists, it is clear that there is also no method
-to efficiently construct the path, because otherwise
-we could just try to construct the path and see
-whether it exists.
+Гамильтон жолының бар-жоғын тексерудің тиімді әдісі 
+болмағандықтан, жолды тиімді құру әдісі де жоқ екені анық.
+Өйткені жолды салуға тырысу арқылы оның  
+бар-жоғын оңай тексеруге де болар еді.
+% Since there is no efficient way to check if a Hamiltonian
+% path exists, it is clear that there is also no method
+% to efficiently construct the path, because otherwise
+% we could just try to construct the path and see
+% whether it exists.
 
-A simple way to search for a Hamiltonian path is
-to use a backtracking algorithm that goes through all
-possible ways to construct the path.
-The time complexity of such an algorithm is at least $O(n!)$,
-because there are $n!$ different ways to choose the order of $n$ nodes.
+Гамильтон жолын іздеудің қарапайым жолы --
+Гамильтон жолын құратын барлық мүмкін жолдардан өтетін 
+қайта іздеу алгоритмін (backtracking) пайдалану. 
+Мұндай алгоритмнің уақытша күрделілігі кем дегенде 
+$O(n!)$ құрайды, себебі $n$ төбелерді $n!$ әртүрлі жолдармен
+өтуге болады.
+% A simple way to search for a Hamiltonian path is
+% to use a backtracking algorithm that goes through all
+% possible ways to construct the path.
+% The time complexity of such an algorithm is at least $O(n!)$,
+% because there are $n!$ different ways to choose the order of $n$ nodes.
 
-A more efficient solution is based on dynamic programming
-(see Chapter 10.5).
-The idea is to calculate values
-of a function $\texttt{possible}(S,x)$,
-where $S$ is a subset of nodes and $x$
-is one of the nodes.
-The function indicates whether there is a Hamiltonian path
-that visits the nodes of $S$ and ends at node $x$.
-It is possible to implement this solution in $O(2^n n^2)$ time.
+Бұдан да анағұрлым тиімді шешім динамикалық бағдарламалауға негізделеді 
+(10.5 тарауды еске түсіріңіз). Динамикалық бағдарламалаудың
+идеясы -- $\texttt{possible}(S,x)$ функциясының
+мәндерін есептеу, бұл жердегі $S$ -- ішжиын, ал $x$ -- ішжиындағы төбелердің бірі.
+Функция $S$ төбелеріне баратын және $x$ төбесінен аяқталатын 
+Гамильтон жолының бар-жоғын көрсетеді. 
+Бұл шешімді $O(2^n n^2)$ уақытында жүзеге асыруға болады.
+% A more efficient solution is based on dynamic programming
+% (see Chapter 10.5).
+% The idea is to calculate values
+% of a function $\texttt{possible}(S,x)$,
+% where $S$ is a subset of nodes and $x$
+% is one of the nodes.
+% The function indicates whether there is a Hamiltonian path
+% that visits the nodes of $S$ and ends at node $x$.
+% It is possible to implement this solution in $O(2^n n^2)$ time.
 
-\section{De Bruijn sequences}
+\section{Де Брёйн тізбегі}
 
-\index{De Bruijn sequence}
+\index{Де Брёйн тізбегі}
 
-A \key{De Bruijn sequence}
-is a string that contains
-every string of length $n$
-exactly once as a substring, for a fixed
-alphabet of $k$ characters.
-The length of such a string is 
-$k^n+n-1$ characters.
-For example, when $n=3$ and $k=2$,
-an example of a De Bruijn sequence is
+\key{Де Брёйн тізбегі} -- ұзындығы $n$ болатын әрбір жолды бір рет қамтитын, бекітілген $k$ таңбалы әліпбиден тұратын жол.
+
+Осы жолдың ұзындығы $k^n+n-1$ формуласына тең болады.
+Мысалы, $n=3$ және $k=2$ болған жағдайдағы Де Брёйн тізбегі:
+% is a string that contains
+% every string of length $n$
+% exactly once as a substring, for a fixed
+% alphabet of $k$ characters.
+% The length of such a string is 
+% $k^n+n-1$ characters.
+% For example, when $n=3$ and $k=2$,
+% an example of a De Bruijn sequence is
 \[0001011100.\]
-The substrings of this string are all
-combinations of three bits:
-000, 001, 010, 011, 100, 101, 110 and 111.
+Осы жолдың ішжолдары -- үш биттің барлық комбинациялары:
+% The substrings of this string are all
+% combinations of three bits:
+000, 001, 010, 011, 100, 101, 110 және 111.
 
-It turns out that each De Bruijn sequence
-corresponds to an Eulerian path in a graph.
-The idea is to construct a graph where
-each node contains a string of $n-1$ characters
-and each edge adds one character to the string.
-The following graph corresponds to the above scenario:
+Әрбір Де Брёйн тізбегі графтағы Эйлер жолына сәйкес келеді.
+Бұл жердегі идея әр төбесі ұзындығы $n-1$ таңбадан тұратын жолды
+қамтитын және әрбір қыр жолға бір таңба қосатын графты құрастыруға негізделеді. 
+Келесі граф негізгі идеяға сәйкес келеді:
+% It turns out that each De Bruijn sequence
+% corresponds to an Eulerian path in a graph.
+% The idea is to construct a graph where
+% each node contains a string of $n-1$ characters
+% and each edge adds one character to the string.
+% The following graph corresponds to the above scenario:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
@@ -573,27 +717,35 @@ The following graph corresponds to the above scenario:
 \end{tikzpicture}
 \end{center}
 
-An Eulerian path in this graph corresponds to a string
-that contains all strings of length $n$.
-The string contains the characters of the starting node
-and all characters of the edges.
-The starting node has $n-1$ characters
-and there are $k^n$ characters in the edges,
-so the length of the string is $k^n+n-1$.
+Графтағы Эйлер жолы ұзындығы $n$ болатын барлық жолдарды қамтиды.
+Ол бастапқы төбенің таңбаларынан және қырлардың барлық
+таңбаларынан тұрады. Бастапқы төбеде $n-1$ таңба, ал
+қырларда $k^n$ таңба бар. Сонда жолдың ұзындығы
+$k^n+n-1$ болады.
+% An Eulerian path in this graph corresponds to a string
+% that contains all strings of length $n$.
+% The string contains the characters of the starting node
+% and all characters of the edges.
+% The starting node has $n-1$ characters
+% and there are $k^n$ characters in the edges,
+% so the length of the string is $k^n+n-1$.
 
-\section{Knight's tours}
+\section{Ат сапары}
 
-\index{knight's tour}
+\index{ат сапары}
+\key{Шахмат атының бағдарғысы} -- ат жүрісінің $n \times n$ шахмат тақтасындағы шахмат ережелеріне сәйкес әр шаршыға тура бір рет барылатын тізбегі.
+Егер ат соңында бастапқы төбеге қайтып келсе, аттың сапарын 
+жабық сапар дейміз. Ал басқа жағдайда ашық сапар деп айтамыз.
+% \key{Ат сапары} деген a sequence of moves
+% of a knight on an $n \times n$ chessboard
+% following the rules of chess such that the knight
+% visits each square exactly once.
+% A knight's tour is called a \emph{closed} tour
+% if the knight finally returns to the starting square and
+% otherwise it is called an \emph{open} tour.
 
-A \key{knight's tour} is a sequence of moves
-of a knight on an $n \times n$ chessboard
-following the rules of chess such that the knight
-visits each square exactly once.
-A knight's tour is called a \emph{closed} tour
-if the knight finally returns to the starting square and
-otherwise it is called an \emph{open} tour.
-
-For example, here is an open knight's tour on a $5 \times 5$ board:
+Мысалы, $5 \times 5$ тақтада ашық ат сапары бар:
+% For example, here is an open knight's tour on a $5 \times 5$ board:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -626,34 +778,47 @@ For example, here is an open knight's tour on a $5 \times 5$ board:
 \end{tikzpicture}
 \end{center}
 
-A knight's tour corresponds to a Hamiltonian path in a graph
-whose nodes represent the squares of the board,
-and two nodes are connected with an edge if a knight
-can move between the squares according to the rules of chess.
+Аттың сапары графтағы Гамильтон жолына сәйкес құрылған. Графтағы төбелер
+тақтадағы шаршыларға сәйкес келеді. Ал ат бір төбеден екінші төбеге шахмат заңдары бойынша бара алса ғана, сол екі төбе арасында жол бар болмақ.
+% A knight's tour corresponds to a Hamiltonian path in a graph
+% whose nodes represent the squares of the board,
+% and two nodes are connected with an edge if a knight
+% can move between the squares according to the rules of chess.
 
-A natural way to construct a knight's tour is to use backtracking.
-The search can be made more efficient by using
-\emph{heuristics} that attempt to guide the knight so that
-a complete tour will be found quickly.
+Аттың сапарын құрудын қарапайым жолы -- қайта іздеу алгоритмін қолдану.
+% A natural way to construct a knight's tour is to use backtracking.
+Аттың толық жолды тезірек табуы үшін бағдар беруге тырысатын эвристикалық тәсілдерді қолану арқылы да ізденісті одан да тиімді етуге болады.
 
-\subsubsection{Warnsdorf's rule}
+% The search can be made more efficient by using
+% \emph{heuristics} that attempt to guide the knight so that
+% a complete tour will be found quickly.
 
-\index{heuristic}
-\index{Warnsdorf's rule}
+\subsubsection{Уарнсдорф ережесі}
 
-\key{Warnsdorf's rule} is a simple and effective heuristic
-for finding a knight's tour\footnote{This heuristic was proposed
-in Warnsdorf's book \cite{war23} in 1823. There are
-also polynomial algorithms for finding knight's tours
-\cite{par97}, but they are more complicated.}.
-Using the rule, it is possible to efficiently construct a tour
-even on a large board.
-The idea is to always move the knight so that it ends up
-in a square where the number of possible moves is as
-\emph{small} as possible.
+\index{эвристика}
+\index{Уарнсдорф ережесі}
 
-For example, in the following situation, there are five
-possible squares to which the knight can move (squares $a \ldots e$):
+\key{Уарнсдорф ережесі} -- аттың сапарын табатын
+қарапайым және тиімді эвристика.\footnote{Эвристика Уарнсдорфтың кітабында \cite{war23} 1823 жылы жазылған. Сондай-ақ ат сапарын табудың полиномдық алгоритмдері де бар \cite{par97}, 
+бірақ олар қиынырақ.}.
+Осы ережені қолдана отырып, ат сапарын үлкен тақтайда
+да тиімді құрастыруға болады.
+Мұндағы идея атты әрдайым әлі жүрілмеген шаршылардың минималды санына баруға мүмкіндік беретін шаршыға қоюға негізделеді.
+% is a simple and effective heuristic
+% for finding a knight's tour\footnote{This heuristic was proposed
+% in Warnsdorf's book \cite{war23} in 1823. There are
+% also polynomial algorithms for finding knight's tours
+% \cite{par97}, but they are more complicated.}.
+% Using the rule, it is possible to efficiently construct a tour
+% even on a large board.
+% The idea is to always move the knight so that it ends up
+% in a square where the number of possible moves is as
+% \emph{small} as possible.
+
+Мысалы, төмендегі жағдайда атты қозғауға болатын бес шаршы бар 
+($a \ldots e$ шыршалары):
+% For example, in the following situation, there are five
+% possible squares to which the knight can move (squares $a \ldots e$):
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (5,5);
@@ -666,9 +831,12 @@ possible squares to which the knight can move (squares $a \ldots e$):
 \node at (3.5,1.5) {$d$};
 \end{tikzpicture}
 \end{center}
-In this situation, Warnsdorf's rule moves the knight to square $a$,
-because after this choice, there is only a single possible move.
-The other choices would move the knight to squares where
-there would be three moves available.
+Бұл жағдайда Уарнсдорф ережесі атты $a$-шаршысына қозғайды. Себебі бұл жүрісті 
+таңдағаннан кейін, тек бір ғана қозғалыс жасау мүмкіндігі қалады.
+Ал басқаша таңдау жасағанда, ат үш рет жүріс жасау мүмкіндігін беретін шаршыға түсер еді.
+% In this situation, Warnsdorf's rule moves the knight to square $a$,
+% because after this choice, there is only a single possible move.
+% The other choices would move the knight to squares where
+% there would be three moves available.
 
 

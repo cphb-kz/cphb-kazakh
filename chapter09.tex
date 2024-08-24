@@ -1,23 +1,22 @@
-\chapter{Range queries}
+\chapter{Аралық сұратымдар}
 
-\index{range query}
-\index{sum query}
-\index{minimum query}
-\index{maximum query}
+\index{аралық сұратымдар}
+\index{қосынды сұратымы}
+\index{минимум сұратымы}
+\index{максимум сұратымы}
 
-In this chapter, we discuss data structures
-that allow us to efficiently process range queries.
-In a \key{range query},
-our task is to calculate a value
-based on a subarray of an array.
-Typical range queries are:
+Бұл тарауда аралық сұратымдарды тиімді өңдейтін
+деректер құрылымдары жайлы сөз қозғайтын боламыз.
+Әдетте \key{аралық сұратымдар} есепте
+ішжиымдарға негізделген мәндерді табуға арналады.
+Қарапайым аралық сұратымдар:
 \begin{itemize}
-\item $\texttt{sum}_q(a,b)$: calculate the sum of values in range $[a,b]$
-\item $\texttt{min}_q(a,b)$: find the minimum value in range $[a,b]$
-\item $\texttt{max}_q(a,b)$: find the maximum value in range $[a,b]$
+\item $\texttt{sum}_q(a,b)$: $[a,b]$ аралығындағы сандардың қосындысын есептеу
+\item $\texttt{min}_q(a,b)$: $[a,b]$ аралығындағы сандардың минимумын есептеу
+\item $\texttt{max}_q(a,b)$: $[a,b]$ аралығындағы сандардың максимумын есептеу
 \end{itemize}
 
-For example, consider the range $[3,6]$ in the following array:
+Мысалы, төмендегі жиымдағы $[3,6]$ арасын қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (3,0) rectangle (7,1);
@@ -43,13 +42,12 @@ For example, consider the range $[3,6]$ in the following array:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-In this case, $\texttt{sum}_q(3,6)=14$,
-$\texttt{min}_q(3,6)=1$ and $\texttt{max}_q(3,6)=6$.
+Қарастырылған жағдайда $\texttt{sum}_q(3,6)=14$,
+$\texttt{min}_q(3,6)=1$ және $\texttt{max}_q(3,6)=6$.
 
-A simple way to process range queries is to use
-a loop that goes through all array values in the range.
-For example, the following function can be
-used to process sum queries on an array:
+Бұл аралық сұратымды өңдеудің ең қарапайым жолы --
+аралықтың барлық элементтерін өтіп шығатын циклды қолдану.
+Мысалы, төмендегі функция қосынды сұратымдарын өңдейді:
 
 \begin{lstlisting}
 int sum(int a, int b) {
@@ -61,36 +59,33 @@ int sum(int a, int b) {
 }
 \end{lstlisting}
 
-This function works in $O(n)$ time,
-where $n$ is the size of the array.
-Thus, we can process $q$ queries in $O(nq)$
-time using the function.
-However, if both $n$ and $q$ are large, this approach
-is slow. Fortunately, it turns out that there are
-ways to process range queries much more efficiently.
+Функция $O(n)$ уақытта жұмыс жасайды,
+мұндағы $n$ -- жиымның өлшемі. Демек $q$ сұратымды
+$O(nq)$ уақытта өңдейміз. Егер 
+$n$ мен $q$ екеуі де үлкен болса, бұл 
+тәсіл біз үшін баяу. Бақытымызға орай, аралық сұратымдарды
+әлдеқайда тезірек өңдеу жолдары да бар. 
 
-\section{Static array queries}
+\section{Статикалық жиым сұратымдары}
 
-We first focus on a situation where
-the array is \emph{static}, i.e.,
-the array values are never updated between the queries.
-In this case, it suffices to construct
-a static data structure that tells us
-the answer for any possible query.
+Алдымен жиым \emph{статикалық} болатын (яғни жиымның 
+мәндері сұратым араларында өзгермейтін) жағдайды
+қарастырайық. Бұл жағдайда барлық сұратымдарға жауап беретін 
+статикалық деректер құрылымын құрыстыру жеткілікті.
 
-\subsubsection{Sum queries}
+\subsubsection{Қосынды сұратымдары}
 
-\index{prefix sum array}
+\index{префиксті қосындылар жиымы}
 
-We can easily process
-sum queries on a static array
-by constructing a \key{prefix sum array}.
-Each value in the prefix sum array equals
-the sum of values in the original array up to that position,
-i.e., the value at position $k$ is $\texttt{sum}_q(0,k)$.
-The prefix sum array can be constructed in $O(n)$ time.
+\key{Префиксті қосындылар жиымын} құрыстыру арқылы
+біз статикалық жиымның 
+қосынды сұратымдарын жеңіл есептей аламыз.
+Префиксті қосындылар жиымындағы әр мән 
+негізгі жиымдағы алғашқы элементтен бастап сол позицияға дейінгі сандардың қосындысына тең болады,
+яғни $k$ позициясындағы мән $\texttt{sum}_q(0,k)$-ға тең. 
+Префиксті қосындылар жиымы $O(n)$ уақытта құрастырылады.
 
-For example, consider the following array:
+Мысалы төмендегі жиымды қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 %\fill[color=lightgray] (3,0) rectangle (7,1);
@@ -116,7 +111,7 @@ For example, consider the following array:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-The corresponding prefix sum array is as follows:
+Оған сәйкес префиксті қосындылар жиымы:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 %\fill[color=lightgray] (3,0) rectangle (7,1);
@@ -143,15 +138,15 @@ The corresponding prefix sum array is as follows:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-Since the prefix sum array contains all values
-of $\texttt{sum}_q(0,k)$,
-we can calculate any value of
-$\texttt{sum}_q(a,b)$ in $O(1)$ time as follows:
+Жиым $\texttt{sum}_q(0,k)$-ның 
+барлық мәндерін қамтығандықтан,
+біз қалаған $\texttt{sum}_q(a,b)$ мәнін $O(1)$ 
+уақытта төмендегідей жолмен таба аламыз:
 \[ \texttt{sum}_q(a,b) = \texttt{sum}_q(0,b) - \texttt{sum}_q(0,a-1)\]
-By defining $\texttt{sum}_q(0,-1)=0$,
-the above formula also holds when $a=0$.
+$\texttt{sum}_q(0,-1)=0$ деп санасақ, 
+$a=0$ болған жағдайда да формула жұмыс жасай береді. 
 
-For example, consider the range $[3,6]$:
+Мысалы, $[3,6]$ аралығын қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (3,0) rectangle (7,1);
@@ -177,9 +172,9 @@ For example, consider the range $[3,6]$:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-In this case $\texttt{sum}_q(3,6)=8+6+1+4=19$.
-This sum can be calculated from
-two values of the prefix sum array:
+Бұл жағдайда $\texttt{sum}_q(3,6)=8+6+1+4=19$.
+Қосындыны префиксті қосыныдылар жиымының екі мәні
+арқылы есептей аламыз:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (2,0) rectangle (3,1);
@@ -206,19 +201,18 @@ two values of the prefix sum array:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-Thus, $\texttt{sum}_q(3,6)=\texttt{sum}_q(0,6)-\texttt{sum}_q(0,2)=27-8=19$.
+Осылайша $\texttt{sum}_q(3,6)=\texttt{sum}_q(0,6)-\texttt{sum}_q(0,2)=27-8=19$.
 
-It is also possible to generalize this idea
-to higher dimensions.
-For example, we can construct a two-dimensional
-prefix sum array that can be used to calculate
-the sum of any rectangular subarray in $O(1)$ time.
-Each sum in such an array corresponds to
-a subarray
-that begins at the upper-left corner of the array.
+Бұл идеяны әрі қарай көп өлшемдерге 
+жалпылауға болады. Мысалы, екі өлшемді 
+префиксті қосындылар жиымын құрастырып, 
+төртбұрыш ішжиымдардың қосындыларын $O(1)$ 
+уақытта таба аламыз. Жиымдағы әр қосынды
+жоғарғы сол жақ бұрыштан басталатын ішжиымға
+есептеледі. 
 
 \begin{samepage}
-The following picture illustrates the idea:
+Төмендегі сурет аталған идеяны бейнелейді:
 \begin{center}
 \begin{tikzpicture}[scale=0.54]
 \draw[fill=lightgray] (3,2) rectangle (7,5);
@@ -231,37 +225,32 @@ The following picture illustrates the idea:
 \end{center}
 \end{samepage}
 
-The sum of the gray subarray can be calculated
-using the formula
-\[S(A) - S(B) - S(C) + S(D),\]
-where $S(X)$ denotes the sum of values
-in a rectangular
-subarray from the upper-left corner
-to the position of $X$.
+Сұр түспен белгіленіп тұрған ішжиымның қосындысын
+\[S(A) - S(B) - S(C) + S(D)\]
+формуласы арқылы табуға болады,
+мұндағы $S(X)$ үстіңгі сол жақ бұрыштан басталып,
+$X$ позициясында аяқталатын ішжиым мәндерінің қосындысы. 
 
-\subsubsection{Minimum queries}
+\subsubsection{Минимум сұратымдары}
 
-\index{sparse table}
+\index{сиретілген кесте}
 
-Minimum queries are more difficult to process
-than sum queries.
-Still, there is a quite simple 
-$O(n \log n)$ time preprocessing
-method after which we can answer any minimum
-query in $O(1)$ time\footnote{This technique
-was introduced in \cite{ben00} and sometimes
-called the \key{sparse table} method.
-There are also more sophisticated techniques \cite{fis06} where
-the preprocessing time is only $O(n)$, but such algorithms
-are not needed in competitive programming.}.
-Note that since minimum and maximum queries can
-be processed similarly,
-we can focus on minimum queries.
+Минимум сұратымдарын өңдеу қосынды сұратымдарды 
+өңдеуден қиынырақ. Дегенмен $O(n \log n)$ уақыт ішінде
+алдын ала өңдеу арқылы кез келген минимум сұратымдарын $O(1)$
+уақытта таба аламыз\footnote{Бұл техника алғаш 
+\cite{ben00} көрсетілді және кейде 
+\key{сиретілген кесте} әдісі деп аталады.
+Күрделі техникалар \cite{fis06} арқылы алдын 
+ала өңдеу уақыты $O(n)$ болатын алгоритмдер де бар, бірақ олар
+спорттық бағдарламалауда қажетсіз.}.
+Максимум мен минимум сұратымдары бірдей өңделетіндіктен,
+минимум сұратымдарын ғана қарастырайық.
 
-The idea is to precalculate all values of
-$\textrm{min}_q(a,b)$ where
-$b-a+1$ (the length of the range) is a power of two.
-For example, for the array
+Идеясы барлық $\textrm{min}_q(a,b)$ мәндерін 
+алдын ала есептеуге негізделеді. Мұндағы $b-a+1$ (аралықтың ұзындығы) 
+екінің дәрежесі. 
+Мысалы, төмендегі жиым үшін
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -287,7 +276,7 @@ For example, for the array
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-the following values are calculated:
+келесі мәндер есептеледі:
 
 \begin{center}
 \begin{tabular}{ccc}
@@ -338,24 +327,25 @@ $a$ & $b$ & $\texttt{min}_q(a,b)$ \\
 \end{tabular}
 \end{center}
 
-The number of precalculated values is $O(n \log n)$,
-because there are $O(\log n)$ range lengths
-that are powers of two.
-The values can be calculated efficiently
-using the recursive formula
+Алдын ала есептелген мәндердің саны $O(n \log n)$,
+себебі ұзындығы екінің дәрежесі болатын аралықтардың саны $O(\log n)$.
+Мәндер келесі рекурсиялық формула арқылы тиімді 
+есептеледі:
 \[\texttt{min}_q(a,b) = \min(\texttt{min}_q(a,a+w-1),\texttt{min}_q(a+w,b)),\]
-where $b-a+1$ is a power of two and $w=(b-a+1)/2$.
-Calculating all those values takes $O(n \log n)$ time.
+мұндағы $b-a+1$ екінің дәрежесі және $w=(b-a+1)/2$.
+Барлық мәндерді есептеу $O(n \log n)$ уақыт алады.
 
-After this, any value of $\texttt{min}_q(a,b)$ can be calculated
-in $O(1)$ time as a minimum of two precalculated values.
-Let $k$ be the largest power of two that does not exceed $b-a+1$.
-We can calculate the value of $\texttt{min}_q(a,b)$ using the formula
+Осыдан кейін кез келген $\texttt{min}_q(a,b)$ мәнін
+екі алдын ала есептелген мән арқылы $O(1)$ уақытта 
+есептей аламыз. $k$ деп $b-a+1$-ден аспайтын 
+екінің ең үлкен дәрежесін алайық.
+$\texttt{min}_q(a,b)$ мәнін төмендегі формула арқылы есептеуге болады:
 \[\texttt{min}_q(a,b) = \min(\texttt{min}_q(a,a+k-1),\texttt{min}_q(b-k+1,b)).\]
-In the above formula, the range $[a,b]$ is represented
-as the union of the ranges $[a,a+k-1]$ and $[b-k+1,b]$, both of length $k$.
+Формулада $[a,b]$ аралығы ұзындықтары $k$ болатын 
+$[a,a+k-1]$ және $[b-k+1,b]$ аралықтарының бірігуі деп көрсетілген.
 
-As an example, consider the range $[1,6]$:
+
+Мысалы, $[1,6]$ аралығын қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (1,0) rectangle (7,1);
@@ -381,11 +371,10 @@ As an example, consider the range $[1,6]$:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-The length of the range is 6,
-and the largest power of two that does
-not exceed 6 is 4.
-Thus the range $[1,6]$ is
-the union of the ranges $[1,4]$ and $[3,6]$:
+Аралықтың ұзындығы -- 6, ал
+6-дан аспайтын екінің ең үлкен дәрежесі -- 4.
+Ендеше, $[1,6]$ аралығы -- $[1,4]$ аралығы мен
+$[3,6]$ аралығының бірігуінен тұрады.
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (1,0) rectangle (5,1);
@@ -437,46 +426,43 @@ the union of the ranges $[1,4]$ and $[3,6]$:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-Since $\texttt{min}_q(1,4)=3$ and $\texttt{min}_q(3,6)=1$,
-we conclude that $\texttt{min}_q(1,6)=1$.
+$\texttt{min}_q(1,4)=3$ және $\texttt{min}_q(3,6)=1$ болғандықтан,
+$\texttt{min}_q(1,6)=1$ деп тұжырымдаймыз.
 
-\section{Binary indexed tree}
+\section{Бинарлы индекстелген дарақ}
 
-\index{binary indexed tree}
-\index{Fenwick tree}
+\index{бинарлы индекстелген дарақ}
+\index{Фенвик дарағы}
 
-A \key{binary indexed tree} or a \key{Fenwick tree}\footnote{The
-binary indexed tree structure was presented by P. M. Fenwick in 1994 \cite{fen94}.}
-can be seen as a dynamic variant of a prefix sum array.
-It supports two $O(\log n)$ time operations on an array:
-processing a range sum query and updating a value.
+\key{Бинарлы индекстелген дарақ} немесе \key{Фенвик дарағын}
+\footnote{Бинарлы индекстелген дарақты 1994 жылы П.М.Фенвик ұсынды \cite{fen94}.} префиксті қосындының динамикалық нұсқасы деп
+қарастыруға болады. Ол жиымға қатысты екі операцияны -- аралық 
+қосындыны табу мен мәнді өзгертуді $O(\log n)$ уақытта орындайды.
 
-The advantage of a binary indexed tree is
-that it allows us to efficiently update
-array values between sum queries.
-This would not be possible using a prefix sum array,
-because after each update, it would be necessary to build the
-whole prefix sum array again in $O(n)$ time.
+Бинарлы индекстелген дарақтың артықшылығы -- 
+аралық қосындылармен қатар жиымдағы мәндерді тиімді өзгертуінде.
+Бұл қасиет префиксті қосындылар жиымында жоқ.  
+Әр жаңарту операциясы префиксті қосындылар жиымын басынан бастап
+қайта құрастыратындықтан, ол $O(n)$ уақыт алады. 
 
-\subsubsection{Structure}
+\subsubsection{Құрылымы}
 
-Even if the name of the structure is a binary indexed \emph{tree},
-it is usually represented as an array.
-In this section we assume that all arrays are one-indexed,
-because it makes the implementation easier.
+Құрылымның аты бинарлы индекстелген \emph{дарақ} болғанымен, 
+әдетте ол жиым ретінде көрсетіледі. Бұл бөлімде жиымды
+бірлік индекстелген деп қарастырамыз, себебі ол кодтың жазылу барысын
+жеңілдетеді. 
 
-Let $p(k)$ denote the largest power of two that
-divides $k$.
-We store a binary indexed tree as an array \texttt{tree}
-such that
-\[ \texttt{tree}[k] = \texttt{sum}_q(k-p(k)+1,k),\]
-i.e., each position $k$ contains the sum of values
-in a range of the original array whose length is $p(k)$
-and that ends at position $k$.
-For example, since $p(6)=2$, $\texttt{tree}[6]$
-contains the value of $\texttt{sum}_q(5,6)$.
+$p(k)$ деп $k$-ні бөле алатын ең үлкен екінің дәрежесін
+белгілейік. Бинарлы индекстелген дарақты 
+\[ \texttt{tree}[k] = \texttt{sum}_q(k-p(k)+1,k)\]
+болатындай \texttt{tree} жиымында сақтаймыз,
+яғни әр $k$ позициясында берілген жиымның ұзындығы
+$p(k)$ болатын және $k$ позициясында бітетін аралықтың
+қосындысын сақтаймыз. 
+Мысалы, $p(6)=2$ болғандықтан $\texttt{tree}[6]$
+$\texttt{sum}_q(5,6)$ мәнін сақтайды. 
 
-For example, consider the following array:
+Өрнек ретінде төмендегі жиымды қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -502,7 +488,7 @@ For example, consider the following array:
 \end{tikzpicture}
 \end{center}
 
-The corresponding binary indexed tree is as follows:
+Осыған сәйкес бинарлы индекстелген дарақ:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -528,9 +514,9 @@ The corresponding binary indexed tree is as follows:
 \end{tikzpicture}
 \end{center}
 
-The following picture shows more clearly
-how each value in the binary indexed tree
-corresponds to a range in the original array:
+Төмендегі сурет бинарлы индекстелген дарақтың
+әр мәнінің әуелгі жиымдағы қандай аралыққа 
+сәйкестігін анық көрсетеді:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -575,14 +561,14 @@ corresponds to a range in the original array:
 \end{tikzpicture}
 \end{center}
 
-Using a binary indexed tree,
-any value of $\texttt{sum}_q(1,k)$
-can be calculated in $O(\log n)$ time,
-because a range $[1,k]$ can always be divided into
-$O(\log n)$ ranges whose sums are stored in the tree.
+Қарастырылған дарақ арқылы
+қалаған $\texttt{sum}_q(1,k)$ мәнін 
+$O(\log n)$ уақытта есептей аламыз.
+Себебі $[1,k]$ аралығын әрдайым 
+қосындылары дарақта сақталатын $O(\log n)$ аралыққа бөлуге болады. 
 
-For example, the range $[1,7]$ consists of
-the following ranges:
+Мысалы, $[1,7]$ аралығы төмендегідей аралықтарға 
+бөлінеді:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -625,21 +611,20 @@ the following ranges:
 \draw (0,-4) -- (8,-4) -- (8,-4.5) -- (0,-4.5) -- (0,-4);
 \end{tikzpicture}
 \end{center}
-Thus, we can calculate the corresponding sum as follows:
+Демек біз қосындыны төменгідей жолмен есептей аламыз:
 \[\texttt{sum}_q(1,7)=\texttt{sum}_q(1,4)+\texttt{sum}_q(5,6)+\texttt{sum}_q(7,7)=16+7+4=27\]
 
-To calculate the value of $\texttt{sum}_q(a,b)$ where $a>1$,
-we can use the same trick that we used with prefix sum arrays:
+$a>1$ болатын $\texttt{sum}_q(a,b)$ мәнін есептеу үшін 
+префиксті қосындылар жиымында қолданған амалды бұл жерде де қолдануға
+болады:
 \[ \texttt{sum}_q(a,b) = \texttt{sum}_q(1,b) - \texttt{sum}_q(1,a-1).\]
-Since we can calculate both $\texttt{sum}_q(1,b)$
-and $\texttt{sum}_q(1,a-1)$ in $O(\log n)$ time,
-the total time complexity is $O(\log n)$.
+$\texttt{sum}_q(1,b)$ және $\texttt{sum}_q(1,a-1)$
+мәндерін $O(\log n)$ уақытта есептей алғандықтан, 
+қорытынды уақытша күрделілігі $O(\log n)$ болады. 
 
-Then, after updating a value in the original array,
-several values in the binary indexed tree
-should be updated.
-For example, if the value at position 3 changes,
-the sums of the following ranges change:
+Берілген жиымдағы мәннің өзгеруіне байланысты бинарлы индекстелген 
+дарақта да бірнеше мәндер өзгеруі тиіс. Мысалы, 3-позициядағы
+мән өзгерсе, төмендегі аралықтардың қосындылары да өзгереді:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -683,19 +668,21 @@ the sums of the following ranges change:
 \end{tikzpicture}
 \end{center}
 
-Since each array element belongs to $O(\log n)$
-ranges in the binary indexed tree,
-it suffices to update $O(\log n)$ values in the tree.
+Жиымдағы әр элемент бинарлы индекстелген 
+дарақтағы $O(\log n)$ аралығының құрамында
+болғандықтан, дарақтағы $O(\log n)$ мәнін өзгерткен
+жеткілікті. 
 
-\subsubsection{Implementation}
+\subsubsection{Кодтың жазылуы}
 
-The operations of a binary indexed tree can be
-efficiently implemented using bit operations.
-The key fact needed is that we can
-calculate any value of $p(k)$ using the formula
+Бинарлы индекстелген дарақ операцияларын 
+биттік операциялар арқылы тиімді жүзеге
+асыра аламыз. Бұл жердегі маңызды факт --
+әр $p(k)$ мәнін 
 \[p(k) = k \& -k.\]
+формуласы арқылы есептеу. 
 
-The following function calculates the value of $\texttt{sum}_q(1,k)$:
+Төмендегі функция $\texttt{sum}_q(1,k)$ мәнін есептейді:
 \begin{lstlisting}
 int sum(int k) {
     int s = 0;
@@ -707,9 +694,8 @@ int sum(int k) {
 }
 \end{lstlisting}
 
-The following function increases the
-array value at position $k$ by $x$
-($x$ can be positive or negative):
+Ал келесі функция жиымның $k$ позициясындағы
+мәніне $x$-ті қосады ($x$ оң немесе теріс сан бола алады): 
 \begin{lstlisting}
 void add(int k, int x) {
     while (k <= n) {
@@ -719,53 +705,45 @@ void add(int k, int x) {
 }
 \end{lstlisting}
 
-The time complexity of both the functions is
-$O(\log n)$, because the functions access $O(\log n)$
-values in the binary indexed tree, and each move
-to the next position takes $O(1)$ time.
+Екі функцияның уақытша күрделілігі -- $O(\log n)$, 
+өйткені функциялар бинарлы индекстелген 
+дарақтағы $O(\log n)$ мәнді қарап, әр 
+келесі позицияға өту үшін $O(1)$ уақыт жұмсайды. 
 
-\section{Segment tree}
+\section{Кесінділер дарағы}
 
-\index{segment tree}
+\index{кесінділер дарағы}
 
-A \key{segment tree}\footnote{The bottom-up-implementation in this chapter corresponds to
-that in \cite{sta06}. Similar structures were used
-in late 1970's to solve geometric problems \cite{ben80}.} is a data structure
-that supports two operations:
-processing a range query and
-updating an array value.
-Segment trees can support
-sum queries, minimum and maximum queries and many other
-queries so that both operations work in $O(\log n)$ time.
+\key{Кесінділер дарағы}\footnote{Бөлімдегі төменнен жоғарыға қарай код жазылуы \cite{sta06}-ге сәйкес келеді.  Ұқсас құрылымдар 1970 жылдардың аяғында геометриялық есептерді шешу үшін қолданылған \cite{ben80}.} ––
+екі түрлі операцияны, атап айтқанда
+аралық сұратымдарды өңдеу және жиымдағы мәнді жаңарту операцияларын қолдайтын деректер құрылымы. 
+Кесінділер дарағы қосындыны табу, минимум мен максимумды анықтау және басқа да сұратымдарға  $O(\log n)$ уақытта жауап бере алады.
 
-Compared to a binary indexed tree,
-the advantage of a segment tree is that it is
-a more general data structure.
-While binary indexed trees only support
-sum queries\footnote{In fact, using \emph{two} binary
-indexed trees it is possible to support minimum queries \cite{dim15},
-but this is more complicated than to use a segment tree.},
-segment trees also support other queries.
-On the other hand, a segment tree requires more
-memory and is a bit more difficult to implement.
+Бинарлы индекстелген дарақпен салыстырғанда кесінділер дарағының артықшылығы -- жалпы деректер құрылымы болуында. Бинарлы индекстелген 
+дарақ тек қосынды сұратымдарын қолдаса\footnote{Шын мәнінде
+\emph{екі} бинарлы индекстелген дарақ арқылы 
+минимум сұратымдарын қолдауға болады \cite{dim15}, бірақ
+бұл кесінділер дарағына қарағанда әлдеқайда қиынырақ.}, 
+кесінділер дарағы өзге сұратымдарды да қолдайды. 
+Есесіне, кесінділер дарағы көп жадыны алады 
+және оны кодта жазу сәл қиынырақ болады. 
 
-\subsubsection{Structure}
+\subsubsection{Құрылымы}
 
-A segment tree is a binary tree
-such that the nodes on the bottom level of the tree
-correspond to the array elements,
-and the other nodes
-contain information needed for processing range queries.
+Кесінділер дарағы -- ең төменгі деңгейде орналасқан төбелері 
+жиымның элементтеріне сәйкес келетін және
+басқа төбелері аралық сұратымдарды өңдеуге қажет
+ақпаратты сақтайтын бинарлы дарақ. 
 
-In this section, we assume that the size
-of the array is a power of two and zero-based
-indexing is used, because it is convenient to build
-a segment tree for such an array.
-If the size of the array is not a power of two,
-we can always append extra elements to it.
+Бұл бөлімде біз жиымның өлшемі екінің дәрежесіне тең 
+және жиым нөлдік индекстелген жағдайды қарастырамыз.
+Өйткені мұндай жиым үшін кесінділер дарағын құрастыру
+оңайырақ. Егер жиымның өлшемі 
+екінің дәрежесі болмаса,
+онда біз әрдайым қосымша элементтер қоса аламыз.
 
-We will first discuss segment trees that support sum queries.
-As an example, consider the following array:
+Алдымен қосынды аралық сұратымдарын қолдайтын кесінділер
+дарағын қарастырайық. Өрнек ретінде төмендегі жиымды алайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -790,7 +768,7 @@ As an example, consider the following array:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-The corresponding segment tree is as follows:
+Ол үшін құрылған кесінділер дарағы:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -830,18 +808,18 @@ The corresponding segment tree is as follows:
 \end{tikzpicture}
 \end{center}
 
-Each internal tree node
-corresponds to an array range
-whose size is a power of two.
-In the above tree, the value of each internal
-node is the sum of the corresponding array values,
-and it can be calculated as the sum of
-the values of its left and right child node.
+Дарақтағы әрбір ішкі төбенің 
+өлшемі -- екінің дәрежесі болатын жиымға
+пара-пар. Келтірілген дарақтағы ішкі 
+төбелердің мәні -- сәйкес келетін 
+жиым элементтерінің қосындысы.
+Олар сол және оң жақтағы
+ұл төбелердің қосындысына тең болады.
 
-It turns out that any range $[a,b]$
-can be divided into $O(\log n)$ ranges
-whose values are stored in tree nodes.
-For example, consider the range [2,7]:
+$[a,b]$ аралығының кез келген 
+мәндері дарақтағы төбелерде сақталған
+$O(\log n)$ аралықтарға бөлінеді екен.
+Мысалы, [2,7] аралығын қарастырайық:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=gray!50] (2,0) rectangle (8,1);
@@ -867,9 +845,10 @@ For example, consider the range [2,7]:
 \node at (7.5,1.4) {$7$};
 \end{tikzpicture}
 \end{center}
-Here $\texttt{sum}_q(2,7)=6+3+2+7+2+6=26$.
-In this case, the following two tree nodes
-correspond to the range:
+Бұл жерде $\texttt{sum}_q(2,7)=6+3+2+7+2+6=26$.
+Біздің жағдайда төменде берілген
+дарақтағы екі төбе аралыққа сәйкес
+келеді:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -908,24 +887,22 @@ correspond to the range:
 \path[draw,thick,-] (m) -- (j);
 \end{tikzpicture}
 \end{center}
-Thus, another way to calculate the sum is $9+17=26$.
+Осылайша, қосындыны есептеудің тағы бір жолы -- $9+17=26$ болып шығады.
 
-When the sum is calculated using nodes
-located as high as possible in the tree,
-at most two nodes on each level
-of the tree are needed.
-Hence, the total number of nodes
-is $O(\log n)$.
+Қосындыны мүмкіндігінше ең жоғарғы төбелер
+арқылы есептейтін болсақ, дарақтағы 
+әр деңгейде ең көбі екі төбе қажет болады. Демек
+жалпы төбелер саны -- $O(\log n)$.
 
-After an array update,
-we should update all nodes
-whose value depends on the updated value.
-This can be done by traversing the path
-from the updated array element to the top node
-and updating the nodes along the path.
+Жиымды жаңартқаннан кейін 
+өзгерген мәнге тәуелді 
+барлық төбелерді жаңартуымыз қажет.
+Мұны өзгерген жиым элементінен бастап
+ең жоғарғы төбеге дейінгі жолмен жүріп, 
+жолдағы төбелерді өзгерту арқылы жүзеге асырамыз. 
 
-The following picture shows which tree nodes
-change if the array value 7 changes:
+Төмендегі сурет 7 мәні өзгерсе, дарақтағы 
+қандай төбелер өзгеретінін көрсетеді:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -967,25 +944,26 @@ change if the array value 7 changes:
 \end{tikzpicture}
 \end{center}
 
-The path from bottom to top
-always consists of $O(\log n)$ nodes,
-so each update changes $O(\log n)$ nodes in the tree.
+Төменнен жоғарыға дейінгі жол
+әрдайым $O(\log n)$ төбеден тұрады, 
+сондықтан әр жаңарту дарақтағы 
+$O(\log n)$ төбені жаңартады. 
 
-\subsubsection{Implementation}
+\subsubsection{Кодтың жазылуы}
 
-We store a segment tree as an array
-of $2n$ elements where $n$ is the size of
-the original array and a power of two.
-The tree nodes are stored from top to bottom:
-$\texttt{tree}[1]$ is the top node,
-$\texttt{tree}[2]$ and $\texttt{tree}[3]$
-are its children, and so on.
-Finally, the values from $\texttt{tree}[n]$
-to $\texttt{tree}[2n-1]$ correspond to
-the values of the original array
-on the bottom level of the tree.
+Біз кесінділер дарағын $2n$ элементтен 
+тұратын жиымда сақтайтын боламыз, 
+мұндағы $n$ берілген жиымның өлшемі және ол
+екінің дәрежесіне тең. Дарақтың төбелері 
+жоғарыдан төменге қарай сақталады. Мұндағы
+$\texttt{tree}[1]$ --ң жоғарғы төбе, 
+$\texttt{tree}[2]$ және $\texttt{tree}[3]$ --
+оның ұлдары болып жалғаса береді. Соңында $\texttt{tree}[n]$ 
+мен $\texttt{tree}[2n-1]$ аралығында орналасқан
+дарақтың төменгі деңгейіндегі мәндер --
+берілген жиым мәндеріне сәйкес келеді.
 
-For example, the segment tree
+Мысалы, төмендегі кесінділер дарағы
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -1024,7 +1002,7 @@ For example, the segment tree
 \path[draw,thick,-] (m) -- (j);
 \end{tikzpicture}
 \end{center}
-is stored as follows:
+төмендегі үлгіде сақталады:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (15,1);
@@ -1063,16 +1041,16 @@ is stored as follows:
 \node at (14.5,1.4) {$15$};
 \end{tikzpicture}
 \end{center}
-Using this representation,
-the parent of $\texttt{tree}[k]$
-is $\texttt{tree}[\lfloor k/2 \rfloor]$,
-and its children are $\texttt{tree}[2k]$
-and $\texttt{tree}[2k+1]$.
-Note that this implies that the position of a node
-is even if it is a left child and odd if it is a right child.
+Осы көріністі қолдана отырып,
+$\texttt{tree}[k]$-ның әкесі 
+$\texttt{tree}[\lfloor k/2 \rfloor]$ болады,
+ал ұлдарына $\texttt{tree}[2k]$
+мен $\texttt{tree}[2k+1]$ жатады.
+Осылайша, төбенің позициясы жұп болса, онда ол сол жақ ұлы,
+ал тақ болса, ол оң жақ ұлы екенін көрсетеді. 
 
-The following function
-calculates the value of $\texttt{sum}_q(a,b)$:
+Төмендегі функция $\texttt{sum}_q(a,b)$
+мәнін есептейді:
 \begin{lstlisting}
 int sum(int a, int b) {
     a += n; b += n;
@@ -1085,15 +1063,14 @@ int sum(int a, int b) {
     return s;
 }
 \end{lstlisting}
-The function maintains a range
-that is initially $[a+n,b+n]$.
-Then, at each step, the range is moved
-one level higher in the tree,
-and before that, the values of the nodes that do not
-belong to the higher range are added to the sum.
+Функция басында $[a+n,b+n]$ аралықты
+ұстап тұрады. Сосын келесі қадамда
+аралық бір деңгей жоғары қозғалады 
+және оған дейін үстіңгі аралыққа 
+кірмейтін төбелердің мәні қосындыға қосылады.
 
-The following function increases the array value
-at position $k$ by $x$:
+Төмендегі функция $k$ позициясындағы жиым мәнін 
+$x$-ке арттырады:
 \begin{lstlisting}
 void add(int k, int x) {
     k += n;
@@ -1103,30 +1080,28 @@ void add(int k, int x) {
     }
 }
 \end{lstlisting}
-First the function updates the value
-at the bottom level of the tree.
-After this, the function updates the values of all
-internal tree nodes, until it reaches
-the top node of the tree.
+Алдымен функция дарақтың төменгі 
+деңгейіндегі мәнді жаңартады.
+Кейін дарақтың жоғарғы 
+төбесіне жеткенге дейін, барлық ішкі 
+төбелердің мәндерін жаңартады.
 
-Both the above functions work
-in $O(\log n)$ time, because a segment tree
-of $n$ elements consists of $O(\log n)$ levels,
-and the functions move one level higher
-in the tree at each step.
+Үстідегі екі фукнция $O(\log n)$ уақытта
+жұмыс істейді: $n$ элементтен тұратын
+кесінділер дарағы $O(\log n)$ деңгейден
+тұрады және әр қадам сайын 
+бір деңгей жоғары көтеріледі. 
 
-\subsubsection{Other queries}
+\subsubsection{Басқа сұратымдар}
 
-Segment trees can support all range queries
-where it is possible to divide a range into two parts,
-calculate the answer separately for both parts
-and then efficiently combine the answers.
-Examples of such queries are
-minimum and maximum, greatest common divisor,
-and bit operations and, or and xor.
+Кесінділер дарағы аралықты екіге бөліп,
+жауапты бөлек есептеп, кейін оларды тиімді 
+біріктіретін барлық аралық сұратымдарды қолдайды. 
+Осы типтегі сұратымдар -- минимум, максимум, ең үлкен 
+ортақ бөлгіш және биттік операциялар -- конъюнкция, дизъюнкция, жоюшы дизъюнкция (xor). % TODO.
 
-For example, the following segment tree
-supports minimum queries:
+Мысалы, төмендегі кесінділер дарағы минимум
+сұратымдарды қолдайды:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -1167,23 +1142,20 @@ supports minimum queries:
 \end{tikzpicture}
 \end{center}
 
-In this case, every tree node contains
-the smallest value in the corresponding
-array range.
-The top node of the tree contains the smallest
-value in the whole array.
-The operations can be implemented like previously,
-but instead of sums, minima are calculated.
+Бұл жағдайда дарақтың әр төбесі 
+жиымның аралығына сәйкес ең кіші мәнді сақтайды.
+Дарақтағы ең жоғарғы төбе бүкіл жиымның ең кішкентай мәнін
+сақтайды. Операцияларды бұрынғыдай орындауға болады, бірақ бұл жағдайда
+қосындылар орнына минимумдар есептеледі.
 
-The structure of a segment tree also allows us
-to use binary search for locating array elements.
-For example, if the tree supports minimum queries,
-we can find the position of an element
-with the smallest value in $O(\log n)$ time.
+Кесінділер дарағының құрылымы жиымның элементтерін 
+бинарлық ізденіс арқылы табуға
+жол береді. Мысалы, егер дарақ минимум сұратымдарын
+қолдаса, онда ең кішкентай элементтің позициясын 
+$O(\log n)$ уақытта таба аламыз. 
 
-For example, in the above tree, an
-element with the smallest value 1 can be found
-by traversing a path downwards from the top node:
+Мысалы, келтірілген дарақта ең кіші мәні 1 болатын 
+элементті жоғарыдан төменге қарай жүру арқылы табуға болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -1228,39 +1200,36 @@ by traversing a path downwards from the top node:
 \end{tikzpicture}
 \end{center}
 
-\section{Additional techniques}
+\section{Қосымша әдіс-тәсілдер}
 
-\subsubsection{Index compression}
+\subsubsection{Индекстерді сығымдау}
+% TODO
+Жиымнан құрылған  деректер құрылымының 
+шектеуі элементтердің қатар орналасқан 
+сандар арқылы индекстелуімен байланыстырылады.
+Үлкен индекстер 
+қажет болған жағдайда қиындық туындайды. 
+Мысалы, егер $10^9$ индексін қолданғымыз
+келсе, сәйкесінше, жиым $10^9$ элементтен тұруы шарт.
+Ол өз кезегінде тым көп жадыны талап етеді. 
 
-A limitation in data structures that
-are built upon an array is that
-the elements are indexed using
-consecutive integers.
-Difficulties arise when large indices
-are needed.
-For example, if we wish to use the index $10^9$,
-the array should contain $10^9$
-elements which would require too much memory.
+\index{индекстерді сығымдау}
 
-\index{index compression}
+Алайда туындаған қиындықты сығымдау
+арқылы шешуге болады, яғни бастапқы индекстерді
+1, 2, 3 сияқты индекстерге алмастырамыз.
+Мұны алгоритмге қажет барлық индекстерді
+алдын ала білген жағдайда ғана іске асыра аламыз.
 
-However, we can often bypass this limitation
-by using \key{index compression},
-where the original indices are replaced
-with indices $1,2,3,$ etc.
-This can be done if we know all the indices
-needed during the algorithm beforehand.
+Идеясы әр түпкі $x$ индексін $c(x)$-пен ауыстыруға негізделген. 
+Мұндағы $c$ -- индекстерді сығымдайтын функция. Бұл жерде 
+индекстер ретінің өзгермеуін талап еткеніміз жөн, 
+яғни $a<b$ болса, $c(a)<c(b)$ болуы керек.
+Бұл индекстер сығымдалған болса да сұратымдарды
+ыңғайлы орындауға мүмкіндік береді. 
 
-The idea is to replace each original index $x$
-with $c(x)$ where $c$ is a function that
-compresses the indices.
-We require that the order of the indices
-does not change, so if $a<b$, then $c(a)<c(b)$.
-This allows us to conveniently perform queries
-even if the indices are compressed.
-
-For example, if the original indices are
-$555$, $10^9$ and $8$, the new indices are:
+Мысалы, түпкі индекстер $555$, $10^9$ және 
+$8$ болса, жаңа индекстер төмендегідей болады:
 
 \[
 \begin{array}{lcl}
@@ -1270,29 +1239,27 @@ c(10^9) & = & 3 \\
 \end{array}
 \]
 
-\subsubsection{Range updates}
+\subsubsection{Аралық жаңартулар}
 
-So far, we have implemented data structures
-that support range queries and updates
-of single values.
-Let us now consider an opposite situation,
-where we should update ranges and
-retrieve single values.
-We focus on an operation that increases all
-elements in a range $[a,b]$ by $x$.
+Осыған дейін біз аралық сұратымдарды 
+қолдайтын және бір ғана мәнді өзгертетін
+деректер құрылымының кодын жаздық. 
+Енді теріс жағдайды, яғни
+аралықты жаңартатын және бір ғана мәнді 
+қарайтын сұратымдарды, $[a,b]$ аралығындағы
+барлық элементтерді
+$x$–ке арттыратын операцияны ғана қарастырайық.
 
-\index{difference array}
+\index{айырма жиымы}
 
-Surprisingly, we can use the data structures
-presented in this chapter also in this situation.
-To do this, we build a \key{difference array}
-whose values indicate
-the differences between consecutive values
-in the original array.
-Thus, the original array is the
-prefix sum array of the
-difference array.
-For example, consider the following array:
+Бөлімде аталған деректер құрылымын 
+осы жағдайда да қолдануға болады. 
+Ол үшін берілген жиымдағы
+қатар мәндер арасындағы айырмашылықтарды 
+көрсететін \key{айырма жиымын} құрастырамыз.
+Осылайша, берілген жиым -- айырма жиымның префиксті
+қосындылар жиымы болады. 
+Мысалы, келесі жиымды қарастырайық:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -1320,7 +1287,7 @@ For example, consider the following array:
 \end{tikzpicture}
 \end{center}
 
-The difference array for the above array is as follows:
+Айырма жиымы төмендегідей болады:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (8,1);
@@ -1347,20 +1314,16 @@ The difference array for the above array is as follows:
 \end{tikzpicture}
 \end{center}
 
-For example, the value 2 at position 6 in the original array
-corresponds to the sum $3-2+4-3=2$ in the difference array.
+Берілген жиымдағы 6-позициядағы 2 мәні 
+айырма жиымындағы $3-2+4-3=2$ қосындысына сәйкес келеді. 
 
-The advantage of the difference array is
-that we can update a range
-in the original array by changing just
-two elements in the difference array.
-For example, if we want to 
-increase the original array 
-values between positions 1 and 4 by 5,
-it suffices to increase the
-difference array value at position 1 by 5
-and decrease the value at position 5 by 5.
-The result is as follows:
+Айырма жиымының артықшылығы -- берілген жиымдағы 
+аралықты жаңарту үшін өзінің екі ғана
+элементін өзгеруінде. Мысалы, берілген жиымдағы 
+1 және 4-позиция аралығын 5-ке арттыру үшін 
+айырма жиымында 1-позициядағы санды 5-ке арттырып,
+5-позициядағы санды 5-ке азайту жеткілікті. 
+Нәтижесінде :
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -1387,17 +1350,15 @@ The result is as follows:
 \end{tikzpicture}
 \end{center}
 
-More generally, to increase the values
-in range $[a,b]$ by $x$,
-we increase the value at position $a$ by $x$
-and decrease the value at position $b+1$ by $x$.
-Thus, it is only needed to update single values
-and process sum queries,
-so we can use a binary indexed tree or a segment tree.
+Қорыта айтқанда $[a,b]$ аралығын $x$-ке
+арттыру үшін біз $a$ позициясындағы санды $x$-ке
+арттырып, $b+1$ позициядағы санды $x$-ке азайтамыз.
+Демек тек бір мәнді жаңарту және қосынды сұратымдарын
+өңдеу қажет. Ал ол үшін біз бинарлы индекстелген дарақ
+немесе кесінділер дарағын қолдана аламыз.
 
-A more difficult problem is to support both
-range queries and range updates.
-In Chapter 28 we will see that even this is possible.
-
+Сәл қиынырақ есепке
+аралық сұратымдарды және аралық жаңартуларды қолдау жатады.
+28-тарауда біз мұның мүмкін екенін көреміз.
 
 

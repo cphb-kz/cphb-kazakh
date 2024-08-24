@@ -1,35 +1,23 @@
-\chapter{Basics of graphs}
+\chapter{Граф негіздері}
 
-Many programming problems can be solved by
-modeling the problem as a graph problem
-and using an appropriate graph algorithm.
-A typical example of a graph is a network
-of roads and cities in a country.
-Sometimes, though, the graph is hidden
-in the problem and it may be difficult to detect it.
+Бағдарламалаудың көптеген есептерін оларды граф түрінде моделдеу және графтағы сәйкес алгоритмдерді қолдану
+арқылы шығара аламыз. Графтың әдеттегі мысалы ретінде еліміздегі жолдар мен қалалар желісін алуға болады. Бірақ кей есепте граф жасырын түрде кездеседі және оны табу қиынға соғады.  
 
-This part of the book discusses graph algorithms,
-especially focusing on topics that
-are important in competitive programming.
-In this chapter, we go through concepts
-related to graphs,
-and study different ways to represent graphs in algorithms.
+Кітабымыздың осы бөлімінде біз граф алгоритмдерін талқылаймыз.
+Әсіресе спорттық бағдарламалауда пайдалы болатын
+алгоритмдерге баса назар аударамыз. Бұл тарауда графқа
+қатысты ұғымдарды қарастырамыз және графты көрсетудің түрлі жолдарын үйренеміз.
 
-\section{Graph terminology}
+\section{Граф терминологиясы}
 
-\index{graph}
-\index{node}
-\index{edge}
+\index{граф}
+\index{төбе}
+\index{қыр}
 
-A \key{graph} consists of \key{nodes}
-and \key{edges}. In this book,
-the variable $n$ denotes the number of nodes
-in a graph, and the variable $m$ denotes
-the number of edges.
-The nodes are numbered
-using integers $1,2,\ldots,n$.
+\key{Граф} \key{төбелер}ден және \key{қырлар}дан тұрады. Кітапта $n$ деп графтағы төбелердің,
+ал $m$ деп қырлардың саны белгіленген. Төбелер $1,2,\ldots,n$ деп нөмірленеді.
 
-For example, the following graph consists of 5 nodes and 7 edges:
+Мысалға, төменде 5 төбеден және 7 қырдан тұратын граф бейнеленген:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -49,16 +37,13 @@ For example, the following graph consists of 5 nodes and 7 edges:
 \end{tikzpicture}
 \end{center}
 
-\index{path}
+\index{жол}
 
-A \key{path} leads from node $a$ to node $b$
-through edges of the graph.
-The \key{length} of a path is the number of
-edges in it.
-For example, the above graph contains
-a path $1 \rightarrow 3 \rightarrow 4 \rightarrow 5$
-of length 3
-from node 1 to node 5:
+\key{Жол} -- графтағы $a$ төбесінен $b$ төбесіне дейінгі  қырлар тізбегі.
+Жолдағы қырлардың саны ұзындықты құрайды.
+Мысалы, жоғарыдағы графта
+ $1 \rightarrow 3 \rightarrow 4 \rightarrow 5$ жолы бар. 
+ Жолдың ұзындығы -- 3, ол 1-төбеден басталып, 5-төбеге дейін жетеді:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -82,15 +67,13 @@ from node 1 to node 5:
 \end{tikzpicture}
 \end{center}
 
-\index{cycle}
+\index{цикл}
 
-A path is a \key{cycle} if the first and last
-node is the same.
-For example, the above graph contains
-a cycle $1 \rightarrow 3 \rightarrow 4 \rightarrow 1$.
-A path is \key{simple} if each node appears
-at most once in the path.
-
+Жолдың бірінші және соңғы төбелері бірдей болса, оны цикл дейміз.
+Мысалға, жоғарыдағы графта
+$1 \rightarrow 3 \rightarrow 4 \rightarrow 1$ циклы бар.
+Жолда бір төбе 1 реттен артық қайталанбаса, 
+ол жай жол болып саналады.
 
 % 
 % \begin{itemize}
@@ -102,13 +85,12 @@ at most once in the path.
 % \item $1 \rightarrow 3 \rightarrow 4 \rightarrow 2 \rightarrow 5$ (length 4)
 % \end{itemize}
 
-\subsubsection{Connectivity}
+\subsubsection{Байланыстылық}
 
-\index{connected graph}
+\index{Байланысты граф}
 
-A graph is \key{connected} if there is a path
-between any two nodes.
-For example, the following graph is connected:
+Кез келген екі төбенің арасында жол болса, граф өзара байланысты болады.
+Мысалы, төмендегі граф өзара байланысты:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -123,9 +105,7 @@ For example, the following graph is connected:
 \end{tikzpicture}
 \end{center}
 
-The following graph is not connected,
-because it is not possible to get
-from node 4 to any other node:
+Ал төмендегі граф өзара байланысты емес. Себебі 4-төбеден басқа төбелерге баратын жол жоқ.
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -138,14 +118,12 @@ from node 4 to any other node:
 \end{tikzpicture}
 \end{center}
 
-\index{component}
+\index{Компонент}
 
-The connected parts of a graph are
-called its \key{components}.
-For example, the following graph
-contains three components:
+Графтың өзара байланысты бөліктері компонент деп аталады.
+Мысалы, төмендегі графта үш компонент бар:
 $\{1,\,2,\,3\}$,
-$\{4,\,5,\,6,\,7\}$ and
+$\{4,\,5,\,6,\,7\}$ және
 $\{8\}$.
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
@@ -170,13 +148,11 @@ $\{8\}$.
 \end{tikzpicture}
 \end{center}
 
-\index{tree}
+\index{дарақ}
 
-A \key{tree} is a connected graph
-that consists of $n$ nodes and $n-1$ edges.
-There is a unique path
-between any two nodes of a tree.
-For example, the following graph is a tree:
+Дарақ деп $n$ төбеден және $n-1$ қырдан тұратын өзара байланысты графты айтамыз.
+Бұл графта кез-келген екі төбе арасында бірегей жол болады.
+Төмендегі графты дарақ деп санауымызға болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -195,14 +171,12 @@ For example, the following graph is a tree:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Edge directions}
+\subsubsection{Қыр бағыты}
 
-\index{directed graph}
+\index{бағытталған граф}
 
-A graph is \key{directed}
-if the edges can be traversed
-in one direction only.
-For example, the following graph is directed:
+Егер қырлар бір ғана төбеге бағытталса, ол \key{бағытталған граф} болып саналады. 
+Бағытталған граф үлгісі:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -219,19 +193,16 @@ For example, the following graph is directed:
 \end{tikzpicture}
 \end{center}
 
-The above graph contains
-a path $3 \rightarrow 1 \rightarrow 2 \rightarrow 5$
-from node $3$ to node $5$,
-but there is no path from node $5$ to node $3$.
+Жоғарыдағы графта $3 \rightarrow 1 \rightarrow 2 \rightarrow 5$ жол бар. 
+Бірақ, бұл графта $5$-төбеден $3$-төбеге жол жоқ.
 
-\subsubsection{Edge weights}
+\subsubsection{Қыр салмағы}
 
-\index{weighted graph}
+\index{Салмақталған граф}
 
-In a \key{weighted} graph, each edge is assigned
-a \key{weight}.
-The weights are often interpreted as edge lengths.
-For example, the following graph is weighted:
+Салмақталған графтың әр қырында салмағы белгіленеді.
+Салмақ көбіне қырдың ұзындығы ретінде көрсетіледі.
+Төмендегі граф салмақталған графқа жатады:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -248,27 +219,20 @@ For example, the following graph is weighted:
 \end{tikzpicture}
 \end{center}
 
-The length of a path in a weighted graph
-is the sum of the edge weights on the path.
-For example, in the above graph,
-the length of the path
-$1 \rightarrow 2 \rightarrow 5$ is $12$,
-and the length of the path
-$1 \rightarrow 3 \rightarrow 4 \rightarrow 5$ is $11$.
-The latter path is the \key{shortest} path from node $1$ to node $5$.
+Салмақталған графта жолдың ұзындығы жолдағы қырлардың салмақтарының қосындысына тең болады.
+Жоғарыдағы графта $1 \rightarrow 2 \rightarrow 5$ жолының ұзындығы $12$-ге тең. 
+Ал $1 \rightarrow 3 \rightarrow 4 \rightarrow 5$ жолының ұзындығы $11$-ге тең.
+Осы жол $1$-төбеден $5$-төбеге дейін ең қысқа жол болып тұр.
 
-\subsubsection{Neighbors and degrees}
+\subsubsection{Көршілер және дәреже}
 
-\index{neighbor}
-\index{degree}
+\index{көрші}
+\index{дәреже}
 
-Two nodes are \key{neighbors} or \key{adjacent}
-if there is an edge between them.
-The \key{degree} of a node
-is the number of its neighbors.
-For example, in the following graph,
-the neighbors of node 2 are 1, 4 and 5,
-so its degree is 3.
+Егер екі төбе арасында қыр болса, олар өзара көршілер болады.
+Төбенің дәрежесі төбедегі көршілестердің санына тең келеді.
+Мысалы, үлгіде келтірілген графтың 2-төбесінде 1, 4 және 5 
+көрші төбелері бар. Сондықтан оның дәрежесі 3-ке тең болмақ.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -288,33 +252,24 @@ so its degree is 3.
 \end{tikzpicture}
 \end{center}
 
-The sum of degrees in a graph is always $2m$,
-where $m$ is the number of edges,
-because each edge
-increases the degree of exactly two nodes by one.
-For this reason, the sum of degrees is always even.
+Графта $m$ қыр болса, графтағы дәрежелердің сомасы әрқашан $2m$-ге тең болады. 
+Себебі әр қыр екі көршілес тұрған
+төбелердің дәрежесін 1-ге көбейтеді. 
+Демек дәрежелердің қосындысы әрдайым жұп сан болады.
 
-\index{regular graph}
-\index{complete graph}
+\index{біртекті граф}
+\index{толық граф}
 
-A graph is \key{regular} if the
-degree of every node is a constant $d$.
-A graph is \key{complete} if the
-degree of every node is $n-1$, i.e.,
-the graph contains all possible edges
-between the nodes.
+Егер барлық төбелердің дәрежелері тең болса, ондай графты біртекті граф дейміз.
+Ал егер графтағы барлық төбелердің дәрежелері $(n-1)$-ге тең болса, ондай граф толық граф деп аталады. 
+Яғни графтағы әр төбе өзінен басқа барлық төбелермен байланысты болады.
 
-\index{indegree}
-\index{outdegree}
+\index{кірістің жарты дәрежесі}
+\index{шығыстың жарты дәрежесі}
 
-In a directed graph, the \key{indegree}
-of a node is the number of edges
-that end at the node,
-and the \key{outdegree} of a node
-is the number of edges that start at the node.
-For example, in the following graph,
-the indegree of node 2 is 2,
-and the outdegree of node 2 is 1.
+Бағытталған графтағы кірістің жарты дәрежесі деп төбеге бағытталған қырлардың санын белгілейміз.
+Ал шығыстың жарты дәрежесі деп төбеден бағыт алған қырлардың санын белгілейміз.
+Мысалға, төмендегі графтың 2-төбесіндегі кірісінің жарты дәрежесі 2-ге, ал шығысының жарты дәреже 1-ге тең.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -333,21 +288,16 @@ and the outdegree of node 2 is 1.
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Colorings}
+\subsubsection{Бояулы}
 
-\index{coloring}
-\index{bipartite graph}
+\index{бояулы}
+\index{екі ұялы граф}
 
-In a \key{coloring} of a graph,
-each node is assigned a color so that
-no adjacent nodes have the same color.
+Бояулы графта әр төбеге бір бояу беріледі. Оның екі көршілес төбелері бірдей түске боялмайды.
 
-A graph is \key{bipartite} if
-it is possible to color it using two colors.
-It turns out that a graph is bipartite
-exactly when it does not contain a cycle
-with an odd number of edges.
-For example, the graph
+Егер граф екі түске боялатын болса, ол екі ұялы граф деп аталады.
+Граф екі ұялы болу үшін оның ішінде ұзындығы тақ сан болатын цикл болмауы тиіс.
+Мысалы, төменде екі ұялы граф берілген:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$2$};
@@ -364,7 +314,7 @@ For example, the graph
 \path[draw,thick,-] (5) -- (6);
 \end{tikzpicture}
 \end{center}
-is bipartite, because it can be colored as follows:
+Себебі, оны төмендегідей етіп бояуға болады:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle, fill=blue!40] (1) at (1,3) {$2$};
@@ -381,7 +331,7 @@ is bipartite, because it can be colored as follows:
 \path[draw,thick,-] (5) -- (6);
 \end{tikzpicture}
 \end{center}
-However, the graph
+Ал келесі граф екі ұялы емес:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$2$};
@@ -399,8 +349,8 @@ However, the graph
 \path[draw,thick,-] (1) -- (6);
 \end{tikzpicture}
 \end{center}
-is not bipartite, because it is not possible to color
-the following cycle of three nodes using two colors:
+Өйткені $1$, $2$ және $5$ төбелері құрайтын ұзындығы $3$-ке тең 
+циклды екі түске бояу мүмкін емес:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$2$};
@@ -423,16 +373,15 @@ the following cycle of three nodes using two colors:
 \end{tikzpicture}
 \end{center}
 
-\subsubsection{Simplicity}
+\subsubsection{Қарапайым граф}
 
-\index{simple graph}
+\index{қарапайым граф}
 
-A graph is \key{simple}
-if no edge starts and ends at the same node,
-and there are no multiple
-edges between two nodes.
-Often we assume that graphs are simple.
-For example, the following graph is \emph{not} simple:
+Егер графта бір төбеден шығып дәл сол төбеге 
+қайта бағытталатын қыр (ілмек) болмаса және екі төбе 
+арасында бір ғана қыр болса, ондай графты қарапайым граф деп атаймыз.
+Көбінесе, біз графты елестеткенде оны жай граф түрінде қарастырамыз.
+Мысалы, төмендегі граф қарапайым графқа жатпайды.
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$2$};
@@ -456,36 +405,26 @@ For example, the following graph is \emph{not} simple:
 \end{tikzpicture}
 \end{center}
 
-\section{Graph representation}
+\section{Графты көрсету жолдары}
 
-There are several ways to represent graphs
-in algorithms.
-The choice of a data structure
-depends on the size of the graph and
-the way the algorithm processes it.
-Next we will go through three common representations.
+Графты көрсетудің бірнеше жолы бар.
+Деректер құрылымын таңдау
+графтың өлшеміне және алгоритмнің өңдеу тәсіліне  байланысты болып келеді. 
+Біз графты көрсетудің 3 жалпы жолын қарастырамыз.
 
-\subsubsection{Adjacency list representation}
+\subsubsection{Сыбайластық тізім көрінісі}
 
-\index{adjacency list}
+\index{cыбайластық тізімі}
 
-In the adjacency list representation,
-each node $x$ in the graph is assigned an \key{adjacency list}
-that consists of nodes
-to which there is an edge from $x$.
-Adjacency lists are the most popular
-way to represent graphs, and most algorithms can be
-efficiently implemented using them.
+Бұл көріністе әр графтағы $x$ төбесінің cыбайластық тізімі белгіленеді. Cыбайластық тізім -- $x$ төбесінен шыққан қырлар байланысқан төбелердің тізімі.
+Ол қолданыста ең жиі кездесетін көрсетілім түріне жатады. Оған қоса, көптеген алгоритмдер осы көрініспен тиімді жұмыс жасайды.
 
-A convenient way to store the adjacency lists is to declare
-an array of vectors as follows:
+Cыбайластық тізімін сақтау үшін векторлар жиымы жарияланады:
 \begin{lstlisting}
 vector<int> adj[N];
 \end{lstlisting}
 
-The constant $N$ is chosen so that all
-adjacency lists can be stored.
-For example, the graph
+Барлық cыбайластық тізімдер сиятындай бір тұрақты сан $N$ таңдалады. Мысалы, төмендегі графты
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -501,7 +440,7 @@ For example, the graph
 \path[draw,thick,->,>=latex] (4) -- (1);
 \end{tikzpicture}
 \end{center}
-can be stored as follows:
+келесі ретпен сақтауға болады:
 \begin{lstlisting}
 adj[1].push_back(2);
 adj[2].push_back(3);
@@ -510,20 +449,15 @@ adj[3].push_back(4);
 adj[4].push_back(1);
 \end{lstlisting}
 
-If the graph is undirected, it can be stored in a similar way,
-but each edge is added in both directions.
+Егер граф бағытталмаған болса, оны да дәл солай сақтауға болады. Бірақ әрбір қырды екі бағыттан сақтайды.
 
-For a weighted graph, the structure can be extended
-as follows:
+Ал салмақталған графтың құрылымы аздап өзгереді:
 
 \begin{lstlisting}
 vector<pair<int,int>> adj[N];
 \end{lstlisting}
 
-In this case, the adjacency list of node $a$
-contains the pair $(b,w)$
-always when there is an edge from node $a$ to node $b$
-with weight $w$. For example, the graph
+Бұл кезде $a$ төбесінің cыбайластық тізімі $(b,w)$ жұбын сақтайды, яғни бұл жерде $a$ төбесінен басталып $b$ төбесінде аяқталатын салмағы $w$-ге тең қыр бар. Үлгідегі графты
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -539,7 +473,7 @@ with weight $w$. For example, the graph
 \path[draw,thick,->,>=latex] (4) -- node[font=\small,label=left:2] {} (1);
 \end{tikzpicture}
 \end{center}
-can be stored as follows:
+төмендегідей етіп сақтауға болады:
 \begin{lstlisting}
 adj[1].push_back({2,5});
 adj[2].push_back({3,7});
@@ -548,11 +482,8 @@ adj[3].push_back({4,5});
 adj[4].push_back({1,2});
 \end{lstlisting}
 
-The benefit of using adjacency lists is that
-we can efficiently find the nodes to which
-we can move from a given node through an edge.
-For example, the following loop goes through all nodes
-to which we can move from node $s$:
+Cыбайластық тiзiмiнің артықшылығы -- берілген төбеден қыр арқылы бара алатын басқа төбелерді тиімді әрі тез таба алуымызда. 
+Мысалы, келесі циклде біз $s$-төбесінен бағыт ала алатын барлық төбелерді өтіп шығамыз.
 
 \begin{lstlisting}
 for (auto u : adj[s]) {
@@ -560,25 +491,19 @@ for (auto u : adj[s]) {
 }
 \end{lstlisting}
 
-\subsubsection{Adjacency matrix representation}
+\subsubsection{Cыбайластық матрица көрінісі}
 
-\index{adjacency matrix}
+\index{cыбайластық матрицасы}
 
-An \key{adjacency matrix} is a two-dimensional array
-that indicates which edges the graph contains.
-We can efficiently check from an adjacency matrix
-if there is an edge between two nodes.
-The matrix can be stored as an array
+Cыбайластық матрицасы -- графтың қай қырларды қамтитынын көрсететін екі өлшемді матрица.
+Біз cыбайластық матрицасы арқылы екі төбе арасында қырдың бар немесе жоқ екенін оңай анықтай аламыз.
+Матрицаны жиым ретінде сақтауға болады:
 \begin{lstlisting}
 int adj[N][N];
 \end{lstlisting}
-where each value $\texttt{adj}[a][b]$ indicates
-whether the graph contains an edge from
-node $a$ to node $b$.
-If the edge is included in the graph,
-then $\texttt{adj}[a][b]=1$,
-and otherwise $\texttt{adj}[a][b]=0$.
-For example, the graph
+Бұл жерде $\texttt{adj}[a][b]$ графта $a$ төбесінен басталып $b$ төбесінде аяқталатын қырдың бар немесе жоқ екенін көрсетеді.
+Егер графта қыр бар болса, $\texttt{adj}[a][b]=1$, әйтпесе $\texttt{adj}[a][b]=0$.
+Мысалға, төмендегі графты
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -593,7 +518,7 @@ For example, the graph
 \path[draw,thick,->,>=latex] (4) -- (1);
 \end{tikzpicture}
 \end{center}
-can be represented as follows:
+осылай көрсетуге болады:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (4,4);
@@ -624,11 +549,8 @@ can be represented as follows:
 \end{tikzpicture}
 \end{center}
 
-If the graph is weighted, the adjacency matrix
-representation can be extended so that
-the matrix contains the weight of the edge
-if the edge exists.
-Using this representation, the graph
+Егер граф салмақталған болса, cыбайластық матрицасының көрінісін толықтыруға болады. Матрица тек $1$ және $0$ сандарын сақтамай, қырдағы салмақты да сақтайды.
+Сәйкесінше, келесі графты
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -645,7 +567,7 @@ Using this representation, the graph
 \end{tikzpicture}
 \end{center}
 \begin{samepage}
-corresponds to the following matrix:
+осы нұсқада көрсетуге болады:
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \draw (0,0) grid (4,4);
@@ -677,30 +599,22 @@ corresponds to the following matrix:
 \end{center}
 \end{samepage}
 
-The drawback of the adjacency matrix representation
-is that the matrix contains $n^2$ elements,
-and usually most of them are zero.
-For this reason, the representation cannot be used
-if the graph is large.
+Бұл көріністің кемшілігі --матрицада $n^2$ элемент сақтай алуымызда және оның көп бөлігі $0$-ге тең болуында.
+Сондықтан егер граф үлкен болса, қарастырылған көрініс жарамсыз болмақ.
 
-\subsubsection{Edge list representation}
+\subsubsection{Қырлар тізімі көрінісі}
 
-\index{edge list}
+\index{қырлар тізімі}
 
-An \key{edge list} contains all edges of a graph
-in some order.
-This is a convenient way to represent a graph
-if the algorithm processes all edges of the graph
-and it is not needed to find edges that start
-at a given node.
+Қырлар тізімінде графтағы барлық қырлар белгілі бір ретпен сақталады.
+Бұл көрініс алгоритм графтағы барлық қырларды өтіп шығатын болса және белгілі бір төбеден басталатын қырлардың тізімін қажет етпесе тиімді болады.
 
-The edge list can be stored in a vector
+Қырлар тізімі векторда сақтала алады.
 \begin{lstlisting}
 vector<pair<int,int>> edges;
 \end{lstlisting}
-where each pair $(a,b)$ denotes that
-there is an edge from node $a$ to node $b$.
-Thus, the graph
+Бұл жерде $(a,b)$ жұбы $a$-төбесінен $b$-төбесіне дейін қырдың бар немесе жоқ екенін көрсетеді.
+Сондықтан бұл графты
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -716,7 +630,7 @@ Thus, the graph
 \path[draw,thick,->,>=latex] (4) -- (1);
 \end{tikzpicture}
 \end{center}
-can be represented as follows:
+төмендегідей етіп көрсетуге болады:
 \begin{lstlisting}
 edges.push_back({1,2});
 edges.push_back({2,3});
@@ -726,15 +640,12 @@ edges.push_back({4,1});
 \end{lstlisting}
 
 \noindent
-If the graph is weighted, the structure can
-be extended as follows:
+Граф салмақталған болса, құрылымы осылай өзгере алады:
 \begin{lstlisting}
 vector<tuple<int,int,int>> edges;
 \end{lstlisting}
-Each element in this list is of the
-form $(a,b,w)$, which means that there
-is an edge from node $a$ to node $b$ with weight $w$.
-For example, the graph
+Вектордағы әр элемент $(a,b,w)$ құрылымында болады. Бұл құрылымда әр қыр $a$ төбесінен басталып $b$ төбесінде аяқталады және салмағы $w$-ге тең болады.
+Мысалы, келесі графты
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -751,9 +662,9 @@ For example, the graph
 \end{tikzpicture}
 \end{center}
 \begin{samepage}
-can be represented as follows\footnote{In some older compilers, the function
-\texttt{make\_tuple} must be used instead of the braces (for example,
-\texttt{make\_tuple(1,2,5)} instead of \texttt{\{1,2,5\}}).}:
+осы түрде көрсете аламыз \footnote{Кей ескі компиляторларда өрнек жақша орнына \texttt{make\_tuple} функциясын қолдану керек. (Мысалы,
+\texttt{make\_tuple(1,2,5)} орнына \texttt{\{1,2,5\}}).}:
+
 \begin{lstlisting}
 edges.push_back({1,2,5});
 edges.push_back({2,3,7});

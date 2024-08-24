@@ -1,259 +1,260 @@
-\chapter{Probability}
+\chapter{Ықтималдылық}
 
-\index{probability}
+\index{ықтималдылық}
 
-A \key{probability} is a real number between $0$ and $1$
-that indicates how probable an event is.
-If an event is certain to happen,
-its probability is 1,
-and if an event is impossible,
-its probability is 0.
-The probability of an event is denoted $P(\cdots)$
-where the three dots describe the event.
+\key{Ықтималдылық} -- оқиғаның қаншалықты 
+мүмкін болатынын көрсететін
+$0$ мен $1$ арасындағы нақты сан. Егер оқиға
+белгілі болатын болса, онда ықтималдылығы 1,
+ал оқиға мүмкін емес болса,
+онда ықтималдылығы 0 болады. Оқиғаның ықтималдылығы 
+$P(\cdots)$ түрінде белгілінеді, мұндағы үш нүкте оқиғаны көрсетеді.
 
-For example, when throwing a dice,
-the outcome is an integer between $1$ and $6$,
-and the probability of each outcome is $1/6$.
-For example, we can calculate the following probabilities:
+Мысалы, ойын сүйегін лақтыратын болсақ,
+нәтижесі $1$ мен $6$ арасындағы бүтін сан
+және әр нәтиженің ықтималдылығы $1/6$ болады.
+Өрнек ретінде төмендегі ықтималдылықтарды есептей 
+аламыз:
 
 \begin{itemize}[noitemsep]
-\item $P(\textrm{''the outcome is 4''})=1/6$
-\item $P(\textrm{''the outcome is not 6''})=5/6$
-\item $P(\textrm{''the outcome is even''})=1/2$
+\item $P(\textrm{''нәтиже 4 болады''})=1/6$
+\item $P(\textrm{''нәтиже 6 болмайды''})=5/6$
+\item $P(\textrm{''нәтиже жұп сан''})=1/2$
 \end{itemize}
 
-\section{Calculation}
+\section{Есептеу}
 
-To calculate the probability of an event,
-we can either use combinatorics
-or simulate the process that generates the event.
-As an example, let us calculate the probability
-of drawing three cards with the same value
-from a shuffled deck of cards
-(for example, $\spadesuit 8$, $\clubsuit 8$ and $\diamondsuit 8$).
+Оқиғаның ықтималдылығын есептеу үшін комбинаториканы 
+қолдануымызға болады немесе оқиғаны тудыратын үдерісті симуляциялай аламыз.
+Өрнек ретінде араластырылған карта колодасынан мәні бірдей үш картаны
+алып шығу ықтималдылығын есептейік.
+(мысалы $\spadesuit 8$, $\clubsuit 8$ және $\diamondsuit 8$).
 
-\subsubsection*{Method 1}
+\subsubsection*{1-әдіс}
 
-We can calculate the probability using the formula
+Ықтималдылықты есептеу үшін келесі формуланы қолдануымызға болады:
 
-\[\frac{\textrm{number of desired outcomes}}{\textrm{total number of outcomes}}.\]
+\[\frac{\textrm{қажет нәтижелер саны}}{\textrm{жалпы нәтижелер саны}}.\]
 
-In this problem, the desired outcomes are those
-in which the value of each card is the same.
-There are $13 {4 \choose 3}$ such outcomes,
-because there are $13$ possibilities for the
-value of the cards and ${4 \choose 3}$ ways to
-choose $3$ suits from $4$ possible suits.
+Бұл есепте қажет нәтижелер -- карталардың мәндері 
+бірдей болған жағдай. Ондайдың $13 {4 \choose 3}$ жолы бар:
+картаның мәніне $13$ мүмкіндік бар және
+әр санға $4$ түстен $3$ түсті алу үшін ${4 \choose 3}$ жол бар.
 
-There are a total of ${52 \choose 3}$ outcomes,
-because we choose 3 cards from 52 cards.
-Thus, the probability of the event is
+Жалпы нәтижелердің саны -- ${52 \choose 3}$:
+біз 52 карта ішінен 3 карта аламыз. Осылайша
+оқиғаның ықтималдылығы 
 
 \[\frac{13 {4 \choose 3}}{{52 \choose 3}} = \frac{1}{425}.\]
 
-\subsubsection*{Method 2}
+\subsubsection*{2-әдіс}
 
-Another way to calculate the probability is
-to simulate the process that generates the event.
-In this example, we draw three cards, so the process
-consists of three steps.
-We require that each step of the process is successful.
+Ықтималдылықты есептеудің басқа жолы --
+оқиғаны тудыратын үдерісті симуляциялау.
+Бұл мысалда біз үш картаны алуымыз керек,
+демек үдеріс 3 қадамнан тұрады. 
+Біз үдерістің әрбір қадамы сәтті болуын талап етеміз.
 
-Drawing the first card certainly succeeds,
-because there are no restrictions.
-The second step succeeds with probability $3/51$,
-because there are 51 cards left and 3 of them
-have the same value as the first card.
-In a similar way, the third step succeeds with probability $2/50$.
+Ешқандай шектеу қойылмағандықтан, бірінші картаны алу әрдайым сәтті болады. Екінші
+картаны алу $3/51$ ықтималдылықпен сәтті болады,
+өйткені бізде 51 карта қалады және 3-уі 
+бірінші картадағыдай мәнге ие болады. Дәл солай
+үшінші қадам $2/50$ ықтималдылықпен сәтті болады.
 
-The probability that the entire process succeeds is
+Толық үдерістің сәтті болуының ықтималдылығы 
 
 \[1 \cdot \frac{3}{51} \cdot \frac{2}{50} = \frac{1}{425}.\]
 
-\section{Events}
+\section{Оқиғалар}
 
-An event in probability theory can be represented as a set
+Ықтималдылық теориясында оқиғаны жиын ретінде көрсетуге болады
 \[A \subset X,\]
-where $X$ contains all possible outcomes
-and $A$ is a subset of outcomes.
-For example, when drawing a dice, the outcomes are
+мұнда $X$ барлық нәтижелерді қамтиды және
+$A$ -- нәтижелердің ішжиыны.
+Мысалы, ойын сүйегін лақтырған кезде, нәтижелер төмендегідей болады:
 \[X = \{1,2,3,4,5,6\}.\]
-Now, for example, the event ''the outcome is even''
-corresponds to the set
+Мысалы, ''нәтиже жұп сан'' деген оқиғаға сәйкес жиын
 \[A = \{2,4,6\}.\]
 
-Each outcome $x$ is assigned a probability $p(x)$.
-Then, the probability $P(A)$ of an event
-$A$ can be calculated as a sum
-of probabilities of outcomes using the formula
+Әр $x$ нәтижеге $p(x)$ ықтималдылығын белгілейік.
+Онда $A$ оқиғасының ықтималдылығы $P(A)$ нәтижелердің 
+ықтималдылықтарының қосындысы ретінде төмендегі формула
+арқылы есептеуге болады:
+% Each outcome $x$ is assigned a probability $p(x)$.
+% Then, the probability $P(A)$ of an event
+% $A$ can be calculated as a sum
+% of probabilities of outcomes using the formula
 \[P(A) = \sum_{x \in A} p(x).\]
-For example, when throwing a dice,
-$p(x)=1/6$ for each outcome $x$,
-so the probability of the event
-''the outcome is even'' is
-\[p(2)+p(4)+p(6)=1/2.\]
+Мысалы, ойын сүйегін лақтырған кезде,
+әр $x$ нәтижеге $p(x)=1/6$ сәйкес келеді,
+демек ''нәтиже жұп сан'' оқиғасының
+ықтималдылығы \[p(2)+p(4)+p(6)=1/2.\]. 
 
-The total probability of the outcomes in $X$ must
-be 1, i.e., $P(X)=1$.
+$X$-тің барлық нәтижелерінің ықтималдылықтарының қосындысы
+1 болу керек, яғни $P(X)=1$.
 
-Since the events in probability theory are sets,
-we can manipulate them using standard set operations:
+Ықтималдылық теориясындағы оқиғалар жиын болғандықтан,
+біз оған қарапайым жиын операцияларын қолдана аламыз:  
 
 \begin{itemize}
-\item The \key{complement} $\bar A$ means
-''$A$ does not happen''.
-For example, when throwing a dice, 
-the complement of $A=\{2,4,6\}$ is
-$\bar A = \{1,3,5\}$.
-\item The \key{union} $A \cup B$ means
-''$A$ or $B$ happen''.
-For example, the union of
-$A=\{2,5\}$
-and $B=\{4,5,6\}$ is
-$A \cup B = \{2,4,5,6\}$.
-\item The \key{intersection} $A \cap B$ means
-''$A$ and $B$ happen''.
-For example, the intersection of
-$A=\{2,5\}$ and $B=\{4,5,6\}$ is
-$A \cap B = \{5\}$.
+\item $\bar A$ деп $A$-ға \key{толықтыру}
+оқиғасын белгілейді. Мысалы ойын сүйегін лақтырған кезде,
+$A=\{2,4,6\}$ оқиғасына толықтыру оқиғасы 
+$\bar A = \{1,3,5\}$ болады. 
+\item $A \cup B$ деп $A$ мен $B$ оқиғаларының \key{біріктіруін}
+белгілейді. Мысалы $A=\{2,5\}$ және 
+$B=\{4,5,6\}$ оқиғаларының біріктіруі 
+-- $A \cup B = \{2,4,5,6\}$. 
+\item $A \cap B$ деп $A$ мен $B$ оқиғаларының \key{қиылысуын}
+белгілейді. Мысалы $A=\{2,5\}$ және $B=\{4,5,6\}$
+оқиғаларының қиылысуы –– $A \cap B = \{5\}$.
 \end{itemize}
 
-\subsubsection{Complement}
+% \item The \key{complement} $\bar A$ means
+% ''$A$ does not happen''.
+% For example, when throwing a dice, 
+% the complement of $A=\{2,4,6\}$ is
+% $\bar A = \{1,3,5\}$.
+% \item The \key{union} $A \cup B$ means
+% ''$A$ or $B$ happen''.
+% For example, the union of
+% $A=\{2,5\}$
+% and $B=\{4,5,6\}$ is
+% $A \cup B = \{2,4,5,6\}$.
+% \item The \key{intersection} $A \cap B$ means
+% ''$A$ and $B$ happen''.
+% For example, the intersection of
+% $A=\{2,5\}$ and $B=\{4,5,6\}$ is
+% $A \cap B = \{5\}$.
 
-The probability of the complement
-$\bar A$ is calculated using the formula
+
+\subsubsection{Толықтыру}
+
+$\bar A$ толықтырудың ықтималдылығы келесі формула
+арқылы есептеледі:
 \[P(\bar A)=1-P(A).\]
 
-Sometimes, we can solve a problem easily
-using complements by solving the opposite problem.
-For example, the probability of getting
-at least one six when throwing a dice ten times is
+Берілген есепті толықтыруларды пайдаланып қарама-қарсы есепті 
+шешу тәсілі арқылы оңай шешуге болады.
+Мысалы, 10 рет ойын сүйегін лақтырған кезде 
+6 санын кем дегенде бір мәрте көруіміздің ықтималдылығы: 
 \[1-(5/6)^{10}.\]
+Бұл жердегі $5/6$ -- бір лақтырыстың нәтижесі 6 болмауының, ал $(5/6)^{10}$ -- 10 лақтырыстың ешқайсысы 6 болмауының ықтималдылығы. 
+Осының толықтыруы -- берілген есептің жауабы.
 
-Here $5/6$ is the probability that the outcome
-of a single throw is not six, and
-$(5/6)^{10}$ is the probability that none of
-the ten throws is a six.
-The complement of this is the answer to the problem.
+\subsubsection{Біріктіру}
 
-\subsubsection{Union}
-
-The probability of the union $A \cup B$
-is calculated using the formula
+$A \cup B$ біріктіруінің ықтималдылығын төмендегі 
+формула арқылы есептеуге болады:
 \[P(A \cup B)=P(A)+P(B)-P(A \cap B).\]
-For example, when throwing a dice,
-the union of the events
-\[A=\textrm{''the outcome is even''}\]
-and
-\[B=\textrm{''the outcome is less than 4''}\]
-is
-\[A \cup B=\textrm{''the outcome is even or less than 4''},\]
-and its probability is
+Мысалы ойын сүйегін лақтырған кезде,
+\[A=\textrm{''нәтиже жұп сан''}\] оқиғасы 
+мен 
+\[B=\textrm{''нәтиже 4-тен кем''}\] оқиғаларының
+біріктіруі –– \[A \cup B=\textrm{''нәтиже жұп сан немесе 4-тен кем''},\]
+және оның ықтималдылығы -- 
 \[P(A \cup B) = P(A)+P(B)-P(A \cap B)=1/2+1/2-1/6=5/6.\]
 
-If the events $A$ and $B$ are \key{disjoint}, i.e.,
-$A \cap B$ is empty,
-the probability of the event $A \cup B$ is simply
+Егер $A$ мен $B$ оқиғалары \key{қиылыспайтын}, яғни
+$A \cap B$ бос болса, 
+$A \cup B$ оқиғасының ықтималдылығы --
 
 \[P(A \cup B)=P(A)+P(B).\]
 
-\subsubsection{Conditional probability}
+\subsubsection{Шартты ықтималдылық}
 
-\index{conditional probability}
+\index{шартты ықтималдылық}
 
-The \key{conditional probability}
-\[P(A | B) = \frac{P(A \cap B)}{P(B)}\]
-is the probability of $A$
-assuming that $B$ happens.
-Hence, when calculating the
-probability of $A$, we only consider the outcomes
-that also belong to $B$.
+\key{Шартты ықтималдылық}
+\[P(A | B) = \frac{P(A \cap B)}{P(B)}\] --
+$B$ орын алғанда $A$ оқиғасының ықтималдылығы.
+$A$–ның ықтималдылығын есептегенде,
+біз тек $B$–ға тиесілі нәтижелерді қарастырамыз. 
 
-Using the previous sets,
+Алдыңғы жиындарды қолдансақ,
 \[P(A | B)= 1/3,\]
-because the outcomes of $B$ are
-$\{1,2,3\}$, and one of them is even.
-This is the probability of an even outcome
-if we know that the outcome is between $1 \ldots 3$.
+себебі $B$-ның нәтижелері 
+$\{1,2,3\}$, және олардың біреуі ғана
+жұп. Бұл егер нәтиже $1 \ldots 3$ арасында болса, 
+нәтиженің жұп болуының ықтималдылығын білдіреді. 
 
-\subsubsection{Intersection}
+\subsubsection{Қиылысу}
 
-\index{independence}
+\index{тәуелсіздік}
 
-Using conditional probability,
-the probability of the intersection
-$A \cap B$ can be calculated using the formula
+Шартты ықтималдылықты қолданып,
+$A \cap B$ қиылысуының ықтималдылығын 
+келесі формула арқылы есептеуге болады:
 \[P(A \cap B)=P(A)P(B|A).\]
-Events $A$ and $B$ are \key{independent} if
-\[P(A|B)=P(A) \hspace{10px}\textrm{and}\hspace{10px} P(B|A)=P(B),\]
-which means that the fact that $B$ happens does not
-change the probability of $A$, and vice versa.
-In this case, the probability of the intersection is
+Егер 
+\[P(A|B)=P(A) \hspace{10px}\textrm{және}\hspace{10px} P(B|A)=P(B),\]
+болса, $A$ мен $B$ оқиғалары \key{тәуелсіз} болады. Бұл $B$-ның орын алуы $A$-ның ықтималдылығына 
+және $A$-ның орын алуы $B$-ның ықтималдылығына 
+еш әсер бермейтінін білдіреді. 
+Бұл жағдайдағы қиылысудың ықтималдылығы --
 \[P(A \cap B)=P(A)P(B).\]
-For example, when drawing a card from a deck, the events
-\[A = \textrm{''the suit is clubs''}\]
-and
-\[B = \textrm{''the value is four''}\]
-are independent. Hence the event
-\[A \cap B = \textrm{''the card is the four of clubs''}\]
-happens with probability
-\[P(A \cap B)=P(A)P(B)=1/4 \cdot 1/13 = 1/52.\]
+Мысалы, колодадан картаны алғанда,
+\[A = \textrm{''картаның түсі жүрек''}\]
+және
+\[B = \textrm{''картаның мәні 4''}\]
+екенін көреміз. Демек 
+\[A \cap B = \textrm{''картаның мәні 4 және түсі жүрек''}\] оқиғасы
+\[P(A \cap B)=P(A)P(B)=1/4 \cdot 1/13 = 1/52\] ықтималдылықпен
+орын алады. 
 
-\section{Random variables}
+\section{Кездейсоқ шамалар}
 
-\index{random variable}
+\index{кездейсоқ шамалар}
 
-A \key{random variable} is a value that is generated
-by a random process.
-For example, when throwing two dice,
-a possible random variable is
-\[X=\textrm{''the sum of the outcomes''}.\]
-For example, if the outcomes are $[4,6]$
-(meaning that we first throw a four and then a six),
-then the value of $X$ is 10.
+\key{Кездейсоқ шама} -- кездейсоқ үдерістен құрылған
+мән. Мысалы, екі ойын сүйегін лақтырған кезде, 
+келесі кездейсоқ шаманы анықтауға болады:
+\[X=\textrm{''нәтижелердің қосындысы''}.\]
+Егер нәтижелер $[4,6]$ болса (яғни бірінші лақтырыстың
+нәтижесі төрт және екінші лақтырыстың нәтижесі алты), 
+онда $X$-тің мәні 10 болады. 
 
-We denote $P(X=x)$ the probability that
-the value of a random variable $X$ is $x$.
-For example, when throwing two dice,
-$P(X=10)=3/36$,
-because the total number of outcomes is 36
-and there are three possible ways to obtain
-the sum 10: $[4,6]$, $[5,5]$ and $[6,4]$.
+$P(X=x)$ деп $X$ кездейсоқ шаманың 
+$x$-ке тең болуының ықтималдығы деп белгілейміз. 
+Мысалы, екі ойын сүйегін лақтырған кезде, 
+$P(X=10)=3/36$, өйткені жалпы нәтижелердің саны 
+36 және қосындысы 10 болатын 3 нәтиже бар: 
+$[4,6]$, $[5,5]$ және $[6,4]$.
 
-\subsubsection{Expected value}
 
-\index{expected value}
+\subsubsection{Математикалық күтім}
 
-The \key{expected value} $E[X]$ indicates the
-average value of a random variable $X$.
-The expected value can be calculated as the sum
+\index{математикалық күтім}
+
+\key{Математикалық күтім} $E[X]$ -- $X$
+кездейсоқ айнымалының орташа мәні. 
+Математикалық күтімді қосындылар арқылы 
+есептеуге болады: 
 \[\sum_x P(X=x)x,\]
-where $x$ goes through all possible values of $X$.
+мұндағы $x$ барлық $X$-тің мәндерінен өтіп шығады. 
 
-For example, when throwing a dice,
-the expected outcome is
+Мысалы, ойын сүйегін лақтырған кездегі 
+нәтиженің математикалық күтімі -- 
 \[1/6 \cdot 1 + 1/6 \cdot 2 + 1/6 \cdot 3 + 1/6 \cdot 4 + 1/6 \cdot 5 + 1/6 \cdot 6 = 7/2.\]
 
-A useful property of expected values is \key{linearity}.
-It means that the sum
-$E[X_1+X_2+\cdots+X_n]$
-always equals the sum
-$E[X_1]+E[X_2]+\cdots+E[X_n]$.
-This formula holds even if random variables
-depend on each other.
+Математикалық күтімнің пайдалы қасиеті --
+\key{сызықтық}. Ол 
+$E[X_1+X_2+\cdots+X_n]$ қосындысы 
+әрдайым 
+$E[X_1]+E[X_2]+\cdots+E[X_n]$ қосындысына тең дегенді білдіреді. 
+Бұл формула егер кездейсоқ шамалар өзара тәуелді болса
+да орындалады. 
 
-For example, when throwing two dice,
-the expected sum is
+Мысалы екі ойын сүйегін лақтырған кезде,
+математикалық күтім --
 \[E[X_1+X_2]=E[X_1]+E[X_2]=7/2+7/2=7.\]
 
-Let us now consider a problem where
-$n$ balls are randomly placed in $n$ boxes,
-and our task is to calculate the expected
-number of empty boxes.
-Each ball has an equal probability to
-be placed in any of the boxes.
-For example, if $n=2$, the possibilities
-are as follows:
+Енді басқа есепті қарастырайық:
+$n$ доп $n$ қорапқа кездейсоқ салынған. 
+Біздің тапсырмамыз -- бос қораптар санының 
+математикалық күтімін есептеу. Әр доп 
+кез келген қорапқа бірдей ықтималдылықпен салына алады.
+Мысалы, егер $n=2$ болса, нәтижелер төмендегідей болуы мүмкін:
 \begin{center}
 \begin{tikzpicture}
 \draw (0,0) rectangle (1,1);
@@ -275,27 +276,25 @@ are as follows:
 \draw[fill=red] (10.95,0.2) circle (0.1);
 \end{tikzpicture}
 \end{center}
-In this case, the expected number of
-empty boxes is
+Бұл жағдайда қораптың бос болуының математикалық
+күтімі --
 \[\frac{0+0+1+1}{4} = \frac{1}{2}.\]
-In the general case, the probability that a
-single box is empty is
+Жалпы жағдайда қораптың бос болуының ықтималдылығы --
 \[\Big(\frac{n-1}{n}\Big)^n,\]
-because no ball should be placed in it.
-Hence, using linearity, the expected number of
-empty boxes is
+себебі оған ешқандай доп салынбауы керек.
+Осылайша, сызықтық қасиетті қолданған кездегі 
+бос қораптардың санының математикалық күтімі --
 \[n \cdot \Big(\frac{n-1}{n}\Big)^n.\]
 
-\subsubsection{Distributions}
+\subsubsection{Үлестірім}
 
-\index{distribution}
+\index{үлестірім}
 
-The \key{distribution} of a random variable $X$
-shows the probability of each value that
-$X$ may have.
-The distribution consists of values $P(X=x)$.
-For example, when throwing two dice,
-the distribution for their sum is:
+$X$ кездейсоқ шаманың \key{үлестірімі}
+$X$-те бола алатын барлық мәндерінің ықтималдылығын
+көрсетеді. Үлестірім $P(X=x)$ мәндерінен тұрады. 
+Мысалы, төменде екі ойын сүйегін лақтырған кездегі 
+нәтижелердің қосындысының үлестірімі берілген:
 \begin{center}
 \small {
 \begin{tabular}{r|rrrrrrrrrrrrr}
@@ -305,81 +304,68 @@ $P(X=x)$ & $1/36$ & $2/36$ & $3/36$ & $4/36$ & $5/36$ & $6/36$ & $5/36$ & $4/36$
 }
 \end{center}
 
-\index{uniform distribution}
-In a \key{uniform distribution},
-the random variable $X$ has $n$ possible
-values $a,a+1,\ldots,b$ and the probability of each value is $1/n$.
-For example, when throwing a dice,
-$a=1$, $b=6$ and $P(X=x)=1/6$ for each value $x$.
+\index{бірқалыпты үлестірім}
 
-The expected value of $X$ in a uniform distribution is
+\key{Бірқалыпты үлестірімде} $X$ кездейсоқ шамасында 
+$n$ мүмкін болатын $a,a+1,\ldots,b$ мәндері бар және әр мәнінің 
+ықтималдылығы $1/n$. Мысалы ойын сүйегін лақтырған кезде 
+$a=1$, $b=6$ және әр $x$ мәніне $P(X=x)=1/6$ орындалады.
+
+Бірқалыпты үлестірімдегі $X$ мәнінің математикалық күтімі ––
 \[E[X] = \frac{a+b}{2}.\]
 
-\index{binomial distribution}
-In a \key{binomial distribution}, $n$ attempts
-are made
-and the probability that a single attempt succeeds
-is $p$.
-The random variable $X$ counts the number of
-successful attempts,
-and the probability of a value $x$ is
+\index{Биномдық үлестірім}
+\key{Биномдық  үлестірімде} $n$ сынақ жасалады
+және әр сынақтың сәтті болуының ықтималдылығы -- $p$. 
+$X$ кездейсоқ шамасы неше сынақ сәтті өткенін 
+санайды және $x$ мәнінің ықтималдығы --
 \[P(X=x)=p^x (1-p)^{n-x} {n \choose x},\]
-where $p^x$ and $(1-p)^{n-x}$ correspond to
-successful and unsuccessful attemps,
-and ${n \choose x}$ is the number of ways
-we can choose the order of the attempts.
+мұндағы $p^x$ және $(1-p)^{n-x}$ сәтті және сәтсіз 
+сынақтарға сәйкес келсе, ${n \choose x}$ сынақтарды 
+қанша жолмен жасауға болатынын көрсетеді. 
 
-For example, when throwing a dice ten times,
-the probability of throwing a six exactly
-three times is $(1/6)^3 (5/6)^7 {10 \choose 3}$.
+Мысалы, ойын сүйегін он рет лақтырған кезде, 
+6 санын 3 рет көруіміздің ықтималдылығы  --
+$(1/6)^3 (5/6)^7 {10 \choose 3}$.
 
-The expected value of $X$ in a binomial distribution is
+Биномдық үлестірімде $X$ мәнінің математикалық күтімі 
 \[E[X] = pn.\]
 
-\index{geometric distribution}
-In a \key{geometric distribution},
-the probability that an attempt succeeds is $p$,
-and we continue until the first success happens.
-The random variable $X$ counts the number
-of attempts needed, and the probability of
-a value $x$ is
+\index{Геометриялық үлестірім}
+\key{Геометриялық үлестірімде} 
+сынақтың сәтті өтуінің ықтималдылығы -- $p$
+және сынақтарды бірінші сәтті сынаққа дейін жалғастырамыз.
+$X$ кездейсоқ шамасы қанша сынақ керектінін есептейді
+және $x$ мәнінің ықтималдылығы 
 \[P(X=x)=(1-p)^{x-1} p,\]
-where $(1-p)^{x-1}$ corresponds to the unsuccessful attemps
-and $p$ corresponds to the first successful attempt.
+мұндағы $(1-p)^{x-1}$ сәтсіз сынақтарға сәйкес келсе,
+$p$ бірінші сәтті сынаққа сәйкес келеді. 
 
-For example, if we throw a dice until we throw a six,
-the probability that the number of throws
-is exactly 4 is $(5/6)^3 1/6$.
+Мысалы, ойын сүйегін алты санын көргенше лақтырамыз десек,
+лақтырыс санының 4 болуының ықтималдылығы 
+$(5/6)^3 1/6$.
 
-The expected value of $X$ in a geometric distribution is
+Геометриялық үлестірімде $X$ мәнінің математикалық күтімі --
 \[E[X]=\frac{1}{p}.\]
 
-\section{Markov chains}
+\section{Марковтық тізбе}
 
-\index{Markov chain}
+\index{Марковтық тізбе}
 
-A \key{Markov chain}
-% \footnote{A. A. Markov (1856--1922)
-% was a Russian mathematician.}
-is a random process
-that consists of states and transitions between them.
-For each state, we know the probabilities
-for moving to other states.
-A Markov chain can be represented as a graph
-whose nodes are states and edges are transitions.
+\key{Марковтық тізбе} –– күйлер мен олардың ауысуларын
+қамтитын кездейсоқ үдеріс. Ауысулар бір күйден басқа күйлерге көшу ықтималдылығын көрсетеді. Марковтық тізбекті төбелері күй, қырлары ауысу болатын граф ретінде көрсетуге болады. 
 
-As an example, consider a problem
-where we are in floor 1 in an $n$ floor building.
-At each step, we randomly walk either one floor
-up or one floor down, except that we always
-walk one floor up from floor 1 and one floor down
-from floor $n$.
-What is the probability of being in floor $m$
-after $k$ steps?
+Өрнек ретінде мына есепті қарастырайық:
+$n$ қабаттан тұратын ғимараттың біз бірінші қабатында
+тұрмыз. Әр қадам сайын біз кездейсоқ түрде бір қабат
+үстіге көтерілеміз немесе бір қабат астыға түсеміз. Бірақ
+бірінші қабатта біз әрдайым үстіге көтерілеміз және 
+$n$-қабатта әрдайым төменге түсеміз. $k$ қадамнан кейін
+$m$-қабатта болуымыздың ықтималдылығы қандай?
 
-In this problem, each floor of the building
-corresponds to a state in a Markov chain.
-For example, if $n=5$, the graph is as follows:
+Бұл есепте, ғимараттың әр қабаты Марковтық тізбедегі әр
+күйге сәйкес келеді. Мысалы, егер $n=5$ болса, граф төмендегідей
+болады:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
@@ -403,32 +389,28 @@ For example, if $n=5$, the graph is as follows:
 \end{tikzpicture}
 \end{center}
 
-The probability distribution
-of a Markov chain is a vector
-$[p_1,p_2,\ldots,p_n]$, where $p_k$ is the
-probability that the current state is $k$.
-The formula $p_1+p_2+\cdots+p_n=1$ always holds.
+Марковтық тізбенің ықтималдылық үлестірімі 
+-- $[p_1,p_2,\ldots,p_n]$ векторы, мұндағы
+$p_k$ -- қазіргі күйіміз $k$ болуының ықтималдылығы. 
+$p_1+p_2+\cdots+p_n=1$ формуласы әрдайым орындалады. 
 
-In the above scenario, the initial distribution is
-$[1,0,0,0,0]$, because we always begin in floor 1.
-The next distribution is $[0,1,0,0,0]$,
-because we can only move from floor 1 to floor 2.
-After this, we can either move one floor up
-or one floor down, so the next distribution is
-$[1/2,0,1/2,0,0]$, and so on.
+Жоғарыдағы жағдайда бастапқы үлестірім -- $[1,0,0,0,0]$,
+себебі біз бірінші қабаттан бастаймыз. Одан кейінгі үлестірім
+$[0,1,0,0,0]$, себебі біз бірінші қабаттан тек екінші қабатқа
+көше аламыз. Кейін біз төменге түсеміз не жоғарыға көтерілеміз,
+демек келесі үлестірім -- $[1/2,0,1/2,0,0]$ және дәл солай 
+кете береді.
 
-An efficient way to simulate the walk in
-a Markov chain is to use dynamic programming.
-The idea is to maintain the probability distribution,
-and at each step go through all possibilities
-how we can move.
-Using this method, we can simulate
-a walk of $m$ steps in $O(n^2 m)$ time.
+Марковтық тізбедегі қадамдарды симуляциялаудың тиімді жолы
+-- динамикалық бағдарламалауды қолдану.  
+Динамикалық бағдарламалаудың идеясы -- 
+ықтималдылық үлестірімін сақтай отырып,
+әр қадамда барлық мүмкін болатын жолдарды қарастыру.  
+Осы әдісті қолдана отырып, $m$ қадамдық кезуді $O(n^2 m)$ уақытта
+симуляциялауымызға болады. 
 
-The transitions of a Markov chain can also be
-represented as a matrix that updates the
-probability distribution.
-In the above scenario, the matrix is
+Марковтық тізбенің ауысуларын ықтималдылық үлестірімді жаңартатын
+матрица ретінде көрсетуге болады. Аталған жағдайға сәйкес төмендегідей матрица құрылады:
 
 \[ 
  \begin{bmatrix}
@@ -440,11 +422,10 @@ In the above scenario, the matrix is
  \end{bmatrix}.
 \]
 
-When we multiply a probability distribution by this matrix,
-we get the new distribution after moving one step.
-For example, we can move from the distribution
-$[1,0,0,0,0]$ to the distribution
-$[0,1,0,0,0]$ as follows:
+Ықтималдылық үлестірімін осы матрицаға көбейткенде, 
+бір қадам өткеннен кейінгі ықтималдылық үлестірімді 
+алатын боламыз. Мысалы $[1,0,0,0,0]$ ықтималдылық үлестірімнен
+$[0,1,0,0,0]$ ықтималдылық үлестірімге келісі ретпен қозғалатын боламыз:
 
 \[ 
  \begin{bmatrix}
@@ -471,122 +452,160 @@ $[0,1,0,0,0]$ as follows:
  \end{bmatrix}.
 \]
 
-By calculating matrix powers efficiently,
-we can calculate the distribution after $m$ steps
-in $O(n^3 \log m)$ time.
+Матрицаның дәрежесін тиімді есептейтін болсақ, 
+$m$ қадамнан кейінгі үлестірімді $O(n^3 \log m)$ уақытта
+есептей аламыз. 
 
-\section{Randomized algorithms}
+\section{Рандомизацияланған алгоритмдер}
 
-\index{randomized algorithm}
+\index{рандомизацияланған алгоритм}
 
-Sometimes we can use randomness for solving a problem,
-even if the problem is not related to probabilities.
-A \key{randomized algorithm} is an algorithm that
-is based on randomness.
+Кейде ықтималдылыққа байланысы жоқ есептерді шығару
+үшін кездейсоқтықты қолдануға болады. \key{Рандомизацияланған 
+алгоритм} деп кездейсоқтыққа негізделген алгоритмді атаймыз. 
 
-\index{Monte Carlo algorithm}
+\index{Монте Карло алгоритмі}
 
-A \key{Monte Carlo algorithm} is a randomized algorithm
-that may sometimes give a wrong answer.
-For such an algorithm to be useful,
-the probability of a wrong answer should be small.
+\key{Монте Карло алгоритмі} –– кейде қате жауап
+беретін рандомизацияланған алгоритм. Алгоритм пайдалы 
+болу үшін жауаптың қате шығу ықтималдылығы төмен болуы 
+тиіс.
 
-\index{Las Vegas algorithm}
+\index{Лас Вегас алгоритмі}
 
-A \key{Las Vegas algorithm} is a randomized algorithm
-that always gives the correct answer,
-but its running time varies randomly.
-The goal is to design an algorithm that is
-efficient with high probability.
+\key{Лас Вегас алгоритмі} –– орындалу уақыты әртүрлі болатын және
+әрдайым дұрыс жауап беретін алгоритм. Бұл жердегі мақсатымыз --
+жоғары ықтималдылықпен тиімді алгоритмді жобалау. 
 
-Next we will go through three example problems that
-can be solved using randomness.
+Біз төменде кездейсоқтықпен шығарылатын үш есепті қарастырамыз. 
 
-\subsubsection{Order statistics}
+\subsubsection{Реттік статистика}
 
-\index{order statistic}
+\index{реттік статистика}
 
-The $kth$ \key{order statistic} of an array
-is the element at position $k$ after sorting
-the array in increasing order.
-It is easy to calculate any order statistic
-in $O(n \log n)$ time by first sorting the array,
-but is it really needed to sort the entire array
-just to find one element?
+Жиымның $k$-\key{реттік статистикасы} --
+жиымды сұрыптағаннан кейін $k$-позицияда тұратын
+элемент. Кез келген реттік статистиканы 
+$O(n \log n)$ уақытта жеңіл түрде есептеуге болады:
+басында жиымды сұрыптаймыз, кейін $k$-элементті аламыз. 
+Бірақ бір элементті табу үшін барлық жиымды сұрыптау 
+шыныменде қажет пе?
 
-It turns out that we can find order statistics
-using a randomized algorithm without sorting the array.
-The algorithm, called \key{quickselect}\footnote{In 1961,
-C. A. R. Hoare published two algorithms that
-are efficient on average: \index{quicksort} \index{quickselect}
-\key{quicksort} \cite{hoa61a} for sorting arrays and
-\key{quickselect} \cite{hoa61b} for finding order statistics.}, is a Las Vegas algorithm:
-its running time is usually $O(n)$
-but $O(n^2)$ in the worst case.
+Реттік статистиканы жиымды сұрыптамай, рандомизацияланған 
+алгоритм арқылы да табуға болады екен. Мұндай алгоритмдердің біріне Лас Вегас алгоритмі типіне кіретін \key{quickselect} алгоритмі жатады\footnote{1961 жылы
+Ч. А. Р. Хоар орташа есеппен тиімді екі алгоритмді, \index{quicksort} \index{quickselect}
+жиымдарды сұрыптайтын \key{quicksort} \cite{hoa61a} және
+реттік статистиканы табатын
+\key{quickselect} \cite{hoa61b} алгоритмдерін жариялады.}.
+Оның орындалу уақыты әдетте $O(n)$, бірақ ең жаман жағдайда $O(n^2)$ болады.
 
-The algorithm chooses a random element $x$
-of the array, and moves elements smaller than $x$
-to the left part of the array,
-and all other elements to the right part of the array.
-This takes $O(n)$ time when there are $n$ elements.
-Assume that the left part contains $a$ elements
-and the right part contains $b$ elements.
-If $a=k$, element $x$ is the $k$th order statistic.
-Otherwise, if $a>k$, we recursively find the $k$th order
-statistic for the left part,
-and if $a<k$, we recursively find the $r$th order
-statistic for the right part where $r=k-a$.
-The search continues in a similar way, until the element
-has been found.
+Алгоритм жиымның $x$ кездейсоқ элементін алады, сосын
+$x$-тен кіші элементтерді жиымның сол жағына жылжытады, ал қалған барлық элементтерді жиымның оң жағына жылжытады.
+Егер жиымда $n$ элемент бар болса, бұл $O(n)$ уақыт алады. 
+Сол жағында $a$ элемент және оң жағында $b$ элемент бар делік.
+Егер $a=k$ болса, $x$ элементі $k$-реттік статистика болады. 
+Егер $a>k$ болса, біз $k$-реттік статистиканы рекурсивті
+түрде сол жақтан іздейміз. Ал егер $a<k$ болса,
+біз $r$-реттік статистиканы рекурсивті түрде оң жақтан
+іздейтін боламыз, мұндағы $r=k-a$. Ізденіс солай элемент 
+табылғанға дейін қайталана береді. 
 
-When each element $x$ is randomly chosen,
-the size of the array about halves at each step,
-so the time complexity for
-finding the $k$th order statistic is about
+% Assume that the left part contains $a$ elements
+% and the right part contains $b$ elements.
+% If $a=k$, element $x$ is the $k$th order statistic.
+% Otherwise, if $a>k$, we recursively find the $k$th order
+% statistic for the left part,
+% and if $a<k$, we recursively find the $r$th order
+% statistic for the right part where $r=k-a$.
+% The search continues in a similar way, until the element
+% has been found.
+
+$x$ элементі кездейсоқ түрде алынған кезде 
+жиымның өлшемі әр қадам сайын екіге бөлінеді.
+Сондықтан $k$-реттік статистиканы табудың уақытша 
+күрделілігі шамамен 
 \[n+n/2+n/4+n/8+\cdots < 2n = O(n).\]
 
-The worst case of the algorithm requires still $O(n^2)$ time,
-because it is possible that $x$ is always chosen
-in such a way that it is one of the smallest or largest
-elements in the array and $O(n)$ steps are needed.
-However, the probability for this is so small
-that this never happens in practice.
+% When each element $x$ is randomly chosen,
+% the size of the array about halves at each step,
+% so the time complexity for
+% finding the $k$th order statistic is about
+% \[n+n/2+n/4+n/8+\cdots < 2n = O(n).\]
 
-\subsubsection{Verifying matrix multiplication}
+Алгоритм ең жаман жағдайда $O(n^2)$ уақытты қажет етеді,
+өйткені $x$ саны жиымдағы ең кіші не ең үлкен сан болып 
+таңдалынуы мүмкін және ол кезде $O(n)$ қадам жасау керек болады.
+Бірақ ондай жағдайдың болуының ықтималдылығы өте төмен.
+Сондықтан бұл тәжірибеде мүлдем кездеспейді. 
 
-\index{matrix multiplication}
+% The worst case of the algorithm requires still $O(n^2)$ time,
+% because it is possible that $x$ is always chosen
+% in such a way that it is one of the smallest or largest
+% elements in the array and $O(n)$ steps are needed.
+% However, the probability for this is so small
+% that this never happens in practice.
 
-Our next problem is to \emph{verify}
-if $AB=C$ holds when $A$, $B$ and $C$
-are matrices of size $n \times n$.
-Of course, we can solve the problem
-by calculating the product $AB$ again
-(in $O(n^3)$ time using the basic algorithm),
-but one could hope that verifying the
-answer would by easier than to calculate it from scratch.
+\subsubsection{Матрицалардың көбейтіндісін тексеру}
 
-It turns out that we can solve the problem
-using a Monte Carlo algorithm\footnote{R. M. Freivalds published
-this algorithm in 1977 \cite{fre77}, and it is sometimes
-called \index{Freivalds' algoritm} \key{Freivalds' algorithm}.} whose
-time complexity is only $O(n^2)$.
-The idea is simple: we choose a random vector
-$X$ of $n$ elements, and calculate the matrices
-$ABX$ and $CX$. If $ABX=CX$, we report that $AB=C$,
-and otherwise we report that $AB \neq C$.
+\index{матрица көбейтіндісі}
 
-The time complexity of the algorithm is
-$O(n^2)$, because we can calculate the matrices
-$ABX$ and $CX$ in $O(n^2)$ time.
-We can calculate the matrix $ABX$ efficiently
-by using the representation $A(BX)$, so only two
-multiplications of $n \times n$ and $n \times 1$
-size matrices are needed.
+Келесі есебіміз -- өлшемдері $n \times n$ болатын
+$A$, $B$ және $C$ матрицаларға $AB=C$ орындалатынын 
+\emph{тексеру}. 
+Әрине бұл есепті шығару үшін 
+$AB$ көбейтіндісін қайтадан (қарапайым алгоритм арқылы $O(n^3)$ уақытта) есептесек болады, бірақ жауапты тексеру 
+қайтадан есептеуден әлдеқайда оңайырақ болуы керек
+деген үміт бар. 
 
-The drawback of the algorithm is
-that there is a small chance that the algorithm
-makes a mistake when it reports that $AB=C$.
-For example, 
+% Our next problem is to \emph{verify}
+% if $AB=C$ holds when $A$, $B$ and $C$
+% are matrices of size $n \times n$.
+% Of course, we can solve the problem
+% by calculating the product $AB$ again
+% (in $O(n^3)$ time using the basic algorithm),
+% but one could hope that verifying the
+% answer would by easier than to calculate it from scratch.
+
+Есепті уақытша күрделілігі $O(n^2)$ болатын
+Монте Карло алгоритмі\footnote{Р. М. Фрейвалдс бұл алгоритмді 1977 жылы
+жариялады \cite{fre77}, оны кейде \key{Фрейвалдс алгоритмі} деп те атайды.} 
+арқылы шығаруға болады екен. Алгоритмнің идеясы -- қарапайым. 
+Басында $n$ кездейсоқ элементтерден тұратын 
+$X$ аламыз, сосын $ABX$ және $CX$ матрицаларын
+есептейміз. Егер $ABX=CX$ орындалса, $AB=C$ деп
+хабарлаймыз, әйтпесе $AB \neq C$ деп хабарлаймыз. 
+
+% It turns out that we can solve the problem
+% using a Monte Carlo algorithm\footnote{R. M. Freivalds published
+% this algorithm in 1977 \cite{fre77}, and it is sometimes
+% called \index{Freivalds' algoritm} \key{Freivalds' algorithm}.} whose
+% time complexity is only $O(n^2)$.
+% The idea is simple: we choose a random vector
+% $X$ of $n$ elements, and calculate the matrices
+% $ABX$ and $CX$. If $ABX=CX$, we report that $AB=C$,
+% and otherwise we report that $AB \neq C$.
+
+Алгоритмнің уақытша күрделілігі -- $O(n^2)$, 
+себебі $ABX$ және $CX$ матрицалары
+$O(n^2)$ уақытта есептелінеді. $ABX$ матрицасын
+$A(BX)$ көрінісі арқылы тиімдірек есептеуімізге болады.
+Осылайша екі $n \times n$ және $n \times 1$
+матрицаларын көбейту ғана қажет болады. 
+
+% The time complexity of the algorithm is
+% $O(n^2)$, because we can calculate the matrices
+% $ABX$ and $CX$ in $O(n^2)$ time.
+% We can calculate the matrix $ABX$ efficiently
+% by using the representation $A(BX)$, so only two
+% multiplications of $n \times n$ and $n \times 1$
+% size matrices are needed.
+
+Алгоритмнің кемшілігі --
+ $AB=C$ болуын кішкентай ықтималдылықпен қате баяндауында. 
+% The drawback of the algorithm is
+% that there is a small chance that the algorithm
+% makes a mistake when it reports that $AB=C$.
+Мысалы
 \[
  \begin{bmatrix}
   6 & 8 \\
@@ -598,7 +617,7 @@ For example,
   3 & 2 \\
  \end{bmatrix},
 \]
-but
+бірақ
 \[
  \begin{bmatrix}
   6 & 8 \\
@@ -618,22 +637,30 @@ but
   6 \\
  \end{bmatrix}.
 \]
-However, in practice, the probability that the
-algorithm makes a mistake is small,
-and we can decrease the probability by
-verifying the result using multiple random vectors $X$
-before reporting that $AB=C$.
+Дегенмен тәжірибеде алгоритмнің қате орындау ықтималдылығы
+төмен және сол ықтималдылықты бірнеше кездейсоқ
+$X$ векторлармен тексеру арқылы одан сайын төмендете аламыз. 
+% However, in practice, the probability that the
+% algorithm makes a mistake is small,
+% and we can decrease the probability by
+% verifying the result using multiple random vectors $X$
+% before reporting that $AB=C$.
 
-\subsubsection{Graph coloring}
+\subsubsection{Графты бояу}
 
-\index{coloring}
+\index{бояу}
 
-Given a graph that contains $n$ nodes and $m$ edges,
-our task is to find a way to color the nodes
-of the graph using two colors so that
-for at least $m/2$ edges, the endpoints 
-have different colors.
-For example, in the graph
+$n$ төбелер мен $m$ қырлардан тұратын граф берілген.
+Біздің тапсырмамыз -- ең кемінде $m/2$ қырлардың 
+шеттері әртүрлі түске ие болатындай етіп төбелерді бояу
+жолын табу.  
+
+% Given a graph that contains $n$ nodes and $m$ edges,
+% our task is to find a way to color the nodes
+% of the graph using two colors so that
+% for at least $m/2$ edges, the endpoints 
+% have different colors.
+Мысалы, төмендегі графта
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle] (1) at (1,3) {$1$};
@@ -651,7 +678,8 @@ For example, in the graph
 \path[draw,thick,-] (4) -- (5);
 \end{tikzpicture}
 \end{center}
-a valid coloring is as follows:
+жарамды бояулардың бірі осындай болмақ:
+% a valid coloring is as follows:
 \begin{center}
 \begin{tikzpicture}[scale=0.9]
 \node[draw, circle, fill=blue!40] (1) at (1,3) {$1$};
@@ -669,21 +697,35 @@ a valid coloring is as follows:
 \path[draw,thick,-] (4) -- (5);
 \end{tikzpicture}
 \end{center}
-The above graph contains 7 edges, and for 5 of them,
-the endpoints have different colors,
-so the coloring is valid.
+Жоғарыдағы граф 7 қырдан тұрады және 5-еуінің
+шеттері әртүрлі түске ие, демек
+бұл бояу жарамды деп саналады.
+% The above graph contains 7 edges, and for 5 of them,
+% the endpoints have different colors,
+% so the coloring is valid.
 
-The problem can be solved using a Las Vegas algorithm
-that generates random colorings until a valid coloring
-has been found.
-In a random coloring, the color of each node is
-independently chosen so that the probability of
-both colors is $1/2$.
+Есепті жарамды бояуды тапқанша дейін кездейсоқ түрде бояйтын 
+Лас Вегас алгоритмі арқылы шығаруға болады. Кездейсоқ
+бояуда әр төбенің түсі $1/2$ ықтималдылықпен 
+тәуелсіз түрде таңдалады. 
 
-In a random coloring, the probability that the endpoints
-of a single edge have different colors is $1/2$.
-Hence, the expected number of edges whose endpoints
-have different colors is $m/2$.
-Since it is expected that a random coloring is valid,
-we will quickly find a valid coloring in practice.
+% The problem can be solved using a Las Vegas algorithm
+% that generates random colorings until a valid coloring
+% has been found.
+% In a random coloring, the color of each node is
+% independently chosen so that the probability of
+% both colors is $1/2$.
+
+Кездейсоқ бояуда бір қырдың шеттері бірдей емес түске 
+ие болуының ықтималдылығы -- $1/2$. Демек қырлардың
+шеттері бірдей емес түске ие болуының математикалық
+күтімі -- $m/2$. Кездейсоқ бояу жарамды деп күтілгендіктен,
+іс жүзінде жарамды бояуды тез табатын боламыз.
+
+% In a random coloring, the probability that the endpoints
+% of a single edge have different colors is $1/2$.
+% Hence, the expected number of edges whose endpoints
+% have different colors is $m/2$.
+% Since it is expected that a random coloring is valid,
+% we will quickly find a valid coloring in practice.
 

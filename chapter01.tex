@@ -1,92 +1,60 @@
-\chapter{Introduction}
+\chapter{Кіріспе}
 
-Competitive programming combines two topics:
-(1) the design of algorithms and (2) the implementation of algorithms.
+Спорттық бағдарламалау екі тақырыпты қамтиды:
+(1) алгоритмдерді жобалау және (2) оларды жүзеге асыру.
 
-The \key{design of algorithms} consists of problem solving
-and mathematical thinking.
-Skills for analyzing problems and solving them
-creatively are needed.
-An algorithm for solving a problem
-has to be both correct and efficient,
-and the core of the problem is often
-about inventing an efficient algorithm.
+\key{Алгоритмдерді жобалау} есеп шығару мен математикалық ойлаудан тұрады.
+Есеп шығару барысында креативті көзқарас пен талдау жасай алу қабілеті қажет.
+Есептің шешімі болатын алгоритм тиімді әрі дұрыс болуы тиіс, 
+көбіне есептердің түпкі мақсаты оңтайлы алгоритмді анықтауға құрылады.
 
-Theoretical knowledge of algorithms
-is important to competitive programmers.
-Typically, a solution to a problem is
-a combination of well-known techniques and
-new insights.
-The techniques that appear in competitive programming
-also form the basis for the scientific research
-of algorithms.
+Теория -- спорттық бағдарламалаушы үшін маңызды бөлім. 
+Есептің шешімі -- дұрыс пайдаланылған білім мен идеяның жемісі.
+Спорттық бағдарламалауда кездесетін кей әдістер алгоритмдерді тереңірек зерттеудің негізін қалыптастырады.
 
-The \key{implementation of algorithms} requires good
-programming skills.
-In competitive programming, the solutions
-are graded by testing an implemented algorithm
-using a set of test cases.
-Thus, it is not enough that the idea of the
-algorithm is correct, but the implementation also
-has to be correct.
+Жақсы бағдарлама жаза білу қабілеті \key{алгоритмдерді жүзеге асыруға} 
+үлкен әсерін тигізеді.
+Спорттық бағдарламалауда есеп шешімі тест жиыны арқылы тексеріледі.
+Сондықтан алгоритм идеясы мен жазылуының дұрыс болуы шарт.
 
-A good coding style in contests is
-straightforward and concise.
-Programs should be written quickly,
-because there is not much time available.
-Unlike in traditional software engineering,
-the programs are short (usually at most a few
-hundred lines of code), and they do not need to 
-be maintained after the contest.
+Бағдарламалау жарыстарындағы (контесттерде) ең жақсы код стиліне ''қарапайым да жинақы жазу'' жатады. 
+Уақыттың шетеулі болуына байланысты бағдарламаны тез жазған абзал.
+Инженерлік бағдарламалауға қарағанда бұл жерде код қысқа болады (әдетте максималды мөлшері бірнеше жүздеген жолдан тұрады), әрі жарыстан кейін ары қарай сүйемелдеуді қажет етпейді.
 
-\section{Programming languages}
+\section{Бағдарламалау тілдері}
 
 \index{programming language}
 
-At the moment, the most popular programming
-languages used in contests are C++, Python and Java.
-For example, in Google Code Jam 2017,
-among the best 3,000 participants,
-79 \% used C++,
-16 \% used Python and
-8 \% used Java \cite{goo17}.
-Some participants also used several languages.
+Қазіргі таңда бағдарламалау жарыстарында (контесттерде) С++, Python, Java тілдері жиі қолданылады. 
+Мысалы, Google Code Jam 2017 жарысында
+3000 үздік қатысушылардың арасында
+79 \% C++,
+16 \% Python,
+8 \%  Java \cite{goo17} тілдерін қолданған.
+Қалған пайызы өзге тілдерді пайдаланған.
 
-Many people think that C++ is the best choice
-for a competitive programmer,
-and C++ is nearly always available in
-contest systems.
-The benefits of using C++ are that
-it is a very efficient language and
-its standard library contains a 
-large collection
-of data structures and algorithms.
+Көп адам С++ тілін спорттық бағдарламалау 
+үшін ең қолайлы тіл деп есептейді
+және С++ барлық дерлік контесттер жүйесінде кездеседі.
+Бұл тілдің артықшылығы – тілдегі алгоритмдер мен деректер 
+құрылымының үлкен жиынтығы болуында. Сондай-ақ С++ тілінде кодтың жылдамырақ жұмыс істеуі де бұл тілдің тиімділігін арттырады.  
 
-On the other hand, it is good to
-master several languages and understand
-their strengths.
-For example, if large integers are needed
-in the problem,
-Python can be a good choice, because it
-contains built-in operations for
-calculating with large integers.
-Still, most problems in programming contests
-are set so that
-using a specific programming language
-is not an unfair advantage.
+Бір жағынан бірнеше тілде жаза алудың өз 
+тиімді тұстары да бар. 
+Мысалы, есепте үлкен сандармен жұмыс жасау керек болса,
+Python ұтымды таңдау болмақ. Себебі оның ішіне үлкен сандармен жұмыс жасайтын
+операциялар кіріктірілген.
+Дегенмен контесттерде есептер барлық тілдерде шешім табуға болатындай етіп
+құрастырылатынын ұмытпағанымыз жөн.
 
-All example programs in this book are written in C++,
-and the standard library's
-data structures and algorithms are often used.
-The programs follow the C++11 standard,
-which can be used in most contests nowadays.
-If you cannot program in C++ yet,
-now is a good time to start learning.
+Мысал ретінде берілген барлық кодтар С++ - те жазылып отыр және көбіне стандартты дерекханадағы алгоритмдер мен деректер құрылымдары қолданылады.
+Кітапта жазылған кодтар барлық заманауи контесттерде кездесетін  С++11 стандартты нұсқасына сай келеді.
 
-\subsubsection{C++ code template}
+Егер сіз әлі С++ - пен таныс болмасаңыз, осы тілді меңгере бастауыңызға қолайлы сәт енді туды деп санауыңызға болады.
 
-A typical C++ code template for competitive programming
-looks like this:
+\subsubsection{C++ код үлгісі}
+
+Жиі кездесетін С++ код үлгісі:
 
 \begin{lstlisting}
 #include <bits/stdc++.h>
@@ -98,51 +66,44 @@ int main() {
 }
 \end{lstlisting}
 
-The \texttt{\#include} line at the beginning
-of the code is a feature of the \texttt{g++} compiler
-that allows us to include the entire standard library.
-Thus, it is not needed to separately include
-libraries such as \texttt{iostream},
-\texttt{vector} and \texttt{algorithm},
-but rather they are available automatically.
+Кодтың ең жоғарғы бөлігінде жазылған \texttt{\#include} 
+жолы -- \texttt{g++} компиляторының ерекшілігі.
+Оның көмегімен барлық стандартты дерекханаларды пайдалана аламыз.
+\texttt{iostream}, \texttt{vector} және \texttt{algorithm}
+сияқты дерекханалардың әрқайсысын жеке-дара жазу қажеттілігі туындамайды,
+бірден автоматты түрде қолдана аламыз.
 
-The \texttt{using} line declares
-that the classes and functions
-of the standard library can be used directly
-in the code.
-Without the \texttt{using} line we would have
-to write, for example, \texttt{std::cout},
-but now it suffices to write \texttt{cout}.
+\texttt{using} жолы стандартты дерекхана кластары
+мен функциялары тікелей әрекет ете алатындығын көрсетеді.  
+Онсыз \texttt{cout} орнына \texttt{std::cout} 
+деп жазып отыруға тура келер еді.
 
-The code can be compiled using the following command:
+Келесі команда арқылы код компиляциядан өтеді:
 
 \begin{lstlisting}
 g++ -std=c++11 -O2 -Wall test.cpp -o test
 \end{lstlisting}
 
-This command produces a binary file \texttt{test}
-from the source code \texttt{test.cpp}.
-The compiler follows the C++11 standard
+Команда \texttt{test.cpp} кодынан
+\texttt{test} бинарлық файлын қайтарады.
+Компилятор C++11 стандартын қолданады
 (\texttt{-std=c++11}),
-optimizes the code (\texttt{-O2})
-and shows warnings about possible errors (\texttt{-Wall}).
+кодты оңтайландырады (\texttt{-O2})
+және туындауы мүмкін ескертулерге нұсқайды (\texttt{-Wall}).
 
-\section{Input and output}
+\section{Енгізу (input) мен шығару (output)}
 
-\index{input and output}
+\index{Енгізу (input) мен шығару (output)}
 
-In most contests, standard streams are used for
-reading input and writing output.
-In C++, the standard streams are
-\texttt{cin} for input and \texttt{cout} for output.
-In addition, the C functions
-\texttt{scanf} and \texttt{printf} can be used.
+Көбіне контесттерде енгізу мен шығару үшін 
+стандартты ағындарды пайдаланады.
+С++ үшін стандартты ағындар :
+\texttt{cin} енгізу үшін, \texttt{cout} шығару үшін.
+Сонымен қатар C функциялары
+\texttt{scanf} пен \texttt{printf} - ті пайдалануға болады.
 
-The input for the program usually consists of
-numbers and strings that are separated with
-spaces and newlines.
-They can be read from the \texttt{cin} stream
-as follows:
+Әдетте енгізу бос орын не жаңа жолдар арқылы ажыратылған сандар мен жолдардан (string) тұрады.
+Олар мысалдағыдай \texttt{cin} арқылы оқылады:
 
 \begin{lstlisting}
 int a, b;
@@ -150,11 +111,10 @@ string x;
 cin >> a >> b >> x;
 \end{lstlisting}
 
-This kind of code always works,
-assuming that there is at least one space
-or newline between each element in the input.
-For example, the above code can read
-both of the following inputs:
+Енгізуде әр элемент ең кем дегенде бос 
+орынмен немесе жаңа жолмен бөлінгендіктен, әрдайым осы тәріздес кодтар жұмыс істейді.
+
+Мысалы, жоғарыдағы код келтірілген мына екі енгізуді де қабылдай алады:
 \begin{lstlisting}
 123 456 monkey
 \end{lstlisting}
@@ -162,107 +122,94 @@ both of the following inputs:
 123    456
 monkey
 \end{lstlisting}
-The \texttt{cout} stream is used for output
-as follows:
+\texttt{cout} ағымы осы жердегідей шығару үшін пайдаланылады:
 \begin{lstlisting}
 int a = 123, b = 456;
 string x = "monkey";
 cout << a << " " << b << " " << x << "\n";
 \end{lstlisting}
 
-Input and output is sometimes
-a bottleneck in the program.
-The following lines at the beginning of the code
-make input and output more efficient:
+Дәл осы енгізу мен шығару бағдарламаның тиімді жұмыс жасауына кейде кедергі келтіреді.
+Ал төмендегі жолдар кедергіге қарсы әрекет етеді:
 
 \begin{lstlisting}
 ios::sync_with_stdio(0);
 cin.tie(0);
 \end{lstlisting}
 
-Note that the newline \texttt{"\textbackslash n"}
-works faster than \texttt{endl},
-because \texttt{endl} always causes
-a flush operation.
+Тағы да ескеретін бір жайт бар. \texttt{"\textbackslash n"}
+\texttt{endl} - ке қарағанда тезірек жұмыс жасайды,
+өйткені \texttt{endl} әрдайым буферді арылтып отырады.
 
-The C functions \texttt{scanf}
-and \texttt{printf} are an alternative
-to the C++ standard streams.
-They are usually a bit faster,
-but they are also more difficult to use.
-The following code reads two integers from the input:
+C функциялары \texttt{scanf}
+пен \texttt{printf} С++ - тің стандартты ағымдарына балама ретінде қолданылады.
+С функциялары салыстырмалы түрде жылдамырақ жұмыс жасағанымен, қолданыста біраз қиындық тудырады.
+Төмендегі код екі сан енгізеді:
 \begin{lstlisting}
 int a, b;
 scanf("%d %d", &a, &b);
 \end{lstlisting}
-The following code prints two integers:
+Ал келесі код керісінше екі сан шығарады:
 \begin{lstlisting}
 int a = 123, b = 456;
 printf("%d %d\n", a, b);
 \end{lstlisting}
 
-Sometimes the program should read a whole line
-from the input, possibly containing spaces.
-This can be accomplished by using the
-\texttt{getline} function:
+Кейде бағдарлама бір жолды толығымен, яғни бос орындармен бірге оқуы тиіс болады.
+Осындай кезде \texttt{getline} функциясын қолданамыз:
 
 \begin{lstlisting}
 string s;
 getline(cin, s);
 \end{lstlisting}
 
-If the amount of data is unknown, the following
-loop is useful:
+Егер енгізу саны нақты болмаса, келесі цикл пайдалы:
 \begin{lstlisting}
 while (cin >> x) {
     // code
 }
 \end{lstlisting}
-This loop reads elements from the input
-one after another, until there is no
-more data available in the input.
+Бұл цикл енгізу деректері аяқталмайынша, стандартты енгізудегі барлық элементтерді қабылдай береді.
 
-In some contest systems, files are used for
-input and output.
-An easy solution for this is to write
-the code as usual using standard streams,
-but add the following lines to the beginning of the code:
+Кей контесттерде енгізу мен шығару файл ретінде беріледі.
+Мұндай жағдайда стандартты шығару мен енгізуді пайдаланып,
+төменде көрсетілген код жолдарын жазған абзал:
 \begin{lstlisting}
 freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 \end{lstlisting}
-After this, the program reads the input from the file
-''input.txt'' and writes the output to the file
-''output.txt''.
+Осыдан кейін бағдарлама енгізуді
+''input.txt'' файлынан қабылдап,
+шығаруды ''output.txt'' файлында шығарады.
 
-\section{Working with numbers}
+\section{Сандармен жұмыс}
 
-\index{integer}
+\index{бүтін сандар}
 
-\subsubsection{Integers}
+\subsubsection{Бүтін сандар}
 
-The most used integer type in competitive programming
-is \texttt{int}, which is a 32-bit type with
-a value range of $-2^{31} \ldots 2^{31}-1$
-or about $-2 \cdot 10^9 \ldots 2 \cdot 10^9$.
-If the type \texttt{int} is not enough,
-the 64-bit type \texttt{long long} can be used.
-It has a value range of $-2^{63} \ldots 2^{63}-1$
-or about $-9 \cdot 10^{18} \ldots 9 \cdot 10^{18}$.
+Бүтін сандардың ең жиі қолданылатын түрі --
+\texttt{int}. Ол -- мәні $-2^{31} \ldots 2^{31}-1$
+арасындағы (шамамен $-2 \cdot 10^9 \ldots 2 \cdot 10^9$) 
+бүтін сандарды қамтитын 32 биттік деректер типі.
+Егер \texttt{int} деректер типінен орасан үлкен/кіші сандарды
+сақтағыңыз келсе, 64 биттік \texttt{long long} деректер
+типін қолдана аласыз. Оның қамтитын ауқымы 
+-- $-2^{63} \ldots 2^{63}-1$
+(шамамен $-9 \cdot 10^{18} \ldots 9 \cdot 10^{18}$).
 
-The following code defines a
-\texttt{long long} variable:
+Төмендегі код \texttt{long long} типтік 
+айнымалысын орнатады:
 \begin{lstlisting}
 long long x = 123456789123456789LL;
 \end{lstlisting}
-The suffix \texttt{LL} means that the
-type of the number is \texttt{long long}.
+\texttt{LL} суффиксі санның типі 
+\texttt{long long} екенін көрсетеді.
 
-A common mistake when using the type \texttt{long long}
-is that the type \texttt{int} is still used somewhere
-in the code.
-For example, the following code contains
-a subtle error:
+\texttt{long long} қолданысындағы кең 
+таралған қателердің бірі --
+\texttt{int} типін жаңылысып қолдану. 
+Мысалы, төменегі кодта қате бар:
 
 \begin{lstlisting}
 int a = 123456789;
@@ -270,48 +217,41 @@ long long b = a*a;
 cout << b << "\n"; // -1757895751
 \end{lstlisting}
 
-Even though the variable \texttt{b} is of type \texttt{long long},
-both numbers in the expression \texttt{a*a}
-are of type \texttt{int} and the result is
-also of type \texttt{int}.
-Because of this, the variable \texttt{b} will
-contain a wrong result.
-The problem can be solved by changing the type
-of \texttt{a} to \texttt{long long} or
-by changing the expression to \texttt{(long long)a*a}.
+\texttt{b} айнымалысы \texttt{long long} болғанымен,
+\texttt{a*a} өрнегіндегі айнымалылардың типі \texttt{int}
+болғандықтан, олардың көбейтіндісі де \texttt{int} болады.
+Сондықтан \texttt{b} айнымалысына қате нәтиже сақтайды.
+Қатені дұрыстау үшін \texttt{a} айнымалысының типін
+\texttt{long long} ауыстырсақ жеткілікті немесе 
+өрнекті \texttt{(long long)a*a} деп өзгертсек те болады.
 
-Usually contest problems are set so that the
-type \texttt{long long} is enough.
-Still, it is good to know that
-the \texttt{g++} compiler also provides
-a 128-bit type \texttt{\_\_int128\_t}
-with a value range of
-$-2^{127} \ldots 2^{127}-1$ or about $-10^{38} \ldots 10^{38}$.
-However, this type is not available in all contest systems.
+Контесттегі есептердің шешуіне әдетте \texttt{long long} 
+жеткілікті. Дегенмен \texttt{g++} компиляторында 
+128 биттік типтік \texttt{\_\_int128\_t} деректер типін
+қолдануға болады. Оның қамтитын ауқымы --
+$-2^{127} \ldots 2^{127}-1$ (шамамен $-10^{38} \ldots 10^{38}$).
+Бірақ, бұл деректер типі барлық контест
+жүйелерінде қол жетімді емес.
 
-\subsubsection{Modular arithmetic}
+\subsubsection{Модульдік арифметика}
 
-\index{remainder}
-\index{modular arithmetic}
+\index{қалдық}
+\index{модульдік арифметика}
 
-We denote by $x \bmod m$ the remainder
-when $x$ is divided by $m$.
-For example, $17 \bmod 5 = 2$,
-because $17 = 3 \cdot 5 + 2$.
+Біз $x \bmod m$ деп $x$ - ті $m$ - ге 
+бөлгендегі қалдықты белгілейміз.
+Мысалы, $17 \bmod 5 = 2$,
+себебі $17 = 3 \cdot 5 + 2$.
 
-Sometimes, the answer to a problem is a
-very large number but it is enough to
-output it ''modulo $m$'', i.e.,
-the remainder when the answer is divided by $m$
-(for example, ''modulo $10^9+7$'').
-The idea is that even if the actual answer
-is very large,
-it suffices to use the types
-\texttt{int} and \texttt{long long}.
+Кей есептердің жауабы тым үлкен сан болуы мүмкін. Сондай жағдайда есептің шартына сәйкес жауапты ''модуль $m$'' арқылы алуға болады. 
+(мысалы, ''модуль $10^9+7$'').
+Мұндағы идея жауаптың үлкендігіне қарамастан 
+\texttt{int} және \texttt{long long} типтерін қолданудың жеткілікті екендігіне негізделеді.
 
-An important property of the remainder is that
-in addition, subtraction and multiplication,
-the remainder can be taken before the operation:
+Қалдықтың маңызды қасиеті -- 
+қосу, азайту және көбейту
+операцияларын орындамастан 
+бұрын қалдықты алдын-ала есептеу мүмкіндігі келесі формулалар арқылы көрінеді:
 
 \[
 \begin{array}{rcr}
@@ -321,11 +261,10 @@ the remainder can be taken before the operation:
 \end{array}
 \]
 
-Thus, we can take the remainder after every operation
-and the numbers will never become too large.
+Осылайша біз әр операциядан кейін қалдық есептеу арқылы
+тым үлкен сан шықпауын қадағалаймыз.
 
-For example, the following code calculates $n!$,
-the factorial of $n$, modulo $m$:
+Мысалы, $n!$ коды $n$ факториалын $m$ модулінде есептейді:
 \begin{lstlisting}
 long long x = 1;
 for (int i = 2; i <= n; i++) {
@@ -334,75 +273,57 @@ for (int i = 2; i <= n; i++) {
 cout << x%m << "\n";
 \end{lstlisting}
 
-Usually we want the remainder to always
-be between $0\ldots m-1$.
-However, in C++ and other languages,
-the remainder of a negative number
-is either zero or negative.
-An easy way to make sure there
-are no negative remainders is to first calculate
-the remainder as usual and then add $m$
-if the result is negative:
+Әдетте қалдықтың $0\ldots m-1$ аралығында
+болғанын қалаймыз.
+Алайда С++ және басқа тілдерде теріс сандардың 
+қалдығы нөлге тең немесе теріс сандар болады.
+Қалдықтың теріс сан болмауын қадағалаудағы оңай жол –
+алдымен жай қалдықты есептеу, кейін жауап теріс болса,
+$m$ - ді қосу:
 \begin{lstlisting}
 x = x%m;
 if (x < 0) x += m;
 \end{lstlisting}
-However, this is only needed when there
-are subtractions in the code and the
-remainder may become negative.
+Дегенмен бұл жол кодта азайту болған жағдайда ғана қолданылады.
+Басқа жағдайларда теріс санды қалдыруға болады.
 
-\subsubsection{Floating point numbers}
+\subsubsection{Қалқымалы нүктелі сандар}
 
-\index{floating point number}
+\index{қалқымалы нүктелі сандар}
 
-The usual floating point types in
-competitive programming are
-the 64-bit \texttt{double}
-and, as an extension in the \texttt{g++} compiler,
-the 80-bit \texttt{long double}.
-In most cases, \texttt{double} is enough,
-but \texttt{long double} is more accurate.
+Әдетте спорттық бағдарламалауда кездесетін қалқымалы
+нүктелі сандар -- деректер типі 64 биттік \texttt{double}
+мен \texttt{g++} компиляторындағы кеңейтілімі
+80 биттік \texttt{long double}.
+Көп жағдайда \texttt{double} жеткілікті болғанымен, \texttt{long double} дәлірек келеді.
 
-The required precision of the answer
-is usually given in the problem statement.
-An easy way to output the answer is to use
-the \texttt{printf} function
-and give the number of decimal places
-in the formatting string.
-For example, the following code prints
-the value of $x$ with 9 decimal places:
+Талап етілетін жауап дәлдігі негізінен есеп шартында беріледі.
+Жауапты шығарудың оңай жолы –  \texttt{printf} функциясын пайдаланып,
+нүктеден кейінгі сан мөлшерін форматтау жолында көрсету.
+Мысалы, төмендегі код $x$ - ті нүктеден кейінгі 9 орынмен бірге шығарады:
 
 \begin{lstlisting}
 printf("%.9f\n", x);
 \end{lstlisting}
 
-A difficulty when using floating point numbers
-is that some numbers cannot be represented
-accurately as floating point numbers,
-and there will be rounding errors.
-For example, the result of the following code
-is surprising:
+Қалқымалы нүктелі сандарды қолдану барысындағы қиындықтар
+кейбір сандардың дәлдігі мен ықшамдау кезінде туындайтын қателермен байланысты болып келеді.
+Мысалы, келесі код күтпеген нәтиже береді:
 
 \begin{lstlisting}
 double x = 0.3*3+0.1;
 printf("%.20f\n", x); // 0.99999999999999988898
 \end{lstlisting}
 
-Due to a rounding error,
-the value of \texttt{x} is a bit smaller than 1,
-while the correct value would be 1.
+Ықшамдау қателігі \texttt{x} - тің мәнін дұрыс жауабында дәл 1-ге тең екеніне қарамастан, 1 - ден сәл кішірек етіп көрсетеді.
 
-It is risky to compare floating point numbers
-with the \texttt{==} operator,
-because it is possible that the values should be
-equal but they are not because of precision errors.
-A better way to compare floating point numbers
-is to assume that two numbers are equal
-if the difference between them is less than $\varepsilon$,
-where $\varepsilon$ is a small number.
+Қалқымалы нүктелі сандарды \texttt{==} операторы 
+арқылы салыстыру біраз қауіпті,  өйткені дәлдік қатесінің әсерінен тең сандар дұрыс тексерілмеуі мүмкін.
+Оларды салыстырудың ұтымды жолы – екі санның айырмашылығы $\varepsilon$ - ден 
+көп болмаса, тең деп есептеу.
+Бұл жердегі $\varepsilon$ –кішкентай сан.
 
-In practice, the numbers can be compared
-as follows ($\varepsilon=10^{-9}$):
+Қолданыстағы сандарды осылай салыстыруға болады: ($\varepsilon=10^{-9}$):
 
 \begin{lstlisting}
 if (abs(a-b) < 1e-9) {
@@ -410,322 +331,297 @@ if (abs(a-b) < 1e-9) {
 }
 \end{lstlisting}
 
-Note that while floating point numbers are inaccurate,
-integers up to a certain limit can still be
-represented accurately.
-For example, using \texttt{double},
-it is possible to accurately represent all
-integers whose absolute value is at most $2^{53}$.
+Қалқымалы нүктелі сандардың дәлдікпен сақталу мүмкіндігі болмаса да,
+бүтін сандарды белгілі мәндер аралығында жоғары дәлдікпен сақтай аламыз.
+Мысалы, \texttt{double} - ды қолданып,
+бүтін сандарды $2^{53}$ мәніне дейін сақтай аламыз.
 
-\section{Shortening code}
+\section{Кодты ықшамдау}
 
-Short code is ideal in competitive programming,
-because programs should be written
-as fast as possible.
-Because of this, competitive programmers often define
-shorter names for datatypes and other parts of code.
+Кодты ықшамдап жазу -- спорттық бағдарламалау үшін аса маңызды тәсіл. Себебі бағдарламаны барынша тез жазған абзал.
+Сондықтан спорттық бағдарламалаушылар әдетте
+деректер типтерін қысқа атаулармен алмастырады және 
+кодтың өзге бөліктеріне де қысқа атаулар береді.
 
-\subsubsection{Type names}
+\subsubsection{Тип атаулары}
 \index{tuppdef@\texttt{typedef}}
-Using the command \texttt{typedef}
-it is possible to give a shorter name
-to a datatype.
-For example, the name \texttt{long long} is long,
-so we can define a shorter name \texttt{ll}:
+\texttt{typedef} командасын қолдану арқылы
+деректер типіне қысқа атау беруге болады.
+Мысалы, \texttt{long long} тым ұзақ,
+оны \texttt{ll} деп қысқарттық:
 \begin{lstlisting}
 typedef long long ll;
 \end{lstlisting}
-After this, the code
+Төмендегі код:
 \begin{lstlisting}
 long long a = 123456789;
 long long b = 987654321;
 cout << a*b << "\n";
 \end{lstlisting}
-can be shortened as follows:
+Осылай қысқара алады:
 \begin{lstlisting}
 ll a = 123456789;
 ll b = 987654321;
 cout << a*b << "\n";
 \end{lstlisting}
 
-The command \texttt{typedef}
-can also be used with more complex types.
-For example, the following code gives
-the name \texttt{vi} for a vector of integers
-and the name \texttt{pi} for a pair
-that contains two integers.
+\texttt{typedef} командасын
+өзге күрделірек типтер үшін де пайдалануға болады. Мысалы, төмендегі кодтағы \texttt{vi} атауы бүтін санды векторды, ал
+ \texttt{pi} екі бүтін санды сақтауға арналған жұпты білдіреді.
 \begin{lstlisting}
 typedef vector<int> vi;
 typedef pair<int,int> pi;
 \end{lstlisting}
 
-\subsubsection{Macros}
-\index{macro}
-Another way to shorten code is to define
-\key{macros}.
-A macro means that certain strings in
-the code will be changed before the compilation.
-In C++, macros are defined using the
-\texttt{\#define} keyword.
+\subsubsection{Макростар}
+\index{макрос}
+Кодты ықшамдаудың тағы бір жолына
+\key{макростарды} қолдану жатады.
+Макрос компиляциялауға дейін белгілі бір жолдардың 
+өзгеретінін білдіреді.
+C++ - та макростар \texttt{\#define} кодсөзі 
+арқылы анықталады.
 
-For example, we can define the following macros:
+Мысалы, төменде көрсетілген макростарды кодта қолдана аламыз:
 \begin{lstlisting}
 #define F first
 #define S second
 #define PB push_back
 #define MP make_pair
 \end{lstlisting}
-After this, the code
+Осыдан кейін кодты
 \begin{lstlisting}
 v.push_back(make_pair(y1,x1));
 v.push_back(make_pair(y2,x2));
 int d = v[i].first+v[i].second;
 \end{lstlisting}
-can be shortened as follows:
+осылай ықшамдай аламыз:
 \begin{lstlisting}
 v.PB(MP(y1,x1));
 v.PB(MP(y2,x2));
 int d = v[i].F+v[i].S;
 \end{lstlisting}
 
-A macro can also have parameters
-which makes it possible to shorten loops and other
-structures.
-For example, we can define the following macro:
+Сондай-ақ макростардың циклдер мен басқа да
+құрылымдарды қысқарта алатын параметрлері болуы мүмкін.
+Үлігі ретінде макростың бір нұсқасын берейік:
 \begin{lstlisting}
 #define REP(i,a,b) for (int i = a; i <= b; i++)
 \end{lstlisting}
-After this, the code
+Ол төмендегі кодты
 \begin{lstlisting}
 for (int i = 1; i <= n; i++) {
     search(i);
 }
 \end{lstlisting}
-can be shortened as follows:
+осылай ықшамдай алады:
 \begin{lstlisting}
 REP(i,1,n) {
     search(i);
 }
 \end{lstlisting}
 
-Sometimes macros cause bugs that may be difficult
-to detect. For example, consider the following macro
-that calculates the square of a number:
+Кейде макрос анықталуы қиын қателерді туындатуы мүмкін.
+Мысалы, санның квадратын есептейтін макросты қарастырайық:
 \begin{lstlisting}
 #define SQ(a) a*a
 \end{lstlisting}
-This macro \emph{does not} always work as expected.
-For example, the code
+Бұл макрос әрдайым күткеніміздей \emph{жұмыс жасамайды}.
+Мына кодты қарастырайық:
 \begin{lstlisting}
 cout << SQ(3+3) << "\n";
 \end{lstlisting}
-corresponds to the code
+сәйкесінше:
 \begin{lstlisting}
 cout << 3+3*3+3 << "\n"; // 15
 \end{lstlisting}
 
-A better version of the macro is as follows:
+Макростың дұрысырақ жазылған нұсқасы:
 \begin{lstlisting}
 #define SQ(a) (a)*(a)
 \end{lstlisting}
-Now the code
+Ал енді төмендегі код:
 \begin{lstlisting}
 cout << SQ(3+3) << "\n";
 \end{lstlisting}
-corresponds to the code
+келесі өрнекке өзгереді
 \begin{lstlisting}
 cout << (3+3)*(3+3) << "\n"; // 36
 \end{lstlisting}
 
 
-\section{Mathematics}
+\section{Математика}
 
-Mathematics plays an important role in competitive
-programming, and it is not possible to become
-a successful competitive programmer without
-having good mathematical skills.
-This section discusses some important
-mathematical concepts and formulas that
-are needed later in the book.
+Математиканың спорттық бағдарламалаудағы рөлі орасан зор,
+сондықтан да математикалық ойлау қабілетінсіз бұл салада үздік болу мүмкін емес.
+Бұл бөлімде алдағы уақытта қажет болатын тұжырымдамалар мен формулаларды талдаймыз.
 
-\subsubsection{Sum formulas}
+\subsubsection{Қосынды формуласы}
 
-Each sum of the form
 \[\sum_{x=1}^n x^k = 1^k+2^k+3^k+\ldots+n^k,\]
-where $k$ is a positive integer,
-has a closed-form formula that is a
-polynomial of degree $k+1$.
-For example\footnote{\index{Faulhaber's formula}
-There is even a general formula for such sums, called \key{Faulhaber's formula},
-but it is too complex to be presented here.},
+формасындағы $k$ бүтін сан болған жағдайда,
+қосындының формуласын $k+1$ дәрежесіндегі 
+көпмүше арқылы келтіре аламыз.
+Мысалы, \footnote{\index{Фаульхабер формуласы}
+Осындай қосындылар үшін жалпы формула - Фаульхабер формуласы бар.
+Бірақ ол күрделі болғандықтан кітапта көрсетілмеді.},
 \[\sum_{x=1}^n x = 1+2+3+\ldots+n = \frac{n(n+1)}{2}\]
-and
+және
 \[\sum_{x=1}^n x^2 = 1^2+2^2+3^2+\ldots+n^2 = \frac{n(n+1)(2n+1)}{6}.\]
 
-An \key{arithmetic progression} is a \index{arithmetic progression}
-sequence of numbers
-where the difference between any two consecutive
-numbers is constant.
-For example,
+\key{Арифметикалық прогрессия} -- \index{арифметикалық прогрессия}
+әр екі көршілес тұрған санның айырмасы тұрақты санға тең болатын тізбек.
+Төмендегі тізбек --
 \[3, 7, 11, 15\]
-is an arithmetic progression with constant 4.
-The sum of an arithmetic progression can be calculated
-using the formula
+тұрақты саны 4 болатын арифметикалық прогрессия.
+Арифметикалық прогрессиялы тізбектің сомасын табатын формула:
 \[\underbrace{a + \cdots + b}_{n \,\, \textrm{numbers}} = \frac{n(a+b)}{2}\]
-where $a$ is the first number,
-$b$ is the last number and
-$n$ is the amount of numbers.
-For example,
+$a$ -- ең алғашқы,
+ал $b$ -- ең соңғы сан болса,
+$n$ -- тізбектегі сандар мөлшері.
+Мысалы,
 \[3+7+11+15=\frac{4 \cdot (3+15)}{2} = 36.\]
-The formula is based on the fact
-that the sum consists of $n$ numbers and
-the value of each number is $(a+b)/2$ on average.
+тізбегінің тұрақты саны 4.
+Формулада $n$ саннан тұратын тізбектегі әр сан орташа 
+есеппен $(a+b)/2$ тең екенін негізге аламыз.
 
-\index{geometric progression}
-A \key{geometric progression} is a sequence
-of numbers
-where the ratio between any two consecutive
-numbers is constant.
-For example,
+\index{Геометриялық прогрессия}
+\key{Геометриялық прогрессия} -- әр көршілес санның қатынасы тұрақты болатын сандар тізбегі.
+
+Төмендегі тізбек:
 \[3,6,12,24\]
-is a geometric progression with constant 2.
-The sum of a geometric progression can be calculated
-using the formula
+тұрақты саны 2-ге тең геометриялық прогрессия.
+Қосындысын есептеу формуласы:
 \[a + ak + ak^2 + \cdots + b = \frac{bk-a}{k-1}\]
-where $a$ is the first number,
-$b$ is the last number and the
-ratio between consecutive numbers is $k$.
-For example,
+$a$ -- алғашқы сан,
+$b$ -- соңғы сан, ал $k$ -- екі көршілес санның қатынасы.
+Мысалы,
 \[3+6+12+24=\frac{24 \cdot 2 - 3}{2-1} = 45.\]
 
-This formula can be derived as follows. Let
-\[ S = a + ak + ak^2 + \cdots + b .\]
-By multiplying both sides by $k$, we get
-\[ kS = ak + ak^2 + ak^3 + \cdots + bk,\]
-and solving the equation
+Формуланың шығу жолы:
+\[ S = a + ak + ak^2 + \cdots + b .\] болса,
+екі жақты $k$ санына көбейтсек
+\[ kS = ak + ak^2 + ak^3 + \cdots + bk,\] өрнегі пайда болады.
+Теңдеуді шешу арқылы
 \[ kS-S = bk-a\]
-yields the formula.
+формуласы қалады.
 
-A special case of a sum of a geometric progression is the formula
+Геометриялық прогрессияның қосындысы үшін дербес жағдай формуласы:
 \[1+2+4+8+\ldots+2^{n-1}=2^n-1.\]
 
-\index{harmonic sum}
+\index{Гармоникалық қосынды}
 
-A \key{harmonic sum} is a sum of the form
+\key{Гармоникалық қосынды} -- 
 \[ \sum_{x=1}^n \frac{1}{x} = 1+\frac{1}{2}+\frac{1}{3}+\ldots+\frac{1}{n}.\]
-
-An upper bound for a harmonic sum is $\log_2(n)+1$.
-Namely, we can
-modify each term $1/k$ so that $k$ becomes
-the nearest power of two that does not exceed $k$.
-For example, when $n=6$, we can estimate
-the sum as follows:
+формасындағы қосынды.
+Гармоникалық қосындының үстіңгі шегі $\log_2(n)+1$. % HERE
+Анығырақ айтсақ, әр $1/k$ өрнегіндегі
+$k$ санын $k$-дан аспайтын және оған ең жақын болатын 2-нің
+дәрежесіне ауыстырамыз.
+Мысалы, $n=6$ болған жағдайда қосындының өзгерісі:
 \[ 1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\frac{1}{5}+\frac{1}{6} \le
 1+\frac{1}{2}+\frac{1}{2}+\frac{1}{4}+\frac{1}{4}+\frac{1}{4}.\]
-This upper bound consists of $\log_2(n)+1$ parts
-($1$, $2 \cdot 1/2$, $4 \cdot 1/4$, etc.),
-and the value of each part is at most 1.
+Жоғарғы шек $\log_2(n)+1$ бөліктен тұрады
+($1$, $2 \cdot 1/2$, $4 \cdot 1/4$... ),
+және ең көп дегенде әр бөлік 1-ге тең болады.
 
-\subsubsection{Set theory}
+\subsubsection{Жиын теориясы}
 
-\index{set theory}
-\index{set}
-\index{intersection}
-\index{union}
-\index{difference}
-\index{subset}
-\index{universal set}
-\index{complement}
+\index{жиын теориясы}
+\index{жиын}
+\index{қиылысу}
+\index{бірігу}
+\index{айырмашылық}
+\index{ішжиын}
+\index{әмбебап жиын}
+\index{толықтауыш}
 
-A \key{set} is a collection of elements.
-For example, the set
-\[X=\{2,4,7\}\]
-contains elements 2, 4 and 7.
-The symbol $\emptyset$ denotes an empty set,
-and $|S|$ denotes the size of a set $S$,
-i.e., the number of elements in the set.
-For example, in the above set, $|X|=3$.
+\key{Жиын} -- элемменттер топтамасы.
+Мысалы,
+\[X=\{2,4,7\}\] жиыны
+2, 4 және 7 элементтерін қамтиды.
+$\emptyset$ символы бос жиынды,
+ал $|S|$ $S$ жиындардың өлшемін, яғни
+элементтер санын көрсетеді.
+Мысалға қайта оралсақ, $|X|=3$.
 
-If a set $S$ contains an element $x$,
-we write $x \in S$,
-and otherwise we write $x \notin S$.
-For example, in the above set
-\[4 \in X \hspace{10px}\textrm{and}\hspace{10px} 5 \notin X.\]
+$S$ жиыны $x$ элементін қамтитынын
+$x \in S$ белгісімен көрсетеміз,
+кері нұсқасы -- $x \notin S$.
+Жоғарыда қарастырған жиынға қатысты мысал:
+\[4 \in X \hspace{10px}\textrm{және}\hspace{10px} 5 \notin X.\]
 
 \begin{samepage}
-New sets can be constructed using set operations:
+Жиын операциялары арқылы жаңа жиындар құрастыра аламыз:
 \begin{itemize}
-\item The \key{intersection} $A \cap B$ consists of elements
-that are in both $A$ and $B$.
-For example, if $A=\{1,2,5\}$ and $B=\{2,4\}$,
-then $A \cap B = \{2\}$.
-\item The \key{union} $A \cup B$ consists of elements
-that are in $A$ or $B$ or both.
-For example, if $A=\{3,7\}$ and $B=\{2,3,8\}$,
-then $A \cup B = \{2,3,7,8\}$.
-\item The \key{complement} $\bar A$ consists of elements
-that are not in $A$.
-The interpretation of a complement depends on
-the \key{universal set}, which contains all possible elements.
-For example, if $A=\{1,2,5,7\}$ and the universal set is
-$\{1,2,\ldots,10\}$, then $\bar A = \{3,4,6,8,9,10\}$.
-\item The \key{difference} $A \setminus B = A \cap \bar B$
-consists of elements that are in $A$ but not in $B$.
-Note that $B$ can contain elements that are not in $A$.
-For example, if $A=\{2,3,7,8\}$ and $B=\{3,5,8\}$,
-then $A \setminus B = \{2,7\}$.
+\item $A \cap B$ \key{қиылысуы} $A$ және $B$ жиындарының екеуіне де тән
+элементтерден құралған.
+Мысалы, $A=\{1,2,5\}$, $B=\{2,4\}$.
+Сәйкесінше, $A \cap B = \{2\}$.
+\item $A \cup B$ \key{бірігуі} -- екі жиында да 
+немесе кем дегенде екеуінің бірінде кездестін элементтерді қамтиды.
+$A=\{3,7\}$ және $B=\{2,3,8\}$ жиындары болса,
+олардың бірігу үлгісі: $A \cup B = \{2,3,7,8\}$.
+\item $\bar A$ \key{толықтауышы} -- $A$ жиынында жоқ элементтер.
+Толықтауыштың түсіндірмесі болуы мүмкін барлық элементтерді қамтитын
+\key{әмбебап жиынға} тәуелді.
+Егер $A=\{1,2,5,7\}$, ал әмбебап жиын
+$\{1,2,\ldots,10\}$ болса, $\bar A = \{3,4,6,8,9,10\}$.
+\item  $A \setminus B = A \cap \bar B$ \key{айырмашылығы} --
+$A$ жиынында болғанымен $B$ жиынында жоқ элементтер.
+Бұл жерде $B$ элементтері $A$ элементтерінің қатарында жоқ екендігіне назар аудару керек:
+Егер $A=\{2,3,7,8\}$ және $B=\{3,5,8\}$
+болса, $A \setminus B = \{2,7\}$.
 \end{itemize}
 \end{samepage}
 
-If each element of $A$ also belongs to $S$,
-we say that $A$ is a \key{subset} of $S$,
-denoted by $A \subset S$.
-A set $S$ always has $2^{|S|}$ subsets,
-including the empty set.
-For example, the subsets of the set $\{2,4,7\}$ are
+$A$ элементтері толықтай $S$ жиынына кірсе,
+$A$ $S$-тің \key{ішжиыны},
+белгіленуі: $A \subset S$.
+$S$ жиынында бос жиындарды санағанда 
+әрдайым $2^{|S|}$ ішжиын бар.
+Мысалы, $\{2,4,7\}$ үшін ішжиындар:
 \begin{center}
 $\emptyset$,
-$\{2\}$, $\{4\}$, $\{7\}$, $\{2,4\}$, $\{2,7\}$, $\{4,7\}$ and $\{2,4,7\}$.
+$\{2\}$, $\{4\}$, $\{7\}$, $\{2,4\}$, $\{2,7\}$, $\{4,7\}$ және $\{2,4,7\}$.
 \end{center}
 
-Some often used sets are
-$\mathbb{N}$ (natural numbers),
-$\mathbb{Z}$ (integers),
-$\mathbb{Q}$ (rational numbers) and
-$\mathbb{R}$ (real numbers).
-The set $\mathbb{N}$
-can be defined in two ways, depending
-on the situation:
-either $\mathbb{N}=\{0,1,2,\ldots\}$
-or $\mathbb{N}=\{1,2,3,...\}$.
+Жиі қолданылатын жиындар:
+$\mathbb{N}$ (натурал сандар),
+$\mathbb{Z}$ (бүтін сандар),
+$\mathbb{Q}$ (рационал сандар) мен
+$\mathbb{R}$ (нақты сандар).
+$\mathbb{N}$ жиынын туындаған жағдайға байланысты
+екі түрде қарастыра аламыз:
+$\mathbb{N}=\{0,1,2,\ldots\}$
+немесе $\mathbb{N}=\{1,2,3,...\}$.
 
-We can also construct a set using a rule of the form
+Сонымен қатар жиынды келесі форманы қолдану арқылы құрастыра аламыз:
 \[\{f(n) : n \in S\},\]
-where $f(n)$ is some function.
-This set contains all elements of the form $f(n)$,
-where $n$ is an element in $S$.
-For example, the set
+$f(n)$ қандай да бір функцияны меңзейді.
+Жиын $f(n)$ формасындағы барлық мүмкін мәндерді қамтиды,
+$n$ $S$ элементі.
+Үлгідегі жиын барлық жұп сандарды қамтиды:
 \[X=\{2n : n \in \mathbb{Z}\}\]
-contains all even integers.
 
-\subsubsection{Logic}
+\subsubsection{Логика}
 
-\index{logic}
-\index{negation}
-\index{conjuction}
-\index{disjunction}
-\index{implication}
-\index{equivalence}
+\index{логика}
+\index{терістеу}
+\index{конъюкция}
+\index{дизъюнкция}
+\index{импликация}
+\index{эквиваленттеу}
 
-The value of a logical expression is either
-\key{true} (1) or \key{false} (0).
-The most important logical operators are
-$\lnot$ (\key{negation}),
-$\land$ (\key{conjunction}),
-$\lor$ (\key{disjunction}),
-$\Rightarrow$ (\key{implication}) and
-$\Leftrightarrow$ (\key{equivalence}).
-The following table shows the meanings of these operators:
+Логикалық өрнектің тек \key{true} (1)
+немесе \key{false} (0) мәндері бар.
+Ең маңызды логикалық операциялар:
+$\lnot$ (\key{терістеу}),
+$\land$ (\key{конъюкция}),
+$\lor$ (\key{дизъюнкция}),
+$\Rightarrow$ (\key{импликация}) мен
+$\Leftrightarrow$ (\key{эквиваленттеу}).
+Төмендегі кестеде операторлар мағыналарымен көрсетілген:
 
 \begin{center}
 \begin{tabular}{rr|rrrrrrr}
@@ -738,69 +634,65 @@ $A$ & $B$ & $\lnot A$ & $\lnot B$ & $A \land B$ & $A \lor B$ & $A \Rightarrow B$
 \end{tabular}
 \end{center}
 
-The expression $\lnot A$ has the opposite value of $A$.
-The expression $A \land B$ is true if both $A$ and $B$
-are true,
-and the expression $A \lor B$ is true if $A$ or $B$ or both
-are true.
-The expression $A \Rightarrow B$ is true
-if whenever $A$ is true, also $B$ is true.
-The expression $A \Leftrightarrow B$ is true
-if $A$ and $B$ are both true or both false.
+$\lnot A$ өрнегі -- $A$ - ға теріс мән.
+$A \land B$ өрнегі -- егер $A$ мен $B$
+екеуі де ақиқат болса, ақиқат, ал $A \lor B$ өрнегі --
+$A$ мен $B$-ның бірі немесе екеуі де ақиқат болса,
+ақиқат.
+$A \Rightarrow B$ өрнегі --
+әрдайым $A$ ақиқат және $B$ да ақиқат болса,
+ақиқат. $A \Leftrightarrow B$ өрнегі --
+егер $A$ мен $B$ екеуі де ақиқат немесе жалған болса, ақиқат.
 
-\index{predicate}
+\index{Предикат}
 
-A \key{predicate} is an expression that is true or false
-depending on its parameters.
-Predicates are usually denoted by capital letters.
-For example, we can define a predicate $P(x)$
-that is true exactly when $x$ is a prime number.
-Using this definition, $P(7)$ is true but $P(8)$ is false.
+\key{Предикат} -- ақиқат не жалған болуы параметрлерге байланысты өрнек.
+Предикаттар әдетте бас әріппен белгіленеді.
+Мысалы, $P(x)$ $x$ саны жай болғанда ғана
+ақиқат деп белгілейік.
+Сәйкесінше, $P(7)$ -- ақиқат, $P(8)$ -- жалған.
 
-\index{quantifier}
+\index{квантор}
 
-A \key{quantifier} connects a logical expression
-to the elements of a set.
-The most important quantifiers are
-$\forall$ (\key{for all}) and $\exists$ (\key{there is}).
-For example,
+\key{Квантор} логикалық өрнекті
+жиын элементтерімен байланыстырады.
+Ең маңызды кванторлар --
+$\forall$ (\key{жалпылық}) және $\exists$ (\key{бар болу}).
+Мысалы,
 \[\forall x (\exists y (y < x))\]
-means that for each element $x$ in the set,
-there is an element $y$ in the set
-such that $y$ is smaller than $x$.
-This is true in the set of integers,
-but false in the set of natural numbers.
+жиындағы әр $x$ элементі үшін өзінен 
+кішірек болатын $y$ элементі бар деген мағынаны білдіреді.
+Бұл бүтін сандар жиыны үшін ақиқат болса,
+натурал сандар жиыны үшін жалған.
 
-Using the notation described above,
-we can express many kinds of logical propositions.
-For example,
-\[\forall x ((x>1 \land \lnot P(x)) \Rightarrow (\exists a (\exists b (a > 1 \land b > 1 \land x = ab))))\]
-means that if a number $x$ is larger than 1
-and not a prime number,
-then there are numbers $a$ and $b$
-that are larger than $1$ and whose product is $x$.
-This proposition is true in the set of integers.
+Жоғарыда берілген түсініктемеге сәйкес
+көптеген логикалық тұжырымдарды өрнектей аламыз.
 
-\subsubsection{Functions}
+Үлгіде егер $x$ 1-ден үлкен және жай сан болмаса,
+\[\forall x ((x>1 \land \lnot P(x)) \Rightarrow (\exists a (\exists b (a > 1 \land b > 1 \land x = ab))))\].
+демек екеуі де 1-ден үлкен, көбейтінділері $x$-ке 
+тең $a$ және $b$ сандары бар.
+Тұжырымдама -- бүтін сандар үшін ақиқат.
 
-The function $\lfloor x \rfloor$ rounds the number $x$
-down to an integer, and the function
-$\lceil x \rceil$ rounds the number $x$
-up to an integer. For example,
-\[ \lfloor 3/2 \rfloor = 1 \hspace{10px} \textrm{and} \hspace{10px} \lceil 3/2 \rceil = 2.\]
+\subsubsection{Функциялар}
 
-The functions $\min(x_1,x_2,\ldots,x_n)$
-and $\max(x_1,x_2,\ldots,x_n)$
-give the smallest and largest of values
-$x_1,x_2,\ldots,x_n$.
-For example,
-\[ \min(1,2,3)=1 \hspace{10px} \textrm{and} \hspace{10px} \max(1,2,3)=3.\]
+$\lfloor x \rfloor$ функциясы $x$ санын
+бүтінге дейін төменге дөңгелектейді, ал
+$\lceil x \rceil$ $x$ санын
+бүтінге дейін жоғарыға дөңгелектейді. 
+Мысалы,
+\[ \lfloor 3/2 \rfloor = 1 \hspace{10px} \textrm{және} \hspace{10px} \lceil 3/2 \rceil = 2.\]
 
-\index{factorial}
+$\min(x_1,x_2,\ldots,x_n)$ және $\max(x_1,x_2,\ldots,x_n)$ функциялары
+$x_1,x_2,\ldots,x_n$ аралығандағы  ең аз және ең көп сәйкес мәндерді қайтарады.
+Мысалы,
+\[ \min(1,2,3)=1 \hspace{10px} \textrm{және} \hspace{10px} \max(1,2,3)=3.\]
 
-The \key{factorial} $n!$ can be defined
+\index{Факториал}
+
+\key{$n!$} факториалы төмендегі формула бойынша:
 \[\prod_{x=1}^n x = 1 \cdot 2 \cdot 3 \cdot \ldots \cdot n\]
-or recursively
+немесе рекуррентті анықталады: 
 \[
 \begin{array}{lcl}
 0! & = & 1 \\
@@ -808,12 +700,14 @@ n! & = & n \cdot (n-1)! \\
 \end{array}
 \]
 
-\index{Fibonacci number}
+\index{Фибоначчи сандары}
 
-The \key{Fibonacci numbers}
-%\footnote{Fibonacci (c. 1175--1250) was an Italian mathematician.}
-arise in many situations.
-They can be defined recursively as follows:
+
+
+%Ескерту: {Фибоначчи шамамен 1175-1250 жылдары өмір сүрген итальяндық математик.
+
+%footnote{Fibonacci (c. 1175--1250) was an Italian mathematician.}
+\key{Фибоначчи сандары} көп жағдайда туындайды. Оларды төмендегі рекуррентті қатынас арқылы анықтауға болады:
 \[
 \begin{array}{lcl}
 f(0) & = & 0 \\
@@ -821,151 +715,134 @@ f(1) & = & 1 \\
 f(n) & = & f(n-1)+f(n-2) \\
 \end{array}
 \]
-The first Fibonacci numbers are
+Алғашқы Фибоначчи сандары:
 \[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, \ldots\]
-There is also a closed-form formula
-for calculating Fibonacci numbers, which is sometimes called
-\index{Binet's formula} \key{Binet's formula}:
+Фибоначчи сандарын анықтау үшін келесі тұйық формуланы қолдана аламыз. Ол кейде \index{Бине формуласы}
+\key{Бине формуласы} деп те аталады:
 \[f(n)=\frac{(1 + \sqrt{5})^n - (1-\sqrt{5})^n}{2^n \sqrt{5}}.\]
 
-\subsubsection{Logarithms}
+\subsubsection{Логарифмдер}
 
-\index{logarithm}
+\index{логарифм}
 
-The \key{logarithm} of a number $x$
-is denoted $\log_k(x)$, where $k$ is the base
-of the logarithm.
-According to the definition,
-$\log_k(x)=a$ exactly when $k^a=x$.
+$x$ санының \key{логарифмі}
+$\log_k(x) $ ретінде белгіленеді, бұл жердегі $k$
+логарифм негізі.
+Анықтама бойынша,
+$k^a=x$ болған жағдайда ғана $\log_k(x)=a$.
 
-A useful property of logarithms is
-that $\log_k(x)$ equals the number of times
-we have to divide $x$ by $k$ before we reach 
-the number 1.
-For example, $\log_2(32)=5$
-because 5 divisions by 2 are needed:
+Логарифмнің пайдалы қасиеті --
+$\log_k(x)$ арқылы $x$-тен 1-ге жету үшін 
+$k$ санына қанша мәрте бөлу қажеттігін есептеуінде.
+Мысалы, $\log_2(32)=5$,
+себебі 2-ге 5 рет бөлеміз:
 
 \[32 \rightarrow 16 \rightarrow 8 \rightarrow 4 \rightarrow 2 \rightarrow 1 \]
 
-Logarithms are often used in the analysis of
-algorithms, because many efficient algorithms
-halve something at each step.
-Hence, we can estimate the efficiency of such algorithms
-using logarithms.
+Алгоритмдерге талдау жасауда логарифмдер жиі қолданылады, 
+себебі көптеген тиімді алгоритмдер әр қадам сайын әлденені 
+екі есеге қысқартады.
+Осылайша, кей алгоритмдердің тиімділігіне логарифмдер арқылы баға бере аламыз.
 
-The logarithm of a product is
+Көбейтінді логарифмі 
 \[\log_k(ab) = \log_k(a)+\log_k(b),\]
-and consequently,
+сәйкесінше,
 \[\log_k(x^n) = n \cdot \log_k(x).\]
-In addition, the logarithm of a quotient is
+Сондай-ақ, бөлінді логарифмі 
 \[\log_k\Big(\frac{a}{b}\Big) = \log_k(a)-\log_k(b).\]
-Another useful formula is
+Тағы бір пайдалы формула: 
 \[\log_u(x) = \frac{\log_k(x)}{\log_k(u)},\]
-and using this, it is possible to calculate
-logarithms to any base if there is a way to
-calculate logarithms to some fixed base.
+оның көмегімен кез-келген негіздегі логарифмді әлдеқандай 
+белгілі негіз арқылы таба аламыз.
 
-\index{natural logarithm}
+\index{натурал логорифм}
 
-The \key{natural logarithm} $\ln(x)$ of a number $x$
-is a logarithm whose base is $e \approx 2.71828$.
-Another property of logarithms is that
-the number of digits of an integer $x$ in base $b$ is
-$\lfloor \log_b(x)+1 \rfloor$.
-For example, the representation of
-$123$ in base $2$ is 1111011 and
-$\lfloor \log_2(123)+1 \rfloor = 7$.
+$\ln(x)$ негізі 
+$e \approx 2.71828$ болатын
+$x$ санының \key{натурал логарифмін} білдіреді.
+Логарифмдердің қасиеті:
+$b$ негізіндегі $x$ бүтін санының цифрлар мөлшерін
+$\lfloor \log_b(x)+1 \rfloor$ арқылы біле аламыз.
+Мысалы, $123$-тің негізі $2$ болса, 
+көрсетілімі -- 1111011, сәйкесінше,
+$\lfloor \log_2(123)+1 \rfloor = 7$ болады.
 
-\section{Contests and resources}
+\section{Контесттер және ресурстар}
 
 \subsubsection{IOI}
 
-The International Olympiad in Informatics (IOI)
-is an annual programming contest for
-secondary school students.
-Each country is allowed to send a team of
-four students to the contest.
-There are usually about 300 participants
-from 80 countries.
+Информатикадан Халықаралық Олимпиада(IOI) --
+жоғарғы сынып оқушыларына арналған бағдарламалау контесті.
+Жарысқа әр елден 4 оқушыдан құралған команда қатыса алады.
+Әдетте шамамен 80 елден жиналған 300 қатысушы арасында өтеді.
 
-The IOI consists of two five-hour long contests.
-In both contests, the participants are asked to
-solve three algorithm tasks of various difficulty.
-The tasks are divided into subtasks,
-each of which has an assigned score.
-Even if the contestants are divided into teams,
-they compete as individuals.
+IOI 5 сағатқа созылатын екі контесттен тұрады.
+Екі кезеңде де қатысушыларға 3 түрлі деңгейдегі 
+алгоритмдік есептер ұсынылады.
+Олар ішесептерге бөлініп,
+әрбір ішесеп үшін нақты ұпайлар белгіленеді.
+Қатысушылар командаларға бөлінгенімен, 
+әрқайсысы жеке дара контестке түседі.
 
-The IOI syllabus \cite{iois} regulates the topics
-that may appear in IOI tasks.
-Almost all the topics in the IOI syllabus
-are covered by this book.
+IOI силлабусы \cite{iois} IOI есептерінің болжамды
+тақырыптарын реттейді.
+Кітапта IOI силлабусының түгелге дерлік тақырыптары
+қамтылған.
 
-Participants for the IOI are selected through
-national contests.
-Before the IOI, many regional contests are organized,
-such as the Baltic Olympiad in Informatics (BOI),
-the Central European Olympiad in Informatics (CEOI)
-and the Asia-Pacific Informatics Olympiad (APIO).
+IOI қатысушылары ұлттық олимпиадалар арқылы іріктеледі.
+IOI-дан бұрын Балтық информатика олимпиадасы (BOI),
+Орталық Еуропа Информатикалық олимпиадасы (CEOI)
+және Азия-Тынық мұхиты Информатика Олимпиадасы (APIO) сияқты өңірлік контесттер ұйымдастырылады.
 
-Some countries organize online practice contests
-for future IOI participants,
-such as the Croatian Open Competition in Informatics \cite{coci}
-and the USA Computing Olympiad \cite{usaco}.
-In addition, a large collection of problems from Polish contests
-is available online \cite{main}.
+Кей елдерде болашақ IOI қатысушыларына арналған онлайн контесттер ұйымдастырылады.
+Мысалы, Croatian Open Competition in Informatics \cite{coci}
+және the USA Computing Olympiad \cite{usaco}.
+Сондай-ақ көптеген Поляк контесттерінің есептері онлайн қолжетімді\cite{main}.
 
 \subsubsection{ICPC}
 
-The International Collegiate Programming Contest (ICPC)
-is an annual programming contest for university students.
-Each team in the contest consists of three students,
-and unlike in the IOI, the students work together;
-there is only one computer available for each team.
+Студенттердің Халықаралық Бағдарламалау Сайысы (ICPC)
+жыл сайын университет студенттеріне арнап өткізіледі.
+Әр  командада 3 қатысушыдан болады.
+IOI-дан айырмашылығы -- студенттер бірлесіп жұмыс жасайды,
+әр команда үшін бір компьютер беріледі.
 
-The ICPC consists of several stages, and finally the
-best teams are invited to the World Finals.
-While there are tens of thousands of participants
-in the contest, there are only a small number\footnote{The exact number of final
-slots varies from year to year; in 2017, there were 133 final slots.} of final slots available,
-so even advancing to the finals
-is a great achievement in some regions.
+ICPC бірнеше кезеңнен тұрады, үздік
+командалар Әлемдік Біріншілікке шақырылады.
+Мыңдаған қатысушылардың арасынан іріктеліп, финалға
+тек санаулысы өте алады\footnote{Қатысушылар саны жыл сайын өзгеріп отырады; 2017 жылғы қатысушылар саны -- 133.},
+сондықтан финалға өтудің өзі үлкен жетістік деп саналады.
 
-In each ICPC contest, the teams have five hours of time to
-solve about ten algorithm problems.
-A solution to a problem is accepted only if it solves
-all test cases efficiently.
-During the contest, competitors may view the results of other teams,
-but for the last hour the scoreboard is frozen and it
-is not possible to see the results of the last submissions.
+Әр ICPC контестінде 5 сағат ішінде командалар
+шамамен 10 алгоритмдік есеп шығаруы қажет.
+Есеп шешімі барлық тестілік жағдайды тиімді шешсе ғана
+қабылданады.
+Контест барысында командалар бір-бірінің нәтижелерін көре алады,
+бірақ соңғы сағаттағы нәтижелер мен соңғы жіберілген шешімдерді көру мүмкіндігі шектелген.
 
-The topics that may appear at the ICPC are not so well
-specified as those at the IOI.
-In any case, it is clear that more knowledge is needed
-at the ICPC, especially more mathematical skills.
+ICPC-да болжамды тақырыптар IOI-дағыдай көрсетілмейді.
+Десе де, ICPC терең білімді, әсіресе математикалық қабілеттілікті қажет етеді.
 
-\subsubsection{Online contests}
+\subsubsection{Онлайн контесттер}
 
-There are also many online contests that are open for everybody.
-At the moment, the most active contest site is Codeforces,
-which organizes contests about weekly.
-In Codeforces, participants are divided into two divisions:
-beginners compete in Div2 and more experienced programmers in Div1.
-Other contest sites include AtCoder, CS Academy, HackerRank and Topcoder.
+Жоғарыда аталған сайыстармен бірге көпшілікке арналған онлайн контесттерді де атап өтуге болады.
+Қазіргі таңдағы ең белсенді контесттер сайты -- Codeforces,
+онда шамамен апта сайын контесттер ұйымдастырылып тұрады.
+Codeforces-та жаңа қатысушылар -- Div2, ал тәжірибелі қатысушылар -- Div1 деп аталатын екі дивизионға бөлінеді.
+Контесттер ұйымдастырылатын сайттардың қатарында AtCoder, CS Academy, HackerRank және Topcoder-ді де атап өтуге болады. 
 
-Some companies organize online contests with onsite finals.
-Examples of such contests are Facebook Hacker Cup,
-Google Code Jam and Yandex.Algorithm.
-Of course, companies also use those contests for recruiting:
-performing well in a contest is a good way to prove one's skills.
+Кейбір компаниялар финалы офлайн болатын онлайн контесттерді ұйымдастырады.
+Мысалы: Facebook Hacker Cup,
+Google Code Jam мен Yandex.Algorithm.
+Әрине, компаниялар бұл контесттерді қызметкерлерді жинақтау үшін де өткізеді. Өйткені контестте жақсы нәтиже көрсету арқылы қатысушылар бағдарламалау қабілеттерін көрсетуге мүмкіндік алады.
 
-\subsubsection{Books}
+\subsubsection{Кітаптар}
 
-There are already some books (besides this book) that
-focus on competitive programming and algorithmic problem solving:
+Спорттық бағдарламалау мен алгоритмдік есептерді шығаруға бағытталған
+бірнеше кітаптар тізімі (қолыңыздағы кітапты санамағанда) :
 
 \begin{itemize}
-\item S. S. Skiena and M. A. Revilla:
+\item S. S. Skiena and M. A. Revilla: 
 \emph{Programming Challenges: The Programming Contest Training Manual} \cite{ski03}
 \item S. Halim and F. Halim:
 \emph{Competitive Programming 3: The New Lower Bound of Programming Contests} \cite{hal13}
@@ -973,12 +850,10 @@ focus on competitive programming and algorithmic problem solving:
 the University of Warsaw Programming Competitions} \cite{dik12}
 \end{itemize}
 
-The first two books are intended for beginners,
-whereas the last book contains advanced material.
+Алғашқы екі кітап жаңадан бастаушыларға арналса, соңғысы ілгері деңгейдегілерге арнап жазылған.
 
-Of course, general algorithm books are also suitable for
-competitive programmers.
-Some popular books are:
+Спорттық бағдарламалауды зерделеуде пайдалы жалпы алгоритмдер жайлы  кітаптар бар.
+Олардың ішіндегі кейбір танымалдары:
 
 \begin{itemize}
 \item T. H. Cormen, C. E. Leiserson, R. L. Rivest and C. Stein:

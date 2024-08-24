@@ -1,32 +1,27 @@
-\chapter{Square root algorithms}
+\chapter{Квадраттық түбір алгоритмдер}
 
-\index{square root algorithm}
+\index{квадраттық түбір алгоритм}
 
-A \key{square root algorithm} is an algorithm
-that has a square root in its time complexity.
-A square root can be seen as a ''poor man's logarithm'':
-the complexity $O(\sqrt n)$ is better than $O(n)$
-but worse than $O(\log n)$.
-In any case, many square root algorithms are fast and usable in practice.
+\key{Квадраттық түбір алгоритмі} -- уақытша күрделілігінде
+квадрат түбірі бар алгоритм.  $O(\sqrt n)$ күрделілігі $O(n)$-нен
+тез болғанымен, $O(\log n)$-нен баяу болуына байланысты оны ''кемшілікті логарифм'' 
+ретінде де қарастыруға болады. Қандай жағдай болмасын көптеген түбір алгоритмдер қолданыста жылдам, ыңғайлы және тиімді болып келеді. 
 
-As an example, consider the problem of
-creating a data structure that supports
-two operations on an array:
-modifying an element at a given position
-and calculating the sum of elements in the given range.
-We have previously solved the problem using
-binary indexed and segment trees,
-that support both operations in $O(\log n)$ time.
-However, now we will solve the problem
-in another way using a square root structure
-that allows us to modify elements in $O(1)$ time
-and calculate sums in $O(\sqrt n)$ time.
+Мысалға төмендегі есепті қарастырайық:
+берілген позициядағы элементті өзгерту және
+берілген аралық бойынша қосындыны есептеу
+операцияларын қолдайтын деректер құрылымын құруымыз керек.
+Осыған дейін біз бұл есепті
+екі операцияны $O(\log n)$ уақытта қолдайтын
+бинарлы индекстелген дарақ немесе кесінділер дарағы 
+арқылы шығарған едік. Ал енді $O(1)$ уақытта
+элементтерді өзгертуге және $O(\sqrt n)$ уақытта 
+қосындыларды есептеуге мүмкіндік беретін квадраттық 
+түбір құрылымын пайдаланып, басқа жолмен шешеміз.
 
-The idea is to divide the array into \emph{blocks}
-of size $\sqrt n$ so that each block contains
-the sum of elements inside the block.
-For example, an array of 16 elements will be
-divided into blocks of 4 elements as follows:
+Идеясы жиымды өлшемі $\sqrt n$ болатын \emph{блоктар}ға бөлу
+және әр блок үшін ішіндегі элементтер қосындысын сақтауға негізделеді.
+Мысалы, 16 элементтен тұратын жиым төмендегідей 4 элементтік блоктарға бөлінеді:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -62,15 +57,12 @@ divided into blocks of 4 elements as follows:
 \end{tikzpicture}
 \end{center}
 
-In this structure,
-it is easy to modify array elements,
-because it is only needed to update
-the sum of a single block
-after each modification,
-which can be done in $O(1)$ time.
-For example, the following picture shows
-how the value of an element and
-the sum of the corresponding block change:
+Аталған құрылымда жиым элементтерін өзгерту 
+жеңіл. Өйткені әр жаңартудан кейін 1 ғана блоктың
+қосындысы өзгереді, ал ол өз кезегінде $O(1)$
+уақытта орындалады. Мысалы, төмендегі суретте
+элементтің мәні және оған сәйкес блок қалай
+өзгеретіні көрсетілген:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -108,10 +100,9 @@ the sum of the corresponding block change:
 \end{tikzpicture}
 \end{center}
 
-Then, to calculate the sum of elements in a range,
-we divide the range into three parts such that 
-the sum consists of values of single elements
-and sums of blocks between them:
+Аралықтағы қосындыны есептеу үшін, дара
+элементтер мен олардың арасындағы 
+бүтін блоктардан тұратындай етіп, аралықты үшке бөлеміз:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -154,46 +145,35 @@ and sums of blocks between them:
 \end{tikzpicture}
 \end{center}
 
-Since the number of single elements is $O(\sqrt n)$
-and the number of blocks is also $O(\sqrt n)$,
-the sum query takes $O(\sqrt n)$ time.
-The purpose of the block size $\sqrt n$ is
-that it \emph{balances} two things:
-the array is divided into $\sqrt n$ blocks,
-each of which contains $\sqrt n$ elements.
+Дара элементтердің саны да $O(\sqrt n)$,
+блоктардың саны да $O(\sqrt n)$ болғандықтан, 
+қосынды сұратымы $O(\sqrt n)$ уақыт алады. 
+Блоктың өлшемі -- $\sqrt n$, өйткені ол екі затты теңгерімдейді: жиым $\sqrt n$ блоктан, ал әр блок $\sqrt n$ элементтен тұрады. 
 
-In practice, it is not necessary to use the
-exact value of $\sqrt n$ as a parameter,
-and instead we may use parameters $k$ and $n/k$ where $k$ is
-different from $\sqrt n$.
-The optimal parameter depends on the problem and input.
-For example, if an algorithm often goes
-through the blocks but rarely inspects
-single elements inside the blocks,
-it may be a good idea to divide the array into
-$k < \sqrt n$ blocks, each of which contains $n/k > \sqrt n$
-elements.
+Тәжірибеде параметр ретінде дәл $\sqrt n$ мәнін 
+қолдану шарт емес, оны $k$ мен $n/k$ арқылы
+алмастыра аламыз, мұндағы $k$ $\sqrt n$-ге тең емес. 
+Параметр тиімділігі есеп пен енгізуге байланысты.
+Мысалы, егер алгоритм блоктарды жиі қарап, 
+дара элементтерге сирек жүгінетін болса,
+жиымды $k < \sqrt n$ блоктарға, ал әр блокты
+$n/k > \sqrt n$ бөлген тиімді.
 
-\section{Combining algorithms}
+\section{Алгоритмдерді біріктіру}
 
-In this section we discuss two square root algorithms
-that are based on combining two algorithms into one algorithm.
-In both cases, we could use either of the algorithms
-without the other
-and solve the problem in $O(n^2)$ time.
-However, by combining the algorithms, the running
-time is only $O(n \sqrt n)$.
+Бұл бөлімде біз екі алгоритмді біріктіруге негізделген
+екі квадрат түбір алгоритмін талқылаймыз.
+Қай жағдайда да алгоритмдердің біреуін ғана қолдана отырып, есепті 
+$O(n^2)$ уақытта шығаруға болады. Бірақ, алгоритмдерді біріктіру арқылы
+уақытша күрделілігі $O(n \sqrt n)$-ге қысқарады. 
 
-\subsubsection{Case processing}
+\subsubsection{Жағдайларды қарастыру} % TODO
 
-Suppose that we are given a two-dimensional
-grid that contains $n$ cells.
-Each cell is assigned a letter,
-and our task is to find two cells
-with the same letter whose distance is minimum,
-where the distance between cells
-$(x_1,y_1)$ and $(x_2,y_2)$ is $|x_1-x_2|+|y_1-y_2|$.
-For example, consider the following grid:
+Бізге $n$ ұяшығы бар екі өлшемдік тор берілген. 
+Әр ұяшықта әріп белгіленген. Бізге арақашықтығы ең аз болатын бірдей 
+әріпті екі ұяшықты табу тапсырылады. $(x_1,y_1)$ және
+$(x_2,y_2)$ ұяшықтарының қашықтығы -- $|x_1-x_2|+|y_1-y_2|$. 
+Мысалы, төмендегі торды қарастырайық:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -216,59 +196,57 @@ For example, consider the following grid:
 \draw (0,0) grid (4,4);
 \end{tikzpicture}
 \end{center}
-In this case, the minimum distance is 2 between the two 'E' letters.
+Бұл жағдайда минималды қашықтық 2-ге тең --
+екі 'E' әріптерінің арасы.
 
-We can solve the problem by considering each letter separately.
-Using this approach, the new problem is to calculate
-the minimum distance
-between two cells with a \emph{fixed} letter $c$.
-We focus on two algorithms for this:
+Есепті әр әріпті жеке қарастыру арқылы шығаруға болады.
+Бұл тәсілді қолдансақ, есебіміз \emph{тұрақты} $c$ әрпі
+бар екі ұяшық арасындағы ең аз қашықтықты есептейтін жаңа есепке ауысады.
+Екі алгоритмді қарастырайық:
 
-\emph{Algorithm 1:} Go through all pairs of cells with letter $c$,
-and calculate the minimum distance between such cells.
-This will take $O(k^2)$ time where $k$ is the number of cells with letter $c$.
+\emph{1-алгоритм:} барлық $c$ әрпі бар ұяшық жұптарын өтіп,
+сол ұяшықтар арасындағы минимум қашықтықты есептеу. Бұл $O(k^2)$ уақыт алады, мұндағы
+$k$ -- $c$ әрпі бар ұяшықтар саны. 
 
-\emph{Algorithm 2:} Perform a breadth-first search that simultaneously
-starts at each cell with letter $c$. The minimum distance between
-two cells with letter $c$ will be calculated in $O(n)$ time.
+\emph{2–алгоритм:} барлық $c$ әрпі бар ұяшықтардан бір уақытта жүргізілетін
+ені бойынша іздеу (BFS) алгоритмін бастаймыз. $c$ әрпі бар ұяшықтардың
+арасындағы минимум қашықтықты $O(n)$ уақытта есептейтін болады. 
 
-One way to solve the problem is to choose either of the
-algorithms and use it for all letters.
-If we use Algorithm 1, the running time is $O(n^2)$,
-because all cells may contain the same letter,
-and in this case $k=n$.
-Also if we use Algorithm 2, the running time is $O(n^2)$,
-because all cells may have different letters,
-and in this case $n$ searches are needed.
+Есепті шешудің бір жолы -- алгоритмдердің біреуін таңдап,
+барлық әріптерге қолдану. Егер 1-алгоритмді қолдансақ,
+оның орындалу уақыты $O(n^2)$: барлық ұяшықтарда
+бірдей әріп болуы мүмкін және сол жағдайда $k=n$.
+Егер 2-алгоритмді қолдансақ, оның да орындалу уақыты
+$O(n^2)$, себебі әр ұяшықта әртүрлі әріп
+болуы мүмкін және бұл жағдайда $n$ ізденіс жасауы қажет. 
 
-However, we can \emph{combine} the two algorithms and
-use different algorithms for different letters
-depending on how many times each letter appears in the grid.
-Assume that a letter $c$ appears $k$ times.
-If $k \le \sqrt n$, we use Algorithm 1, and if $k > \sqrt n$,
-we use Algorithm 2.
-It turns out that by doing this, the total running time
-of the algorithm is only $O(n \sqrt n)$.
+Дегенмен біз екі алгоритмді \emph{біріктіре} аламыз
+және әр әріптің санына қарай әртүрлі алгоритм қолдануға
+болады. $c$ әрпі $k$ мәрте қайталанды делік. Егер $k \le \sqrt n$ болса,
+1-алгоритмді қолданамыз, ал $k > \sqrt n$ болса, 
+2-алгоритмді қолданамыз. Осы жолды ұстансақ, қорытынды 
+уақытша күрделілігі $O(n \sqrt n)$ болады. 
 
-First, suppose that we use Algorithm 1 for a letter $c$.
-Since $c$ appears at most $\sqrt n$ times in the grid,
-we compare each cell with letter $c$ $O(\sqrt n)$ times
-with other cells.
-Thus, the time used for processing all such cells is $O(n \sqrt n)$.
-Then, suppose that we use Algorithm 2 for a letter $c$.
-There are at most $\sqrt n$ such letters,
-so processing those letters also takes $O(n \sqrt n)$ time.
+Алдымен $c$ әрпі үшін 1-алгоритмді қолданамыз делік.
+$c$ әрпі ең көбі $\sqrt n$ кездескендіктен, 
+біз әр ұяшықты басқа $c$ әріптермен $O(\sqrt n)$ 
+рет салыстырамыз. Осылайша  сондай барлық ұяшықтарды
+өңдеуге $O(n \sqrt n)$ уақыт кетеді. Ал енді 
+$c$ әрпі үшін 2-алгоритмді қолданамыз делік.
+$c$ әрпі ең көбі $\sqrt n$ кездескендіктен, 
+барлық сондай әріптерді өңдеу үшін де $O(n \sqrt n)$ 
+уақыт қажет болады.
 
-\subsubsection{Batch processing}
+\subsubsection{Дестелік өңдеу}
 
-Our next problem also deals with
-a two-dimensional grid that contains $n$ cells.
-Initially, each cell except one is white.
-We perform $n-1$ operations, each of which first
-calculates the minimum distance from a given white cell
-to a black cell, and then paints the white cell black.
+Келесі есебіміз $n$ ұяшығы бар 
+екі өлшемдік торды қарастырады. 
+Бастапқыда бір ұяшықтан басқасының барлығы
+ақ болады. Біз $n-1$ операция орындаймыз.
+Әр операцияда берілген ақ ұяшықтан қара ұяшыққа 
+минимум қашықтықты есептеп, ақ ұяшықты қараға бояймыз. 
 
-For example, consider the following operation:
+Мысалы, төмендегі операцияларды қарастырайық:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -280,11 +258,11 @@ For example, consider the following operation:
 \end{tikzpicture}
 \end{center}
 
-First, we calculate the minimum distance
-from the white cell marked with * to a black cell.
-The minimum distance is 2, because we can move
-two steps left to a black cell.
-Then, we paint the white cell black:
+Әуелде * арқылы белгіленген ақ ұяшықтан
+қара ұяшыққа минимум қашықтықты есептейміз.
+Минимум қашықтық -- 2, яғни екі қадам солға жүріп,
+қара ұяшыққа жете аламыз. Кейін ақ ұяшықты
+қараға бояймыз:
 
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
@@ -296,72 +274,66 @@ Then, we paint the white cell black:
 \end{tikzpicture}
 \end{center}
 
-Consider the following two algorithms:
+Төмендегі екі алгоритмді қарастырайық:
 
-\emph{Algorithm 1:} Use breadth-first search
-to calculate
-for each white cell the distance to the nearest black cell.
-This takes $O(n)$ time, and after the search,
-we can find the minimum distance from any white cell
-to a black cell in $O(1)$ time.
+\emph{1-алгоритм:} Ені бойынша іздеу (BFS) арқылы 
+әр ақ ұяшық үшін ең жақын орналасқан қара ұяшықты 
+анықтаймыз. Бұл $O(n)$ уақыт алады және әр ізденістен кейін
+әр ақ ұяшықтан қара ұяшыққа дейінгі қашықтықты $O(1)$ уақытта
+айта аламыз.
 
-\emph{Algorithm 2:} Maintain a list of cells that have been
-painted black, go through this list at each operation
-and then add a new cell to the list.
-An operation takes $O(k)$ time where $k$ is the length of the list.
+\emph{2-алгоритм:} Қараға боялған ұяшықтарды 
+тізімде сақтаймыз, әр операция сайын тізімді 
+өтіп шығып, соңында жаңа ұяшық қосамыз.
+Операция $O(k)$ уақыт алады, мұндағы $k$ -- тізімнің өлшемі.
 
-We combine the above algorithms by
-dividing the operations into
-$O(\sqrt n)$ \emph{batches}, each of which consists
-of $O(\sqrt n)$ operations.
-At the beginning of each batch,
-we perform Algorithm 1.
-Then, we use Algorithm 2 to process the operations
-in the batch.
-We clear the list of Algorithm 2 between
-the batches.
-At each operation,
-the minimum distance to a black cell
-is either the distance calculated by Algorithm 1
-or the distance calculated by Algorithm 2.
+Операцияларды әрқайсысы $O(\sqrt n)$ операциядан
+тұратын $O(\sqrt n)$ \emph{дестелерге}
+бөлу арқылы жоғарыдағы екі алгоритмді біріктіреміз. 
+Әр дестенің алдында біз 1-алгоритмді жүргіземіз.
+Кейін дестедегі операцияларды өңдеу үшін 
+2-алгоритмді қолданамыз. Дестелер арасында
+2-алгоритмнің тізімін тазартып отырамыз. 
+Әр операцияда қара ұяшыққа дейінгі минималды қашықтық --
+1-алгоритмнен есептелген қашықтық немесе
+2-алгоритмнен есептелген қашықтық болады. 
 
-The resulting algorithm works in
-$O(n \sqrt n)$ time.
-First, Algorithm 1 is performed $O(\sqrt n)$ times,
-and each search works in $O(n)$ time.
-Second, when using Algorithm 2 in a batch,
-the list contains $O(\sqrt n)$ cells
-(because we clear the list between the batches)
-and each operation takes $O(\sqrt n)$ time.
+Қорытынды алгоритм $O(n \sqrt n)$ уақытта
+жұмыс істейді. Біріншіден, 1-алгоритм $O(\sqrt n)$ мәрте
+орындалады және әр ізденіс $O(n)$ уақыт алады.
+Екіншіден, дестенің ішінде 2-алгоритмді қолданғанда,
+тізім $O(\sqrt n)$ элементті қамтиды (себебі біз
+дестелер арасында тізімді тазартамыз).
+Демек әр операция $O(\sqrt n)$ уақыт алады. 
 
-\section{Integer partitions}
+\section{Бүтін бөлінулер}
 
-Some square root algorithms are based on
-the following observation:
-if a positive integer $n$ is represented as
-a sum of positive integers,
-such a sum always contains at most
-$O(\sqrt n)$ \emph{distinct} numbers.
-The reason for this is that to construct
-a sum that contains a maximum number of distinct
-numbers, we should choose \emph{small} numbers.
-If we choose the numbers $1,2,\ldots,k$,
-the resulting sum is
-\[\frac{k(k+1)}{2}.\]
-Thus, the maximum amount of distinct numbers is $k = O(\sqrt n)$.
-Next we will discuss two problems that can be solved
-efficiently using this observation.
+Кейбір квадраттық түбір алгоритмдер 
+мынадай бақылауға негізделеді:
+егер $n$ бүтін саны бүтін қосылғыштармен
+көрсетілсе, қосылғыштардың саны 
+ең көбі $O(\sqrt n)$
+\emph{әртүрлі} саннан тұрады. 
+Себебі қосылғыштардың саны көп болатын және
+әртүрлі қосылғыштардан тұратын қосындыны 
+құрау үшін ең \emph{кішкентай}
+сандарды алуымыз қажет.
 
-\subsubsection{Knapsack}
+Егер сандарды $1,2,\ldots,k$ деп алсақ,
+қорытынды қосынды \[\frac{k(k+1)}{2}.\] болады. 
+Демек максималды әртүрлі қосылғыштардың саны 
+-- $k = O(\sqrt n)$. Кейін бұл бақылауға
+сүйеніп, 2 есептің шығару жолын талқылаймыз. 
 
-Suppose that we are given a list of integer weights
-whose sum is $n$.
-Our task is to find out all sums that can be formed using
-a subset of the weights. For example, if the weights are
-$\{1,3,3\}$, the possible sums are as follows:
+\subsubsection{Қоржын}
+
+Бізге қосындысы $n$ болатын бүтін салмақтар тізімі берілген.
+Салмақтардың ішжиындарынан құралатын барлық
+қосындыларды табуымыз керек. Мысалы, егер салмақтар $\{1,3,3\}$ болса,
+төмендегідей қосындылардың болуы мүмкін:
 
 \begin{itemize}[noitemsep]
-\item $0$ (empty set)
+\item $0$ (бос жиын)
 \item $1$
 \item $3$
 \item $1+3=4$
@@ -369,42 +341,41 @@ $\{1,3,3\}$, the possible sums are as follows:
 \item $1+3+3=7$
 \end{itemize}
 
-Using the standard knapsack approach (see Chapter 7.4),
-the problem can be solved as follows:
-we define a function $\texttt{possible}(x,k)$ whose value is 1
-if the sum $x$ can be formed using the first $k$ weights,
-and 0 otherwise.
-Since the sum of the weights is $n$,
-there are at most $n$ weights and
-all values of the function can be calculated
-in $O(n^2)$ time using dynamic programming.
+Қарапайым қоржын тәсілін (7.4-тарауын қараңыз) қолдансақ,
+есеп былай шығарылады: 
+$\texttt{possible}(x,k)$ функциясының мәні
+алғашқы $k$ салмақты пайдаланып $x$ қосындысын жинаса, 1-ге тең, ал басқа жағдайда 0-ге тең болады. Салмақтардың
+қосындысы $n$ болғандықтан, ең көбі $n$ салмақ бола алады
+және функцияның барлық мәндері динамикалық бағдарламалау 
+арқылы $O(n^2)$ уақытта есептеледі. 
 
-However, we can make the algorithm more efficient
-by using the fact that there are at most $O(\sqrt n)$
-\emph{distinct} weights.
-Thus, we can process the weights in groups
-that consists of similar weights.
-We can process each group
-in $O(n)$ time, which yields an $O(n \sqrt n)$ time algorithm.
+Бірақ, әртүрлі салмақтардың саны ең
+көбі $O(\sqrt n)$ болатындықтан, бұл 
+алгоритмді жылдамырақ жаза аламыз.
+Осылайша бірдей салмақтарды топтастырып
+қарастырамыз. Әр топты $O(n)$ уақытта
+өңдей аламыз, демек ақырғы уақытша күрделілігі --
+$O(n \sqrt n)$. 
 
-The idea is to use an array that records the sums of weights
-that can be formed using the groups processed so far.
-The array contains $n$ elements: element $k$ is 1 if the sum
-$k$ can be formed and 0 otherwise.
-To process a group of weights, we scan the array
-from left to right and record the new sums of weights that
-can be formed using this group and the previous groups.
+Идеясы осы уақытқа дейін өңделген топтарды пайдаланып,
+құруға болатын салмақтарды сақтайтын жиым қолдануға негізделеді. 
+Жиым $n$ элементтен тұрады. Егер $k$ қосындысын құрай
+алса, $k$-элемент 1-ге, ал кері жағдайда 0-ге тең. 
+Салмақтардың тобын өңдеу үшін жиымды солдан 
+оңға қарай өтіп, осы топ пен алдыңғы топ арқылы 
+құрауға болатын жаңа салмақтарды сақтаймыз. 
 
-\subsubsection{String construction}
+\subsubsection{Жол құрылысы}
 
-Given a string \texttt{s} of length $n$
-and a set of strings $D$ whose total length is $m$,
-consider the problem of counting the number of ways
-\texttt{s} can be formed as a concatenation of strings in $D$.
-For example,
-if $\texttt{s}=\texttt{ABAB}$ and
-$D=\{\texttt{A},\texttt{B},\texttt{AB}\}$,
-there are 4 ways:
+Ұзындығы $n$ болатын \texttt{s} жолы берілген
+және жалпы ұзындығы $m$ болатын $D$ жолдар жиыны берілген.
+$D$ жолдарының конкатенациясы арқылы \texttt{s} жолын 
+қанша жолмен құрауға болатынын қарастырайық. 
+
+Мысалы,
+егер $\texttt{s}=\texttt{ABAB}$ және
+$D=\{\texttt{A},\texttt{B},\texttt{AB}\}$ болса,
+онда 4 жол бар:
 
 \begin{itemize}[noitemsep]
 \item $\texttt{A}+\texttt{B}+\texttt{A}+\texttt{B}$
@@ -413,99 +384,81 @@ there are 4 ways:
 \item $\texttt{AB}+\texttt{AB}$
 \end{itemize}
 
-We can solve the problem using dynamic programming:
-Let $\texttt{count}(k)$ denote the number of ways to construct the prefix
-$\texttt{s}[0 \ldots k]$ using the strings in $D$.
-Now $\texttt{count}(n-1)$ gives the answer to the problem,
-and we can solve the problem in $O(n^2)$ time
-using a trie structure.
+Бұл есепті динамикалық бағдарламалау арқылы шығаруға болады:
+$\texttt{count}(k)$ деп $D$-дағы жолдар арқылы 
+$\texttt{s}[0 \ldots k]$ префиксін құрайтын жолдар 
+санын белгілейік. Енді $\texttt{count}(n-1)$ 
+есеп жауабы бола алады және бұл есепті $O(n^2)$ уақытта
+префикс дарағы арқылы шығара аламыз. 
 
-However, we can solve the problem more efficiently
-by using string hashing and the fact that there
-are at most $O(\sqrt m)$ distinct string lengths in $D$.
-First, we construct a set $H$ that contains all
-hash values of the strings in $D$.
-Then, when calculating a value of $\texttt{count}(k)$,
-we go through all values of $p$
-such that there is a string of length $p$ in $D$,
-calculate the hash value of $\texttt{s}[k-p+1 \ldots k]$
-and check if it belongs to $H$.
-Since there are at most $O(\sqrt m)$ distinct string lengths,
-this results in an algorithm whose running time is $O(n \sqrt m)$.
+Алайда жол хеші мен $D$-да ең көбі 
+$O(\sqrt m)$ әртүрлі жолдар ұзындығы болатыны туралы бақылаудың 
+арқасында жылдамырақ шешуге болады. Алдымен $D$–дағы барлық
+жолдардың хэштері бар $H$ жиынын құрастырамыз.
+Кейін $\texttt{count}(k)$ мәнін есептеу үшін
+$D$-да болуы мүмкін жол ұзындығы $p$ мәндерін қарастырамыз және
+$\texttt{s}[k-p+1 \ldots k]$ хэш мәнін есептеп,
+оның $H$–та бар-жоғын тексереміз. Ұзындықтары әртүрлі
+жолдардың ең көп саны $O(\sqrt m)$ болғандықтан,
+қорытынды уақытша күрделілігі $O(n \sqrt m)$ болады.
 
-\section{Mo's algorithm}
+\section{Мо алгоритмі}
 
-\index{Mo's algorithm}
+\index{Мо алгоритмі}
 
-\key{Mo's algorithm}\footnote{According to \cite{cod15}, this algorithm
-is named after Mo Tao, a Chinese competitive programmer, but
-the technique has appeared earlier in the literature \cite{ken06}.}
-can be used in many problems
-that require processing range queries in 
-a \emph{static} array, i.e., the array values
-do not change between the queries.
-In each query, we are given a range $[a,b]$,
-and we should calculate a value based on the
-array elements between positions $a$ and $b$.
-Since the array is static,
-the queries can be processed in any order,
-and Mo's algorithm
-processes the queries in a special order which guarantees
-that the algorithm works efficiently.
+\key{Мо алгоритмі}\footnote{\cite{cod15}–ге сәйкес бұл алгоритм қытайлық
+спорттық бағдарламалаушы Мо Таоның атымен аталған. Алайда 
+бұл техника әдебиетте ертерек пайда болды \cite{ken06}.}
+\emph{статикалық} (яғни сұратымдардың арасында жиым өзгермейді)
+жиымда аралық сұратымдарды өңдеуді талап ететін
+көптеген есептерде қолданылады. Әр сұратымда бізге 
+$[a,b]$ аралығы берілген және $a$ мен $b$ аралығындағы 
+жиым элементтеріне негізделген мәнді есептеу қажет. 
+Статикалық жиым болғандықтан сұратымдарды кез келген
+ретте өңдеуге болады. Мо алгоритмі сұратымдарды алгоритмнің жылдам болуына кепілдік беретіндей арнайы ретпен өңдейді. 
 
-Mo's algorithm maintains an \emph{active range}
-of the array, and the answer to a query
-concerning the active range is known at each moment.
-The algorithm processes the queries one by one,
-and always moves the endpoints of the
-active range by inserting and removing elements.
-The time complexity of the algorithm is
-$O(n \sqrt n f(n))$ where the array contains
-$n$ elements, there are $n$ queries
-and each insertion and removal of an element
-takes $O(f(n))$ time.
+Мо алгоритмі жиымның \emph{белсенді аралығын} сақтайды
+және белсенді аралыққа қатысты сұратымға әрқашан жауап береді.
+Алгоритм сұратымдарды бір-бірден өңдейді және
+элементтерді қосып, не өшіріп отырып, 
+белсенді аралықтың шеткі нүктелерін жылжытады. 
+Уақытша күрделілігі -- $O(n \sqrt n f(n))$,
+мұндағы жиым $n$ элементтен тұрады, $n$ сұратым бар және
+элементті қосу немесе өшіру $O(f(n))$ уақыт алады. 
 
-The trick in Mo's algorithm is the order
-in which the queries are processed:
-The array is divided into blocks of $k=O(\sqrt n)$
-elements, and a query $[a_1,b_1]$
-is processed before a query $[a_2,b_2]$
-if either 
+Мо алгоритмінің айласы -- сұратымдарды өңдеу
+реті. Жиым $k=O(\sqrt n)$ элементтен тұратын
+блоктарға бөлінеді. Егер
 \begin{itemize}
-\item $\lfloor a_1/k \rfloor < \lfloor a_2/k \rfloor$ or
-\item $\lfloor a_1/k \rfloor = \lfloor a_2/k \rfloor$ and $b_1 < b_2$.
-\end{itemize}
+\item $\lfloor a_1/k \rfloor < \lfloor a_2/k \rfloor$ немесе
+\item $\lfloor a_1/k \rfloor = \lfloor a_2/k \rfloor$ және $b_1 < b_2$
+\end{itemize} шарты орындалса,
+$[a_1,b_1]$ сұратымы
+$[a_2,b_2]$ сұратымнан ертерек өңделеді.
 
-Thus, all queries whose left endpoints are
-in a certain block are processed one after another
-sorted according to their right endpoints.
-Using this order, the algorithm
-only performs $O(n \sqrt n)$ operations,
-because the left endpoint moves
-$O(n)$ times $O(\sqrt n)$ steps,
-and the right endpoint moves
-$O(\sqrt n)$ times $O(n)$ steps. Thus, both
-endpoints move a total of $O(n \sqrt n)$ steps during the algorithm.
+Осылайша, сол жақ шеткі нүктесі бір блокта тұрған барлық
+сұратымдар оң жақ шеткі нүктелеріне қарай сұрыпталған ретте
+бірінен кейін бірі өңделеді. Осы рет бойынша алгоритм тек 
+$O(n \sqrt n)$ операция орындайды. Сол жақ шеткі нүкте 
+$O(n)$ рет $O(\sqrt n)$ қадамға өзгереді, ал оң жақ
+шеткі нүкте $O(\sqrt n)$ рет $O(n)$ қадамға өзгереді. 
+Демек алгоритм барысында екі шеткі 
+нүктелер жалпылай $O(n \sqrt n)$ қадам жасайды. 
 
-\subsubsection*{Example}
+\subsubsection*{Өрнек}
 
-As an example, consider a problem
-where we are given a set of queries,
-each of them corresponding to a range in an array,
-and our task is to calculate for each query
-the number of \emph{distinct} elements in the range.
+Өрнек ретінде жиым бойынша бірнеше сұратым берілді делік.
+Әр сұратымда қанша \emph{әртүрлі} сан бар екенін табуымыз керек. 
 
-In Mo's algorithm, the queries are always sorted
-in the same way, but it depends on the problem
-how the answer to the query is maintained.
-In this problem, we can maintain an array 
-\texttt{count} where $\texttt{count}[x]$
-indicates the number of times an element $x$
-occurs in the active range.
+Мо алгоритмінде сұратымдар әрдайым бірдей сұрыпталған,
+бірақ есепке қарай сұратымға жауап қалай сақталанатыны
+белгілі болады. Бұл есепте \texttt{count} жиымын белгілейік.
+$\texttt{count}[x]$ деп  $x$ саны белсенді аралықта қанша рет
+кездесетінін көрсетеді. 
 
-When we move from one query to another query,
-the active range changes.
-For example, if the current range is
+Бір сұратымнан екінші сұратымға көшкенде,
+белсенді аралық өзгереді. Мысалы, белсенді
+аралық төмендегідей,
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (1,0) rectangle (5,1);
@@ -521,7 +474,7 @@ For example, if the current range is
 \node at (8.5, 0.5) {4};
 \end{tikzpicture}
 \end{center}
-and the next range is
+ал келесі аралық көрсетілгендей болса,
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 \fill[color=lightgray] (2,0) rectangle (7,1);
@@ -537,23 +490,18 @@ and the next range is
 \node at (8.5, 0.5) {4};
 \end{tikzpicture}
 \end{center}
-there will be three steps:
-the left endpoint moves one step to the right,
-and the right endpoint moves two steps to the right.
+келесі үш қадам жасалу керек:
+сол жақ шеткі нүкте бір қадам оңға жылжиды,
+ал оң жақ шеткі нүкте екі қадам оңға жылжиды.
 
-After each step, the array \texttt{count}
-needs to be updated.
-After adding an element $x$,
-we increase the value of 
-$\texttt{count}[x]$ by 1,
-and if $\texttt{count}[x]=1$ after this,
-we also increase the answer to the query by 1.
-Similarly, after removing an element $x$,
-we decrease the value of 
-$\texttt{count}[x]$ by 1,
-and if $\texttt{count}[x]=0$ after this,
-we also decrease the answer to the query by 1.
+Әрбір қадамнан кейін \texttt{count} жиымы жаңаруы
+тиіс. $x$ санын қосқаннан кейін, біз $\texttt{count}[x]$
+мәнін 1-ге арттырып, кейін $\texttt{count}[x]=1$
+болса, осы сұратымға байланысты жауапты 1-ге арттыруымыз қажет.
+Дәл солай, $x$ санын өшіргеннен кейін, біз $\texttt{count}[x]$
+мәнін 1-ге азайтып, ал одан кейін $\texttt{count}[x]=0$ болса,
+осы сұратымға байланысты жауапты 1-ге азайтуымыз қажет. 
 
-In this problem, the time needed to perform
-each step is $O(1)$, so the total time complexity
-of the algorithm is $O(n \sqrt n)$.
+Бұл есепте әрбір қадамды орындау үшін $O(1)$ уақыт керек.
+Демек алгоритмнің қорытынды уақытша күрделілігі 
+-- $O(n \sqrt n)$.
